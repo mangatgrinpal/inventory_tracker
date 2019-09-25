@@ -1,27 +1,23 @@
-import React from "react"
+import React, { Fragment, useState, useEffect } from "react";
+import Home from "./Home"
 
 import { BrowserRouter, Switch, Route } from "react-router-dom"
 
-import Container from "react-bootstrap/Container"
-import Row from "react-bootstrap/Row"
-import Col from "react-bootstrap/Col"
-import Button from "react-bootstrap/Button"
 
-class App extends React.Component {
-	constructor(props) {
-		super(props);
-	}
 
-	render() {
-		return (
-			<BrowserRouter>
-				<Switch>
-					<Route />
-					<Route />
-				</Switch>
-			</BrowserRouter>
-		)
-	}
+function App () {
+	
+
+	return (
+		<BrowserRouter>
+			<Switch>
+				<Route exact path="/" component={Home}/>
+
+				<Route />
+			</Switch>
+		</BrowserRouter>
+	)
+
 }
 
 export default App
