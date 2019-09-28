@@ -5,12 +5,12 @@ import { Provider } from "react-redux"
 import Home from "./Home"
 import Dashboard from "./Dashboard"
 
-import configureStore from "../configureStore"
+import store from "../store"
 
 
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom"
 
-const store = configureStore();
+const store = store();
 
 
 const App = () => {

@@ -1,8 +1,6 @@
 import { createStore } from "redux";
 
-const initialState = {
-	things: []
-};
+const initialState = {};
 
 function rootReducer(state, action) {
 	console.log(action.type);
@@ -12,7 +10,7 @@ function rootReducer(state, action) {
 	}
 }
 
-export default function configureStore() {
-	const store = createStore(rootReducer, initialState);
-	return store;
-}
+const
+
+
+export default store;
