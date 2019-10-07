@@ -1,6 +1,12 @@
-import { createStore } from "redux";
+import { createStore, applyMiddleware } from "redux";
 
-const initialState = {};
+import thunk from "redux-thunk"
+
+import { composeWithDevTools } from "redux-devtools-extension";
+
+const initialState = {
+
+};
 
 function rootReducer(state, action) {
 	console.log(action.type);
@@ -10,7 +16,12 @@ function rootReducer(state, action) {
 	}
 }
 
-const
+const store = createStore(
+	rootReducer,
+	initialState,
+	composeWithDevTools(
+		applyMiddleware(thunk))
+	);
 
 
-export default store;
+export default store
