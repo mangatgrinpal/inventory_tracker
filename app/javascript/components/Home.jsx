@@ -6,16 +6,17 @@ import Col from "react-bootstrap/Col"
 import Button from "react-bootstrap/Button"
 
 const Home = () => {
-	const [name, setName] = useState("dude")
+
 
 
 	return (
 		<Fragment>
 			<Container>
-				<h1>Hello {name}!</h1>
-				<Button variant="primary" onClick={()=> setName("bro")}>
-					make me a bro
-				</Button>
+				<Row>
+					<Col>
+						<h1>Inventory Tracker</h1>
+					</Col>
+				</Row>
 			
 			</Container>
 		</Fragment>

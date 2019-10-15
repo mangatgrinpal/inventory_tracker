@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
-  resources :restaurants, only: [:create, :destroy]
-  resources :items, only: [:create, :destroy]
+  resources :restaurants
+  resources :items
   
   root 'static_pages#home'
 
