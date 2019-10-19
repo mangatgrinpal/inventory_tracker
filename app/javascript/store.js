@@ -1,20 +1,17 @@
-import { createStore, applyMiddleware } from 'redux'
+import { createStore, combineReducers, applyMiddleware } from 'redux'
 
 import thunk from 'redux-thunk'
 
 import { composeWithDevTools } from 'redux-devtools-extension'
 
-const initialState = {
-	
-};
+import rootReducer from "./reducers"
 
-function rootReducer(state, action) {
-	console.log(action.type);
-	switch (action.type) {
-		default:
-			return state
-	}
-}
+
+
+const initialState = {};
+
+
+
 
 const store = createStore(
 	rootReducer,

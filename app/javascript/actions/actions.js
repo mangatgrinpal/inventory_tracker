@@ -1,10 +1,14 @@
 import {
-	FETCH_RESTAURANTS,
+	FETCH_RESTAURANTS_REQUEST,
 	FETCH_RESTAURANTS_SUCCESS,
 	FETCH_RESTAURANTS_ERROR
 } from './types'
 
-export const fetchRestaurants = () => async dispatch => {
+
+
+
+
+export const fetchRestaurants = restaurant => async dispatch => {
 	const apiURL = "/restaurants"
 
 	// we'll add a dispatch here to start spinner
@@ -15,13 +19,17 @@ export const fetchRestaurants = () => async dispatch => {
 		const data = await res.json();
 
 		dispatch({
-			type: FETCH_RESTAURANTS,
+			type: FETCH_RESTAURANTS_SUCCESS,
 			payload: data
 		})
 		console.log(data);
-		dispatch(fetchRestaurants(data))
+
 
 	} catch (error) {
+
+		dipatch({
+			type: FETCH_RESTAURANTS_ERROR
+		})
 		console.log(error);
 	}
 

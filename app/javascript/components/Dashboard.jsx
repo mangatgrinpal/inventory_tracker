@@ -2,22 +2,25 @@ import React, { Fragment, useEffect, useState } from 'react';
 import Restaurant from './Restaurant'
 import Loading from './Loading'
 import { Switch, Route, Link } from 'react-router-dom'
+import { connect } from 'react-redux'
+
+import { fetchRestaurants } from "../actions/actions"
+
+
 
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import Button from 'react-bootstrap/Button'
 
-const Dashboard = ({ match }) => {
+const Dashboard = ({ match, fetchRestaurants }) => {
 
 
 	useEffect(()=> {
-		console.log('hello')
+		fetchRestaurants()
 
-		return () => {
-			console.log('unmount')
-		}
-	})
+
+	},[])
 
 	return (
 		<Fragment>
@@ -35,4 +38,14 @@ const Dashboard = ({ match }) => {
 	)
 }
 
-export default Dashboard
+const mapStateToProps = state => {
+	restaurant: state.restaurant
+}
+
+
+
+
+export default connect (
+	mapStateToProps,
+	{ fetchRestaurants }
+)(Dashboard)

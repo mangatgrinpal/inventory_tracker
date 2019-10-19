@@ -1,27 +1,28 @@
 import { 
-	FETCH_RESTAURANTS, 
+	FETCH_RESTAURANTS_REQUEST, 
 	FETCH_RESTAURANTS_SUCCESS, 
 	FETCH_RESTAURANTS_ERROR
 } from '../actions/types';
 
 
-
 const initialState = {
 	restaurants: [],
-	isLoading: false
+	isFetching: false
 };
 
 export default function(state = initialState, action) {
 	switch (action.type) {
-		case FETCH_RESTAURANTS:
+		case FETCH_RESTAURANTS_REQUEST:
 			return {
 				...state,
-				isLoading: true
+				isFetching: true
 			};
 		case FETCH_RESTAURANTS_SUCCESS:
 			return {
 				...state,
-				
+				restaurants: action.restaurants
 			}
+		default:
+			return state
 	}
 }
