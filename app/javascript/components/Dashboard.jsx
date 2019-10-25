@@ -4,7 +4,7 @@ import Loading from './Loading'
 import { Switch, Route, Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 
-import { fetchRestaurants } from "../actions/actions"
+import { fetchRestaurants } from '../actions/restaurants'
 
 
 
@@ -13,7 +13,9 @@ import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import Button from 'react-bootstrap/Button'
 
-const Dashboard = ({ match, fetchRestaurants }) => {
+
+
+const Dashboard = ({ match, fetchRestaurants, restaurants: { isFetching } }) => {
 
 
 	useEffect(()=> {
@@ -27,9 +29,9 @@ const Dashboard = ({ match, fetchRestaurants }) => {
 			<Container fluid={true}>
 				<Row>
 					<Col>
-						<h1>Your restaurants are listed below.</h1>
-
-						<Restaurant />
+						
+						{isFetching ? <Loading /> :
+						<Restaurant />}
 
 					</Col>
 				</Row>
@@ -39,7 +41,11 @@ const Dashboard = ({ match, fetchRestaurants }) => {
 }
 
 const mapStateToProps = state => {
-	restaurant: state.restaurant
+	return {
+		restaurants: state.restaurants,
+		isFetching: state.isFetching
+	}
+	
 }
 
 

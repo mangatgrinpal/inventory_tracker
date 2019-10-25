@@ -1,7 +1,7 @@
 class RestaurantsController < ApplicationController
   def index
     @restaurants = Restaurant.all
-    render json: @restaurants
+    render json: serialized_restaurants
   end  
 
   def create
@@ -20,5 +20,11 @@ class RestaurantsController < ApplicationController
 
   def restaurant_params
     params.require(:restaurant).permit(:name)
+  end
+
+
+  def serialized_restaurants
+    @restaurants = Restaurant.all
+    RestaurantSerializer.new(@restaurants, include: [:items]).serialized_json
   end
 end

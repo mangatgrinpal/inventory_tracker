@@ -1,7 +1,8 @@
 import { 
 	FETCH_RESTAURANTS_REQUEST, 
 	FETCH_RESTAURANTS_SUCCESS, 
-	FETCH_RESTAURANTS_ERROR
+	FETCH_RESTAURANTS_ERROR,
+	ADD_RESTAURANT
 } from '../actions/types';
 
 
@@ -20,8 +21,10 @@ export default function(state = initialState, action) {
 		case FETCH_RESTAURANTS_SUCCESS:
 			return {
 				...state,
-				restaurants: action.restaurants
+				restaurants: action.restaurants,
+				isFetching: false
 			}
+
 		default:
 			return state
 	}
