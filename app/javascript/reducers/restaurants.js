@@ -7,11 +7,12 @@ import {
 
 
 const initialState = {
-	restaurants: [],
+	restaurantList: [],
 	isFetching: false
 };
 
 export default function(state = initialState, action) {
+
 	switch (action.type) {
 		case FETCH_RESTAURANTS_REQUEST:
 			return {
@@ -21,7 +22,7 @@ export default function(state = initialState, action) {
 		case FETCH_RESTAURANTS_SUCCESS:
 			return {
 				...state,
-				restaurants: action.restaurants,
+				restaurantList: action.restaurantList,
 				isFetching: false
 			}
 

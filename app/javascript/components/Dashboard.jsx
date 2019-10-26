@@ -15,23 +15,40 @@ import Button from 'react-bootstrap/Button'
 
 
 
-const Dashboard = ({ match, fetchRestaurants, restaurants: { isFetching } }) => {
+const Dashboard = ({ 
+	match, 
+	fetchRestaurants, 
+	restaurants: { isFetching, restaurantList } 
+}) => {
 
 
 	useEffect(()=> {
 		fetchRestaurants()
 
 
-	},[])
+	},[ fetchRestaurants ])
+
+	const listOfRestaurants = restaurantList.map(restaurant=> {
+
+		let restaurantName = restaurant["attributes"].name
+		return (
+
+			<Restaurant key={restaurant.id} name={restaurantName} />
+
+			
+		)
+	})
+
+
 
 	return (
+
 		<Fragment>
 			<Container fluid={true}>
 				<Row>
 					<Col>
 						
-						{isFetching ? <Loading /> :
-						<Restaurant />}
+						{listOfRestaurants}
 
 					</Col>
 				</Row>
@@ -41,9 +58,9 @@ const Dashboard = ({ match, fetchRestaurants, restaurants: { isFetching } }) => 
 }
 
 const mapStateToProps = state => {
+
 	return {
-		restaurants: state.restaurants,
-		isFetching: state.isFetching
+		restaurants: state.restaurants
 	}
 	
 }

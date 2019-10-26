@@ -35,16 +35,21 @@ export const fetchRestaurants = restaurant => async dispatch => {
 		const res = await fetch('/restaurants');
 		const data = await res.json();
 
+		const payload = data.data
+
+
+
 		dispatch({
+
 			type: FETCH_RESTAURANTS_SUCCESS,
-			payload: data
+			restaurantList: payload
+
 		})
 		
 
 
 	} catch (error) {
 
-		
 		console.log(error);
 	}
 
