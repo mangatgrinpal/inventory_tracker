@@ -1,16 +1,16 @@
-import React from "react"
+import React from 'react'
 
-import { Link } from "react-router-dom"
+import { NavLink } from 'react-router-dom'
 
 
 const Navigation = () => {
 	return (
 		<ul>
 			<li>
-				<Link to="/">Home</Link>
+				<NavLink to='/' activeClassName='active'>Home</NavLink>
 			</li>
 			<li>
-				<Link to="/dashboard">Dashboard</Link>
+				<NavLink to='/dashboard' activeClassName='active'>Dashboard</NavLink>
 			</li>
 
 		</ul>

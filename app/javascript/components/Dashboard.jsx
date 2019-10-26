@@ -1,7 +1,14 @@
 import React, { Fragment, useEffect, useState } from 'react';
 import Restaurant from './Restaurant'
 import Loading from './Loading'
-import { Switch, Route, Link } from 'react-router-dom'
+import { 
+	BrowserRouter as Router, 
+	Switch, 
+	Route, 
+	Link, 
+	useRouteMatch, 
+	useParams 
+} from 'react-router-dom'
 import { connect } from 'react-redux'
 
 import { fetchRestaurants } from '../actions/restaurants'
@@ -16,10 +23,11 @@ import Button from 'react-bootstrap/Button'
 
 
 const Dashboard = ({ 
-	match, 
 	fetchRestaurants, 
 	restaurants: { isFetching, restaurantList } 
 }) => {
+
+	let { path, url } = useRouteMatch();
 
 
 	useEffect(()=> {
@@ -28,31 +36,72 @@ const Dashboard = ({
 
 	},[ fetchRestaurants ])
 
-	const listOfRestaurants = restaurantList.map(restaurant=> {
+
+
+	const listOfRestaurantLinks = restaurantList.map( restaurant => {
+
+
 
 		let restaurantName = restaurant["attributes"].name
+		let formattedRestaurantName = restaurantName.replace(/ /g,'_');
+
+
 		return (
+			<Fragment key={restaurant.id}>
+				<Link to={`${url}/${formattedRestaurantName}`}>
+					{restaurantName}
+				</Link>
+				<br/>
+				
+			</Fragment>
+		)
 
-			<Restaurant key={restaurant.id} name={restaurantName} />
+	})
 
+	const listOfRestaurantRoutes = restaurantList.map( restaurant => {
+		let restaurantName = restaurant["attributes"].name
+		let formattedRestaurantName = restaurantName.replace(/ /g,'_');
+
+		return (
+				
+			<Route key={restaurant.id} path={`${path}/${formattedRestaurantName}`}>
+				<Restaurant name={restaurantName} />
+			</Route>
 			
 		)
 	})
 
 
-
 	return (
 
 		<Fragment>
-			<Container fluid={true}>
-				<Row>
-					<Col>
-						
-						{listOfRestaurants}
+			<Router>
+				<Container fluid={true}>
+					<Row>
+						<Col>
+							<Button>
+								Add New Restaurant
+							</Button>
+						</Col>
+					</Row>
+					<Row>
+						<Col>
+							{listOfRestaurantLinks}
+								
+								<Switch>
+									<Route exact path='/'>
+										<h3>Choose a restaurant</h3>
 
-					</Col>
-				</Row>
-			</Container>
+									</Route>
+									{listOfRestaurantRoutes}
+								</Switch>
+
+
+						</Col>
+					</Row>
+					
+				</Container>
+			</Router>
 		</Fragment>
 	)
 }
