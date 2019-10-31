@@ -1,17 +1,19 @@
 import React, { Fragment, useEffect, useState } from 'react';
 import Restaurant from './Restaurant'
 import Loading from './Loading'
+import DashHome from './DashHome'
 import { 
 	BrowserRouter as Router, 
 	Switch, 
 	Route, 
 	Link, 
 	useRouteMatch, 
-	useParams 
+	useParams,
+	withRouter 
 } from 'react-router-dom'
 import { connect } from 'react-redux'
 
-import { fetchRestaurants } from '../actions/restaurants'
+import { fetchRestaurants, addRestaurant } from '../actions/restaurants'
 
 
 
@@ -24,6 +26,7 @@ import Button from 'react-bootstrap/Button'
 
 const Dashboard = ({ 
 	fetchRestaurants, 
+	addRestaurant,
 	restaurants: { isFetching, restaurantList } 
 }) => {
 
@@ -59,13 +62,14 @@ const Dashboard = ({
 	})
 
 	const listOfRestaurantRoutes = restaurantList.map( restaurant => {
+
 		let restaurantName = restaurant["attributes"].name
 		let formattedRestaurantName = restaurantName.replace(/ /g,'_');
 
 		return (
 				
 			<Route key={restaurant.id} path={`${path}/${formattedRestaurantName}`}>
-				<Restaurant name={restaurantName} />
+				<Restaurant name={restaurantName} items={restaurant.relationships.items} />
 			</Route>
 			
 		)
@@ -79,7 +83,7 @@ const Dashboard = ({
 				<Container fluid={true}>
 					<Row>
 						<Col>
-							<Button>
+							<Button onClick={addRestaurant} >
 								Add New Restaurant
 							</Button>
 						</Col>
@@ -89,8 +93,9 @@ const Dashboard = ({
 							{listOfRestaurantLinks}
 								
 								<Switch>
-									<Route exact path='/'>
-										<h3>Choose a restaurant</h3>
+									<Route exact path={path}>
+
+										<DashHome />
 
 									</Route>
 									{listOfRestaurantRoutes}
@@ -117,7 +122,7 @@ const mapStateToProps = state => {
 
 
 
-export default connect (
+export default withRouter(connect (
 	mapStateToProps,
-	{ fetchRestaurants }
-)(Dashboard)
+	{ fetchRestaurants, addRestaurant }
+)(Dashboard))

@@ -24,8 +24,12 @@ export default function(state = initialState, action) {
 				...state,
 				restaurantList: action.restaurantList,
 				isFetching: false
-			}
-
+			};
+		case ADD_RESTAURANT:
+			return {
+				...state,
+				restaurantList: action.restaurantList
+			};
 		default:
 			return state
 	}
