@@ -14,11 +14,7 @@ const Restaurant = ( props ) => {
 		<Fragment>
 			<h2>View Inventory for {name}</h2>
 				<ul>
-					{items.length > 0 && items.data.map(item => {
-						
-							<Item item={item} />
-						
-					})}
+					
 				</ul>
 		</Fragment>
 	)

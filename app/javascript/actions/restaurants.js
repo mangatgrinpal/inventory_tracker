@@ -24,10 +24,11 @@ export const addRestaurant = name => async dispatch => {
 		})
 
 		const data = await res.json()
+		const payload = data.data
 
 		dispatch({
 			type: ADD_RESTAURANT,
-			payload: data
+			restaurantList: payload
 		})
 
 	} catch (error) {

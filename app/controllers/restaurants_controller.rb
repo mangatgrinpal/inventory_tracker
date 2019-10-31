@@ -7,7 +7,7 @@ class RestaurantsController < ApplicationController
   def create
   	@restaurant = Restaurant.new(restaurant_params)
   	if @restaurant.save
-  		render json: @restaurant
+  		render json: serialized_restaurants
   	end
   end
 

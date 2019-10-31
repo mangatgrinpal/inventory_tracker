@@ -2,6 +2,7 @@ import React, { Fragment, useEffect, useState } from 'react';
 import Restaurant from './Restaurant'
 import Loading from './Loading'
 import DashHome from './DashHome'
+import ItemForm from './ItemForm'
 import { 
 	BrowserRouter as Router, 
 	Switch, 
@@ -40,6 +41,9 @@ const Dashboard = ({
 	},[ fetchRestaurants ])
 
 
+	const [isHidden, toggleIsHidden] = useState(false);
+
+
 
 	const listOfRestaurantLinks = restaurantList.map( restaurant => {
 
@@ -69,7 +73,7 @@ const Dashboard = ({
 		return (
 				
 			<Route key={restaurant.id} path={`${path}/${formattedRestaurantName}`}>
-				<Restaurant name={restaurantName} items={restaurant.relationships.items} />
+				<Restaurant name={restaurantName} />
 			</Route>
 			
 		)
@@ -83,7 +87,9 @@ const Dashboard = ({
 				<Container fluid={true}>
 					<Row>
 						<Col>
-							<Button onClick={addRestaurant} >
+							{isHidden && 
+								<ItemForm addRestaurant={addRestaurant} />}
+							<Button onClick={()=> {toggleIsHidden(!isHidden)}}>
 								Add New Restaurant
 							</Button>
 						</Col>
