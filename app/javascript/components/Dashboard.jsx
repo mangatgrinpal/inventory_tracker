@@ -2,15 +2,14 @@ import React, { Fragment, useEffect, useState } from 'react';
 import Restaurant from './Restaurant'
 import Loading from './Loading'
 import DashHome from './DashHome'
-import ItemForm from './ItemForm'
+import RestaurantForm from './RestaurantForm'
 import { 
 	BrowserRouter as Router, 
 	Switch, 
 	Route, 
 	Link, 
 	useRouteMatch, 
-	useParams,
-	withRouter 
+	useParams
 } from 'react-router-dom'
 import { connect } from 'react-redux'
 
@@ -88,10 +87,15 @@ const Dashboard = ({
 					<Row>
 						<Col>
 							{isHidden && 
-								<ItemForm addRestaurant={addRestaurant} />}
-							<Button onClick={()=> {toggleIsHidden(!isHidden)}}>
-								Add New Restaurant
-							</Button>
+								<RestaurantForm 
+								addRestaurant={addRestaurant} 
+								isHidden={isHidden} 
+								toggleIsHidden={toggleIsHidden} />}
+								
+							{!isHidden && 
+								<Button onClick={()=> {toggleIsHidden(!isHidden)}}>
+									Add New Restaurant
+								</Button>}
 						</Col>
 					</Row>
 					<Row>
@@ -128,7 +132,7 @@ const mapStateToProps = state => {
 
 
 
-export default withRouter(connect (
+export default connect (
 	mapStateToProps,
 	{ fetchRestaurants, addRestaurant }
-)(Dashboard))
+)(Dashboard)

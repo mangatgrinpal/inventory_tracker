@@ -5,16 +5,19 @@ import Col from 'react-bootstrap/Col'
 import Button from 'react-bootstrap/Button'
 
 
-const ItemForm = () => {
+const RestaurantForm = ({ 
+	addRestaurant, 
+	isHidden, 
+	toggleIsHidden 
+}) => {
+
 	const [ formData, setFormData ] = useState("")	
-
-
 
 
 	return (
 			<Form>
 				<Form.Row>
-					<Col sm={1}>
+					<Col sm={2}>
 						<Form.Control 
 							type="text"
 							value={formData}
@@ -22,8 +25,11 @@ const ItemForm = () => {
 							/>
 					</Col>
 					<Col>
-						<Button>
+						<Button onClick={ ()=>{addRestaurant(formData)} }>
 							Add
+						</Button>
+						<Button variant="danger" onClick={()=> {toggleIsHidden(!isHidden)}}>
+							Cancel
 						</Button>
 					</Col>
 				</Form.Row>
@@ -31,4 +37,4 @@ const ItemForm = () => {
 		)
 }
 
-export default ItemForm
+export default RestaurantForm
