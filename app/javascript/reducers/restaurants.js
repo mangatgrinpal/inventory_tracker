@@ -2,7 +2,8 @@ import {
 	FETCH_RESTAURANTS_REQUEST, 
 	FETCH_RESTAURANTS_SUCCESS, 
 	FETCH_RESTAURANTS_ERROR,
-	ADD_RESTAURANT
+	ADD_RESTAURANT,
+	DELETE_RESTAURANT
 } from '../actions/types';
 
 
@@ -26,6 +27,11 @@ export default function(state = initialState, action) {
 				isFetching: false
 			};
 		case ADD_RESTAURANT:
+			return {
+				...state,
+				restaurantList: action.restaurantList
+			};
+		case DELETE_RESTAURANT:
 			return {
 				...state,
 				restaurantList: action.restaurantList

@@ -13,7 +13,9 @@ class RestaurantsController < ApplicationController
 
   def destroy
   	@restaurant = Restaurant.find(params[:id])
-  	@restaurant.destroy
+  	if @restaurant.destroy
+      render json: serialized_restaurants
+    end
   end
 
   private

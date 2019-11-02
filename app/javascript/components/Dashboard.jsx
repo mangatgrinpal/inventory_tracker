@@ -15,12 +15,12 @@ import { connect } from 'react-redux'
 
 import { fetchRestaurants, addRestaurant } from '../actions/restaurants'
 
-
-
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import Button from 'react-bootstrap/Button'
+import Card from 'react-bootstrap/Card'
+import CardDeck from 'react-bootstrap/CardDeck'
 
 
 
@@ -42,11 +42,7 @@ const Dashboard = ({
 
 	const [isHidden, toggleIsHidden] = useState(false);
 
-
-
 	const listOfRestaurantLinks = restaurantList.map( restaurant => {
-
-
 
 		let restaurantName = restaurant["attributes"].name
 		let formattedRestaurantName = restaurantName.replace(/ /g,'_');
@@ -54,11 +50,17 @@ const Dashboard = ({
 
 		return (
 			<Fragment key={restaurant.id}>
-				<Link to={`${url}/${formattedRestaurantName}`}>
-					{restaurantName}
-				</Link>
-				<br/>
-				
+				<Col md={3}>
+					<Card>
+						<Link to={`${url}/${formattedRestaurantName}`}>
+							<Card.Body>
+								<Card.Title>
+									{restaurantName}
+								</Card.Title>
+							</Card.Body>
+						</Link>
+					</Card>
+				</Col>
 			</Fragment>
 		)
 
@@ -72,7 +74,7 @@ const Dashboard = ({
 		return (
 				
 			<Route key={restaurant.id} path={`${path}/${formattedRestaurantName}`}>
-				<Restaurant name={restaurantName} />
+				<Restaurant restaurant={restaurant} />
 			</Route>
 			
 		)
@@ -84,24 +86,26 @@ const Dashboard = ({
 		<Fragment>
 			<Router>
 				<Container fluid={true}>
-					<Row>
-						<Col>
-							{isHidden && 
-								<RestaurantForm 
-								addRestaurant={addRestaurant} 
-								isHidden={isHidden} 
-								toggleIsHidden={toggleIsHidden} />}
+					{isFetching ? 
+						<Loading/> : 
+						<Row>
+							<Col> 
+								<Row>
+								{listOfRestaurantLinks}
+
+									{!isHidden && 
+									<Button onClick={()=> {toggleIsHidden(!isHidden)}}>
+										+
+									</Button>}
+
+									{isHidden && 
+									<RestaurantForm 
+									addRestaurant={addRestaurant} 
+									isHidden={isHidden} 
+									toggleIsHidden={toggleIsHidden} />}
+								</Row>
 								
-							{!isHidden && 
-								<Button onClick={()=> {toggleIsHidden(!isHidden)}}>
-									Add New Restaurant
-								</Button>}
-						</Col>
-					</Row>
-					<Row>
-						<Col>
-							{listOfRestaurantLinks}
-								
+									
 								<Switch>
 									<Route exact path={path}>
 
@@ -111,10 +115,9 @@ const Dashboard = ({
 									{listOfRestaurantRoutes}
 								</Switch>
 
-
-						</Col>
-					</Row>
-					
+							</Col>
+						</Row>
+					}					
 				</Container>
 			</Router>
 		</Fragment>

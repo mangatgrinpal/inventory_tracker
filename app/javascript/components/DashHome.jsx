@@ -1,10 +1,16 @@
 import React, { Fragment } from 'react'
 
+import Container from 'react-bootstrap/Container'
+
 const DashHome = () => {
 
 	return (
+		
 		<Fragment>
-			<h1>Hello world!</h1>
+			<Container fluid={true}>
+				<h1>Choose a restaurant to get started.</h1>
+			</Container>
+			
 		</Fragment>
 	)
 }
