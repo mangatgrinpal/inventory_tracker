@@ -7,7 +7,6 @@ import {
 } from './types'
 
 
-
 const csrfToken = document.getElementsByName('csrf-token')[0].content
 
 export const fetchRestaurants = restaurant => async dispatch => {
@@ -67,7 +66,7 @@ export const addRestaurant = name => async dispatch => {
 	}
 }
 
-export const deleteRestaurant = restaurant => async dispatch => {
+export const deleteRestaurant = (restaurant, history) => async dispatch => {
 
 	try {
 
@@ -86,7 +85,8 @@ export const deleteRestaurant = restaurant => async dispatch => {
 			type: DELETE_RESTAURANT,
 			restaurantList: payload
 		})
-
+		
+		history.push('/dashboard')
 
 	} catch (error) {
 

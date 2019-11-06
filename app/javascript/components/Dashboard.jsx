@@ -9,8 +9,11 @@ import {
 	Route, 
 	Link, 
 	useRouteMatch, 
-	useParams
+	useParams,
+	withRouter
 } from 'react-router-dom'
+
+
 import { connect } from 'react-redux'
 
 import { fetchRestaurants, addRestaurant } from '../actions/restaurants'
@@ -25,12 +28,13 @@ import CardDeck from 'react-bootstrap/CardDeck'
 
 
 const Dashboard = ({ 
+	props,
 	fetchRestaurants, 
 	addRestaurant,
 	restaurants: { isFetching, restaurantList } 
 }) => {
 
-	let { path, url } = useRouteMatch();
+	const { path, url } = useRouteMatch();
 
 
 	useEffect(()=> {
@@ -124,18 +128,16 @@ const Dashboard = ({
 	)
 }
 
-const mapStateToProps = state => {
-
-	return {
-		restaurants: state.restaurants
-	}
-	
-}
+const mapStateToProps = state => 
+({
+	restaurants: state.restaurants
+})
 
 
 
 
-export default connect (
+export default withRouter (
+	connect (
 	mapStateToProps,
 	{ fetchRestaurants, addRestaurant }
-)(Dashboard)
+)(Dashboard))

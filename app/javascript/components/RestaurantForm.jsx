@@ -13,6 +13,12 @@ const RestaurantForm = ({
 
 	const [ formData, setFormData ] = useState("")	
 
+	const handleClick = () => {
+		addRestaurant(formData)
+		setTimeout(()=>{
+			toggleIsHidden(!isHidden)
+		},500)
+	}
 
 	return (
 			<Form>
@@ -25,7 +31,7 @@ const RestaurantForm = ({
 							/>
 					</Col>
 					<Col>
-						<Button onClick={ ()=>{addRestaurant(formData)} }>
+						<Button onClick={handleClick}>
 							Add
 						</Button>
 						<Button variant="danger" onClick={()=> {toggleIsHidden(!isHidden)}}>
