@@ -13,6 +13,7 @@ const RestaurantForm = ({
 
 	const [ formData, setFormData ] = useState("")	
 
+	// change this set timeout function later
 	const handleClick = () => {
 		addRestaurant(formData)
 		setTimeout(()=>{
@@ -23,13 +24,15 @@ const RestaurantForm = ({
 	return (
 			<Form>
 				<Form.Row>
-					<Col sm={2}>
+					<Col>
 						<Form.Control 
 							type="text"
 							value={formData}
 							onChange={(e)=> setFormData(e.target.value)}
 							/>
 					</Col>
+				</Form.Row>
+				<Form.Row>
 					<Col>
 						<Button onClick={handleClick}>
 							Add

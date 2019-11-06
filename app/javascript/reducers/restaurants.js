@@ -1,5 +1,4 @@
 import { 
-	FETCH_RESTAURANTS_REQUEST, 
 	FETCH_RESTAURANTS_SUCCESS, 
 	FETCH_RESTAURANTS_ERROR,
 	ADD_RESTAURANT,
@@ -9,32 +8,33 @@ import {
 
 const initialState = {
 	restaurantList: [],
-	isFetching: false
+	isFetching: true
 };
 
 export default function(state = initialState, action) {
-
-	switch (action.type) {
-		case FETCH_RESTAURANTS_REQUEST:
-			return {
-				...state,
-				isFetching: true
-			};
+	const { type, payload } = action;
+	switch (type) {
 		case FETCH_RESTAURANTS_SUCCESS:
 			return {
 				...state,
-				restaurantList: action.restaurantList,
+				restaurantList: payload,
 				isFetching: false
 			};
+		case FETCH_RESTAURANTS_ERROR:
+			return {
+				...state,
+				restaurantList: payload,
+				isFetching: false
+			}
 		case ADD_RESTAURANT:
 			return {
 				...state,
-				restaurantList: action.restaurantList
+				restaurantList: payload
 			};
 		case DELETE_RESTAURANT:
 			return {
 				...state,
-				restaurantList: action.restaurantList
+				restaurantList: payload
 			};
 		default:
 			return state

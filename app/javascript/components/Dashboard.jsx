@@ -9,8 +9,7 @@ import {
 	Route, 
 	Link, 
 	useRouteMatch, 
-	useParams,
-	withRouter
+	useParams
 } from 'react-router-dom'
 
 
@@ -27,8 +26,7 @@ import CardDeck from 'react-bootstrap/CardDeck'
 
 
 
-const Dashboard = ({ 
-	props,
+const Dashboard = ({
 	fetchRestaurants, 
 	addRestaurant,
 	restaurants: { isFetching, restaurantList } 
@@ -97,17 +95,22 @@ const Dashboard = ({
 								<Row>
 								{listOfRestaurantLinks}
 
-									{!isHidden && 
-									<Button onClick={()=> {toggleIsHidden(!isHidden)}}>
-										+
-									</Button>}
+									{!isHidden &&
+									<Col md={3}> 
+										<Button onClick={()=> {toggleIsHidden(!isHidden)}}>
+											+
+										</Button>
+									</Col>}
 
-									{isHidden && 
-									<RestaurantForm 
-									addRestaurant={addRestaurant} 
-									isHidden={isHidden} 
-									toggleIsHidden={toggleIsHidden} />}
+									{isHidden &&
+									<Col md={3}>
+										<RestaurantForm 
+										addRestaurant={addRestaurant} 
+										isHidden={isHidden} 
+										toggleIsHidden={toggleIsHidden} />
+									</Col>}
 								</Row>
+
 								
 									
 								<Switch>
@@ -134,10 +137,7 @@ const mapStateToProps = state =>
 })
 
 
-
-
-export default withRouter (
-	connect (
+export default connect (
 	mapStateToProps,
 	{ fetchRestaurants, addRestaurant }
-)(Dashboard))
+)(Dashboard)

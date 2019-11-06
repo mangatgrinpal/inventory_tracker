@@ -2,6 +2,7 @@ import React, { Fragment, useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 
 import { deleteRestaurant } from '../actions/restaurants';
+import { fetchItems } from '../actions/items';
 
 import { useHistory } from 'react-router-dom';
 
@@ -10,10 +11,15 @@ import ItemForm from './ItemForm'
 
 import Button from 'react-bootstrap/Button'
 
-const Restaurant = ( { deleteRestaurant, restaurant }) => {	
-
+const Restaurant = ( { deleteRestaurant, restaurant, fetchItems, items: { itemList, isFetching } }) => {	
+	
 	const { id, attributes: { name }} = restaurant;
 	const history = useHistory();
+
+	useEffect(() => {
+		fetchItems(id)
+
+	},[ fetchItems ])
 
 	return (
 		<Fragment>
@@ -28,10 +34,11 @@ const Restaurant = ( { deleteRestaurant, restaurant }) => {
 
 const mapStateToProps = state => 
 ({	
-	restaurants: state.restaurants
+	restaurants: state.restaurants,
+	items: state.items
 });
 
 export default connect(
 	mapStateToProps,
-	{ deleteRestaurant }
+	{ deleteRestaurant, fetchItems }
 )(Restaurant)
