@@ -2,7 +2,7 @@ import React, { Fragment, useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 
 import { deleteRestaurant } from '../actions/restaurants';
-import { fetchItems } from '../actions/items';
+import { fetchItems, addItem } from '../actions/items';
 
 import { useHistory } from 'react-router-dom';
 
@@ -13,7 +13,13 @@ import ItemForm from './ItemForm';
 
 import Button from 'react-bootstrap/Button';
 
-const Restaurant = ( { deleteRestaurant, restaurant, fetchItems, items: { itemList, isFetching } }) => {	
+const Restaurant = ({ 
+	deleteRestaurant, 
+	restaurant, 
+	fetchItems,
+	addItem,
+	items: { itemList, isFetching } 
+}) => {	
 
 	const { id, attributes: { name }} = restaurant;
 	const history = useHistory();
@@ -23,7 +29,6 @@ const Restaurant = ( { deleteRestaurant, restaurant, fetchItems, items: { itemLi
 
 	},[ fetchItems ])
 
-	console.log(itemList)
 
 	return (
 		<Fragment>
@@ -33,12 +38,13 @@ const Restaurant = ( { deleteRestaurant, restaurant, fetchItems, items: { itemLi
 			</Button>
 			{isFetching ? 
 				<Loading/> : 
-				itemList.map(item=>{
-					let itemInfo = item.attributes
+				itemList.map( item => {
+					let { attributes } = item;
 					return(
-						<Item key={item.id} item={itemInfo} />
+						<Item key={item.id} attributes={attributes} />
 					)
 				})}
+			<ItemForm restaurant={id} addItem={addItem} />
 				
 		</Fragment>
 			
@@ -53,5 +59,5 @@ const mapStateToProps = state =>
 
 export default connect(
 	mapStateToProps,
-	{ deleteRestaurant, fetchItems }
+	{ deleteRestaurant, fetchItems, addItem }
 )(Restaurant)

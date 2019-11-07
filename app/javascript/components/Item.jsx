@@ -1,8 +1,8 @@
 import React, { Fragment } from 'react';
 
 
-const Item = ( { item } ) => {
-	const { name, units } = item;
+const Item = ( { attributes } ) => {
+	const { name, units } = attributes;
 
 	return (
 		<Fragment>

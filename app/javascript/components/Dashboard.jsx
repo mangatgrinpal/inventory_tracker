@@ -12,7 +12,6 @@ import {
 	useParams
 } from 'react-router-dom'
 
-
 import { connect } from 'react-redux'
 
 import { fetchRestaurants, addRestaurant } from '../actions/restaurants'
@@ -33,7 +32,7 @@ const Dashboard = ({
 }) => {
 
 	const { path, url } = useRouteMatch();
-
+	const [isHidden, toggleIsHidden] = useState(false);
 
 	useEffect(()=> {
 		fetchRestaurants()
@@ -42,7 +41,7 @@ const Dashboard = ({
 	},[ fetchRestaurants ])
 
 
-	const [isHidden, toggleIsHidden] = useState(false);
+	
 
 	const listOfRestaurantLinks = restaurantList.map( restaurant => {
 
@@ -105,9 +104,9 @@ const Dashboard = ({
 									{isHidden &&
 									<Col md={3}>
 										<RestaurantForm 
-										addRestaurant={addRestaurant} 
-										isHidden={isHidden} 
-										toggleIsHidden={toggleIsHidden} />
+											addRestaurant={addRestaurant} 
+											isHidden={isHidden} 
+											toggleIsHidden={toggleIsHidden} />
 									</Col>}
 								</Row>
 

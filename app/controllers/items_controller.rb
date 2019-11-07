@@ -6,20 +6,23 @@ class ItemsController < ApplicationController
 
 	def create
 		@item = Item.new(item_params)
+
 		if @item.save
-			render json: @item
+			render json: serialized_items
 		end
 	end
 
 	def destroy
 		@item = Item.find(params[:id])
-		@item.destroy
+		if @item.destroy
+			render json: serialized_items
+		end
 	end
 
 	private
 
 		def item_params
-			params.require(:item).permit(:name, :units)
+			params.require(:item).permit(:name, :units, :restaurant_id)
 		end
 
 		def serialized_items
