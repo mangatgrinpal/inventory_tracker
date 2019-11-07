@@ -1,7 +1,7 @@
 class ItemsController < ApplicationController
 	def index
-		@items = Item.where(restaurant_id: params[:restaurant])
-		render json: @items
+		
+		render json: serialized_items
 	end
 
 	def create
@@ -20,5 +20,10 @@ class ItemsController < ApplicationController
 
 		def item_params
 			params.require(:item).permit(:name, :units)
+		end
+
+		def serialized_items
+			@items = Item.where(restaurant_id: params[:restaurant])
+			ItemSerializer.new(@items).serialized_json
 		end
 end

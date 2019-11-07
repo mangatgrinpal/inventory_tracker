@@ -1,12 +1,13 @@
-import React, { Fragment } from "react"
+import React, { Fragment } from 'react';
 
-const Item = ( props ) => {
-	let { item, units } = props
+
+const Item = ( { item } ) => {
+	const { name, units } = item;
 
 	return (
 		<Fragment>
 			<li>
-				
+				{name}/{units}
 			</li>
 			
 		</Fragment>

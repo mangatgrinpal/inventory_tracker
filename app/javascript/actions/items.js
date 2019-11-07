@@ -17,12 +17,11 @@ export const fetchItems = restaurant => async dispatch => {
 	try {
 		const res = await fetch('/items?restaurant=' + restaurant)
 		const json = await res.json();
-		debugger
-		const payload = json
+
 
 		dispatch({
 			type: FETCH_ITEMS_SUCCESS,
-			payload: payload
+			payload: json.data
 		})
 	} catch(error) {
 		console.log(error)
