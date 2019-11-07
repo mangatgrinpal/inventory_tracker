@@ -2,7 +2,7 @@ import React, { Fragment, useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 
 import { deleteRestaurant } from '../actions/restaurants';
-import { fetchItems, addItem } from '../actions/items';
+import { fetchItems, addItem, deleteItem } from '../actions/items';
 
 import { useHistory } from 'react-router-dom';
 
@@ -18,6 +18,7 @@ const Restaurant = ({
 	restaurant, 
 	fetchItems,
 	addItem,
+	deleteItem,
 	items: { itemList, isFetching } 
 }) => {	
 
@@ -39,9 +40,13 @@ const Restaurant = ({
 			{isFetching ? 
 				<Loading/> : 
 				itemList.map( item => {
-					let { attributes } = item;
+					
 					return(
-						<Item key={item.id} attributes={attributes} />
+						<Item 
+							key={item.id}
+							restaurant={id}
+							item={item}
+							deleteItem={deleteItem} />
 					)
 				})}
 			<ItemForm restaurant={id} addItem={addItem} />
@@ -57,7 +62,8 @@ const mapStateToProps = state =>
 	items: state.items
 });
 
+
 export default connect(
 	mapStateToProps,
-	{ deleteRestaurant, fetchItems, addItem }
+	{ deleteRestaurant, fetchItems, addItem, deleteItem }
 )(Restaurant)
