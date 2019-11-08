@@ -45,18 +45,16 @@ const Dashboard = ({
 
 	const listOfRestaurantLinks = restaurantList.map( restaurant => {
 
-		let restaurantName = restaurant["attributes"].name
-		let formattedRestaurantName = restaurantName.replace(/ /g,'_');
-
+		let { id, attributes: { name }} = restaurant;
 
 		return (
-			<Fragment key={restaurant.id}>
+			<Fragment key={id}>
 				<Col md={3}>
 					<Card>
-						<Link to={`${url}/${formattedRestaurantName}`}>
+						<Link to={`${url}/${id}`}>
 							<Card.Body>
 								<Card.Title>
-									{restaurantName}
+									{name}
 								</Card.Title>
 							</Card.Body>
 						</Link>
@@ -66,21 +64,6 @@ const Dashboard = ({
 		)
 
 	})
-
-	const listOfRestaurantRoutes = restaurantList.map( restaurant => {
-
-		let restaurantName = restaurant["attributes"].name
-		let formattedRestaurantName = restaurantName.replace(/ /g,'_');
-
-		return (
-				
-			<Route key={restaurant.id} path={`${path}/${formattedRestaurantName}`}>
-				<Restaurant restaurant={restaurant} />
-			</Route>
-			
-		)
-	})
-
 
 	return (
 
@@ -110,15 +93,14 @@ const Dashboard = ({
 									</Col>}
 								</Row>
 
-								
-									
 								<Switch>
 									<Route exact path={path}>
-
 										<DashHome />
-
 									</Route>
-									{listOfRestaurantRoutes}
+									<Route path={`${path}/:id`}>
+										<Restaurant />
+									</Route>
+
 								</Switch>
 
 							</Col>

@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { deleteRestaurant } from '../actions/restaurants';
 import { fetchItems, addItem, deleteItem } from '../actions/items';
 
-import { useHistory } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 
 import Loading from './Loading';
 import Item from './Item';
@@ -15,14 +15,14 @@ import Button from 'react-bootstrap/Button';
 
 const Restaurant = ({ 
 	deleteRestaurant, 
-	restaurant, 
 	fetchItems,
 	addItem,
 	deleteItem,
 	items: { itemList, isFetching } 
 }) => {	
+	const { id } = useParams();
 
-	const { id, attributes: { name }} = restaurant;
+	console.log(id)
 	const history = useHistory();
 
 	useEffect(() => {
@@ -34,7 +34,7 @@ const Restaurant = ({
 	return (
 		<Fragment>
 			<h2>View Inventory for {name}</h2>
-			<Button variant="danger" onClick={()=> {deleteRestaurant(id, history)}}>
+			<Button variant='danger' onClick={()=> {deleteRestaurant(id, history)}}>
 				X
 			</Button>
 			{isFetching ? 
