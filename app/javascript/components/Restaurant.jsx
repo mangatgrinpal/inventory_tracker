@@ -20,9 +20,8 @@ const Restaurant = ({
 	deleteItem,
 	items: { itemList, isFetching } 
 }) => {	
+	
 	const { id } = useParams();
-
-	console.log(id)
 	const history = useHistory();
 
 	useEffect(() => {

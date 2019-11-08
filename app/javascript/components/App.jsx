@@ -21,10 +21,10 @@ const App = () => {
 
 				<Switch>
 					<Route exact path='/'>
-						<Home/>
+						<Home />
 					</Route>
 					<Route path='/dashboard'>
-						<Dashboard/>
+						<Dashboard />
 					</Route>
 
 				</Switch>

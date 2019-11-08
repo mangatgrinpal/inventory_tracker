@@ -37,11 +37,8 @@ const Dashboard = ({
 	useEffect(()=> {
 		fetchRestaurants()
 
-
 	},[ fetchRestaurants ])
 
-
-	
 
 	const listOfRestaurantLinks = restaurantList.map( restaurant => {
 
@@ -49,7 +46,7 @@ const Dashboard = ({
 
 		return (
 			<Fragment key={id}>
-				<Col md={3}>
+				<Col md={2}>
 					<Card>
 						<Link to={`${url}/${id}`}>
 							<Card.Body>
@@ -68,46 +65,51 @@ const Dashboard = ({
 	return (
 
 		<Fragment>
-			<Router>
-				<Container fluid={true}>
-					{isFetching ? 
-						<Loading/> : 
-						<Row>
-							<Col> 
-								<Row>
+			<Container fluid={true}>
+				{isFetching ? 
+					<Loading/> : 
+					<Row>
+						<Col>
+							<Row>
+								<Col>
+									<h1>Choose a restaurant to get started.</h1>
+								</Col>
+							</Row> 
+							<Row>
+								
 								{listOfRestaurantLinks}
 
-									{!isHidden &&
-									<Col md={3}> 
-										<Button onClick={()=> {toggleIsHidden(!isHidden)}}>
-											+
-										</Button>
-									</Col>}
+								{!isHidden &&
+								<Col md={3}> 
+									<Button onClick={()=> {toggleIsHidden(!isHidden)}}>
+										+
+									</Button>
+								</Col>}
 
-									{isHidden &&
-									<Col md={3}>
-										<RestaurantForm 
-											addRestaurant={addRestaurant} 
-											isHidden={isHidden} 
-											toggleIsHidden={toggleIsHidden} />
-									</Col>}
-								</Row>
+								{isHidden &&
+								<Col md={3}>
+									<RestaurantForm 
+										addRestaurant={addRestaurant} 
+										isHidden={isHidden} 
+										toggleIsHidden={toggleIsHidden} />
+								</Col>}
+							</Row>
 
-								<Switch>
-									<Route exact path={path}>
-										<DashHome />
-									</Route>
-									<Route path={`${path}/:id`}>
-										<Restaurant />
-									</Route>
+							<Switch>
+								<Route exact path={path}>
+									<h1>sup dude</h1>
+								</Route>
+								<Route path={`${path}/:id`}>
+									<Restaurant />
+								</Route>
 
-								</Switch>
+							</Switch>
 
-							</Col>
-						</Row>
-					}					
-				</Container>
-			</Router>
+						</Col>
+					</Row>
+				}					
+			</Container>
+
 		</Fragment>
 	)
 }
