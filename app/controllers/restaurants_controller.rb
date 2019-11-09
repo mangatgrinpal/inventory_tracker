@@ -27,6 +27,6 @@ class RestaurantsController < ApplicationController
 
   def serialized_restaurants
     @restaurants = Restaurant.all
-    RestaurantSerializer.new(@restaurants, include: [:items]).serialized_json
+    RestaurantSerializer.new(@restaurants).serialized_json
   end
 end

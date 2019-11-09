@@ -1,6 +1,7 @@
 import React, { Fragment } from 'react';
 
-import Button from 'react-bootstrap/Button'
+import Button from 'react-bootstrap/Button';
+import ListGroup from 'react-bootstrap/ListGroup';
 
 
 const Item = ({ item, deleteItem, restaurant }) => {
@@ -8,12 +9,12 @@ const Item = ({ item, deleteItem, restaurant }) => {
 
 	return (
 		<Fragment>
-			<li>
-				{name}/{units}
-				<Button onClick={()=> { deleteItem(id, restaurant)}}>
+			<ListGroup.Item>
+				{name} ({units})
+				<Button variant='danger' onClick={()=> { deleteItem(id, restaurant)}}>
 					x
 				</Button>
-			</li>
+			</ListGroup.Item>
 			
 		</Fragment>
 	)

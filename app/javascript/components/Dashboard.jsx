@@ -3,8 +3,7 @@ import Restaurant from './Restaurant'
 import Loading from './Loading'
 import DashHome from './DashHome'
 import RestaurantForm from './RestaurantForm'
-import { 
-	BrowserRouter as Router, 
+import {  
 	Switch, 
 	Route, 
 	Link, 
@@ -74,7 +73,8 @@ const Dashboard = ({
 								<Col>
 									<h1>Choose a restaurant to get started.</h1>
 								</Col>
-							</Row> 
+							</Row>
+
 							<Row>
 								
 								{listOfRestaurantLinks}
@@ -97,7 +97,7 @@ const Dashboard = ({
 
 							<Switch>
 								<Route exact path={path}>
-									<h1>sup dude</h1>
+
 								</Route>
 								<Route path={`${path}/:id`}>
 									<Restaurant />

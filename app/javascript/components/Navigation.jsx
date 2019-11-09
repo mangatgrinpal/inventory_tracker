@@ -1,19 +1,35 @@
-import React from 'react'
+import React from 'react';
 
-import { Link } from 'react-router-dom'
+import { NavLink } from 'react-router-dom';
 
+import { LinkContainer } from 'react-router-bootstrap';
+
+import Navbar from 'react-bootstrap/Navbar';
+import Nav from 'react-bootstrap/Nav';
 
 const Navigation = () => {
-	return (
-		<ul>
-			<li>
-				<Link to='/'>Home</Link>
-			</li>
-			<li>
-				<Link to='/dashboard' >Dashboard</Link>
-			</li>
 
-		</ul>
+	return (
+		<Navbar bg='dark'>
+			<Nav>
+				<Nav.Item>
+					<LinkContainer to='/'>
+						<Nav.Link to='/'>Home</Nav.Link>
+					</LinkContainer>
+					
+				</Nav.Item>
+				
+				<Nav.Item>
+					<LinkContainer to='/dashboard'>
+						<Nav.Link>Dashboard</Nav.Link>
+					</LinkContainer>
+					
+				</Nav.Item>
+				
+			</Nav>
+		</Navbar>
+
+		
 	)
 }
 

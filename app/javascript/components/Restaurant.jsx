@@ -12,52 +12,67 @@ import ItemForm from './ItemForm';
 
 
 import Button from 'react-bootstrap/Button';
+import Col from 'react-bootstrap/Col';
+import ListGroup from 'react-bootstrap/ListGroup';
 
 const Restaurant = ({ 
 	deleteRestaurant, 
 	fetchItems,
 	addItem,
 	deleteItem,
-	items: { itemList, isFetching } 
+	items: { itemList, isFetching }
 }) => {	
-	
+
 	const { id } = useParams();
 	const history = useHistory();
 
 	useEffect(() => {
 		fetchItems(id)
 
-	},[ fetchItems ])
+	},[ id ])
 
 
 	return (
 		<Fragment>
-			<h2>View Inventory for {name}</h2>
+
 			<Button variant='danger' onClick={()=> {deleteRestaurant(id, history)}}>
-				X
+				Delete Restaurant
 			</Button>
-			{isFetching ? 
+
+			{ isFetching ? 
 				<Loading/> : 
-				itemList.map( item => {
-					
-					return(
-						<Item 
-							key={item.id}
-							restaurant={id}
-							item={item}
-							deleteItem={deleteItem} />
-					)
-				})}
-			<ItemForm restaurant={id} addItem={addItem} />
-				
+				itemList.length == 0 ?
+				<Fragment>
+					<h1>No items yet</h1>
+					<ItemForm restaurant={id} addItem={addItem} />
+				</Fragment> :
+				<Col md={2}>
+					<ListGroup>
+						<ListGroup.Item>
+							Name (units)
+						</ListGroup.Item>
+						{itemList.map( item => {
+							return(
+								<Item 
+									key={item.id}
+									restaurant={id}
+									item={item}
+									deleteItem={deleteItem} />
+							)
+						})}
+						<ListGroup.Item>
+							<ItemForm restaurant={id} addItem={addItem} />
+						</ListGroup.Item>
+					</ListGroup>
+				</Col>
+			}
 		</Fragment>
 			
 	)
 }
 
 const mapStateToProps = state => 
-({	
-	restaurants: state.restaurants,
+({
 	items: state.items
 });
 
