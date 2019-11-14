@@ -27,6 +27,6 @@ class ItemsController < ApplicationController
 
 		def serialized_items
 			@items = Item.where(restaurant_id: params[:restaurant])
-			ItemSerializer.new(@items, include: [:restaurant]).serialized_json
+			ItemSerializer.new(@items, include: [:records]).serialized_json
 		end
 end

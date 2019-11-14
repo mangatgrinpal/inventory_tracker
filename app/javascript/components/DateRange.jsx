@@ -21,7 +21,9 @@ const DateRange = ({weeks}) => {
 	return (
 		<Fragment>
 			<Moment subtract={{weeks:weeks}} date={startOfWeek(new Date())} format='MM/DD'/>
+				&nbsp;
 				-
+				&nbsp;	
 			<Moment subtract={{weeks:weeks}} date={endOfWeek(new Date())} format='MM/DD'/>
 		</Fragment>
 	)

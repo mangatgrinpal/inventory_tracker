@@ -3,4 +3,5 @@ class ItemSerializer
   attributes :name, :units
 
   belongs_to :restaurant
+  has_many :records
 end

@@ -1,6 +1,8 @@
 import React, { Fragment, useState, useEffect } from 'react';
 
-import { Provider } from 'react-redux'
+
+import { Provider } from 'react-redux';
+
 
 import Navigation from './Navigation'
 import Home from './Home'
@@ -12,7 +14,12 @@ import store from '../store'
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom'
 
 
-const App = () => {
+const App = ({ setCurrentWeekStart, setCurrentWeekEnd }) => {
+
+	useEffect(()=> {
+
+	},[])
+
 
 	return (
 		<Provider store={store}>
@@ -24,7 +31,9 @@ const App = () => {
 						<Home />
 					</Route>
 					<Route path='/dashboard'>
-						<Dashboard />
+						<Dashboard 
+							setCurrentWeekStart={setCurrentWeekStart} 
+							setCurrentWeekEnd={setCurrentWeekEnd} />
 					</Route>
 
 				</Switch>

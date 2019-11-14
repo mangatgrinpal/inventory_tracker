@@ -1,8 +1,6 @@
 import React, { Fragment, useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 
-import Moment from 'react-moment'
-
 
 import { deleteRestaurant } from '../actions/restaurants';
 import { fetchItems, addItem, deleteItem } from '../actions/items';
@@ -26,16 +24,23 @@ const Restaurant = ({
 	fetchItems,
 	addItem,
 	deleteItem,
-	items: { itemList, isFetching }
+	items: { itemList, isFetching },
+	weeks: { currentWeekStart, currentWeekEnd }
 }) => {	
 
 	const { id } = useParams();
 	const history = useHistory();
 
+	console.log(currentWeekStart, currentWeekEnd)
+
+
 	useEffect(() => {
 		fetchItems(id)
 
 	},[ id ])
+
+
+
 	
 
 	return (
@@ -45,6 +50,7 @@ const Restaurant = ({
 				Delete Restaurant
 			</Button>
 
+
 			{ isFetching ? 
 				<Loading/> : 
 				itemList.length == 0 ?
@@ -53,36 +59,32 @@ const Restaurant = ({
 					<ItemForm restaurant={id} addItem={addItem} />
 				</Fragment> :
 				<Fragment>
+					<Row className='justify-contents-center'>
+						<Col md={2}>
+							Name (units)
+						</Col>
+						<Col id='week_dates' md={2}>
+							{currentWeekStart} - {currentWeekEnd}
+						</Col>
+						<Col id='week1' md={2}>
+							<DateRange weeks={1} />
+						</Col>
+						<Col id='week2' md={2}>
+							<DateRange weeks={2} />
+						</Col>
+					</Row>
 
 					<Row className='no-gutters'>
-						<Col md={2}>
-							<ListGroup>
-								<ListGroup.Item>
-									Name (units)
-								</ListGroup.Item>
-								{itemList.map( item => {
-									return(
-										<Item 
-											key={item.id}
-											restaurant={id}
-											item={item}
-											deleteItem={deleteItem} />
-									)
-								})}
-								<ListGroup.Item>
-									<ItemForm restaurant={id} addItem={addItem} />
-								</ListGroup.Item>
-							</ListGroup>
-						</Col>
-						<Col md={2}>
-							<ListGroup>
-								<ListGroup.Item>
-									<DateRange weeks={0} />
-								</ListGroup.Item>
-								<ListGroup.Item>
-									<RecordForm/>
-								</ListGroup.Item>
-							</ListGroup>
+						<Col>
+						{itemList.map( item => {
+							return(
+								<Item 
+									key={item.id}
+									restaurant={id}
+									item={item}
+									deleteItem={deleteItem} />
+							)
+						})}
 						</Col>
 						{/*
 						<Col md={2}>
@@ -110,6 +112,11 @@ const Restaurant = ({
 					*/}
 
 					</Row>
+					<Row>
+						<Col md={3}>
+							<ItemForm restaurant={id} addItem={addItem} />
+						</Col>
+					</Row>
 				</Fragment>}
 		</Fragment>
 			
@@ -118,7 +125,8 @@ const Restaurant = ({
 
 const mapStateToProps = state => 
 ({
-	items: state.items
+	items: state.items,
+	weeks: state.weeks
 });
 
 
