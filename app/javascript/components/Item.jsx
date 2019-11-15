@@ -10,16 +10,16 @@ import ListGroup from 'react-bootstrap/ListGroup';
 
 const Item = ({ 
 	item, 
-	deleteItem, 
+	deleteItem,
+	fetchRecords, 
 	restaurant 
 }) => {
 
 	const { id, attributes: { name, units }} = item;
 
-
 	useEffect(()=> {
-
-	})
+		fetchRecords(id);
+	},[ id ])
 
 	return (
 		<Fragment>
@@ -34,6 +34,7 @@ const Item = ({
 					<Record itemId={id} />
 				</Col>
 				<Col md={2}>
+					
 				</Col>
 				<Col md={2}>
 				</Col>

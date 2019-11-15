@@ -8,8 +8,9 @@ export const FETCH_ITEMS_ERROR = 'FETCH_ITEMS_ERROR';
 export const ADD_ITEM = 'ADD_ITEM';
 export const DELETE_ITEM = 'DELETE_ITEM';
 
-//might delete this one later
+
 export const FETCH_RECORDS_SUCCESS = 'FETCH_RECORDS_SUCCESS';
+export const FETCH_RECORDS_ERROR = 'FETCH_RECORDS_ERROR';
 
 
 export const SET_CURRENT_WEEK_START = 'SET_CURRENT_WEEK_START';

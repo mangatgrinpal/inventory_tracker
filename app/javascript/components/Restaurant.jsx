@@ -1,18 +1,17 @@
 import React, { Fragment, useState, useEffect } from 'react';
-import { connect } from 'react-redux';
-
-
-import { deleteRestaurant } from '../actions/restaurants';
-import { fetchItems, addItem, deleteItem } from '../actions/items';
-
-import { useHistory, useParams } from 'react-router-dom';
-
 import Loading from './Loading';
 import Item from './Item';
 import ItemForm from './ItemForm';
 import DateRange from './DateRange';
 import RecordForm from './RecordForm';
+import { connect } from 'react-redux';
 
+
+import { deleteRestaurant } from '../actions/restaurants';
+import { fetchItems, addItem, deleteItem } from '../actions/items';
+import { fetchRecords } from '../actions/records';
+
+import { useHistory, useParams } from 'react-router-dom';
 
 import Button from 'react-bootstrap/Button';
 import Row from 'react-bootstrap/Row';
@@ -22,6 +21,7 @@ import ListGroup from 'react-bootstrap/ListGroup';
 const Restaurant = ({ 
 	deleteRestaurant, 
 	fetchItems,
+	fetchRecords,
 	addItem,
 	deleteItem,
 	items: { itemList, isFetching },
@@ -31,17 +31,13 @@ const Restaurant = ({
 	const { id } = useParams();
 	const history = useHistory();
 
-	console.log(currentWeekStart, currentWeekEnd)
-
 
 	useEffect(() => {
 		fetchItems(id)
 
+
 	},[ id ])
 
-
-
-	
 
 	return (
 		<Fragment>
@@ -82,6 +78,7 @@ const Restaurant = ({
 									key={item.id}
 									restaurant={id}
 									item={item}
+									fetchRecords={fetchRecords}
 									deleteItem={deleteItem} />
 							)
 						})}
@@ -126,11 +123,12 @@ const Restaurant = ({
 const mapStateToProps = state => 
 ({
 	items: state.items,
-	weeks: state.weeks
+	weeks: state.weeks,
+	records: state.records
 });
 
 
 export default connect(
 	mapStateToProps,
-	{ deleteRestaurant, fetchItems, addItem, deleteItem }
+	{ deleteRestaurant, fetchItems, addItem, deleteItem, fetchRecords }
 )(Restaurant)

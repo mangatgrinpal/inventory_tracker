@@ -8,5 +8,6 @@ import records from './records';
 export default combineReducers({
 	weeks,
 	restaurants,
-	items
+	items,
+	records
 });

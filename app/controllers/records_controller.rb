@@ -1,8 +1,8 @@
 class RecordsController < ApplicationController
 	
 	def index
-		# @record = Record.where(item_id: params[:itemId], week_dates: params[:weekDates])
-		# render json: @record
+		@records = Record.where(item_id: params[:itemId])
+		render json: @records
 	end
 
 	def create

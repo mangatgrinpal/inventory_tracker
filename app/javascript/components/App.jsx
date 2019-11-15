@@ -16,11 +16,6 @@ import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom'
 
 const App = ({ setCurrentWeekStart, setCurrentWeekEnd }) => {
 
-	useEffect(()=> {
-
-	},[])
-
-
 	return (
 		<Provider store={store}>
 			<Router>

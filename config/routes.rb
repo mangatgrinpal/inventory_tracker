@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   resources :restaurants
   resources :items
+  resources :records
   
   root 'static_pages#home'
 
