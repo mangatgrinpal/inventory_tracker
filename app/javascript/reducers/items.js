@@ -2,7 +2,8 @@ import {
 	FETCH_ITEMS_SUCCESS,
 	FETCH_ITEMS_ERROR,
 	ADD_ITEM,
-	DELETE_ITEM
+	DELETE_ITEM,
+	FETCH_RECORDS_SUCCESS
 } from '../actions/types'
 
 const initialState = {

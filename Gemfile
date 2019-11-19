@@ -24,7 +24,7 @@ gem 'jbuilder', '~> 2.7'
 gem 'react-rails'
 gem 'haml'
 
-gem 'fast_jsonapi'
+gem 'active_model_serializers', '~> 0.10.0'
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
 

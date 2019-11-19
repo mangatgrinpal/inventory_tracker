@@ -9,10 +9,15 @@ export const fetchRecords = item => async dispatch => {
 		const res = await fetch(`/records?itemId=${item}`)
 		const json = await res.json();
 
+		dispatch({
+			type: FETCH_RECORDS_SUCCESS,
+			payload: json.data
+		})
+
 	} catch(error) {
 
 		console.log(error)
-		
+
 	}
 
 }

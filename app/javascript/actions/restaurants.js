@@ -20,9 +20,11 @@ export const fetchRestaurants = restaurant => async dispatch => {
 		const res = await fetch('/restaurants');
 		const json = await res.json();
 
+
+
 		dispatch({
 			type: FETCH_RESTAURANTS_SUCCESS,
-			payload: json.data
+			payload: json
 		})
 		
 	} catch (error) {
@@ -49,7 +51,7 @@ export const addRestaurant = name => async dispatch => {
 
 		dispatch({
 			type: ADD_RESTAURANT,
-			payload: json.data
+			payload: json
 		})
 
 	} catch (error) {
@@ -71,7 +73,7 @@ export const deleteRestaurant = (restaurant, history) => async dispatch => {
 
 		dispatch({
 			type: DELETE_RESTAURANT,
-			payload: json.data
+			payload: json
 		})
 		
 		history.push('/dashboard')

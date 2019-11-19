@@ -48,7 +48,7 @@ const Dashboard = ({
 
 	const listOfRestaurantLinks = restaurantList.map( restaurant => {
 
-		let { id, attributes: { name }} = restaurant;
+		let { id, name } = restaurant;
 
 		return (
 			<Fragment key={id}>

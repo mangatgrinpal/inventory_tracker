@@ -27,6 +27,6 @@ class RestaurantsController < ApplicationController
 
   def serialized_restaurants
     @restaurants = Restaurant.all
-    RestaurantSerializer.new(@restaurants).serialized_json
+    ActiveModel::Serializer::CollectionSerializer.new(@restaurants, each_serializer: RestaurantSerializer)
   end
 end

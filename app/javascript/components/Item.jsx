@@ -12,14 +12,15 @@ const Item = ({
 	item, 
 	deleteItem,
 	fetchRecords, 
-	restaurant 
+	restaurant,
+	recordList 
 }) => {
 
-	const { id, attributes: { name, units }} = item;
+	const { id, name, units } = item;
 
 	useEffect(()=> {
-		fetchRecords(id);
-	},[ id ])
+		
+	})
 
 	return (
 		<Fragment>
@@ -30,14 +31,15 @@ const Item = ({
 						x
 					</Button>
 				</Col>
-				<Col md={2}>
-					<Record itemId={id} />
-				</Col>
-				<Col md={2}>
-					
-				</Col>
-				<Col md={2}>
-				</Col>
+				{recordList.map(record=>{
+					return(
+						<Col key={record.id} md={2}>
+							<Record record={record}/>
+						</Col>
+					)
+				})}
+				
+				
 				<Col md={2}>
 				</Col>
 			</Row>

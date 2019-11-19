@@ -1,6 +1,5 @@
-class RecordSerializer
-  include FastJsonapi::ObjectSerializer
-  attributes :week_dates, :quantity
+class RecordSerializer < ActiveModel::Serializer
+  attributes :id, :quantity
 
   belongs_to :item
 end

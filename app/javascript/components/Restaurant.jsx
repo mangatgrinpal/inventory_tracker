@@ -25,7 +25,8 @@ const Restaurant = ({
 	addItem,
 	deleteItem,
 	items: { itemList, isFetching },
-	weeks: { currentWeekStart, currentWeekEnd }
+	weeks: { currentWeekStart, currentWeekEnd },
+	records: { recordList }
 }) => {	
 
 	const { id } = useParams();
@@ -79,6 +80,7 @@ const Restaurant = ({
 									restaurant={id}
 									item={item}
 									fetchRecords={fetchRecords}
+									recordList={recordList}
 									deleteItem={deleteItem} />
 							)
 						})}

@@ -1,6 +1,5 @@
-class ItemSerializer
-  include FastJsonapi::ObjectSerializer
-  attributes :name, :units
+class ItemSerializer < ActiveModel::Serializer
+  attributes :id, :name, :units
 
   belongs_to :restaurant
   has_many :records

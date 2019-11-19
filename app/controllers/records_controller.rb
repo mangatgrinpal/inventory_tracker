@@ -1,8 +1,8 @@
 class RecordsController < ApplicationController
 	
 	def index
-		@records = Record.where(item_id: params[:itemId])
-		render json: @records
+
+		render json: serialized_records
 	end
 
 	def create
@@ -26,6 +26,7 @@ class RecordsController < ApplicationController
 		end 
 
 		def serialized_records
-			
+			@records = Record.where(item_id: params[:itemId])
+			ActiveModel::Serializer::CollectionSerializer.new(@records, each_serializer: RecordsSerializer)
 		end
 end

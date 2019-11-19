@@ -22,8 +22,10 @@ export const fetchItems = restaurant => async dispatch => {
 
 		dispatch({
 			type: FETCH_ITEMS_SUCCESS,
-			payload: json.data
+			payload: json
 		})
+
+
 	} catch(error) {
 		console.log(error)
 	}
@@ -45,7 +47,7 @@ export const addItem = (name, units, restaurant) => async dispatch => {
 
 		dispatch({
 			type: ADD_ITEM,
-			payload: json.data
+			payload: json
 		})
 
 	} catch(error) {
@@ -66,7 +68,7 @@ export const deleteItem = (item, restaurant) => async dispatch => {
 
 		dispatch({
 			type: DELETE_ITEM,
-			payload: json.data
+			payload: json
 		})
 
 	} catch(error) {

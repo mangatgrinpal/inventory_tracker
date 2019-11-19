@@ -4,7 +4,7 @@ import {
 } from '../actions/types';
 
 const initialState = {
-	records: []
+	recordList: []
 }
 
 export default function(state = initialState, action) {
@@ -13,12 +13,12 @@ export default function(state = initialState, action) {
 		case FETCH_RECORDS_SUCCESS:
 			return {
 				...state,
-				records: payload
+				recordList: payload
 			}
 		case FETCH_RECORDS_ERROR:
 			return {
 				...state,
-				records: payload
+				recordList: payload
 			}
 		default:
 			return state
