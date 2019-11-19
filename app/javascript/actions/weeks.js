@@ -1,17 +1,12 @@
 import {
-	SET_CURRENT_WEEK_START,
-	SET_CURRENT_WEEK_END
+	SET_CURRENT_WEEK_RANGE
 } from './types';
 
-export const setCurrentWeekRange = (start, end) => dispatch => {
+export const setCurrentWeekRange = week => dispatch => {
 
 	dispatch({
-		type: SET_CURRENT_WEEK_START,
-		payload: start
+		type: SET_CURRENT_WEEK_RANGE,
+		payload: week
 	})
-
-	dispatch({
-		type: SET_CURRENT_WEEK_END,
-		payload: end
-	})
+	
 }

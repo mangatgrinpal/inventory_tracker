@@ -16,11 +16,10 @@ const Item = ({
 	recordList 
 }) => {
 
-	const { id, name, units } = item;
 
-	useEffect(()=> {
-		
-	})
+	const { id, name, units, records } = item;
+
+
 
 	return (
 		<Fragment>
@@ -31,7 +30,7 @@ const Item = ({
 						x
 					</Button>
 				</Col>
-				{recordList.map(record=>{
+				{records.map( record => {
 					return(
 						<Col key={record.id} md={2}>
 							<Record record={record}/>

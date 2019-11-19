@@ -25,7 +25,7 @@ const Restaurant = ({
 	addItem,
 	deleteItem,
 	items: { itemList, isFetching },
-	weeks: { currentWeekStart, currentWeekEnd },
+	weeks: { currentWeekRange },
 	records: { recordList }
 }) => {	
 
@@ -33,11 +33,13 @@ const Restaurant = ({
 	const history = useHistory();
 
 
+
 	useEffect(() => {
 		fetchItems(id)
 
 
 	},[ id ])
+
 
 
 	return (
@@ -50,7 +52,7 @@ const Restaurant = ({
 
 			{ isFetching ? 
 				<Loading/> : 
-				itemList.length == 0 ?
+				itemList.length === 0 ?
 				<Fragment>
 					<h1>No items yet</h1>
 					<ItemForm restaurant={id} addItem={addItem} />
@@ -60,20 +62,19 @@ const Restaurant = ({
 						<Col md={2}>
 							Name (units)
 						</Col>
-						<Col id='week_dates' md={2}>
-							{currentWeekStart} - {currentWeekEnd}
-						</Col>
-						<Col id='week1' md={2}>
-							<DateRange weeks={1} />
-						</Col>
-						<Col id='week2' md={2}>
-							<DateRange weeks={2} />
-						</Col>
+						{currentWeekRange.map( (day, index) => {
+							return (
+								<Col key={index} md={1}>
+									{day}
+								</Col>
+							)
+						})}
 					</Row>
 
 					<Row className='no-gutters'>
 						<Col>
 						{itemList.map( item => {
+
 							return(
 								<Item 
 									key={item.id}

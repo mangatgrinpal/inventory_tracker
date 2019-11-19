@@ -6,9 +6,7 @@ import Col from 'react-bootstrap/Col';
 
 const Record = ({ record }) => {
 
-	const { id, attributes: { week_dates, quantity }}  = record;
-	console.log(id)
-	console.log(quantity.toString())
+	const { id, quantity }  = record;
 
 	return (
 		<Fragment>

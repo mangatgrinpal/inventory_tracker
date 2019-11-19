@@ -29,10 +29,8 @@ const Dashboard = ({
 	fetchRestaurants, 
 	addRestaurant,
 	setCurrentWeekRange,
-	setCurrentWeekStart,
-	setCurrentWeekEnd,
-	restaurants: { isFetching, restaurantList },
-	weeks: { currentWeekStart, currentWeekEnd }
+	currentWeekRange,
+	restaurants: { isFetching, restaurantList }
 }) => {
 
 	const { path, url } = useRouteMatch();
@@ -41,9 +39,10 @@ const Dashboard = ({
 	useEffect(()=> {
 		
 		fetchRestaurants();
-		setCurrentWeekRange(setCurrentWeekStart, setCurrentWeekEnd);
+		setCurrentWeekRange(currentWeekRange)
 
 	},[ fetchRestaurants ])
+
 
 
 	const listOfRestaurantLinks = restaurantList.map( restaurant => {
