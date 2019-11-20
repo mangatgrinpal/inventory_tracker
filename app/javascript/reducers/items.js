@@ -1,6 +1,8 @@
 import {
+	FETCH_ITEMS_REQUEST,
 	FETCH_ITEMS_SUCCESS,
 	FETCH_ITEMS_ERROR,
+	CLEAR_FETCHED_ITEMS,
 	ADD_ITEM,
 	DELETE_ITEM,
 	FETCH_RECORDS_SUCCESS
@@ -14,6 +16,11 @@ const initialState = {
 export default function(state = initialState, action) {
 	const { type, payload } = action;
 	switch (type) {
+		case FETCH_ITEMS_REQUEST:
+			return {
+				...state,
+				isFetching: true
+			}
 		case FETCH_ITEMS_SUCCESS:
 			return {
 				...state,
@@ -36,6 +43,11 @@ export default function(state = initialState, action) {
 				...state,
 				itemList: payload
 			};
+		case CLEAR_FETCHED_ITEMS:
+			return {
+				...state,
+				itemList: []
+			}
 		default:
 			return state
 	}

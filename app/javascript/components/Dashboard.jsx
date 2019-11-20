@@ -30,6 +30,7 @@ const Dashboard = ({
 	addRestaurant,
 	setCurrentWeekRange,
 	currentWeekRange,
+	currentDay,
 	restaurants: { isFetching, restaurantList }
 }) => {
 
@@ -39,10 +40,9 @@ const Dashboard = ({
 	useEffect(()=> {
 		
 		fetchRestaurants();
-		setCurrentWeekRange(currentWeekRange)
+		setCurrentWeekRange(currentDay)
 
 	},[ fetchRestaurants ])
-
 
 
 	const listOfRestaurantLinks = restaurantList.map( restaurant => {
@@ -100,7 +100,7 @@ const Dashboard = ({
 										toggleIsHidden={toggleIsHidden} />
 								</Col>}
 							</Row>
-
+							<br/>
 							<Switch>
 								<Route exact path={path}>
 

@@ -8,7 +8,7 @@ import { connect } from 'react-redux';
 
 
 import { deleteRestaurant } from '../actions/restaurants';
-import { fetchItems, addItem, deleteItem } from '../actions/items';
+import { fetchItems, addItem, deleteItem, clearFetchedItems } from '../actions/items';
 import { fetchRecords } from '../actions/records';
 
 import { useHistory, useParams } from 'react-router-dom';
@@ -24,6 +24,7 @@ const Restaurant = ({
 	fetchRecords,
 	addItem,
 	deleteItem,
+	clearFetchedItems,
 	items: { itemList, isFetching },
 	weeks: { currentWeekRange },
 	records: { recordList }
@@ -37,6 +38,10 @@ const Restaurant = ({
 	useEffect(() => {
 		fetchItems(id)
 
+		return () => {
+			clearFetchedItems()
+		}
+
 
 	},[ id ])
 
@@ -44,11 +49,12 @@ const Restaurant = ({
 
 	return (
 		<Fragment>
-
-			<Button variant='danger' onClick={()=> {deleteRestaurant(id, history)}}>
-				Delete Restaurant
-			</Button>
-
+			<Row>
+				<Button variant='danger' onClick={()=> {deleteRestaurant(id, history)}}>
+					Delete Restaurant
+				</Button>
+			</Row>
+			<br/>
 
 			{ isFetching ? 
 				<Loading/> : 
@@ -64,7 +70,7 @@ const Restaurant = ({
 						</Col>
 						{currentWeekRange.map( (day, index) => {
 							return (
-								<Col key={index} md={1}>
+								<Col key={index} md={3}>
 									{day}
 								</Col>
 							)
@@ -86,34 +92,10 @@ const Restaurant = ({
 							)
 						})}
 						</Col>
-						{/*
-						<Col md={2}>
-							<ListGroup>
-								<ListGroup.Item>
-									<DateRange weeks={2} />
-								</ListGroup.Item>
-							</ListGroup>
-						</Col>
-						<Col md={2}>
-							<ListGroup>
-								<ListGroup.Item>
-									<DateRange weeks={1} />
-								</ListGroup.Item>
-							</ListGroup>
-						</Col>
-						<Col md={2}>
-							<ListGroup>
-								<ListGroup.Item>
-									
-									<DateRange weeks={0} />
-								</ListGroup.Item>
-							</ListGroup>
-						</Col>
-					*/}
 
 					</Row>
 					<Row>
-						<Col md={3}>
+						<Col md={2}>
 							<ItemForm restaurant={id} addItem={addItem} />
 						</Col>
 					</Row>
@@ -133,5 +115,5 @@ const mapStateToProps = state =>
 
 export default connect(
 	mapStateToProps,
-	{ deleteRestaurant, fetchItems, addItem, deleteItem, fetchRecords }
+	{ deleteRestaurant, fetchItems, addItem, deleteItem, fetchRecords, clearFetchedItems }
 )(Restaurant)

@@ -11,7 +11,7 @@ const Navigation = () => {
 
 	return (
 		<Navbar bg='dark'>
-			<Nav>
+			<Nav className='mx-auto'>
 				<Nav.Item>
 					<LinkContainer to='/'>
 						<Nav.Link to='/'>Home</Nav.Link>

@@ -1,6 +1,8 @@
 import {
+	FETCH_ITEMS_REQUEST,
 	FETCH_ITEMS_SUCCESS,
 	FETCH_ITEMS_ERROR,
+	CLEAR_FETCHED_ITEMS,
 	ADD_ITEM,
 	DELETE_ITEM,
 	FETCH_RECORDS_SUCCESS
@@ -16,6 +18,11 @@ const headers = {
 
 export const fetchItems = restaurant => async dispatch => {
 	try {
+
+		dispatch({
+			type: FETCH_ITEMS_REQUEST
+		})
+
 		const res = await fetch('/items?restaurant=' + restaurant)
 		const json = await res.json();
 
@@ -73,5 +80,11 @@ export const deleteItem = (item, restaurant) => async dispatch => {
 
 	} catch(error) {
 		console.log(error)
+	}
+}
+
+export const clearFetchedItems = () => {
+	return {
+		type: CLEAR_FETCHED_ITEMS
 	}
 }
