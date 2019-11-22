@@ -13,12 +13,13 @@ const Item = ({
 	deleteItem,
 	fetchRecords, 
 	restaurant,
-	recordList 
+	recordList,
+	currentWorkDay 
 }) => {
 
 
 	const { id, name, units, records } = item;
-
+	let cases, onHand, needs
 
 
 	return (
@@ -30,6 +31,51 @@ const Item = ({
 						x
 					</Button>
 				</Col>
+				<Col md={2}>
+					<Button size='sm'>
+						&minus;
+					</Button>
+					&nbsp;
+					{cases = records.filter(record => record.type == 'Cases' && record.date == currentWorkDay) > 0 ? cases[0].quantity : 0}
+					&nbsp;
+					<Button size='sm'>
+						+
+					</Button>
+				</Col>
+
+				<Col md={2}>
+					<Button size='sm'>
+						&minus;
+					</Button>
+					&nbsp;
+					{onHand = records.filter(record => record.type == 'On Hand' && record.date == currentWorkDay) > 0 ? onHand[0].quantity : 0}
+					&nbsp;
+					<Button size='sm'>
+						+
+					</Button>
+				</Col>
+				<Col md={2}>
+					<Button size='sm'>
+						&minus;
+					</Button>
+					&nbsp;
+					{needs = records.filter(record => record.type == 'Needs' && record.date == currentWorkDay) > 0 ? needs[0].quantity : 0}
+					&nbsp;
+					<Button size='sm'>
+						+
+					</Button>
+				</Col>
+				<Col md={2}>
+					<Button size='sm'>
+						&minus;
+					</Button>
+					&nbsp;
+					{needs - onHand}
+					&nbsp;
+					<Button size='sm'>
+						+
+					</Button>
+				</Col>				
 				{/*records.map( record => {
 					return(
 						<Col key={record.id} md={2}>

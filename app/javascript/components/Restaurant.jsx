@@ -75,6 +75,18 @@ const Restaurant = ({
 						<Col md={2}>
 							Name (units)
 						</Col>
+						<Col md={2}>
+							Cases
+						</Col>
+						<Col md={2}>
+							On Hand
+						</Col>
+						<Col md={2}>
+							Needs
+						</Col>
+						<Col md={2}>
+							To Be Prepped
+						</Col>
 					</Row>
 
 					<Row className='no-gutters'>
@@ -88,7 +100,8 @@ const Restaurant = ({
 									item={item}
 									fetchRecords={fetchRecords}
 									recordList={recordList}
-									deleteItem={deleteItem} />
+									deleteItem={deleteItem}
+									currentWorkDay={currentWorkDay} />
 							)
 						})}
 						</Col>

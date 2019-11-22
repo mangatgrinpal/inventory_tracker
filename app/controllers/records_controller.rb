@@ -23,7 +23,7 @@ class RecordsController < ApplicationController
 	private
 
 		def record_params
-			params.require(:record).permit(:week_dates, :item_id, :quantity)
+			params.require(:record).permit(:item_id, :quantity, :type, :date)
 		end 
 
 		def serialized_records
