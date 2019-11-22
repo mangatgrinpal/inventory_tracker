@@ -6,7 +6,7 @@ import {
 export const fetchRecords = item => async dispatch => {
 
 	try {
-		const res = await fetch(`/records?itemId=${item}`)
+		const res = await fetch('/records')
 		const json = await res.json();
 
 		dispatch({

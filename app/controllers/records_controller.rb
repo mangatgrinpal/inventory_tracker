@@ -7,6 +7,7 @@ class RecordsController < ApplicationController
 
 	def create
 		@record = Record.new(record_params)
+
 		if @record.save
 			render json: @record
 		end
@@ -26,7 +27,10 @@ class RecordsController < ApplicationController
 		end 
 
 		def serialized_records
-			@records = Record.where(item_id: params[:itemId])
+			current_time = Time.current
+			@records = Record.where(updated_at: (curent_time - 24.hours)..current_time)
 			ActiveModel::Serializer::CollectionSerializer.new(@records, each_serializer: RecordsSerializer)
 		end
+
+		
 end

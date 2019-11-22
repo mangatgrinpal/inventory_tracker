@@ -30,13 +30,13 @@ const Item = ({
 						x
 					</Button>
 				</Col>
-				{records.map( record => {
+				{/*records.map( record => {
 					return(
 						<Col key={record.id} md={2}>
 							<Record record={record}/>
 						</Col>
 					)
-				})}
+				})*/}
 				
 				
 				<Col md={2}>

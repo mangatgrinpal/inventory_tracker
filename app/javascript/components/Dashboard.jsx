@@ -4,17 +4,17 @@ import Loading from './Loading';
 import DashHome from './DashHome';
 import RestaurantForm from './RestaurantForm';
 import {  
-	Switch, 
-	Route, 
-	Link, 
-	useRouteMatch, 
+	Switch,
+	Route,
+	Link,
+	useRouteMatch,
 	useParams
 } from 'react-router-dom';
 
 import { connect } from 'react-redux';
 
 import { fetchRestaurants, addRestaurant } from '../actions/restaurants';
-import { setCurrentWeekRange } from '../actions/weeks';
+import { setCurrentWorkDay } from '../actions/weeks';
 
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
@@ -28,8 +28,7 @@ import CardDeck from 'react-bootstrap/CardDeck';
 const Dashboard = ({
 	fetchRestaurants, 
 	addRestaurant,
-	setCurrentWeekRange,
-	currentWeekRange,
+	setCurrentWorkDay,
 	currentDay,
 	restaurants: { isFetching, restaurantList }
 }) => {
@@ -40,9 +39,9 @@ const Dashboard = ({
 	useEffect(()=> {
 		
 		fetchRestaurants();
-		setCurrentWeekRange(currentDay)
+		setCurrentWorkDay(currentDay)
 
-	},[ fetchRestaurants ])
+	},[ fetchRestaurants, currentDay ])
 
 
 	const listOfRestaurantLinks = restaurantList.map( restaurant => {
@@ -129,5 +128,5 @@ const mapStateToProps = state =>
 
 export default connect (
 	mapStateToProps,
-	{ fetchRestaurants, addRestaurant, setCurrentWeekRange }
+	{ fetchRestaurants, addRestaurant, setCurrentWorkDay }
 )(Dashboard)

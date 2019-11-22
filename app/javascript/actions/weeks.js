@@ -1,12 +1,12 @@
 import {
-	SET_CURRENT_WEEK_RANGE
+	SET_CURRENT_WORK_DAY
 } from './types';
 
-export const setCurrentWeekRange = week => dispatch => {
+export const setCurrentWorkDay = day => dispatch => {
 
 	dispatch({
-		type: SET_CURRENT_WEEK_RANGE,
-		payload: week
+		type: SET_CURRENT_WORK_DAY,
+		payload: day
 	})
 	
 }

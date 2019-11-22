@@ -26,7 +26,7 @@ const Restaurant = ({
 	deleteItem,
 	clearFetchedItems,
 	items: { itemList, isFetching },
-	weeks: { currentWeekRange },
+	weeks: { currentWorkDay },
 	records: { recordList }
 }) => {	
 
@@ -64,17 +64,17 @@ const Restaurant = ({
 					<ItemForm restaurant={id} addItem={addItem} />
 				</Fragment> :
 				<Fragment>
-					<Row className='justify-contents-center'>
+					<Row className='justify-content-center'>
+						<Col md={4}>
+							<h4>
+								{currentWorkDay}
+							</h4>
+						</Col>
+					</Row>
+					<Row>
 						<Col md={2}>
 							Name (units)
 						</Col>
-						{currentWeekRange.map( (day, index) => {
-							return (
-								<Col key={index} md={3}>
-									{day}
-								</Col>
-							)
-						})}
 					</Row>
 
 					<Row className='no-gutters'>

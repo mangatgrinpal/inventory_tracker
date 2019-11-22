@@ -1,19 +1,19 @@
 import {
-	SET_CURRENT_WEEK_RANGE
+	SET_CURRENT_WORK_DAY
 } from '../actions/types';
 
 const initialState = {
-	currentWeekRange: []
+	currentWorkDay: []
 }
 
 export default function(state = initialState, action) {
 	const { type, payload } = action;
 
 	switch (type) {
-		case SET_CURRENT_WEEK_RANGE:
+		case SET_CURRENT_WORK_DAY:
 			return {
 				...state,
-				currentWeekRange: payload
+				currentWorkDay: payload
 			};
 		default:
 			return state
