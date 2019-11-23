@@ -5,7 +5,9 @@ import {
 	CLEAR_FETCHED_ITEMS,
 	ADD_ITEM,
 	DELETE_ITEM,
-	FETCH_RECORDS_SUCCESS
+	FETCH_RECORDS_SUCCESS,
+	INCREMENT_RECORD,
+	DECREMENT_RECORD
 } from './types'
 
 
@@ -86,5 +88,44 @@ export const deleteItem = (item, restaurant) => async dispatch => {
 export const clearFetchedItems = () => {
 	return {
 		type: CLEAR_FETCHED_ITEMS
+	}
+}
+
+
+export const incrementRecord = (date, item, type) => async dispatch => {
+	try {
+		const res = await fetch('/records', {
+			method: 'POST',
+			body: JSON.stringify({record: {item_id: item, type: type, date: date}}),
+			headers: headers
+		})
+
+		const json = await res.json();
+
+		//debugger
+
+
+		dispatch({
+			type: INCREMENT_RECORD,
+			payload: json
+		})
+	} catch(error) {
+		console.log(error)
+	}
+}
+
+export const decrementRecord = (date, item, type) => async dispatch => {
+	try {
+		const res = await fetch('/record', {
+			method: 'POST',
+			body: JSON.stringify({record: {item_id: item, type: type, date: date}})
+		})
+
+		dispatch({
+			type: DECREMENT_RECORD,
+			payload: json
+		})
+	} catch (error) {
+		console.log(error)
 	}
 }

@@ -5,7 +5,9 @@ import {
 	CLEAR_FETCHED_ITEMS,
 	ADD_ITEM,
 	DELETE_ITEM,
-	FETCH_RECORDS_SUCCESS
+	FETCH_RECORDS_SUCCESS,
+	INCREMENT_RECORD,
+	DECREMENT_RECORD
 } from '../actions/types'
 
 const initialState = {
@@ -47,6 +49,16 @@ export default function(state = initialState, action) {
 			return {
 				...state,
 				itemList: []
+			}
+		case INCREMENT_RECORD:
+			return {
+				...state,
+				itemList: payload
+			}
+		case DECREMENT_RECORD:
+			return {
+				...state,
+				itemList: payload
 			}
 		default:
 			return state

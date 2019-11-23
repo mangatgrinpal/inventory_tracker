@@ -8,7 +8,14 @@ import { connect } from 'react-redux';
 
 
 import { deleteRestaurant } from '../actions/restaurants';
-import { fetchItems, addItem, deleteItem, clearFetchedItems } from '../actions/items';
+import { 
+	fetchItems,
+	addItem,
+	deleteItem,
+	clearFetchedItems,
+	incrementRecord,
+	decrementRecord
+} from '../actions/items';
 import { fetchRecords } from '../actions/records';
 
 import { useHistory, useParams } from 'react-router-dom';
@@ -101,7 +108,9 @@ const Restaurant = ({
 									fetchRecords={fetchRecords}
 									recordList={recordList}
 									deleteItem={deleteItem}
-									currentWorkDay={currentWorkDay} />
+									currentWorkDay={currentWorkDay}
+									incrementRecord={incrementRecord}
+									decrementRecord={decrementRecord} />
 							)
 						})}
 						</Col>
@@ -128,5 +137,14 @@ const mapStateToProps = state =>
 
 export default connect(
 	mapStateToProps,
-	{ deleteRestaurant, fetchItems, addItem, deleteItem, fetchRecords, clearFetchedItems }
+	{ 
+		deleteRestaurant, 
+		fetchItems, 
+		addItem, 
+		deleteItem, 
+		fetchRecords, 
+		clearFetchedItems,
+		incrementRecord,
+		decrementRecord
+	}
 )(Restaurant)
