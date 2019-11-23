@@ -32,6 +32,8 @@ const Restaurant = ({
 	addItem,
 	deleteItem,
 	clearFetchedItems,
+	incrementRecord,
+	decrementRecord,
 	items: { itemList, isFetching },
 	weeks: { currentWorkDay },
 	records: { recordList }

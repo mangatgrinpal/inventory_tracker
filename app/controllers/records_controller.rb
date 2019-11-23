@@ -7,7 +7,7 @@ class RecordsController < ApplicationController
 
 	def create
 		@record = Record.new(record_params)
-
+		byebug
 		if @record.save
 			render json: @record
 		end

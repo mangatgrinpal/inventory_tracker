@@ -93,6 +93,8 @@ export const clearFetchedItems = () => {
 
 
 export const incrementRecord = (date, item, type) => async dispatch => {
+	debugger
+	
 	try {
 		const res = await fetch('/records', {
 			method: 'POST',
@@ -115,6 +117,7 @@ export const incrementRecord = (date, item, type) => async dispatch => {
 }
 
 export const decrementRecord = (date, item, type) => async dispatch => {
+	debugger
 	try {
 		const res = await fetch('/record', {
 			method: 'POST',
