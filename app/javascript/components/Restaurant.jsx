@@ -13,8 +13,7 @@ import {
 	addItem,
 	deleteItem,
 	clearFetchedItems,
-	incrementRecord,
-	decrementRecord
+	updateRecord
 } from '../actions/items';
 import { fetchRecords } from '../actions/records';
 
@@ -32,8 +31,7 @@ const Restaurant = ({
 	addItem,
 	deleteItem,
 	clearFetchedItems,
-	incrementRecord,
-	decrementRecord,
+	updateRecord,
 	items: { itemList, isFetching },
 	weeks: { currentWorkDay },
 	records: { recordList }
@@ -111,8 +109,7 @@ const Restaurant = ({
 									recordList={recordList}
 									deleteItem={deleteItem}
 									currentWorkDay={currentWorkDay}
-									incrementRecord={incrementRecord}
-									decrementRecord={decrementRecord} />
+									updateRecord={updateRecord} />
 							)
 						})}
 						</Col>
@@ -146,7 +143,6 @@ export default connect(
 		deleteItem, 
 		fetchRecords, 
 		clearFetchedItems,
-		incrementRecord,
-		decrementRecord
+		updateRecord
 	}
 )(Restaurant)

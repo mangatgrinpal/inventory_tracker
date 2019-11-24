@@ -6,8 +6,7 @@ import {
 	ADD_ITEM,
 	DELETE_ITEM,
 	FETCH_RECORDS_SUCCESS,
-	INCREMENT_RECORD,
-	DECREMENT_RECORD
+	UPDATE_RECORD
 } from '../actions/types'
 
 const initialState = {
@@ -50,12 +49,7 @@ export default function(state = initialState, action) {
 				...state,
 				itemList: []
 			}
-		case INCREMENT_RECORD:
-			return {
-				...state,
-				itemList: payload
-			}
-		case DECREMENT_RECORD:
+		case UPDATE_RECORD:
 			return {
 				...state,
 				itemList: payload

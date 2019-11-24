@@ -15,13 +15,14 @@ const Item = ({
 	restaurant,
 	recordList,
 	currentWorkDay,
-	incrementRecord,
-	decrementRecord 
+	updateRecord
 }) => {
 
 
 	const { id, name, units, records } = item;
-	let cases, onHand, needs
+	let cases = records.filter(record => record.record_type == 'Cases' && record.date == currentWorkDay)
+	let onHand = records.filter(record => record.record_type == 'On Hand' && record.date == currentWorkDay)
+	let needs = records.filter(record => record.record_type == 'Needs' && record.date == currentWorkDay)
 
 
 	return (
@@ -34,58 +35,44 @@ const Item = ({
 					</Button>
 				</Col>
 				<Col md={2}>
-					<Button size='sm' onClick={()=> { decrementRecord()}}>
+					<Button size='sm' onClick={()=> { updateRecord(currentWorkDay, id, 'Cases', restaurant, 'decrement')}}>
 						&minus;
 					</Button>
 					&nbsp;
-					{cases = records.filter(record => record.record_type == 'Cases' && record.date == currentWorkDay) > 0 ? cases[0].quantity : 0}
+					{cases.length > 0 ? cases[0].quantity : 0}
 					&nbsp;
-					<Button size='sm' onClick={()=> {
-						console.log('wtf')
-						incrementRecord(currentWorkDay, id, 'Cases') 
-					}} >
+					<Button size='sm' onClick={()=> { updateRecord(currentWorkDay, id, 'Cases',restaurant, 'increment') }} >
 						+
 					</Button>
 				</Col>
 
 				<Col md={2}>
-					<Button size='sm'>
+					<Button size='sm' onClick={()=> { updateRecord(currentWorkDay, id, 'On Hand', restaurant, 'decrement')}}>
 						&minus;
 					</Button>
 					&nbsp;
-					{onHand = records.filter(record => record.record_type == 'On Hand' && record.date == currentWorkDay) > 0 ? onHand[0].quantity : 0}
+					{onHand.length > 0 ? onHand[0].quantity : 0}
 					&nbsp;
-					<Button size='sm'>
+					<Button size='sm' onClick={()=> { updateRecord(currentWorkDay, id, 'On Hand', restaurant, 'increment')}}>
 						+
 					</Button>
 				</Col>
 				<Col md={2}>
-					<Button size='sm'>
+					<Button size='sm' onClick={()=> { updateRecord(currentWorkDay, id, 'Needs', restaurant, 'decrement')}}>
 						&minus;
 					</Button>
 					&nbsp;
-					{needs = records.filter(record => record.record_type == 'Needs' && record.date == currentWorkDay) > 0 ? needs[0].quantity : 0}
+					{needs.length > 0 ? needs[0].quantity : 0}
 					&nbsp;
-					<Button size='sm'>
+					<Button size='sm' onClick={()=> { updateRecord(currentWorkDay, id, 'Needs', restaurant, 'increment')}}>
 						+
 					</Button>
 				</Col>
 				<Col md={2}>
 					&nbsp;
-					{needs - onHand}
+					{needs.length > 0 && onHand.length > 0 ? needs[0].quantity - onHand[0].quantity : 0}
 					&nbsp;
-				</Col>				
-				{/*records.map( record => {
-					return(
-						<Col key={record.id} md={2}>
-							<Record record={record}/>
-						</Col>
-					)
-				})*/}
-				
-				
-				<Col md={2}>
-				</Col>
+				</Col>			
 			</Row>
 		</Fragment>
 	)
