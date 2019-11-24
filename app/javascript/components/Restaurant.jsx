@@ -71,6 +71,11 @@ const Restaurant = ({
 					<ItemForm restaurant={id} addItem={addItem} />
 				</Fragment> :
 				<Fragment>
+					<Row>
+						<Col md={4}>
+							<ItemForm restaurant={id} addItem={addItem} />
+						</Col>
+					</Row>
 					<Row className='justify-content-center'>
 						<Col md={4}>
 							<h4>
@@ -112,12 +117,6 @@ const Restaurant = ({
 									updateRecord={updateRecord} />
 							)
 						})}
-						</Col>
-
-					</Row>
-					<Row>
-						<Col md={2}>
-							<ItemForm restaurant={id} addItem={addItem} />
 						</Col>
 					</Row>
 				</Fragment>}
