@@ -6,37 +6,53 @@ import Button from 'react-bootstrap/Button'
 
 
 const ItemForm = ({ addItem, restaurant }) => {
-	const [ nameData, setNameData ] = useState("")
-	const [ unitsData, setUnitsData ] = useState("")
+	const [ nameData, setNameData ] = useState('')
+	const [ unitsData, setUnitsData ] = useState('')
+	const [ categoryData, setCategoryData ] = useState('Line')
 
+	console.log(categoryData)
 
 	return (
 			<Form>
-				<Col>
-					<Form.Row>
-						<Col>
-							<Form.Control 
-								type="text"
-								placeholder="name"
-								value={nameData}
-								onChange={(e)=> setNameData(e.target.value)}
-								/>
-						</Col>
-						<Col>
-							<Form.Control 
-								type="text"
-								placeholder="units"
-								value={unitsData}
-								onChange={(e)=> setUnitsData(e.target.value)}
-								/>
-						</Col>
-						<Col>
-							<Button onClick={()=> {addItem(nameData, unitsData, restaurant)}}>
-								Add
-							</Button>
-						</Col>
-					</Form.Row>
-				</Col>
+				<Form.Row>
+					<Col>
+						<Form.Label>
+							Item name
+						</Form.Label>
+						<Form.Control 
+							type='text'
+							placeholder='name'
+							value={nameData}
+							onChange={(e)=> setNameData(e.target.value)}
+							/>
+					</Col>
+					<Col>
+						<Form.Label>
+							Size per unit
+						</Form.Label>
+						<Form.Control 
+							type='text'
+							placeholder='units'
+							value={unitsData}
+							onChange={(e)=> setUnitsData(e.target.value)}
+							/>
+					</Col>
+					<Col>
+						<Form.Label>
+							Prep category
+						</Form.Label>
+						<Form.Control as='select' onChange={(e)=> setCategoryData(e.target.value)}>
+							<option>Line</option>
+							<option>Misc</option>
+						</Form.Control>
+
+					</Col>
+					<Col>
+						<Button className='mt-4' onClick={()=> {addItem(nameData, unitsData, categoryData, restaurant)}}>
+							Add New Item
+						</Button>
+					</Col>
+				</Form.Row>
 			</Form>
 		)
 }

@@ -27,10 +27,10 @@ const Item = ({
 
 	return (
 		<Fragment>
-			<Row>
-				<Col md={2}>
+			<Row className='border-top'>
+				<Col md={3} className='clearfix'>
 					{name} ({units})
-					<Button variant='danger' onClick={()=> { deleteItem(id, restaurant)}}>
+					<Button className='float-right' variant='danger' onClick={()=> { deleteItem(id, restaurant)}}>
 						x
 					</Button>
 				</Col>

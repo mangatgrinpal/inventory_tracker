@@ -16,13 +16,21 @@ class RecordsController < ApplicationController
 			render json: serialized_items, status: 200
 		#if it exists and we are sending an decrement
 		elsif @record && params[:update_type] == 'decrement'
-			@record.decrement!(:quantity, 0.5)
-		# this is the case where there is no 
-			render json: serialized_items, status: 200
 
+			#perform a check to see if the current quantity is greater than 0. it will not decrement if the value is 0
+			if @record.quantity > 0
+				@record.decrement!(:quantity, 0.5)
+				render json: serialized_items, status: 200
+
+			else
+
+				#do this when it fails.. think of something
+
+			end
+			
 		else
 			@record = Record.new(record_params)
-			if @record.save
+			if @record.save && params[:update_type] == 'increment'
 				@record.increment!(:quantity, 0.5)
 				render json: serialized_items, status: 200
 			else

@@ -45,21 +45,27 @@ const Restaurant = ({
 	useEffect(() => {
 		fetchItems(id)
 
-		return () => {
-			clearFetchedItems()
-		}
+		// return () => {
+		// 	clearFetchedItems()
+		// }
 
 
 	},[ id ])
+
+	let lineItems = itemList.filter(item => item.category == 'Line')
+	let miscItems = itemList.filter(item => item.category == 'Misc')
 
 
 
 	return (
 		<Fragment>
 			<Row>
-				<Button variant='danger' onClick={()=> {deleteRestaurant(id, history)}}>
-					Delete Restaurant
-				</Button>
+				<Col className='clearfix'>
+					<Button className='float-right' variant='danger' onClick={()=> {deleteRestaurant(id, history)}}>
+						Delete Restaurant
+					</Button>
+				</Col>
+				
 			</Row>
 			<br/>
 
@@ -71,20 +77,26 @@ const Restaurant = ({
 					<ItemForm restaurant={id} addItem={addItem} />
 				</Fragment> :
 				<Fragment>
-					<Row>
-						<Col md={4}>
+					<Row className='justify-content-center'>
+						<Col md={10} sm={12}>
 							<ItemForm restaurant={id} addItem={addItem} />
 						</Col>
 					</Row>
-					<Row className='justify-content-center'>
+					<Row className='justify-content-center pt-5'>
 						<Col md={4}>
-							<h4>
+							<h3 className='text-center border-bottom'>
 								{currentWorkDay}
-							</h4>
+							</h3>
+						</Col>
+						
+					</Row>
+					<Row className='justify-content-center pt-5'>
+						<Col>
+							<h5 className='text-center'>Line</h5>
 						</Col>
 					</Row>
 					<Row>
-						<Col md={2}>
+						<Col md={3}>
 							Name (units)
 						</Col>
 						<Col md={2}>
@@ -103,7 +115,8 @@ const Restaurant = ({
 
 					<Row className='no-gutters'>
 						<Col>
-						{itemList.map( item => {
+
+						{lineItems.map( item => {
 
 							return(
 								<Item 
@@ -119,6 +132,54 @@ const Restaurant = ({
 						})}
 						</Col>
 					</Row>
+					{miscItems.length > 0 ?
+						<Fragment>
+						<Row className='justify-content-center pt-5'>
+							<Col>
+								<h5 className='text-center'>Line</h5>
+							</Col>
+						</Row>
+						<Row>
+							<Col md={3}>
+								Name (units)
+							</Col>
+							<Col md={2}>
+								Cases
+							</Col>
+							<Col md={2}>
+								On Hand
+							</Col>
+							<Col md={2}>
+								Needs
+							</Col>
+							<Col md={2}>
+								To Be Prepped
+							</Col>
+						</Row>
+						<Row className='no-gutters'>
+							<Col>
+
+							{miscItems.map( item => {
+
+								return(
+									<Item 
+										key={item.id}
+										restaurant={id}
+										item={item}
+										fetchRecords={fetchRecords}
+										recordList={recordList}
+										deleteItem={deleteItem}
+										currentWorkDay={currentWorkDay}
+										updateRecord={updateRecord} />
+								)
+							})}
+							</Col>
+						</Row>
+						</Fragment> :
+
+						<div/>
+					}
+					
 				</Fragment>}
 		</Fragment>
 			

@@ -39,13 +39,18 @@ export const fetchItems = restaurant => async dispatch => {
 	}
 }
 
-export const addItem = (name, units, restaurant) => async dispatch => {
+export const addItem = (name, units, category, restaurant) => async dispatch => {
 	
 	try {
 		const res = await fetch('/items', {
 			method: 'POST',
 			body: JSON.stringify({
-				item:{name: name, units: units, restaurant_id: restaurant},
+				item: {
+					name: name, 
+					units: units, 
+					restaurant_id: restaurant, 
+					category: category
+				},
 				restaurant: restaurant
 			}),
 			headers: headers

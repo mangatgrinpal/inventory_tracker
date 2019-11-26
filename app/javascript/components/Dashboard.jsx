@@ -69,7 +69,7 @@ const Dashboard = ({
 	return (
 
 		<Fragment>
-			<Container fluid={true}>
+			<Container>
 				{isFetching ? 
 					<Loading/> : 
 					<Row>

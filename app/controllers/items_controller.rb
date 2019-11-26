@@ -22,7 +22,7 @@ class ItemsController < ApplicationController
 	private
 
 		def item_params
-			params.require(:item).permit(:name, :units, :restaurant_id)
+			params.require(:item).permit(:name, :units, :restaurant_id, :category)
 		end
 
 		def serialized_items
