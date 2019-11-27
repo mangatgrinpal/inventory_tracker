@@ -190,20 +190,20 @@ const Restaurant = ({
 						<Fragment>
 							<Row className='justify-content-center pt-5'>
 								<Col>
-									<h5 className='text-center'>Misc</h5>
+									<h5 className='text-center'>Meat</h5>
 								</Col>
 							</Row>
 							<Row>
 								<Col md={3}>
 									Name (units)
 								</Col>
-								<Col md={2}>
+								<Col md={3}>
 									Cases
 								</Col>
-								<Col md={2}>
+								<Col md={3}>
 									Marinated cases
 								</Col>
-								<Col md={2}>
+								<Col md={3}>
 									Separated pans
 								</Col>
 							</Row>

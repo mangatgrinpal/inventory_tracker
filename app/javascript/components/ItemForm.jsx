@@ -10,8 +10,14 @@ const ItemForm = ({ addItem, restaurant }) => {
 	const [ unitsData, setUnitsData ] = useState('')
 	const [ categoryData, setCategoryData ] = useState('Line')
 
+	const submitFormOnEnter = e => {
+		if (e.key === 'Enter') {
+			addItem(nameData, unitsData, categoryData, restaurant)
+		}
+	}
+
 	return (
-			<Form>
+			<Form onKeyPress={submitFormOnEnter}>
 				<Form.Row>
 					<Col>
 						<Form.Label>

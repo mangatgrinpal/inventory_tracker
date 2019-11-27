@@ -36,7 +36,7 @@ const MeatItem = ({
 				</Col>
 				
 
-				<Col md={2}>
+				<Col md={3}>
 					<Button size='sm' onClick={()=> { updateRecord(currentWorkDay, id, 'Marinated cases', restaurant, 'decrement')}}>
 						&minus;
 					</Button>
@@ -47,7 +47,7 @@ const MeatItem = ({
 						+
 					</Button>
 				</Col>
-				<Col md={2}>
+				<Col md={3}>
 					<Button size='sm' onClick={()=> { updateRecord(currentWorkDay, id, 'Separated pans', restaurant, 'decrement')}}>
 						&minus;
 					</Button>
@@ -58,7 +58,7 @@ const MeatItem = ({
 						+
 					</Button>
 				</Col>
-				<Col md={2}>
+				<Col md={3}>
 					<Button size='sm' onClick={()=> { updateRecord(currentWorkDay, id, 'Cases', restaurant, 'decrement')}}>
 						&minus;
 					</Button>

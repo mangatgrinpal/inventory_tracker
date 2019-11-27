@@ -21,8 +21,14 @@ const RestaurantForm = ({
 		},500)
 	}
 
+	const submitFormOnEnter = e => {
+		if (e.key === 'Enter') {
+			addRestaurant(formData)
+		}
+	}
+
 	return (
-			<Form>
+			<Form onKeyPress={submitFormOnEnter}>
 				<Form.Row>
 					<Col>
 						<Form.Control 
