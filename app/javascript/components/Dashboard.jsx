@@ -51,7 +51,7 @@ const Dashboard = ({
 		return (
 			<Fragment key={id}>
 				<Col md={2}>
-					<Card>
+					<Card className='py-1'>
 						<Link to={`${url}/${id}`}>
 							<Card.Body>
 								<Card.Title>
@@ -69,7 +69,7 @@ const Dashboard = ({
 	return (
 
 		<Fragment>
-			<Container>
+			<Container className='h-100'>
 				{isFetching ? 
 					<Loading/> : 
 					<Row>

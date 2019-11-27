@@ -8,7 +8,7 @@ import Button from 'react-bootstrap/Button';
 import ListGroup from 'react-bootstrap/ListGroup';
 
 
-const Item = ({ 
+const MeatItem = ({ 
 	item, 
 	deleteItem,
 	fetchRecords, 
@@ -21,8 +21,8 @@ const Item = ({
 
 	const { id, name, units, records } = item;
 	let cases = records.filter(record => record.record_type == 'Cases' && record.date == currentWorkDay)
-	let onHand = records.filter(record => record.record_type == 'On Hand' && record.date == currentWorkDay)
-	let needs = records.filter(record => record.record_type == 'Needs' && record.date == currentWorkDay)
+	let onHand = records.filter(record => record.record_type == 'Marinated cases' && record.date == currentWorkDay)
+	let needs = records.filter(record => record.record_type == 'Separated pans' && record.date == currentWorkDay)
 
 
 	return (
@@ -37,24 +37,24 @@ const Item = ({
 				
 
 				<Col md={2}>
-					<Button size='sm' onClick={()=> { updateRecord(currentWorkDay, id, 'On Hand', restaurant, 'decrement')}}>
+					<Button size='sm' onClick={()=> { updateRecord(currentWorkDay, id, 'Marinated cases', restaurant, 'decrement')}}>
 						&minus;
 					</Button>
 					&nbsp;
 					{onHand.length > 0 ? onHand[0].quantity : 0}
 					&nbsp;
-					<Button size='sm' onClick={()=> { updateRecord(currentWorkDay, id, 'On Hand', restaurant, 'increment')}}>
+					<Button size='sm' onClick={()=> { updateRecord(currentWorkDay, id, 'Marinated cases', restaurant, 'increment')}}>
 						+
 					</Button>
 				</Col>
 				<Col md={2}>
-					<Button size='sm' onClick={()=> { updateRecord(currentWorkDay, id, 'Needs', restaurant, 'decrement')}}>
+					<Button size='sm' onClick={()=> { updateRecord(currentWorkDay, id, 'Separated pans', restaurant, 'decrement')}}>
 						&minus;
 					</Button>
 					&nbsp;
 					{needs.length > 0 ? needs[0].quantity : 0}
 					&nbsp;
-					<Button size='sm' onClick={()=> { updateRecord(currentWorkDay, id, 'Needs', restaurant, 'increment')}}>
+					<Button size='sm' onClick={()=> { updateRecord(currentWorkDay, id, 'Separated pans', restaurant, 'increment')}}>
 						+
 					</Button>
 				</Col>
@@ -68,15 +68,10 @@ const Item = ({
 					<Button size='sm' onClick={()=> { updateRecord(currentWorkDay, id, 'Cases',restaurant, 'increment') }} >
 						+
 					</Button>
-				</Col>
-				<Col md={2}>
-					&nbsp;
-					{needs.length > 0 && onHand.length > 0 ? needs[0].quantity - onHand[0].quantity : 0}
-					&nbsp;
-				</Col>			
+				</Col>		
 			</Row>
 		</Fragment>
 	)
 }
 
-export default Item
+export default MeatItem

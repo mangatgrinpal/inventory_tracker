@@ -6,7 +6,7 @@ import Spinner from 'react-bootstrap/Spinner'
 const Loading = () => {
 	return (
 
-		<Spinner animation='border' />
+		<Spinner id='loading-spinner' className='d-block m-auto' animation='border' />
 
 
 	)

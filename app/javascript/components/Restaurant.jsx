@@ -1,6 +1,7 @@
 import React, { Fragment, useState, useEffect } from 'react';
 import Loading from './Loading';
 import Item from './Item';
+import MeatItem from './MeatItem';
 import ItemForm from './ItemForm';
 import DateRange from './DateRange';
 import RecordForm from './RecordForm';
@@ -54,6 +55,7 @@ const Restaurant = ({
 
 	let lineItems = itemList.filter(item => item.category == 'Line')
 	let miscItems = itemList.filter(item => item.category == 'Misc')
+	let meatItems = itemList.filter(item => item.category == 'Meat')
 
 
 
@@ -67,73 +69,30 @@ const Restaurant = ({
 				</Col>
 				
 			</Row>
+			<Row className='justify-content-center'>
+				<Col md={10} sm={12}>
+					<ItemForm restaurant={id} addItem={addItem} />
+				</Col>
+			</Row>
+			<Row className='justify-content-center pt-5'>
+				<Col md={4}>
+					<h3 className='text-center border-bottom'>
+						{currentWorkDay}
+					</h3>
+				</Col>
+				
+			</Row>
 			<br/>
 
 			{ isFetching ? 
 				<Loading/> : 
 				itemList.length === 0 ?
 				<Fragment>
-					<h1>No items yet</h1>
-					<ItemForm restaurant={id} addItem={addItem} />
+					<h6>No items in this inventory. Add some above.</h6>
 				</Fragment> :
 				<Fragment>
-					<Row className='justify-content-center'>
-						<Col md={10} sm={12}>
-							<ItemForm restaurant={id} addItem={addItem} />
-						</Col>
-					</Row>
-					<Row className='justify-content-center pt-5'>
-						<Col md={4}>
-							<h3 className='text-center border-bottom'>
-								{currentWorkDay}
-							</h3>
-						</Col>
-						
-					</Row>
-					<Row className='justify-content-center pt-5'>
-						<Col>
-							<h5 className='text-center'>Line</h5>
-						</Col>
-					</Row>
-					<Row>
-						<Col md={3}>
-							Name (units)
-						</Col>
-						<Col md={2}>
-							Cases
-						</Col>
-						<Col md={2}>
-							On Hand
-						</Col>
-						<Col md={2}>
-							Needs
-						</Col>
-						<Col md={2}>
-							To Be Prepped
-						</Col>
-					</Row>
-
-					<Row className='no-gutters'>
-						<Col>
-
-						{lineItems.map( item => {
-
-							return(
-								<Item 
-									key={item.id}
-									restaurant={id}
-									item={item}
-									fetchRecords={fetchRecords}
-									recordList={recordList}
-									deleteItem={deleteItem}
-									currentWorkDay={currentWorkDay}
-									updateRecord={updateRecord} />
-							)
-						})}
-						</Col>
-					</Row>
-					{miscItems.length > 0 ?
-						<Fragment>
+				{lineItems.length > 0 ? 
+					<Fragment>
 						<Row className='justify-content-center pt-5'>
 							<Col>
 								<h5 className='text-center'>Line</h5>
@@ -156,10 +115,11 @@ const Restaurant = ({
 								To Be Prepped
 							</Col>
 						</Row>
+
 						<Row className='no-gutters'>
 							<Col>
 
-							{miscItems.map( item => {
+							{lineItems.map( item => {
 
 								return(
 									<Item 
@@ -175,12 +135,103 @@ const Restaurant = ({
 							})}
 							</Col>
 						</Row>
+						</Fragment>
+						:
+					<div/>}
+					
+					{miscItems.length > 0 ?
+						<Fragment>
+							<Row className='justify-content-center pt-5'>
+								<Col>
+									<h5 className='text-center'>Misc</h5>
+								</Col>
+							</Row>
+							<Row>
+								<Col md={3}>
+									Name (units)
+								</Col>
+								<Col md={2}>
+									Cases
+								</Col>
+								<Col md={2}>
+									On Hand
+								</Col>
+								<Col md={2}>
+									Needs
+								</Col>
+								<Col md={2}>
+									To Be Prepped
+								</Col>
+							</Row>
+							<Row className='no-gutters'>
+								<Col>
+
+								{miscItems.map( item => {
+
+									return(
+										<Item 
+											key={item.id}
+											restaurant={id}
+											item={item}
+											fetchRecords={fetchRecords}
+											recordList={recordList}
+											deleteItem={deleteItem}
+											currentWorkDay={currentWorkDay}
+											updateRecord={updateRecord} />
+									)
+								})}
+								</Col>
+							</Row>
 						</Fragment> :
 
-						<div/>
-					}
-					
-				</Fragment>}
+						<div/>}
+
+						{meatItems.length > 0 ?
+						<Fragment>
+							<Row className='justify-content-center pt-5'>
+								<Col>
+									<h5 className='text-center'>Misc</h5>
+								</Col>
+							</Row>
+							<Row>
+								<Col md={3}>
+									Name (units)
+								</Col>
+								<Col md={2}>
+									Cases
+								</Col>
+								<Col md={2}>
+									Marinated cases
+								</Col>
+								<Col md={2}>
+									Separated pans
+								</Col>
+							</Row>
+							<Row className='no-gutters'>
+								<Col>
+
+								{meatItems.map( item => {
+
+									return(
+										<MeatItem 
+											key={item.id}
+											restaurant={id}
+											item={item}
+											fetchRecords={fetchRecords}
+											recordList={recordList}
+											deleteItem={deleteItem}
+											currentWorkDay={currentWorkDay}
+											updateRecord={updateRecord} />
+									)
+								})}
+								</Col>
+							</Row>
+						</Fragment> :
+
+						<div/>}
+				</Fragment>
+				}
+
 		</Fragment>
 			
 	)

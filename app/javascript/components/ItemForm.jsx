@@ -10,8 +10,6 @@ const ItemForm = ({ addItem, restaurant }) => {
 	const [ unitsData, setUnitsData ] = useState('')
 	const [ categoryData, setCategoryData ] = useState('Line')
 
-	console.log(categoryData)
-
 	return (
 			<Form>
 				<Form.Row>
@@ -43,6 +41,7 @@ const ItemForm = ({ addItem, restaurant }) => {
 						</Form.Label>
 						<Form.Control as='select' onChange={(e)=> setCategoryData(e.target.value)}>
 							<option>Line</option>
+							<option>Meat</option>
 							<option>Misc</option>
 						</Form.Control>
 
