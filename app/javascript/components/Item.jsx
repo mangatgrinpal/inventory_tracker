@@ -5,6 +5,7 @@ import Record from './Record';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
+import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import ListGroup from 'react-bootstrap/ListGroup';
 
 
@@ -25,6 +26,7 @@ const Item = ({
 	let needs = records.filter(record => record.record_type == 'Needs' && record.date == currentWorkDay)
 
 
+
 	return (
 		<Fragment>
 			<Row className='border-top'>
@@ -37,43 +39,53 @@ const Item = ({
 				
 
 				<Col md={2}>
-					<Button size='sm' onClick={()=> { updateRecord(currentWorkDay, id, 'On Hand', restaurant, 'decrement')}}>
-						&minus;
-					</Button>
-					&nbsp;
-					{onHand.length > 0 ? onHand[0].quantity : 0}
-					&nbsp;
-					<Button size='sm' onClick={()=> { updateRecord(currentWorkDay, id, 'On Hand', restaurant, 'increment')}}>
-						+
+					<ButtonGroup>
+						<Button size='sm' onClick={()=> { updateRecord(currentWorkDay, id, 'On Hand', restaurant, 'decrement')}}>
+							&minus;
+						</Button>
+						<Button variant='light' className='value-display'>
+							{onHand.length > 0 ? onHand[0].quantity : 0}
+						</Button>
+						<Button size='sm' onClick={()=> { updateRecord(currentWorkDay, id, 'On Hand', restaurant, 'increment')}}>
+							+
+						</Button>
+					</ButtonGroup>
+					
+				</Col>
+				<Col md={2}>
+					<ButtonGroup>
+						<Button size='sm' onClick={()=> { updateRecord(currentWorkDay, id, 'Needs', restaurant, 'decrement')}}>
+							&minus;
+						</Button>
+						<Button variant='light' className='value-display'>
+							{needs.length > 0 ? needs[0].quantity : 0}
+						</Button>
+						<Button size='sm' onClick={()=> { updateRecord(currentWorkDay, id, 'Needs', restaurant, 'increment')}}>
+							+
+						</Button>
+					</ButtonGroup>
+					
+				</Col>
+				<Col md={2}>
+					<Button variant='light' className='value-display'>
+						{needs.length == 0 && onHand.length == 0 ? 0 : (needs[0].quantity - onHand[0].quantity) > 0 ? (needs[0].quantity - onHand[0].quantity) : 0}
 					</Button>
 				</Col>
 				<Col md={2}>
-					<Button size='sm' onClick={()=> { updateRecord(currentWorkDay, id, 'Needs', restaurant, 'decrement')}}>
-						&minus;
-					</Button>
-					&nbsp;
-					{needs.length > 0 ? needs[0].quantity : 0}
-					&nbsp;
-					<Button size='sm' onClick={()=> { updateRecord(currentWorkDay, id, 'Needs', restaurant, 'increment')}}>
-						+
-					</Button>
+					<ButtonGroup>
+						<Button size='sm' onClick={()=> { updateRecord(currentWorkDay, id, 'Cases', restaurant, 'decrement')}}>
+							&minus;
+						</Button>
+						<Button variant='light' className='value-display'>
+							{cases.length > 0 ? cases[0].quantity : 0}
+						</Button>
+						<Button size='sm' onClick={()=> { updateRecord(currentWorkDay, id, 'Cases',restaurant, 'increment') }} >
+							+
+						</Button>
+					</ButtonGroup>
+					
 				</Col>
-				<Col md={2}>
-					<Button size='sm' onClick={()=> { updateRecord(currentWorkDay, id, 'Cases', restaurant, 'decrement')}}>
-						&minus;
-					</Button>
-					&nbsp;
-					{cases.length > 0 ? cases[0].quantity : 0}
-					&nbsp;
-					<Button size='sm' onClick={()=> { updateRecord(currentWorkDay, id, 'Cases',restaurant, 'increment') }} >
-						+
-					</Button>
-				</Col>
-				<Col md={2}>
-					&nbsp;
-					{needs.length > 0 && onHand.length > 0 ? needs[0].quantity - onHand[0].quantity : 0}
-					&nbsp;
-				</Col>			
+							
 			</Row>
 		</Fragment>
 	)

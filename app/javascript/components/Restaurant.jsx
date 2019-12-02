@@ -93,17 +93,14 @@ const Restaurant = ({
 				<Fragment>
 				{lineItems.length > 0 ? 
 					<Fragment>
-						<Row className='justify-content-center pt-5'>
+						<Row className='pt-5'>
 							<Col>
 								<h5 className='text-center'>Line</h5>
 							</Col>
 						</Row>
-						<Row>
+						<Row className='text-center'>
 							<Col md={3}>
 								Name (units)
-							</Col>
-							<Col md={2}>
-								Cases
 							</Col>
 							<Col md={2}>
 								On Hand
@@ -114,10 +111,13 @@ const Restaurant = ({
 							<Col md={2}>
 								To Be Prepped
 							</Col>
+							<Col md={2}>
+								Cases
+							</Col>
 						</Row>
 
 						<Row className='no-gutters'>
-							<Col>
+							<Col className='text-center'>
 
 							{lineItems.map( item => {
 
@@ -141,17 +141,14 @@ const Restaurant = ({
 					
 					{miscItems.length > 0 ?
 						<Fragment>
-							<Row className='justify-content-center pt-5'>
+							<Row className='pt-5'>
 								<Col>
 									<h5 className='text-center'>Misc</h5>
 								</Col>
 							</Row>
-							<Row>
+							<Row className='text-center'>
 								<Col md={3}>
 									Name (units)
-								</Col>
-								<Col md={2}>
-									Cases
 								</Col>
 								<Col md={2}>
 									On Hand
@@ -162,9 +159,12 @@ const Restaurant = ({
 								<Col md={2}>
 									To Be Prepped
 								</Col>
+								<Col md={2}>
+									Cases
+								</Col>
 							</Row>
 							<Row className='no-gutters'>
-								<Col>
+								<Col className='text-center'>
 
 								{miscItems.map( item => {
 
@@ -193,22 +193,23 @@ const Restaurant = ({
 									<h5 className='text-center'>Meat</h5>
 								</Col>
 							</Row>
-							<Row>
+							<Row className='text-center'>
 								<Col md={3}>
 									Name (units)
 								</Col>
-								<Col md={3}>
-									Cases
-								</Col>
+								
 								<Col md={3}>
 									Marinated cases
 								</Col>
 								<Col md={3}>
 									Separated pans
 								</Col>
+								<Col md={3}>
+									Cases
+								</Col>
 							</Row>
 							<Row className='no-gutters'>
-								<Col>
+								<Col className='text-center'>
 
 								{meatItems.map( item => {
 
