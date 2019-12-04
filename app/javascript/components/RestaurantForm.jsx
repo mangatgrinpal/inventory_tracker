@@ -15,10 +15,8 @@ const RestaurantForm = ({
 
 	// change this set timeout function later
 	const handleClick = () => {
-		addRestaurant(formData)
-		setTimeout(()=>{
-			toggleIsHidden(!isHidden)
-		},500)
+		addRestaurant(formData, isHidden, toggleIsHidden)
+		
 	}
 
 	const submitFormOnEnter = e => {

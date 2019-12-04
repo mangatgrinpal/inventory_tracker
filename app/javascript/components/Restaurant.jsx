@@ -34,7 +34,7 @@ const Restaurant = ({
 	clearFetchedItems,
 	updateRecord,
 	items: { itemList, isFetching },
-	weeks: { currentWorkDay },
+	weeks: { currentWorkDay, previousWorkDay },
 	records: { recordList }
 }) => {	
 
@@ -45,11 +45,6 @@ const Restaurant = ({
 
 	useEffect(() => {
 		fetchItems(id)
-
-		// return () => {
-		// 	clearFetchedItems()
-		// }
-
 
 	},[ id ])
 
@@ -130,6 +125,7 @@ const Restaurant = ({
 										recordList={recordList}
 										deleteItem={deleteItem}
 										currentWorkDay={currentWorkDay}
+										previousWorkDay={previousWorkDay}
 										updateRecord={updateRecord} />
 								)
 							})}
@@ -177,6 +173,7 @@ const Restaurant = ({
 											recordList={recordList}
 											deleteItem={deleteItem}
 											currentWorkDay={currentWorkDay}
+											previousWorkDay={previousWorkDay}
 											updateRecord={updateRecord} />
 									)
 								})}
@@ -222,6 +219,7 @@ const Restaurant = ({
 											recordList={recordList}
 											deleteItem={deleteItem}
 											currentWorkDay={currentWorkDay}
+											previousWorkDay={previousWorkDay}
 											updateRecord={updateRecord} />
 									)
 								})}

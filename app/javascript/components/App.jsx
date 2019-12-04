@@ -14,7 +14,7 @@ import store from '../store'
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom'
 
 
-const App = ({ currentDay, currentWeekRange }) => {
+const App = ({ currentDay, yesterday }) => {
 
 	return (
 		<Provider store={store}>
@@ -27,7 +27,7 @@ const App = ({ currentDay, currentWeekRange }) => {
 					</Route>
 					<Route path='/dashboard'>
 						<Dashboard
-							currentWeekRange={currentWeekRange}
+							yesterday={yesterday}
 							currentDay={currentDay} />
 					</Route>
 

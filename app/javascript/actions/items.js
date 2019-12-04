@@ -96,24 +96,33 @@ export const clearFetchedItems = () => {
 }
 
 
-export const updateRecord = (date, item, recordType, restaurant, updateType) => async dispatch => {
+export const updateRecord = (date, item, recordType, restaurant, updateType, quantity) => async dispatch => {
 
-	
+
 	try {
 		const res = await fetch('/records', {
 			method: 'POST',
-			body: JSON.stringify({record: {item_id: item, record_type: recordType, date: date}, restaurant: restaurant, update_type: updateType}),
+			body: JSON.stringify({
+				record: {
+					item_id: item, 
+					record_type: recordType, 
+					date: date,
+					quantity: quantity
+				}, 
+				restaurant: restaurant, 
+				update_type: updateType
+			}),
 			headers: headers
 		})
 
 		const json = await res.json();
 
 
-
 		dispatch({
 			type: UPDATE_RECORD,
 			payload: json
 		})
+		
 	} catch(error) {
 		console.log(error)
 	}

@@ -35,7 +35,7 @@ export const fetchRestaurants = restaurant => async dispatch => {
 }
 
 
-export const addRestaurant = name => async dispatch => {
+export const addRestaurant = (name, isHidden, toggleIsHidden) => async dispatch => {
 
 
 	try {		
@@ -53,6 +53,8 @@ export const addRestaurant = name => async dispatch => {
 			type: ADD_RESTAURANT,
 			payload: json
 		})
+
+		toggleIsHidden(!isHidden)
 
 	} catch (error) {
 

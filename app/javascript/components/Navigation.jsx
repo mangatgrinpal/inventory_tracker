@@ -10,11 +10,11 @@ import Nav from 'react-bootstrap/Nav';
 const Navigation = () => {
 
 	return (
-		<Navbar bg='dark'>
-			<Nav className='mx-auto'>
+		<Navbar>
+			<Nav className='ml-auto'>
 				<Nav.Item>
 					<LinkContainer to='/'>
-						<Nav.Link to='/'>Home</Nav.Link>
+						<Nav.Link>Home</Nav.Link>
 					</LinkContainer>
 					
 				</Nav.Item>

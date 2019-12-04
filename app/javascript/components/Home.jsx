@@ -7,17 +7,14 @@ import Button from "react-bootstrap/Button"
 
 const Home = () => {
 
-
-
 	return (
 		<Fragment>
 			<Container>
-				<Row>
+				<Row className='text-center'>
 					<Col>
-						<h1>Inventory Tracker</h1>
+						<h1>Inventory Management System</h1>
 					</Col>
 				</Row>
-			
 			</Container>
 		</Fragment>
 	)

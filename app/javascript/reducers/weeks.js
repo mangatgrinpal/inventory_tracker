@@ -1,9 +1,11 @@
 import {
-	SET_CURRENT_WORK_DAY
+	SET_CURRENT_WORK_DAY,
+	SET_PREVIOUS_WORK_DAY
 } from '../actions/types';
 
 const initialState = {
-	currentWorkDay: []
+	currentWorkDay: [],
+	previousWorkDay: []
 }
 
 export default function(state = initialState, action) {
@@ -15,6 +17,11 @@ export default function(state = initialState, action) {
 				...state,
 				currentWorkDay: payload
 			};
+		case SET_PREVIOUS_WORK_DAY:
+			return {
+				...state,
+				previousWorkDay: payload
+			}
 		default:
 			return state
 	}

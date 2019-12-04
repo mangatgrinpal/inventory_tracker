@@ -29,6 +29,7 @@ class RecordsController < ApplicationController
 			end
 			
 		else
+
 			@record = Record.new(record_params)
 			if @record.save && params[:update_type] == 'increment'
 				@record.increment!(:quantity, 0.5)

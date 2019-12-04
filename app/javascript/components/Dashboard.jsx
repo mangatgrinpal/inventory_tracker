@@ -14,7 +14,7 @@ import {
 import { connect } from 'react-redux';
 
 import { fetchRestaurants, addRestaurant } from '../actions/restaurants';
-import { setCurrentWorkDay } from '../actions/weeks';
+import { setCurrentWorkDay, setPreviousWorkDay } from '../actions/weeks';
 
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
@@ -23,13 +23,13 @@ import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import CardDeck from 'react-bootstrap/CardDeck';
 
-
-
 const Dashboard = ({
 	fetchRestaurants, 
 	addRestaurant,
 	setCurrentWorkDay,
+	setPreviousWorkDay,
 	currentDay,
+	yesterday,
 	restaurants: { isFetching, restaurantList }
 }) => {
 
@@ -37,9 +37,11 @@ const Dashboard = ({
 	const [isHidden, toggleIsHidden] = useState(false);
 
 	useEffect(()=> {
-		
-		fetchRestaurants();
+
+		setPreviousWorkDay(yesterday)
 		setCurrentWorkDay(currentDay)
+		fetchRestaurants();
+
 
 	},[ fetchRestaurants, currentDay ])
 
@@ -128,5 +130,5 @@ const mapStateToProps = state =>
 
 export default connect (
 	mapStateToProps,
-	{ fetchRestaurants, addRestaurant, setCurrentWorkDay }
+	{ fetchRestaurants, addRestaurant, setCurrentWorkDay, setPreviousWorkDay }
 )(Dashboard)

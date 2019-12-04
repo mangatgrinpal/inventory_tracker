@@ -16,14 +16,21 @@ const Item = ({
 	restaurant,
 	recordList,
 	currentWorkDay,
+	previousWorkDay,
 	updateRecord
 }) => {
 
 
 	const { id, name, units, records } = item;
+	
+	let yesterdaysCases = records.filter(record => record.record_type == 'Cases' && record.date == previousWorkDay)
 	let cases = records.filter(record => record.record_type == 'Cases' && record.date == currentWorkDay)
+
 	let onHand = records.filter(record => record.record_type == 'On Hand' && record.date == currentWorkDay)
 	let needs = records.filter(record => record.record_type == 'Needs' && record.date == currentWorkDay)
+
+	let caseValue = React.createRef()
+
 
 
 
@@ -76,10 +83,10 @@ const Item = ({
 						<Button size='sm' onClick={()=> { updateRecord(currentWorkDay, id, 'Cases', restaurant, 'decrement')}}>
 							&minus;
 						</Button>
-						<Button variant='light' className='value-display'>
-							{cases.length > 0 ? cases[0].quantity : 0}
+						<Button variant='light' className='value-display' ref={caseValue}>
+							{cases.length > 0 ? cases[0].quantity : yesterdaysCases.length > 0 ? yesterdaysCases[0].quantity : 0}
 						</Button>
-						<Button size='sm' onClick={()=> { updateRecord(currentWorkDay, id, 'Cases',restaurant, 'increment') }} >
+						<Button size='sm' onClick={()=> { updateRecord(currentWorkDay, id, 'Cases',restaurant, 'increment', caseValue.current.innerText) }} >
 							+
 						</Button>
 					</ButtonGroup>
