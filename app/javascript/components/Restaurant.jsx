@@ -2,6 +2,7 @@ import React, { Fragment, useState, useEffect } from 'react';
 import Loading from './Loading';
 import Item from './Item';
 import MeatItem from './MeatItem';
+import SauceAddOnItem from './SauceAddOnItem';
 import ItemForm from './ItemForm';
 import DateRange from './DateRange';
 import RecordForm from './RecordForm';
@@ -51,6 +52,7 @@ const Restaurant = ({
 	let lineItems = itemList.filter(item => item.category == 'Line')
 	let miscItems = itemList.filter(item => item.category == 'Misc')
 	let meatItems = itemList.filter(item => item.category == 'Meat')
+	let sauceAddOnItems = itemList.filter(item => item.category == 'Sauces/Add-ons')
 
 
 
@@ -65,7 +67,7 @@ const Restaurant = ({
 				
 			</Row>
 			<Row className='justify-content-center'>
-				<Col md={10} sm={12}>
+				<Col md={10}>
 					<ItemForm restaurant={id} addItem={addItem} />
 				</Col>
 			</Row>
@@ -93,23 +95,25 @@ const Restaurant = ({
 								<h5 className='text-center'>Line</h5>
 							</Col>
 						</Row>
-						<Row className='text-center'>
-							<Col md={3}>
-								Name (units)
-							</Col>
-							<Col md={2}>
-								On Hand
-							</Col>
-							<Col md={2}>
-								Needs
-							</Col>
-							<Col md={2}>
-								To Be Prepped
-							</Col>
-							<Col md={2}>
-								Cases
-							</Col>
-						</Row>
+						<Col >
+							<Row className='text-center'>
+								<Col md={3}>
+									Name (units)
+								</Col>
+								<Col md={2}>
+									On Hand
+								</Col>
+								<Col md={2}>
+									Needs
+								</Col>
+								<Col md={2}>
+									To Be Prepped
+								</Col>
+								<Col md={2}>
+									Cases
+								</Col>
+							</Row>
+						</Col>
 
 						<Row className='no-gutters'>
 							<Col className='text-center'>
@@ -166,6 +170,48 @@ const Restaurant = ({
 
 									return(
 										<Item 
+											key={item.id}
+											restaurant={id}
+											item={item}
+											fetchRecords={fetchRecords}
+											recordList={recordList}
+											deleteItem={deleteItem}
+											currentWorkDay={currentWorkDay}
+											previousWorkDay={previousWorkDay}
+											updateRecord={updateRecord} />
+									)
+								})}
+								</Col>
+							</Row>
+						</Fragment> :
+
+						<div/>}
+						{sauceAddOnItems.length > 0 ?
+						<Fragment>
+							<Row className='justify-content-center pt-5'>
+								<Col>
+									<h5 className='text-center'>Sauces/Add-ons</h5>
+								</Col>
+							</Row>
+							<Row className='text-center'>
+								<Col md={3}>
+									Name (units)
+								</Col>
+								
+								<Col md={4}>
+									On Hand
+								</Col>
+								<Col md={4}>
+									Cases
+								</Col>
+							</Row>
+							<Row className='no-gutters'>
+								<Col className='text-center'>
+
+								{sauceAddOnItems.map( item => {
+
+									return(
+										<SauceAddOnItem 
 											key={item.id}
 											restaurant={id}
 											item={item}

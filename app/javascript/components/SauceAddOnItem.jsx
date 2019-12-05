@@ -9,7 +9,7 @@ import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import ListGroup from 'react-bootstrap/ListGroup';
 
 
-const Item = ({ 
+const SauceAddOnItem = ({ 
 	item, 
 	deleteItem,
 	fetchRecords, 
@@ -22,21 +22,18 @@ const Item = ({
 
 
 	const { id, name, units, records } = item;
-	
+
 	let yesterdaysCases = records.filter(record => record.record_type == 'Cases' && record.date == previousWorkDay)
 	let cases = records.filter(record => record.record_type == 'Cases' && record.date == currentWorkDay)
-
 	let onHand = records.filter(record => record.record_type == 'On Hand' && record.date == currentWorkDay)
-	let needs = records.filter(record => record.record_type == 'Needs' && record.date == currentWorkDay)
 
-	let caseValue = React.createRef()
-
-
+	let sauceAddOnCaseValue = React.createRef()
 
 
 	return (
 		<Fragment>
 			<Row className='border-top'>
+
 				<Col md={3} className='clearfix'>
 					{name} ({units})
 					<Button className='float-right' variant='danger' onClick={()=> { deleteItem(id, restaurant)}}>
@@ -45,7 +42,7 @@ const Item = ({
 				</Col>
 				
 
-				<Col md={2}>
+				<Col md={4}>
 					<ButtonGroup>
 						<Button size='sm' onClick={()=> { updateRecord(currentWorkDay, id, 'On Hand', restaurant, 'decrement')}}>
 							&minus;
@@ -59,46 +56,22 @@ const Item = ({
 					</ButtonGroup>
 					
 				</Col>
-				<Col md={2}>
-					<ButtonGroup>
-						<Button size='sm' onClick={()=> { updateRecord(currentWorkDay, id, 'Needs', restaurant, 'decrement')}}>
-							&minus;
-						</Button>
-						<Button variant='light' className='value-display'>
-							{needs.length > 0 ? needs[0].quantity : 0}
-						</Button>
-						<Button size='sm' onClick={()=> { updateRecord(currentWorkDay, id, 'Needs', restaurant, 'increment')}}>
-							+
-						</Button>
-					</ButtonGroup>
-					
-				</Col>
-				<Col md={2}>
-					<Button variant='light' className='value-display'>
-						{needs.length > 0 && onHand.length > 0 && (needs[0].quantity - onHand[0].quantity) > 0 ? 
-							(needs[0].quantity - onHand[0].quantity) : 
-							needs.length > 0 && onHand.length == 0 ?
-							needs[0].quantity : 0}
-					</Button>
-				</Col>
-				<Col md={2}>
+				<Col md={4}>
 					<ButtonGroup>
 						<Button size='sm' onClick={()=> { updateRecord(currentWorkDay, id, 'Cases', restaurant, 'decrement')}}>
 							&minus;
 						</Button>
-						<Button variant='light' className='value-display' ref={caseValue}>
+						<Button variant='light' className='value-display' ref={sauceAddOnCaseValue}>
 							{cases.length > 0 ? cases[0].quantity : yesterdaysCases.length > 0 ? yesterdaysCases[0].quantity : 0}
 						</Button>
-						<Button size='sm' onClick={()=> { updateRecord(currentWorkDay, id, 'Cases',restaurant, 'increment', caseValue.current.innerText) }} >
+						<Button size='sm' onClick={()=> { updateRecord(currentWorkDay, id, 'Cases',restaurant, 'increment', sauceAddOnCaseValue.current.innerText) }} >
 							+
 						</Button>
 					</ButtonGroup>
-					
-				</Col>
-							
+				</Col>		
 			</Row>
 		</Fragment>
 	)
 }
 
-export default Item
+export default SauceAddOnItem
