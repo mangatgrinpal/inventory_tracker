@@ -75,7 +75,7 @@ const Item = ({
 				</Col>
 				<Col md={2}>
 					<Button variant='light' className='value-display'>
-						{needs.length == 0 && onHand.length == 0 ? 0 : (needs[0].quantity - onHand[0].quantity) > 0 ? (needs[0].quantity - onHand[0].quantity) : 0}
+						{needs.length > 0 && onHand.length > 0 && (needs[0].quantity - onHand[0].quantity) > 0 ? (needs[0].quantity - onHand[0].quantity) : 0}
 					</Button>
 				</Col>
 				<Col md={2}>
