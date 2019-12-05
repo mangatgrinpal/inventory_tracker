@@ -23,6 +23,7 @@ gem 'jbuilder', '~> 2.7'
 # gem 'bcrypt', '~> 3.1.7'
 gem 'react-rails'
 gem 'haml'
+gem 'devise'
 
 gem 'active_model_serializers', '~> 0.10.0'
 # Use Active Storage variant

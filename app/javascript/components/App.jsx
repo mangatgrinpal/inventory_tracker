@@ -4,9 +4,11 @@ import React, { Fragment, useState, useEffect } from 'react';
 import { Provider } from 'react-redux';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-import Navigation from './Navigation'
-import Home from './Home'
-import Dashboard from './Dashboard'
+import Navigation from './Navigation';
+import Home from './Home';
+import Dashboard from './Dashboard';
+import UserSignUp from './UserSignUp';
+import UserSignIn from './UserSignIn';
 
 import store from '../store'
 
@@ -29,6 +31,12 @@ const App = ({ currentDay, yesterday }) => {
 						<Dashboard
 							yesterday={yesterday}
 							currentDay={currentDay} />
+					</Route>
+					<Route path='/sign-up'>
+						<UserSignUp />
+					</Route>
+					<Route path='/sign-in'>
+						<UserSignIn />
 					</Route>
 
 				</Switch>
