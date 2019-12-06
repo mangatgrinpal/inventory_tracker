@@ -1,8 +1,7 @@
 import React, { Fragment, useState, useEffect } from 'react';
 
-
 import { Provider } from 'react-redux';
-import 'bootstrap/dist/css/bootstrap.min.css';
+
 
 import Navigation from './Navigation';
 import Home from './Home';
@@ -11,7 +10,6 @@ import UserSignUp from './UserSignUp';
 import UserSignIn from './UserSignIn';
 
 import store from '../store'
-
 
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom'
 
