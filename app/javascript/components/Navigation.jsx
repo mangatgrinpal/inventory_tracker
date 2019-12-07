@@ -10,7 +10,7 @@ import { LinkContainer } from 'react-router-bootstrap';
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
 
-const Navigation = ({ userSignOut }) => {
+const Navigation = ({ userSignOut, users: { currentUser } }) => {
 
 	const handleClick = e => {
 		e.preventDefault()
@@ -41,7 +41,7 @@ const Navigation = ({ userSignOut }) => {
 				</Nav.Item>
 				<Nav.Item>
 
-					<Nav.Link>Sign Out</Nav.Link>
+					<Nav.Link href='javascript:void(0)' onClick={handleClick}>Sign Out</Nav.Link>
 					
 				</Nav.Item>
 				

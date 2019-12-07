@@ -17,6 +17,16 @@ export default function(state=initialState, action) {
 				...state,
 				currentUser: payload
 			}
+		case USER_SIGN_IN:
+			return {
+				...state,
+				currentUser: payload
+			}
+		case USER_SIGN_OUT:
+			return {
+				...state,
+				currentUser: payload
+			}
 		default:
 			return state
 	}

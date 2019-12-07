@@ -1,6 +1,6 @@
 import React, { Fragment, useState } from 'react';
 
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 
 import { connect } from 'react-redux';
 
@@ -14,12 +14,14 @@ import Button from 'react-bootstrap/Button';
 
 const UserSignIn = ({ userSignIn }) => {
 
+	const history = useHistory();
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
 
-	const handleClick = e => {
+	const handleClick = (e, email, password, history) => {
+
 		e.preventDefault();
-		userSignIn(email, password)
+		userSignIn(email, password, history)
 	}
 
 	return (
@@ -34,14 +36,14 @@ const UserSignIn = ({ userSignIn }) => {
 					<Form>
 						<Form.Group>
 							<Form.Label>Email address</Form.Label>
-							<Form.Control type="email" placeholder="Enter email" />
+							<Form.Control type="email" placeholder="Enter email" onChange={(e)=>{setEmail(e.target.value)}}/>
 						</Form.Group>
 
 						<Form.Group>
 							<Form.Label>Password</Form.Label>
-							<Form.Control type="password" placeholder="Password" />
+							<Form.Control type="password" placeholder="Password" onChange={(e)=>{setPassword(e.target.value)}}/>
 						</Form.Group>
-						<Button variant="primary" type="submit" onClick={handleClick}>
+						<Button variant="primary" onClick={(e)=>{handleClick(e, email, password, history)}}>
 							Submit
 						</Button>
 					</Form>

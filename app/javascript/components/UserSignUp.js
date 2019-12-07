@@ -1,6 +1,7 @@
 import React, { Fragment, useState } from 'react';
 
 import { connect } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 
 import { userSignUp } from '../actions/users';
 
@@ -12,14 +13,13 @@ import Button from 'react-bootstrap/Button';
 
 const UserSignUp = ({ userSignUp }) => {
 
-	
-
+	const history = useHistory();
 
 	const [email, setEmail ] = useState('');
 	const [password, setPassword] = useState('');
 	const [passwordConfirmation, setPasswordConfirmation] = useState('');
 
-	const handleClick = e => {
+	const handleClick = (e, email, password, passwordConfirmation, history) => {
 		e.preventDefault();
 		userSignUp(email, password, passwordConfirmation)
 	}
@@ -49,7 +49,7 @@ const UserSignUp = ({ userSignUp }) => {
 							<Form.Label>Confirm Password</Form.Label>
 							<Form.Control type="password" placeholder="Password Confirmation" onChange={(e)=>{setPasswordConfirmation(e.target.value)}} />
 						</Form.Group>
-						<Button variant="primary" type="submit" onClick={handleClick}>
+						<Button variant="primary" onClick={(e) => { handleClick(e, email, password, passwordConfirmation, history) }}>
 							Submit
 						</Button>
 					</Form>

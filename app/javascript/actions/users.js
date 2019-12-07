@@ -13,7 +13,8 @@ const headers = {
 	'Content-Type': 'application/json'
 }
 
-export const userSignUp = (email, password, passwordConfirmation) => async dispatch => {
+export const userSignUp = (email, password, passwordConfirmation, history) => async dispatch => {
+	
 	try {
 		const res = await fetch('/users', {
 			method: 'POST',
@@ -29,6 +30,13 @@ export const userSignUp = (email, password, passwordConfirmation) => async dispa
 
 		const json = await res.json();
 
+		dispatch({
+			type: USER_SIGN_UP,
+			payload: json
+		})
+
+
+
 		
 	} catch(error) {
 
@@ -36,8 +44,10 @@ export const userSignUp = (email, password, passwordConfirmation) => async dispa
 	}
 }
 
-export const userSignIn = (email, password) => async dispatch => {
+export const userSignIn = (email, password, history) => async dispatch => {
+
 	try {
+
 		const res = await fetch('/users/sign_in', {
 			method: 'POST',
 			body: JSON.stringify({
@@ -48,20 +58,29 @@ export const userSignIn = (email, password) => async dispatch => {
 			}),
 			headers: headers
 		})
+
+		const json = await res.json()
+		//const text = await res.text();
+
+
+		history.push('/dashboard')
+
 	} catch(error) {
 		console.log(error)
 	}
 }
 
 export const userSignOut = email => async dispatch => {
+	
 	try {
 		const res = await fetch('/users/sign_out',{
 			method: 'DELETE',
 			body: JSON.stringify({
 				user: {
-					email: email
+					email: 'ginny4@mail.com'
 				}
-			})
+			}),
+			headers: headers
 		})
 	} catch(error) {
 		console.log(error)
