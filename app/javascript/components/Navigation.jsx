@@ -1,13 +1,21 @@
 import React from 'react';
 
 import { NavLink } from 'react-router-dom';
+import { connect } from 'react-redux';
+
+import { userSignOut } from '../actions/users';
 
 import { LinkContainer } from 'react-router-bootstrap';
 
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
 
-const Navigation = () => {
+const Navigation = ({ userSignOut }) => {
+
+	const handleClick = e => {
+		e.preventDefault()
+		userSignOut()
+	}
 
 	return (
 		<Navbar>
@@ -25,6 +33,17 @@ const Navigation = () => {
 					</LinkContainer>
 					
 				</Nav.Item>
+				<Nav.Item>
+					<LinkContainer to='/sign-in'>
+						<Nav.Link>Sign In</Nav.Link>
+					</LinkContainer>
+					
+				</Nav.Item>
+				<Nav.Item>
+
+					<Nav.Link>Sign Out</Nav.Link>
+					
+				</Nav.Item>
 				
 			</Nav>
 		</Navbar>
@@ -33,4 +52,12 @@ const Navigation = () => {
 	)
 }
 
-export default Navigation
+const mapStateToProps = state => 
+({
+	users: state.users
+})
+
+export default connect(
+	mapStateToProps,
+	{ userSignOut }
+	)(Navigation)

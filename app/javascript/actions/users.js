@@ -45,9 +45,9 @@ export const userSignIn = (email, password) => async dispatch => {
 					email: email,
 					password: password
 				}
-			})
-		}),
-		headers: headers
+			}),
+			headers: headers
+		})
 	} catch(error) {
 		console.log(error)
 	}
