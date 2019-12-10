@@ -11,7 +11,10 @@ import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 
-const UserSignUp = ({ userSignUp }) => {
+const UserSignUp = ({ 
+	userSignUp, 
+	users: { currentUser } 
+}) => {
 
 	const history = useHistory();
 

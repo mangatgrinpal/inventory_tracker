@@ -2,9 +2,9 @@ import {
 	USER_SIGN_UP,
 	USER_SIGN_IN,
 	USER_SIGN_OUT
-} from './types';
+} from '../actions/types';
 
-const intialState = {
+const initialState = {
 	currentUser: null,
 	loading: false
 }

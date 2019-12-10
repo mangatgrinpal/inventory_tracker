@@ -18,7 +18,14 @@ class Users::SessionsController < Devise::SessionsController
 
     sign_in(resource_name, resource)
     yield resource if block_given?
-    render json: resource
+    render json: current_user
+  end
+
+  def destroy
+    signed_out = (Devise.sign_out_all_scopes ? sign_out : sign_out(resource_name))
+
+    yield if block_given?
+    render json: current_user
   end
 
   # DELETE /resource/sign_out
