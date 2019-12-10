@@ -33,17 +33,23 @@ const MeatItem = ({
 
 	return (
 		<Fragment>
-			<Row className='border-top'>
+			<Row className='border-top py-1'>
+				<Col xs={6} className='d-md-none'>
+					Name (units)
+				</Col>
 
-				<Col md={3} className='clearfix'>
+				<Col xs={6} md={3} className='clearfix'>
 					{name} ({units})
 					<Button className='float-right' variant='danger' onClick={()=> { deleteItem(id, restaurant)}}>
 						x
 					</Button>
 				</Col>
 				
+				<Col xs={6} className='d-md-none'>
+					Marinated cases
+				</Col>
 
-				<Col md={3}>
+				<Col xs={6} md={3}>
 					<ButtonGroup>
 						<Button size='sm' onClick={()=> { updateRecord(currentWorkDay, id, 'Marinated cases', restaurant, 'decrement')}}>
 							&minus;
@@ -57,7 +63,10 @@ const MeatItem = ({
 					</ButtonGroup>
 					
 				</Col>
-				<Col md={3}>
+				<Col xs={6} className='d-md-none'>
+					Separated pans
+				</Col>
+				<Col xs={6} md={3}>
 					<ButtonGroup>
 						<Button size='sm' onClick={()=> { updateRecord(currentWorkDay, id, 'Separated pans', restaurant, 'decrement')}}>
 							&minus;
@@ -70,7 +79,10 @@ const MeatItem = ({
 						</Button>
 					</ButtonGroup>
 				</Col>
-				<Col md={3}>
+				<Col xs={6} className='d-md-none'>
+					Cases
+				</Col>
+				<Col xs={6} md={3}>
 					<ButtonGroup>
 						<Button size='sm' onClick={()=> { updateRecord(currentWorkDay, id, 'Cases', restaurant, 'decrement')}}>
 							&minus;

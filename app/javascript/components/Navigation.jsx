@@ -17,11 +17,12 @@ const Navigation = ({
 
 	const history = useHistory();
 
-
 	const handleClick = (e, email, history) => {
 		e.preventDefault()
 		userSignOut(email, history)
 	}
+
+
 
 	return (
 		<Navbar>
@@ -51,12 +52,11 @@ const Navigation = ({
 					</Nav.Item>
 				}
 				
-
 				
 				{ currentUser && 
 
 				<Nav.Item>
-					<Nav.Link onClick={(e)=>{handleClick(e, 'ginny@mail.com', history)}}>Sign Out</Nav.Link>
+					<Nav.Link onClick={(e)=>{handleClick(e, currentUser.email, history)}}>Sign Out</Nav.Link>
 				</Nav.Item>}
 				
 				

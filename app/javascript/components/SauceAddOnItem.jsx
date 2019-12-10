@@ -33,16 +33,21 @@ const SauceAddOnItem = ({
 	return (
 		<Fragment>
 			<Row className='border-top'>
+				<Col xs={6} className='d-md-none'>
+					Name (units)
+				</Col>
 
-				<Col md={3} className='clearfix'>
+				<Col xs={6} md={3} className='clearfix'>
 					{name} ({units})
 					<Button className='float-right' variant='danger' onClick={()=> { deleteItem(id, restaurant)}}>
 						x
 					</Button>
 				</Col>
 				
-
-				<Col md={4}>
+				<Col xs={6} className='d-md-none'>
+					On hand
+				</Col>
+				<Col xs={6} md={4}>
 					<ButtonGroup>
 						<Button size='sm' onClick={()=> { updateRecord(currentWorkDay, id, 'On Hand', restaurant, 'decrement')}}>
 							&minus;
@@ -56,7 +61,10 @@ const SauceAddOnItem = ({
 					</ButtonGroup>
 					
 				</Col>
-				<Col md={4}>
+				<Col xs={6} className='d-md-none'>
+					Cases
+				</Col>
+				<Col xs={6} md={4}>
 					<ButtonGroup>
 						<Button size='sm' onClick={()=> { updateRecord(currentWorkDay, id, 'Cases', restaurant, 'decrement')}}>
 							&minus;

@@ -11,7 +11,7 @@ import Dashboard from './Dashboard';
 import UserSignUp from './UserSignUp';
 import UserSignIn from './UserSignIn';
 
-import { store, persistor } from '../store'
+import { store, persistor } from '../store';
 
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom'
 

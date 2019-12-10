@@ -36,16 +36,22 @@ const Item = ({
 
 	return (
 		<Fragment>
-			<Row className='border-top'>
-				<Col md={3} className='clearfix'>
+			<Row className='border-top py-1'>
+				<Col xs={6} className='d-md-none'>
+					Name (units)
+				</Col>
+				<Col xs={6} md={3} className='clearfix'>
 					{name} ({units})
 					<Button className='float-right' variant='danger' onClick={()=> { deleteItem(id, restaurant)}}>
 						x
 					</Button>
 				</Col>
 				
+				<Col xs={6} className='d-md-none'>
+					On Hand
+				</Col>
+				<Col xs={6} md={2}>
 
-				<Col md={2}>
 					<ButtonGroup>
 						<Button size='sm' onClick={()=> { updateRecord(currentWorkDay, id, 'On Hand', restaurant, 'decrement')}}>
 							&minus;
@@ -59,7 +65,11 @@ const Item = ({
 					</ButtonGroup>
 					
 				</Col>
-				<Col md={2}>
+
+				<Col xs={6} className='d-md-none'>
+					Needs
+				</Col>
+				<Col xs={6} md={2}>
 					<ButtonGroup>
 						<Button size='sm' onClick={()=> { updateRecord(currentWorkDay, id, 'Needs', restaurant, 'decrement')}}>
 							&minus;
@@ -73,7 +83,10 @@ const Item = ({
 					</ButtonGroup>
 					
 				</Col>
-				<Col md={2}>
+				<Col xs={6} className='d-md-none'>
+					To be prepped
+				</Col>
+				<Col xs={6} md={2}>
 					<Button variant='light' className='value-display'>
 						{needs.length > 0 && onHand.length > 0 && (needs[0].quantity - onHand[0].quantity) > 0 ? 
 							(needs[0].quantity - onHand[0].quantity) : 
@@ -81,7 +94,10 @@ const Item = ({
 							needs[0].quantity : 0}
 					</Button>
 				</Col>
-				<Col md={2}>
+				<Col xs={6} className='d-md-none'>
+					Cases
+				</Col>
+				<Col xs={6} md={2}>
 					<ButtonGroup>
 						<Button size='sm' onClick={()=> { updateRecord(currentWorkDay, id, 'Cases', restaurant, 'decrement')}}>
 							&minus;

@@ -95,7 +95,7 @@ const Restaurant = ({
 								<h5 className='text-center'>Line</h5>
 							</Col>
 						</Row>
-						<Col >
+						<Col className='d-none d-md-block'>
 							<Row className='text-center'>
 								<Col md={3}>
 									Name (units)
@@ -146,23 +146,25 @@ const Restaurant = ({
 									<h5 className='text-center'>Misc</h5>
 								</Col>
 							</Row>
-							<Row className='text-center'>
-								<Col md={3}>
-									Name (units)
-								</Col>
-								<Col md={2}>
-									On Hand
-								</Col>
-								<Col md={2}>
-									Needs
-								</Col>
-								<Col md={2}>
-									To Be Prepped
-								</Col>
-								<Col md={2}>
-									Cases
-								</Col>
-							</Row>
+							<Col className='d-none d-md-block'>
+								<Row className='text-center'>
+									<Col md={3}>
+										Name (units)
+									</Col>
+									<Col md={2}>
+										On Hand
+									</Col>
+									<Col md={2}>
+										Needs
+									</Col>
+									<Col md={2}>
+										To Be Prepped
+									</Col>
+									<Col md={2}>
+										Cases
+									</Col>
+								</Row>
+							</Col>
 							<Row className='no-gutters'>
 								<Col className='text-center'>
 
@@ -193,18 +195,21 @@ const Restaurant = ({
 									<h5 className='text-center'>Sauces/Add-ons</h5>
 								</Col>
 							</Row>
-							<Row className='text-center'>
-								<Col md={3}>
-									Name (units)
-								</Col>
-								
-								<Col md={4}>
-									On Hand
-								</Col>
-								<Col md={4}>
-									Cases
-								</Col>
-							</Row>
+							<Col className='d-none d-md-block'>
+								<Row className='text-center'>
+									<Col md={3}>
+										Name (units)
+									</Col>
+									
+									<Col md={4}>
+										On Hand
+									</Col>
+									<Col md={4}>
+										Cases
+									</Col>
+								</Row>
+							</Col>
+							
 							<Row className='no-gutters'>
 								<Col className='text-center'>
 
@@ -236,21 +241,24 @@ const Restaurant = ({
 									<h5 className='text-center'>Meat</h5>
 								</Col>
 							</Row>
-							<Row className='text-center'>
-								<Col md={3}>
-									Name (units)
-								</Col>
-								
-								<Col md={3}>
-									Marinated cases
-								</Col>
-								<Col md={3}>
-									Separated pans
-								</Col>
-								<Col md={3}>
-									Cases
-								</Col>
-							</Row>
+							<Col className='d-none d-md-block'>
+								<Row className='text-center'>
+									<Col md={3}>
+										Name (units)
+									</Col>
+									
+									<Col md={3}>
+										Marinated cases
+									</Col>
+									<Col md={3}>
+										Separated pans
+									</Col>
+									<Col md={3}>
+										Cases
+									</Col>
+								</Row>
+							</Col>
+							
 							<Row className='no-gutters'>
 								<Col className='text-center'>
 

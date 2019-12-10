@@ -58,7 +58,7 @@ class RecordsController < ApplicationController
 
 		def serialized_records
 			current_time = Time.current
-			@records = Record.where(updated_at: (curent_time - 24.hours)..current_time)
+			@records = Record.where(updated_at: (current_time - 24.hours)..current_time)
 			ActiveModel::Serializer::CollectionSerializer.new(@records, each_serializer: RecordsSerializer)
 		end
 
