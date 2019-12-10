@@ -42,15 +42,18 @@ const Navigation = ({
 				</Nav.Item>
 				}
 				
-				<Nav.Item>
-					<LinkContainer to='/sign-in'>
-						<Nav.Link>Sign In</Nav.Link>
-					</LinkContainer>
-					
-				</Nav.Item>
+				{ !currentUser &&
+					<Nav.Item>
+						<LinkContainer to='/sign-in'>
+							<Nav.Link>Sign In</Nav.Link>
+						</LinkContainer>
+						
+					</Nav.Item>
+				}
+				
 
 				
-				{ //currentUser && 
+				{ currentUser && 
 
 				<Nav.Item>
 					<Nav.Link onClick={(e)=>{handleClick(e, 'ginny@mail.com', history)}}>Sign Out</Nav.Link>
