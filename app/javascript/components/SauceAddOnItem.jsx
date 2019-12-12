@@ -33,18 +33,17 @@ const SauceAddOnItem = ({
 	return (
 		<Fragment>
 			<Row className='border-top'>
-				<Col xs={6} className='d-md-none'>
-					Name (units)
-				</Col>
+				
 
-				<Col xs={6} md={4} className='clearfix'>
-					{name} ({units})
+				<Col xs={12} md={4} className='clearfix'>
+					
 					<Button className='float-right' variant='danger' onClick={()=> { deleteItem(id, restaurant)}}>
 						x
 					</Button>
+					<h6 className='item-name'>{name} ({units})</h6>
 				</Col>
 				
-				<Col xs={6} className='d-md-none'>
+				<Col xs={6} className='d-md-none text-right'>
 					On hand
 				</Col>
 				<Col xs={6} md={4}>
@@ -61,7 +60,7 @@ const SauceAddOnItem = ({
 					
 					
 				</Col>
-				<Col xs={6} className='d-md-none'>
+				<Col xs={6} className='d-md-none text-right'>
 					Cases
 				</Col>
 				<Col xs={6} md={4}>

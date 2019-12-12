@@ -34,18 +34,16 @@ const MeatItem = ({
 	return (
 		<Fragment>
 			<Row className='border-top py-1'>
-				<Col xs={6} className='d-md-none'>
-					Name (units)
-				</Col>
 
-				<Col xs={6} md={3} className='clearfix'>
-					{name} ({units})
+				<Col xs={12} md={3} className='clearfix'>
+					
 					<Button className='float-right' variant='danger' onClick={()=> { deleteItem(id, restaurant)}}>
 						x
 					</Button>
+					<h6 className='item-name'>{name} ({units})</h6>
 				</Col>
 				
-				<Col xs={6} className='d-md-none'>
+				<Col xs={6} className='d-md-none text-right'>
 					Marinated cases
 				</Col>
 
@@ -63,7 +61,7 @@ const MeatItem = ({
 				
 					
 				</Col>
-				<Col xs={6} className='d-md-none'>
+				<Col xs={6} className='d-md-none text-right'>
 					Separated pans
 				</Col>
 				<Col xs={6} md={3}>
@@ -79,8 +77,8 @@ const MeatItem = ({
 					</Button>
 				
 				</Col>
-				<Col xs={6} className='d-md-none'>
-					Cases
+				<Col xs={6} className='d-md-none text-right'>
+					Non-marinated Cases
 				</Col>
 				<Col xs={6} md={3}>
 					

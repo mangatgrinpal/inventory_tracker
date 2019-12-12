@@ -43,7 +43,7 @@ const Item = ({
 					<Button size='sm' className='float-right' variant='danger' onClick={()=> { deleteItem(id, restaurant)}}>
 						x
 					</Button>
-					<h6>{name} ({units})</h6>
+					<h6 className='item-name'>{name} ({units})</h6>
 				</Col>
 				
 				<Col xs={6} className='d-md-none text-right'>
@@ -91,7 +91,7 @@ const Item = ({
 							needs[0].quantity : 0}
 					</Button>
 				</Col>
-				<Col xs={6} className='d-md-none'>
+				<Col xs={6} className='d-md-none text-right'>
 					Cases
 				</Col>
 				<Col xs={6} md={2}>

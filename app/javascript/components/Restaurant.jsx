@@ -92,7 +92,7 @@ const Restaurant = ({
 					<Fragment>
 						<Row className='pt-5'>
 							<Col>
-								<h5 className='text-center'>Line</h5>
+								<h5 className='text-center section-name'>Line</h5>
 							</Col>
 						</Row>
 						<Col className='d-none d-md-block'>
@@ -143,7 +143,7 @@ const Restaurant = ({
 						<Fragment>
 							<Row className='pt-5'>
 								<Col>
-									<h5 className='text-center'>Misc</h5>
+									<h5 className='text-center section-name'>Misc</h5>
 								</Col>
 							</Row>
 							<Col className='d-none d-md-block'>
@@ -192,12 +192,12 @@ const Restaurant = ({
 						<Fragment>
 							<Row className='justify-content-center pt-5'>
 								<Col>
-									<h5 className='text-center'>Sauces/Add-ons</h5>
+									<h5 className='text-center section-name'>Sauces/Add-ons</h5>
 								</Col>
 							</Row>
 							<Col className='d-none d-md-block'>
 								<Row className='text-center'>
-									<Col md={3}>
+									<Col md={4}>
 										Name (units)
 									</Col>
 									
@@ -238,7 +238,7 @@ const Restaurant = ({
 						<Fragment>
 							<Row className='justify-content-center pt-5'>
 								<Col>
-									<h5 className='text-center'>Meat</h5>
+									<h5 className='text-center section-name'>Meat</h5>
 								</Col>
 							</Row>
 							<Col className='d-none d-md-block'>
