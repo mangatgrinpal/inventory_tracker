@@ -3,6 +3,7 @@ import React, { Fragment, useState, useEffect } from 'react';
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
 
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 import Navigation from './Navigation';
 import Home from './Home';

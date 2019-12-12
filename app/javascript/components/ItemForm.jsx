@@ -16,6 +16,14 @@ const ItemForm = ({ addItem, restaurant }) => {
 		}
 	}
 
+	const handleClick = e => {
+		e.preventDefault()
+		addItem(nameData, unitsData, categoryData, restaurant)
+		setNameData('')
+		setUnitsData('')
+		setCategoryData('')
+	}
+
 	return (
 			<Form onKeyPress={submitFormOnEnter}>
 				<Form.Row>
@@ -54,7 +62,7 @@ const ItemForm = ({ addItem, restaurant }) => {
 
 					</Col>
 					<Col xs={12} md={3}>
-						<Button className='mt-4' onClick={()=> {addItem(nameData, unitsData, categoryData, restaurant)}}>
+						<Button className='mt-4' onClick={(e)=> {handleClick(e)}}>
 							Add New Item
 						</Button>
 					</Col>

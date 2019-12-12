@@ -50,50 +50,50 @@ const MeatItem = ({
 				</Col>
 
 				<Col xs={6} md={3}>
-					<ButtonGroup>
-						<Button size='sm' onClick={()=> { updateRecord(currentWorkDay, id, 'Marinated cases', restaurant, 'decrement')}}>
-							&minus;
-						</Button>
-						<Button variant='light' className='value-display'>
-							{onHand.length > 0 ? onHand[0].quantity : 0}
-						</Button>
-						<Button size='sm' onClick={()=> { updateRecord(currentWorkDay, id, 'Marinated cases', restaurant, 'increment')}}>
-							+
-						</Button>
-					</ButtonGroup>
+					
+					<Button size='sm' onClick={()=> { updateRecord(currentWorkDay, id, 'Marinated cases', restaurant, 'decrement')}}>
+						&minus;
+					</Button>
+					<Button size='sm' variant='light' className='value-display'>
+						{onHand.length > 0 ? onHand[0].quantity : 0}
+					</Button>
+					<Button size='sm' onClick={()=> { updateRecord(currentWorkDay, id, 'Marinated cases', restaurant, 'increment')}}>
+						+
+					</Button>
+				
 					
 				</Col>
 				<Col xs={6} className='d-md-none'>
 					Separated pans
 				</Col>
 				<Col xs={6} md={3}>
-					<ButtonGroup>
-						<Button size='sm' onClick={()=> { updateRecord(currentWorkDay, id, 'Separated pans', restaurant, 'decrement')}}>
-							&minus;
-						</Button>
-						<Button variant='light' className='value-display'>
-							{needs.length > 0 ? needs[0].quantity : 0}
-						</Button>
-						<Button size='sm' onClick={()=> { updateRecord(currentWorkDay, id, 'Separated pans', restaurant, 'increment')}}>
-							+
-						</Button>
-					</ButtonGroup>
+					
+					<Button size='sm' onClick={()=> { updateRecord(currentWorkDay, id, 'Separated pans', restaurant, 'decrement')}}>
+						&minus;
+					</Button>
+					<Button size='sm' variant='light' className='value-display'>
+						{needs.length > 0 ? needs[0].quantity : 0}
+					</Button>
+					<Button size='sm' onClick={()=> { updateRecord(currentWorkDay, id, 'Separated pans', restaurant, 'increment')}}>
+						+
+					</Button>
+				
 				</Col>
 				<Col xs={6} className='d-md-none'>
 					Cases
 				</Col>
 				<Col xs={6} md={3}>
-					<ButtonGroup>
-						<Button size='sm' onClick={()=> { updateRecord(currentWorkDay, id, 'Cases', restaurant, 'decrement')}}>
-							&minus;
-						</Button>
-						<Button variant='light' className='value-display' ref={meatCaseValue}>
-							{cases.length > 0 ? cases[0].quantity : yesterdaysCases.length > 0 ? yesterdaysCases[0].quantity : 0}
-						</Button>
-						<Button size='sm' onClick={()=> { updateRecord(currentWorkDay, id, 'Cases',restaurant, 'increment', meatCaseValue.current.innerText) }} >
-							+
-						</Button>
-					</ButtonGroup>
+					
+					<Button size='sm' onClick={()=> { updateRecord(currentWorkDay, id, 'Cases', restaurant, 'decrement')}}>
+						&minus;
+					</Button>
+					<Button size='sm' variant='light' className='value-display' ref={meatCaseValue}>
+						{cases.length > 0 ? cases[0].quantity : yesterdaysCases.length > 0 ? yesterdaysCases[0].quantity : 0}
+					</Button>
+					<Button size='sm' onClick={()=> { updateRecord(currentWorkDay, id, 'Cases',restaurant, 'increment', meatCaseValue.current.innerText) }} >
+						+
+					</Button>
+					
 				</Col>		
 			</Row>
 		</Fragment>

@@ -37,7 +37,7 @@ const SauceAddOnItem = ({
 					Name (units)
 				</Col>
 
-				<Col xs={6} md={3} className='clearfix'>
+				<Col xs={6} md={4} className='clearfix'>
 					{name} ({units})
 					<Button className='float-right' variant='danger' onClick={()=> { deleteItem(id, restaurant)}}>
 						x
@@ -48,34 +48,34 @@ const SauceAddOnItem = ({
 					On hand
 				</Col>
 				<Col xs={6} md={4}>
-					<ButtonGroup>
-						<Button size='sm' onClick={()=> { updateRecord(currentWorkDay, id, 'On Hand', restaurant, 'decrement')}}>
-							&minus;
-						</Button>
-						<Button variant='light' className='value-display'>
-							{onHand.length > 0 ? onHand[0].quantity : 0}
-						</Button>
-						<Button size='sm' onClick={()=> { updateRecord(currentWorkDay, id, 'On Hand', restaurant, 'increment')}}>
-							+
-						</Button>
-					</ButtonGroup>
+					
+					<Button size='sm' onClick={()=> { updateRecord(currentWorkDay, id, 'On Hand', restaurant, 'decrement')}}>
+						&minus;
+					</Button>
+					<Button size='sm' variant='light' className='value-display'>
+						{onHand.length > 0 ? onHand[0].quantity : 0}
+					</Button>
+					<Button size='sm' onClick={()=> { updateRecord(currentWorkDay, id, 'On Hand', restaurant, 'increment')}}>
+						+
+					</Button>
+					
 					
 				</Col>
 				<Col xs={6} className='d-md-none'>
 					Cases
 				</Col>
 				<Col xs={6} md={4}>
-					<ButtonGroup>
-						<Button size='sm' onClick={()=> { updateRecord(currentWorkDay, id, 'Cases', restaurant, 'decrement')}}>
-							&minus;
-						</Button>
-						<Button variant='light' className='value-display' ref={sauceAddOnCaseValue}>
-							{cases.length > 0 ? cases[0].quantity : yesterdaysCases.length > 0 ? yesterdaysCases[0].quantity : 0}
-						</Button>
-						<Button size='sm' onClick={()=> { updateRecord(currentWorkDay, id, 'Cases',restaurant, 'increment', sauceAddOnCaseValue.current.innerText) }} >
-							+
-						</Button>
-					</ButtonGroup>
+					
+					<Button size='sm' onClick={()=> { updateRecord(currentWorkDay, id, 'Cases', restaurant, 'decrement')}}>
+						&minus;
+					</Button>
+					<Button size='sm' variant='light' className='value-display' ref={sauceAddOnCaseValue}>
+						{cases.length > 0 ? cases[0].quantity : yesterdaysCases.length > 0 ? yesterdaysCases[0].quantity : 0}
+					</Button>
+					<Button size='sm' onClick={()=> { updateRecord(currentWorkDay, id, 'Cases',restaurant, 'increment', sauceAddOnCaseValue.current.innerText) }} >
+						+
+					</Button>
+					
 				</Col>		
 			</Row>
 		</Fragment>

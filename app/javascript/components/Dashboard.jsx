@@ -71,14 +71,14 @@ const Dashboard = ({
 	return (
 
 		<Fragment>
-			<Container className='h-100'>
+			<Container>
 				{isFetching ? 
 					<Loading/> : 
 					<Row>
 						<Col>
 							<Row>
 								<Col>
-									<h1>Choose a restaurant to get started.</h1>
+									<h3>Choose a restaurant to get started.</h3>
 								</Col>
 							</Row>
 
