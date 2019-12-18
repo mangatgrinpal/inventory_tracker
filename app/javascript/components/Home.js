@@ -13,6 +13,11 @@ const Home = () => {
 				<Row className='text-center'>
 					<Col>
 						<h1>Inventory Management System</h1>
+
+					</Col>
+				</Row>
+				<Row>
+					<Col className='home-background-image'>
 					</Col>
 				</Row>
 			</Container>

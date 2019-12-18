@@ -23,7 +23,6 @@ const Navigation = ({
 	}
 
 
-
 	return (
 		<Navbar>
 			<Nav className='ml-auto navigation'>

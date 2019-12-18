@@ -12,6 +12,15 @@
 	right: 50%;
 }
 
+.home-background-image {
+	background-image: url(https://ginnysbucket.s3-us-west-1.amazonaws.com/dev-images/vietnoms_badge_darkgray_edited.png);
+	height: 50rem;
+	background-position: center;
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-color: #272827;
+}
+
 button.value-display {
 	width: 3rem;
 }
