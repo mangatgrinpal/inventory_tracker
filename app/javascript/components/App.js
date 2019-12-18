@@ -20,9 +20,9 @@ import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom'
 const App = ({ currentDay, yesterday }) => {
 
 	return (
+		
 		<Provider store={store}>
 			<PersistGate loading={<Loading/>} persistor={persistor}>
-
 				<Router>
 					<Navigation />
 
@@ -35,13 +35,14 @@ const App = ({ currentDay, yesterday }) => {
 								yesterday={yesterday}
 								currentDay={currentDay} />
 						</Route>
+					{/*
 						<Route path='/sign-up'>
 							<UserSignUp />
 						</Route>
+					*/}
 						<Route path='/sign-in'>
 							<UserSignIn />
 						</Route>
-
 					</Switch>
 				</Router>
 			</PersistGate>
