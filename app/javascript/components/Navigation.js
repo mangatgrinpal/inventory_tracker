@@ -24,8 +24,8 @@ const Navigation = ({
 
 
 	return (
-		<Navbar>
-			<Nav className='ml-auto navigation'>
+		<Navbar className='navigation'>
+			<Nav className='ml-auto'>
 				<Nav.Item>
 					<LinkContainer to='/'>
 						<Nav.Link>Home</Nav.Link>

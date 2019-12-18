@@ -37,7 +37,7 @@ const MeatItem = ({
 
 				<Col xs={12} md={3} className='clearfix'>
 					
-					<Button className='float-right' variant='danger' onClick={()=> { deleteItem(id, restaurant)}}>
+					<Button size='sm' className='float-right' variant='danger' onClick={()=> { deleteItem(id, restaurant)}}>
 						x
 					</Button>
 					<h6 className='item-name'>{name} ({units})</h6>

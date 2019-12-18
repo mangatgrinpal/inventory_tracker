@@ -25,7 +25,6 @@ const Item = ({
 	
 	let yesterdaysCases = records.filter(record => record.record_type == 'Cases' && record.date == previousWorkDay)
 	let cases = records.filter(record => record.record_type == 'Cases' && record.date == currentWorkDay)
-
 	let onHand = records.filter(record => record.record_type == 'On Hand' && record.date == currentWorkDay)
 	let needs = records.filter(record => record.record_type == 'Needs' && record.date == currentWorkDay)
 

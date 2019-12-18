@@ -18,8 +18,13 @@ const UserSignIn = ({ userSignIn }) => {
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
 
-	const handleClick = (e, email, password, history) => {
+	const submitFormOnEnter = e => {
+		if (e.key === 'Enter') {
+			userSignIn(email, password, history)
+		}
+	}
 
+	const handleClick = (e, email, password, history) => {
 		e.preventDefault();
 		userSignIn(email, password, history)
 	}
@@ -28,31 +33,33 @@ const UserSignIn = ({ userSignIn }) => {
 		<Fragment>
 			<Container>
 				<Row>
-					<Col>
-						Sign In
+					<Col xs={{span: 8, offset: 2}} md={{span: 4, offset: 4}} className='py-5'>
+						<h6 className='section-name'>Sign In</h6>
 					</Col>
 				</Row>
 				<Row>
-					<Form>
-						<Form.Group>
-							<Form.Label>Email address</Form.Label>
-							<Form.Control type="email" placeholder="Enter email" onChange={(e)=>{setEmail(e.target.value)}}/>
-						</Form.Group>
+					<Col xs={{span: 10, offset: 1}} md={{span: 6, offset: 3}}>
+						<Form onKeyPress={submitFormOnEnter} className='clearfix'>
+							<Form.Group>
+								<Form.Label className='form-label'>Email address</Form.Label>
+								<Form.Control type='email' placeholder='Email' onChange={(e)=>{setEmail(e.target.value)}}/>
+							</Form.Group>
 
-						<Form.Group>
-							<Form.Label>Password</Form.Label>
-							<Form.Control type="password" placeholder="Password" onChange={(e)=>{setPassword(e.target.value)}}/>
-						</Form.Group>
-						<Button variant="primary" onClick={(e)=>{handleClick(e, email, password, history)}}>
-							Submit
-						</Button>
-					</Form>
+							<Form.Group>
+								<Form.Label className='form-label'>Password</Form.Label>
+								<Form.Control type='password' placeholder='Password' onChange={(e)=>{setPassword(e.target.value)}}/>
+							</Form.Group>
+							<Button className='float-right' variant='primary' onClick={(e)=>{handleClick(e, email, password, history)}}>
+								Submit
+							</Button>
+						</Form>
+					</Col>
 				</Row>
-				<Row>
+				{/*<Row>
 					<Col>
 						Don't have an account? <Link to='/sign-up'>Sign up</Link>
 					</Col>
-				</Row>
+				</Row>*/}
 			</Container>
 		</Fragment>
 	)

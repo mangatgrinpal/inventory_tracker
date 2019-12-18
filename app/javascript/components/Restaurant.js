@@ -59,7 +59,7 @@ const Restaurant = ({
 		<Fragment>
 			<Row>
 				<Col className='clearfix'>
-					<Button className='float-right' variant='danger' onClick={()=> {deleteRestaurant(id, history)}}>
+					<Button size='sm' className='float-right' variant='danger' onClick={()=> {deleteRestaurant(id, history)}}>
 						Delete Restaurant
 					</Button>
 				</Col>

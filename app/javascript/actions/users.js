@@ -30,8 +30,6 @@ export const userSignUp = (email, password, passwordConfirmation, history) => as
 
 		const json = await res.json();
 
-
-
 		dispatch({
 			type: USER_SIGN_UP,
 			payload: json
