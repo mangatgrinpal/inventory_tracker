@@ -25,10 +25,9 @@ const SauceAddOnItem = ({
 	const { id, name, units, records } = item;
 
 	let yesterdaysOnHand = records.filter(record => record.record_type == 'On Hand' && record.date == previousWorkDay)
-	let cases = records.filter(record => record.record_type == 'Cases' && record.date == currentWorkDay)
 	let onHand = records.filter(record => record.record_type == 'On Hand' && record.date == currentWorkDay)
 
-	let sauceAddOnOnHandValue = React.createRef()
+	let onHandValue = React.createRef()
 
 
 	return (
@@ -63,12 +62,12 @@ const SauceAddOnItem = ({
 					>
 						&minus;
 					</Button>
-					<Button size='sm' variant='light' className='value-display' ref={sauceAddOnOnHandValue}>
+					<Button size='sm' variant='light' className='value-display' ref={onHandValue}>
 						{onHand.length > 0 ? onHand[0].quantity : yesterdaysOnHand.length > 0 ? yesterdaysOnHand[0].quantity: 0}
 					</Button>
 					<Button 
 						size='sm' 
-						onClick={()=> { updateRecord(currentWorkDay, id, 'On Hand', restaurant, 'increment', sauceAddOnOnHandValue.current.innerText)}}
+						onClick={()=> { updateRecord(currentWorkDay, id, 'On Hand', restaurant, 'increment', onHandValue.current.innerText)}}
 						disabled={currentUser === null}
 					>
 						+

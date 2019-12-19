@@ -33,14 +33,14 @@ const Navigation = ({
 					
 				</Nav.Item>
 				
-				{currentUser && 
+ 
 
 				<Nav.Item>
 					<LinkContainer to='/dashboard'>
 						<Nav.Link>Dashboard</Nav.Link>
 					</LinkContainer>
 				</Nav.Item>
-				}
+
 				
 				{ !currentUser &&
 					<Nav.Item>
@@ -57,7 +57,6 @@ const Navigation = ({
 				<Nav.Item>
 					<Nav.Link onClick={(e)=>{handleClick(e, currentUser.email, history)}}>Sign Out</Nav.Link>
 				</Nav.Item>}
-				
 				
 			</Nav>
 		</Navbar>

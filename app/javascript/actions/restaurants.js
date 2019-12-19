@@ -20,8 +20,6 @@ export const fetchRestaurants = restaurant => async dispatch => {
 		const res = await fetch('/restaurants');
 		const json = await res.json();
 
-
-
 		dispatch({
 			type: FETCH_RESTAURANTS_SUCCESS,
 			payload: json

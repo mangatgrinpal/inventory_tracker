@@ -8,7 +8,8 @@ import Button from 'react-bootstrap/Button'
 const RestaurantForm = ({ 
 	addRestaurant, 
 	isHidden, 
-	toggleIsHidden 
+	toggleIsHidden,
+	currentUser 
 }) => {
 
 	const [ formData, setFormData ] = useState("")	
@@ -20,8 +21,12 @@ const RestaurantForm = ({
 	}
 
 	const submitFormOnEnter = e => {
+
 		if (e.key === 'Enter') {
-			addRestaurant(formData)
+			e.preventDefault()
+			if (currentUser != null) {
+				addRestaurant(formData)	
+			}	
 		}
 	}
 
@@ -38,7 +43,7 @@ const RestaurantForm = ({
 				</Form.Row>
 				<Form.Row>
 					<Col>
-						<Button onClick={handleClick}>
+						<Button onClick={handleClick} disabled={currentUser === null}>
 							Add
 						</Button>
 						<Button variant="danger" onClick={()=> {toggleIsHidden(!isHidden)}}>

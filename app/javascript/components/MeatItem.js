@@ -21,15 +21,18 @@ const MeatItem = ({
 	currentUser
 }) => {
 
-
 	const { id, name, units, records } = item;
 
-	let yesterdaysCases = records.filter(record => record.record_type == 'Cases' && record.date == previousWorkDay)
-	let cases = records.filter(record => record.record_type == 'Cases' && record.date == currentWorkDay)
-	let onHand = records.filter(record => record.record_type == 'Marinated cases' && record.date == currentWorkDay)
-	let needs = records.filter(record => record.record_type == 'Separated pans' && record.date == currentWorkDay)
+	let yesterdaysNonMarinatedCases = records.filter(record => record.record_type == 'Non-marinated cases' && record.date == previousWorkDay)
+	let nonMarinatedCases = records.filter(record => record.record_type == 'Non-marinated cases' && record.date == currentWorkDay)
+	let yesterdaysMarinatedCases = records.filter(record => record.record_type == 'Marinated cases' && record.date == previousWorkDay)
+	let marinatedCases = records.filter(record => record.record_type == 'Marinated cases' && record.date == currentWorkDay)
+	let yesterdaysSeparatedPans = records.filter(record => record.record_type == 'Separated pans' && record.date == previousWorkDay)
+	let separatedPans = records.filter(record => record.record_type == 'Separated pans' && record.date == currentWorkDay)
 
-	let meatCaseValue = React.createRef()
+	let nonMarinatedCaseValue = React.createRef()
+	let marinatedCaseValue = React.createRef()
+	let separatedPansValue = React.createRef()
 
 
 	return (
@@ -64,12 +67,12 @@ const MeatItem = ({
 					>
 						&minus;
 					</Button>
-					<Button size='sm' variant='light' className='value-display'>
-						{onHand.length > 0 ? onHand[0].quantity : 0}
+					<Button size='sm' variant='light' className='value-display' ref={marinatedCaseValue}>
+						{marinatedCases.length > 0 ? marinatedCases[0].quantity : yesterdaysMarinatedCases.length > 0 ? yesterdaysMarinatedCases[0].value : 0}
 					</Button>
 					<Button 
 						size='sm' 
-						onClick={()=> { updateRecord(currentWorkDay, id, 'Marinated cases', restaurant, 'increment')}}
+						onClick={()=> { updateRecord(currentWorkDay, id, 'Marinated cases', restaurant, 'increment', marinatedCaseValue.current.innerText)}}
 						disabled={currentUser === null}
 					>
 						+
@@ -90,12 +93,12 @@ const MeatItem = ({
 					>
 						&minus;
 					</Button>
-					<Button size='sm' variant='light' className='value-display'>
-						{needs.length > 0 ? needs[0].quantity : 0}
+					<Button size='sm' variant='light' className='value-display' ref={separatedPansValue}>
+						{separatedPans.length > 0 ? separatedPans[0].quantity : yesterdaysSeparatedPans.length > 0 ? yesterdaysSeparatedPans[0].value : 0}
 					</Button>
 					<Button 
 						size='sm' 
-						onClick={()=> { updateRecord(currentWorkDay, id, 'Separated pans', restaurant, 'increment')}}
+						onClick={()=> { updateRecord(currentWorkDay, id, 'Separated pans', restaurant, 'increment', separatedPansValue.current.innerText)}}
 						disabled={currentUser === null}
 					>
 						+
@@ -103,24 +106,24 @@ const MeatItem = ({
 				
 				</Col>
 				<Col xs={6} className='d-md-none text-right py-1'>
-					Non-marinated Cases
+					Non-marinated cases
 				</Col>
 				<Col xs={6} md={3} className='py-1'>
 					
 					<Button 
 						size='sm' 
 						variant='outline-primary' 
-						onClick={()=> { updateRecord(currentWorkDay, id, 'Cases', restaurant, 'decrement')}}
+						onClick={()=> { updateRecord(currentWorkDay, id, 'Non-marinated cases', restaurant, 'decrement')}}
 						disabled={currentUser === null}
 					>
 						&minus;
 					</Button>
-					<Button size='sm' variant='light' className='value-display' ref={meatCaseValue}>
-						{cases.length > 0 ? cases[0].quantity : yesterdaysCases.length > 0 ? yesterdaysCases[0].quantity : 0}
+					<Button size='sm' variant='light' className='value-display' ref={nonMarinatedCaseValue}>
+						{nonMarinatedCases.length > 0 ? nonMarinatedCases[0].quantity : yesterdaysNonMarinatedCases.length > 0 ? yesterdaysNonMarinatedCases[0].quantity : 0}
 					</Button>
 					<Button 
 						size='sm' 
-						onClick={()=> { updateRecord(currentWorkDay, id, 'Cases',restaurant, 'increment', meatCaseValue.current.innerText) }} 
+						onClick={()=> { updateRecord(currentWorkDay, id, 'Non-marinated cases',restaurant, 'increment', nonMarinatedCaseValue.current.innerText) }} 
 						disabled={currentUser === null}
 					>
 						+

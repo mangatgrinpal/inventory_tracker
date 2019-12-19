@@ -26,10 +26,12 @@ const Item = ({
 	
 	let yesterdaysCases = records.filter(record => record.record_type == 'Cases' && record.date == previousWorkDay)
 	let cases = records.filter(record => record.record_type == 'Cases' && record.date == currentWorkDay)
+	let yesterdaysOnHand = records.filter(record => record.record_type == 'On Hand' && record.date == previousWorkDay)
 	let onHand = records.filter(record => record.record_type == 'On Hand' && record.date == currentWorkDay)
 	let needs = records.filter(record => record.record_type == 'Needs' && record.date == currentWorkDay)
 
 	let caseValue = React.createRef()
+	let onHandValue = React.createRef()
 
 
 
@@ -65,12 +67,12 @@ const Item = ({
 					>
 						&minus;
 					</Button>
-					<Button size='sm' variant='light' className='value-display'>
-						{onHand.length > 0 ? onHand[0].quantity : 0}
+					<Button size='sm' variant='light' className='value-display' ref={onHandValue}>
+						{onHand.length > 0 ? onHand[0].quantity : yesterdaysOnHand.length > 0 ? yesterdaysOnHand[0].quantity : 0}
 					</Button>
 					<Button 
 						size='sm' 
-						onClick={()=> { updateRecord(currentWorkDay, id, 'On Hand', restaurant, 'increment')}}
+						onClick={()=> { updateRecord(currentWorkDay, id, 'On Hand', restaurant, 'increment', onHandValue.current.innerText)}}
 						disabled={currentUser === null}
 					>
 						+

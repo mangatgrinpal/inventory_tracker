@@ -67,7 +67,8 @@ const Dashboard = ({
 								addRestaurant={addRestaurant}
 								hideLinks={hideLinks}
 								toggleHideLinks={toggleHideLinks}
-								/>
+								currentUser={currentUser}
+							/>
 						</CSSTransition>
 
 						<br/>

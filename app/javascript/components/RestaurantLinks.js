@@ -14,7 +14,8 @@ const RestaurantLinks = ({
 	toggleIsHidden,
 	addRestaurant,
 	hideLinks,
-	toggleHideLinks
+	toggleHideLinks,
+	currentUser
 }) => {
 
 	const { url } = useRouteMatch();
@@ -25,7 +26,7 @@ const RestaurantLinks = ({
 
 		return (
 			<Fragment key={id}>
-				<Col md={2}>
+				<Col xs={6} md={3}>
 					<Card className='py-1'>
 						<Link to={`${url}/${id}`} onClick={()=>{toggleHideLinks(false)}}>
 							<Card.Body>
@@ -64,7 +65,8 @@ const RestaurantLinks = ({
 						<RestaurantForm 
 							addRestaurant={addRestaurant} 
 							isHidden={isHidden} 
-							toggleIsHidden={toggleIsHidden} />
+							toggleIsHidden={toggleIsHidden}
+							currentUser={currentUser} />
 					</Col>}
 				</Row>
 			</div>

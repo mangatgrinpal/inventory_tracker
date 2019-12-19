@@ -64,13 +64,10 @@ const Restaurant = ({
 		<Fragment>
 			<Row>
 				<Col className='clearfix'>
-
 					<Button size='sm' className='float-left' onClick={()=>{toggleHideLinks(true)}}>
 						Go Back
 					</Button>
-
 				</Col>
-				
 			</Row>
 			<Row className='justify-content-center py-1'>
 				{showButton && (
@@ -103,7 +100,7 @@ const Restaurant = ({
 				</Col>
 			</Row>
 			<Row className='justify-content-center pt-5'>
-				<Col xs={10} md={4}>
+				<Col xs={9} md={3}>
 					<h3 className='text-center border-bottom'>
 						{currentWorkDay}
 					</h3>
@@ -149,22 +146,22 @@ const Restaurant = ({
 						<Row className='no-gutters'>
 							<Col className='text-center'>
 
-							{lineItems.map( item => {
+								{lineItems.map( item => {
 
-								return(
-									<Item 
-										key={item.id}
-										restaurant={id}
-										item={item}
-										fetchRecords={fetchRecords}
-										recordList={recordList}
-										deleteItem={deleteItem}
-										currentWorkDay={currentWorkDay}
-										previousWorkDay={previousWorkDay}
-										updateRecord={updateRecord}
-										currentUser={currentUser} />
-								)
-							})}
+									return(
+										<Item 
+											key={item.id}
+											restaurant={id}
+											item={item}
+											fetchRecords={fetchRecords}
+											recordList={recordList}
+											deleteItem={deleteItem}
+											currentWorkDay={currentWorkDay}
+											previousWorkDay={previousWorkDay}
+											updateRecord={updateRecord}
+											currentUser={currentUser} />
+									)
+								})}
 							</Col>
 						</Row>
 						</Fragment>
