@@ -28,13 +28,13 @@ const Dashboard = ({
 	setPreviousWorkDay,
 	currentDay,
 	yesterday,
-	restaurants: { isFetching, restaurantList }
+	restaurants: { isFetching, restaurantList },
+	users: { currentUser }
 }) => {
 
 	const { path, url } = useRouteMatch();
 	const [isHidden, toggleIsHidden] = useState(false);
 	const [hideLinks, toggleHideLinks] = useState(true);
-
 
 	useEffect(()=> {
 
@@ -57,7 +57,7 @@ const Dashboard = ({
 					<Fragment>
 						<CSSTransition
 							in={hideLinks}
-							timeout={300}
+							timeout={500}
 							classNames='slide'
 						>
 							<RestaurantLinks
@@ -92,7 +92,8 @@ const Dashboard = ({
 const mapStateToProps = state => 
 ({
 	restaurants: state.restaurants,
-	weeks: state.weeks
+	weeks: state.weeks,
+	users: state.users
 })
 
 export default connect (

@@ -38,7 +38,8 @@ const Restaurant = ({
 	toggleHideLinks,
 	items: { itemList, isFetching },
 	weeks: { currentWorkDay, previousWorkDay },
-	records: { recordList }
+	records: { recordList },
+	users: { currentUser }
 }) => {	
 
 	const { id } = useParams();
@@ -63,6 +64,7 @@ const Restaurant = ({
 		<Fragment>
 			<Row>
 				<Col className='clearfix'>
+
 					<Button size='sm' className='float-left' onClick={()=>{toggleHideLinks(true)}}>
 						Go Back
 					</Button>
@@ -72,7 +74,7 @@ const Restaurant = ({
 			</Row>
 			<Row className='justify-content-center py-1'>
 				{showButton && (
-					<Col>
+					<Col xs={4}>
 						<Button 
 							onClick={()=> setShowForm(true)}
 						>
@@ -93,7 +95,8 @@ const Restaurant = ({
 						<ItemForm 
 							restaurant={id} 
 							addItem={addItem}
-							setShowForm={setShowForm} 
+							setShowForm={setShowForm}
+							currentUser={currentUser} 
 						/>
 					</CSSTransition>
 					
@@ -158,7 +161,8 @@ const Restaurant = ({
 										deleteItem={deleteItem}
 										currentWorkDay={currentWorkDay}
 										previousWorkDay={previousWorkDay}
-										updateRecord={updateRecord} />
+										updateRecord={updateRecord}
+										currentUser={currentUser} />
 								)
 							})}
 							</Col>
@@ -196,125 +200,133 @@ const Restaurant = ({
 							<Row className='no-gutters'>
 								<Col className='text-center'>
 
-								{miscItems.map( item => {
+									{miscItems.map( item => {
 
-									return(
-										<Item 
-											key={item.id}
-											restaurant={id}
-											item={item}
-											fetchRecords={fetchRecords}
-											recordList={recordList}
-											deleteItem={deleteItem}
-											currentWorkDay={currentWorkDay}
-											previousWorkDay={previousWorkDay}
-											updateRecord={updateRecord} />
-									)
-								})}
+										return(
+											<Item 
+												key={item.id}
+												restaurant={id}
+												item={item}
+												fetchRecords={fetchRecords}
+												recordList={recordList}
+												deleteItem={deleteItem}
+												currentWorkDay={currentWorkDay}
+												previousWorkDay={previousWorkDay}
+												updateRecord={updateRecord}
+												currentUser={currentUser} />
+										)
+									})}
 								</Col>
 							</Row>
 						</Fragment> :
 
 						<div/>}
 						{sauceAddOnItems.length > 0 ?
-						<Fragment>
-							<Row className='justify-content-center pt-5'>
-								<Col>
-									<h5 className='text-center section-name'>Sauces/Add-ons</h5>
-								</Col>
-							</Row>
-							<Col className='d-none d-md-block'>
-								<Row className='text-center'>
-									<Col md={3}>
-										Name (units)
-									</Col>
-									
-									<Col md={{span: 3, offset: 3}}>
-										On Hand
+							<Fragment>
+								<Row className='justify-content-center pt-5'>
+									<Col>
+										<h5 className='text-center section-name'>Sauces/Add-ons</h5>
 									</Col>
 								</Row>
-							</Col>
-							
-							<Row className='no-gutters'>
-								<Col className='text-center'>
-
-								{sauceAddOnItems.map( item => {
-
-									return(
-										<SauceAddOnItem 
-											key={item.id}
-											restaurant={id}
-											item={item}
-											fetchRecords={fetchRecords}
-											recordList={recordList}
-											deleteItem={deleteItem}
-											currentWorkDay={currentWorkDay}
-											previousWorkDay={previousWorkDay}
-											updateRecord={updateRecord} />
-									)
-								})}
+								<Col className='d-none d-md-block'>
+									<Row className='text-center'>
+										<Col md={3}>
+											Name (units)
+										</Col>
+										
+										<Col md={{span: 3, offset: 3}}>
+											On Hand
+										</Col>
+									</Row>
 								</Col>
-							</Row>
-						</Fragment> :
+								
+								<Row className='no-gutters'>
+									<Col className='text-center'>
+
+										{sauceAddOnItems.map( item => {
+
+											return(
+												<SauceAddOnItem 
+													key={item.id}
+													restaurant={id}
+													item={item}
+													fetchRecords={fetchRecords}
+													recordList={recordList}
+													deleteItem={deleteItem}
+													currentWorkDay={currentWorkDay}
+													previousWorkDay={previousWorkDay}
+													updateRecord={updateRecord}
+													currentUser={currentUser} />
+											)
+										})}
+									</Col>
+								</Row>
+							</Fragment> :
 
 						<div/>}
 
 						{meatItems.length > 0 ?
-						<Fragment>
-							<Row className='justify-content-center pt-5'>
-								<Col>
-									<h5 className='text-center section-name'>Meat</h5>
-								</Col>
-							</Row>
-							<Col className='d-none d-md-block'>
-								<Row className='text-center'>
-									<Col md={3}>
-										Name (units)
-									</Col>
-									
-									<Col md={3}>
-										Marinated cases
-									</Col>
-									<Col md={3}>
-										Separated pans
-									</Col>
-									<Col md={3}>
-										Non-marinated Cases
+							<Fragment>
+								<Row className='justify-content-center pt-5'>
+									<Col>
+										<h5 className='text-center section-name'>Meat</h5>
 									</Col>
 								</Row>
-							</Col>
-							
-							<Row className='no-gutters'>
-								<Col className='text-center'>
-
-								{meatItems.map( item => {
-
-									return(
-										<MeatItem 
-											key={item.id}
-											restaurant={id}
-											item={item}
-											fetchRecords={fetchRecords}
-											recordList={recordList}
-											deleteItem={deleteItem}
-											currentWorkDay={currentWorkDay}
-											previousWorkDay={previousWorkDay}
-											updateRecord={updateRecord} />
-									)
-								})}
+								<Col className='d-none d-md-block'>
+									<Row className='text-center'>
+										<Col md={3}>
+											Name (units)
+										</Col>
+										
+										<Col md={3}>
+											Marinated cases
+										</Col>
+										<Col md={3}>
+											Separated pans
+										</Col>
+										<Col md={3}>
+											Non-marinated Cases
+										</Col>
+									</Row>
 								</Col>
-							</Row>
-							<br/>
-							<Row className='pt-5'>
-								<Col xs={12} md={{span: 4, offset: 4}}>
-									<Button variant='danger' onClick={()=> {deleteRestaurant(id, history)}} block>
-										Delete Restaurant
-									</Button>
-								</Col>
-							</Row>
-						</Fragment> :
+								
+								<Row className='no-gutters'>
+									<Col className='text-center'>
 
-						<div/>}
+										{meatItems.map( item => {
+
+											return(
+												<MeatItem 
+													key={item.id}
+													restaurant={id}
+													item={item}
+													fetchRecords={fetchRecords}
+													recordList={recordList}
+													deleteItem={deleteItem}
+													currentWorkDay={currentWorkDay}
+													previousWorkDay={previousWorkDay}
+													updateRecord={updateRecord}
+													currentUser={currentUser} />
+											)
+										})}
+									</Col>
+								</Row>
+							</Fragment> :
+
+						<div/>
+					}
+					<Row className='py-5'>
+						<Col xs={{span:10, offset: 1}} md={{span: 4, offset: 4}}>
+							<Button 
+								variant='danger' 
+								onClick={()=> {deleteRestaurant(id, history)}} 
+								disabled={currentUser === null}
+								block
+							>
+								Delete Restaurant
+							</Button>
+						</Col>
+					</Row>
 				</Fragment>
 				}
 
@@ -327,7 +339,8 @@ const mapStateToProps = state =>
 ({
 	items: state.items,
 	weeks: state.weeks,
-	records: state.records
+	records: state.records,
+	users: state.users
 });
 
 

@@ -5,7 +5,13 @@ import Col from 'react-bootstrap/Col'
 import Button from 'react-bootstrap/Button'
 
 
-const ItemForm = ({ addItem, restaurant, setShowForm }) => {
+const ItemForm = ({ 
+	addItem, 
+	restaurant, 
+	setShowForm,
+	currentUser 
+}) => {
+
 	const [ nameData, setNameData ] = useState('')
 	const [ unitsData, setUnitsData ] = useState('')
 	const [ categoryData, setCategoryData ] = useState('Line')
@@ -67,7 +73,12 @@ const ItemForm = ({ addItem, restaurant, setShowForm }) => {
 						</Button>
 					</Col>
 					<Col xs={12} md={2}>
-						<Button className='pt-4' onClick={(e)=> {handleClick(e)}}>
+
+						<Button 
+							className='pt-4' 
+							onClick={(e)=> {handleClick(e)}} 
+							disabled={currentUser === null}
+						>
 							Add New Item
 						</Button>
 					</Col>

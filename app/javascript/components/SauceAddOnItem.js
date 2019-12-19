@@ -17,7 +17,8 @@ const SauceAddOnItem = ({
 	recordList,
 	currentWorkDay,
 	previousWorkDay,
-	updateRecord
+	updateRecord,
+	currentUser
 }) => {
 
 
@@ -37,7 +38,13 @@ const SauceAddOnItem = ({
 
 				<Col xs={12} md={3} className='clearfix'>
 					
-					<Button size='sm' className='float-right' variant='danger' onClick={()=> { deleteItem(id, restaurant)}}>
+					<Button 
+						size='sm' 
+						className='float-right' 
+						variant='danger' 
+						onClick={()=> { deleteItem(id, restaurant)}}
+						disabled={currentUser === null}
+					>
 						x
 					</Button>
 					<h6 className='item-name'>{name} ({units})</h6>
@@ -48,13 +55,22 @@ const SauceAddOnItem = ({
 				</Col>
 				<Col xs={6} md={{span: 3, offset: 3}} className='py-1'>
 					
-					<Button size='sm' variant='outline-primary' onClick={()=> { updateRecord(currentWorkDay, id, 'On Hand', restaurant, 'decrement')}}>
+					<Button 
+						size='sm' 
+						variant='outline-primary' 
+						onClick={()=> { updateRecord(currentWorkDay, id, 'On Hand', restaurant, 'decrement')}}
+						disabled={currentUser === null}
+					>
 						&minus;
 					</Button>
 					<Button size='sm' variant='light' className='value-display' ref={sauceAddOnOnHandValue}>
 						{onHand.length > 0 ? onHand[0].quantity : yesterdaysOnHand.length > 0 ? yesterdaysOnHand[0].quantity: 0}
 					</Button>
-					<Button size='sm' onClick={()=> { updateRecord(currentWorkDay, id, 'On Hand', restaurant, 'increment', sauceAddOnOnHandValue.current.innerText)}}>
+					<Button 
+						size='sm' 
+						onClick={()=> { updateRecord(currentWorkDay, id, 'On Hand', restaurant, 'increment', sauceAddOnOnHandValue.current.innerText)}}
+						disabled={currentUser === null}
+					>
 						+
 					</Button>
 					
