@@ -7,6 +7,7 @@ import ItemForm from './ItemForm';
 import RecordForm from './RecordForm';
 import { connect } from 'react-redux';
 
+import { CSSTransition } from 'react-transition-group';
 
 import { deleteRestaurant } from '../actions/restaurants';
 import { 
@@ -43,7 +44,8 @@ const Restaurant = ({
 	const { id } = useParams();
 	const history = useHistory();
 
-
+	const [showForm, setShowForm] = useState(false);
+	const [showButton, setShowButton] = useState(true);
 
 	useEffect(() => {
 		fetchItems(id)
@@ -65,15 +67,36 @@ const Restaurant = ({
 						Go Back
 					</Button>
 
-					<Button size='sm' className='float-right' variant='danger' onClick={()=> {deleteRestaurant(id, history)}}>
-						Delete Restaurant
-					</Button>
 				</Col>
 				
 			</Row>
-			<Row className='justify-content-center'>
+			<Row className='justify-content-center py-1'>
+				{showButton && (
+					<Col>
+						<Button 
+							onClick={()=> setShowForm(true)}
+						>
+							Add New Item
+						</Button>
+					</Col>
+				)}
+				
 				<Col md={10}>
-					<ItemForm restaurant={id} addItem={addItem} />
+					<CSSTransition
+						in={showForm}
+						timeout={500}
+						classNames='slide'
+						unmountOnExit
+						onEnter={()=> setShowButton(false)}
+						onExited={()=> setShowButton(true)}
+					>
+						<ItemForm 
+							restaurant={id} 
+							addItem={addItem}
+							setShowForm={setShowForm} 
+						/>
+					</CSSTransition>
+					
 				</Col>
 			</Row>
 			<Row className='justify-content-center pt-5'>
@@ -202,15 +225,12 @@ const Restaurant = ({
 							</Row>
 							<Col className='d-none d-md-block'>
 								<Row className='text-center'>
-									<Col md={4}>
+									<Col md={3}>
 										Name (units)
 									</Col>
 									
-									<Col md={4}>
+									<Col md={{span: 3, offset: 3}}>
 										On Hand
-									</Col>
-									<Col md={4}>
-										Cases
 									</Col>
 								</Row>
 							</Col>
@@ -259,7 +279,7 @@ const Restaurant = ({
 										Separated pans
 									</Col>
 									<Col md={3}>
-										Cases
+										Non-marinated Cases
 									</Col>
 								</Row>
 							</Col>
@@ -282,6 +302,14 @@ const Restaurant = ({
 											updateRecord={updateRecord} />
 									)
 								})}
+								</Col>
+							</Row>
+							<br/>
+							<Row className='pt-5'>
+								<Col xs={12} md={{span: 4, offset: 4}}>
+									<Button variant='danger' onClick={()=> {deleteRestaurant(id, history)}} block>
+										Delete Restaurant
+									</Button>
 								</Col>
 							</Row>
 						</Fragment> :

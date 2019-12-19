@@ -23,19 +23,19 @@ const SauceAddOnItem = ({
 
 	const { id, name, units, records } = item;
 
-	let yesterdaysCases = records.filter(record => record.record_type == 'Cases' && record.date == previousWorkDay)
+	let yesterdaysOnHand = records.filter(record => record.record_type == 'On Hand' && record.date == previousWorkDay)
 	let cases = records.filter(record => record.record_type == 'Cases' && record.date == currentWorkDay)
 	let onHand = records.filter(record => record.record_type == 'On Hand' && record.date == currentWorkDay)
 
-	let sauceAddOnCaseValue = React.createRef()
+	let sauceAddOnOnHandValue = React.createRef()
 
 
 	return (
 		<Fragment>
-			<Row className='border-top'>
+			<Row className='border-top py-1'>
 				
 
-				<Col xs={12} md={4} className='clearfix'>
+				<Col xs={12} md={3} className='clearfix'>
 					
 					<Button size='sm' className='float-right' variant='danger' onClick={()=> { deleteItem(id, restaurant)}}>
 						x
@@ -43,39 +43,22 @@ const SauceAddOnItem = ({
 					<h6 className='item-name'>{name} ({units})</h6>
 				</Col>
 				
-				<Col xs={6} className='d-md-none text-right'>
+				<Col xs={6} className='d-md-none text-right py-1'>
 					On hand
 				</Col>
-				<Col xs={6} md={4}>
+				<Col xs={6} md={{span: 3, offset: 3}} className='py-1'>
 					
-					<Button size='sm' onClick={()=> { updateRecord(currentWorkDay, id, 'On Hand', restaurant, 'decrement')}}>
+					<Button size='sm' variant='outline-primary' onClick={()=> { updateRecord(currentWorkDay, id, 'On Hand', restaurant, 'decrement')}}>
 						&minus;
 					</Button>
-					<Button size='sm' variant='light' className='value-display'>
-						{onHand.length > 0 ? onHand[0].quantity : 0}
+					<Button size='sm' variant='light' className='value-display' ref={sauceAddOnOnHandValue}>
+						{onHand.length > 0 ? onHand[0].quantity : yesterdaysOnHand.length > 0 ? yesterdaysOnHand[0].quantity: 0}
 					</Button>
-					<Button size='sm' onClick={()=> { updateRecord(currentWorkDay, id, 'On Hand', restaurant, 'increment')}}>
+					<Button size='sm' onClick={()=> { updateRecord(currentWorkDay, id, 'On Hand', restaurant, 'increment', sauceAddOnOnHandValue.current.innerText)}}>
 						+
 					</Button>
 					
-					
-				</Col>
-				<Col xs={6} className='d-md-none text-right'>
-					Cases
-				</Col>
-				<Col xs={6} md={4}>
-					
-					<Button size='sm' onClick={()=> { updateRecord(currentWorkDay, id, 'Cases', restaurant, 'decrement')}}>
-						&minus;
-					</Button>
-					<Button size='sm' variant='light' className='value-display' ref={sauceAddOnCaseValue}>
-						{cases.length > 0 ? cases[0].quantity : yesterdaysCases.length > 0 ? yesterdaysCases[0].quantity : 0}
-					</Button>
-					<Button size='sm' onClick={()=> { updateRecord(currentWorkDay, id, 'Cases',restaurant, 'increment', sauceAddOnCaseValue.current.innerText) }} >
-						+
-					</Button>
-					
-				</Col>		
+				</Col>	
 			</Row>
 		</Fragment>
 	)

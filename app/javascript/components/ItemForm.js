@@ -5,7 +5,7 @@ import Col from 'react-bootstrap/Col'
 import Button from 'react-bootstrap/Button'
 
 
-const ItemForm = ({ addItem, restaurant }) => {
+const ItemForm = ({ addItem, restaurant, setShowForm }) => {
 	const [ nameData, setNameData ] = useState('')
 	const [ unitsData, setUnitsData ] = useState('')
 	const [ categoryData, setCategoryData ] = useState('Line')
@@ -21,7 +21,7 @@ const ItemForm = ({ addItem, restaurant }) => {
 		addItem(nameData, unitsData, categoryData, restaurant)
 		setNameData('')
 		setUnitsData('')
-		setCategoryData('')
+		setCategoryData('Line')
 	}
 
 	return (
@@ -38,7 +38,7 @@ const ItemForm = ({ addItem, restaurant }) => {
 							onChange={(e)=> setNameData(e.target.value)}
 							/>
 					</Col>
-					<Col xs={12} md={3}>
+					<Col xs={12} md={2}>
 						<Form.Label>
 							Size per unit
 						</Form.Label>
@@ -61,8 +61,13 @@ const ItemForm = ({ addItem, restaurant }) => {
 						</Form.Control>
 
 					</Col>
-					<Col xs={12} md={3}>
-						<Button className='mt-4' onClick={(e)=> {handleClick(e)}}>
+					<Col xs={12} md={2}>
+						<Button variant='danger pt-4' onClick={()=> {setShowForm(false)}}>
+							Cancel
+						</Button>
+					</Col>
+					<Col xs={12} md={2}>
+						<Button className='pt-4' onClick={(e)=> {handleClick(e)}}>
 							Add New Item
 						</Button>
 					</Col>

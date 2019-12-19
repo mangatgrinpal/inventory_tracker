@@ -41,17 +41,17 @@ body {
 }
 
 .slide-enter-active {
-	max-height: 30vh;
+	max-height: 90vh;
 	transition: max-height 500ms ease-in;
 }
 
 .slide-enter-done {
-	max-height: 30vh;
+	max-height: 90vh;
 }
 
 /* slide exit */
 .slide-exit {
-	max-height: 30vh;
+	max-height: 90vh;
 }
 .slide-exit-active {
 	max-height: 0px;

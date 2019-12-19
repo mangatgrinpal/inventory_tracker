@@ -43,13 +43,13 @@ const MeatItem = ({
 					<h6 className='item-name'>{name} ({units})</h6>
 				</Col>
 				
-				<Col xs={6} className='d-md-none text-right'>
+				<Col xs={6} className='d-md-none text-right py-1'>
 					Marinated cases
 				</Col>
 
-				<Col xs={6} md={3}>
+				<Col xs={6} md={3} className='py-1'>
 					
-					<Button size='sm' onClick={()=> { updateRecord(currentWorkDay, id, 'Marinated cases', restaurant, 'decrement')}}>
+					<Button size='sm' variant='outline-primary' onClick={()=> { updateRecord(currentWorkDay, id, 'Marinated cases', restaurant, 'decrement')}}>
 						&minus;
 					</Button>
 					<Button size='sm' variant='light' className='value-display'>
@@ -61,12 +61,12 @@ const MeatItem = ({
 				
 					
 				</Col>
-				<Col xs={6} className='d-md-none text-right'>
+				<Col xs={6} className='d-md-none text-right py-1'>
 					Separated pans
 				</Col>
-				<Col xs={6} md={3}>
+				<Col xs={6} md={3} className='py-1'>
 					
-					<Button size='sm' onClick={()=> { updateRecord(currentWorkDay, id, 'Separated pans', restaurant, 'decrement')}}>
+					<Button size='sm' variant='outline-primary' onClick={()=> { updateRecord(currentWorkDay, id, 'Separated pans', restaurant, 'decrement')}}>
 						&minus;
 					</Button>
 					<Button size='sm' variant='light' className='value-display'>
@@ -77,12 +77,12 @@ const MeatItem = ({
 					</Button>
 				
 				</Col>
-				<Col xs={6} className='d-md-none text-right'>
+				<Col xs={6} className='d-md-none text-right py-1'>
 					Non-marinated Cases
 				</Col>
-				<Col xs={6} md={3}>
+				<Col xs={6} md={3} className='py-1'>
 					
-					<Button size='sm' onClick={()=> { updateRecord(currentWorkDay, id, 'Cases', restaurant, 'decrement')}}>
+					<Button size='sm' variant='outline-primary' onClick={()=> { updateRecord(currentWorkDay, id, 'Cases', restaurant, 'decrement')}}>
 						&minus;
 					</Button>
 					<Button size='sm' variant='light' className='value-display' ref={meatCaseValue}>
