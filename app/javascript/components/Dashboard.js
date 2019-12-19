@@ -33,6 +33,8 @@ const Dashboard = ({
 
 	const { path, url } = useRouteMatch();
 	const [isHidden, toggleIsHidden] = useState(false);
+	const [hideLinks, toggleHideLinks] = useState(true);
+
 
 	useEffect(()=> {
 
@@ -53,20 +55,31 @@ const Dashboard = ({
 				{isFetching ? 
 					<Loading/> : 
 					<Fragment>
-						<RestaurantLinks
-							restaurantList={restaurantList}
-							isHidden={isHidden}
-							toggleIsHidden={toggleIsHidden}
-							addRestaurant={addRestaurant}
-							/>
-						
+						<CSSTransition
+							in={hideLinks}
+							timeout={300}
+							classNames='slide'
+						>
+							<RestaurantLinks
+								restaurantList={restaurantList}
+								isHidden={isHidden}
+								toggleIsHidden={toggleIsHidden}
+								addRestaurant={addRestaurant}
+								hideLinks={hideLinks}
+								toggleHideLinks={toggleHideLinks}
+								/>
+						</CSSTransition>
+
 						<br/>
 						<Switch>
 							<Route exact path={path}>
 
 							</Route>
 							<Route path={`${path}/:id`}>
-								<Restaurant />
+								<Restaurant 
+									hideLinks={hideLinks}
+									toggleHideLinks={toggleHideLinks}
+								/>
 							</Route>
 						</Switch>
 					</Fragment>

@@ -33,6 +33,8 @@ const Restaurant = ({
 	deleteItem,
 	clearFetchedItems,
 	updateRecord,
+	hideLinks,
+	toggleHideLinks,
 	items: { itemList, isFetching },
 	weeks: { currentWorkDay, previousWorkDay },
 	records: { recordList }
@@ -59,6 +61,10 @@ const Restaurant = ({
 		<Fragment>
 			<Row>
 				<Col className='clearfix'>
+					<Button size='sm' className='float-left' onClick={()=>{toggleHideLinks(true)}}>
+						Go Back
+					</Button>
+
 					<Button size='sm' className='float-right' variant='danger' onClick={()=> {deleteRestaurant(id, history)}}>
 						Delete Restaurant
 					</Button>
@@ -71,7 +77,7 @@ const Restaurant = ({
 				</Col>
 			</Row>
 			<Row className='justify-content-center pt-5'>
-				<Col md={4}>
+				<Col xs={10} md={4}>
 					<h3 className='text-center border-bottom'>
 						{currentWorkDay}
 					</h3>

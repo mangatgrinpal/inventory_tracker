@@ -33,14 +33,34 @@ body {
 
 /* Transitions for animations will be placed here */
 
-/* slide up */
+/* slide enter */
 
-.slide-up {
-	
+.slide-enter {
+	max-height: 0px;
+	overflow: hidden;
 }
 
-.slide-down {
-	
+.slide-enter-active {
+	max-height: 30vh;
+	transition: max-height 500ms ease-in;
+}
+
+.slide-enter-done {
+	max-height: 30vh;
+}
+
+/* slide exit */
+.slide-exit {
+	max-height: 30vh;
+}
+.slide-exit-active {
+	max-height: 0px;
+	overflow: hidden;
+	transition: max-height 500ms ease-out;
+}
+.slide-exit-done {
+	max-height: 0px;
+	overflow: hidden;
 }
 
 

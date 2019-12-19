@@ -1,6 +1,8 @@
 import React, { Fragment, useEffect, useState } from 'react';
+import RestaurantForm from './RestaurantForm';
 import { Link, useRouteMatch } from 'react-router-dom';
 
+import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Card from 'react-bootstrap/Card';
@@ -10,7 +12,9 @@ const RestaurantLinks = ({
 	restaurantList,
 	isHidden,
 	toggleIsHidden,
-	addRestaurant
+	addRestaurant,
+	hideLinks,
+	toggleHideLinks
 }) => {
 
 	const { url } = useRouteMatch();
@@ -23,7 +27,7 @@ const RestaurantLinks = ({
 			<Fragment key={id}>
 				<Col md={2}>
 					<Card className='py-1'>
-						<Link to={`${url}/${id}`}>
+						<Link to={`${url}/${id}`} onClick={()=>{toggleHideLinks(false)}}>
 							<Card.Body>
 								<Card.Title>
 									{name}
@@ -38,30 +42,32 @@ const RestaurantLinks = ({
 
 	return (
 		<Fragment>
-			<Row>
-				<Col>
-					<h3>Choose a restaurant to get started.</h3>
-				</Col>
-			</Row>
+			<div className='restaurant-links-section'>
+				<Row>
+					<Col xs={{span:10, offset: 1}} className='pt-2 pb-5 text-center'>
+						<h3>Choose a restaurant to get started</h3>
+					</Col>
+				</Row>
 
-			<Row>			
-				{listOfRestaurantLinks}
+				<Row>			
+					{listOfRestaurantLinks}
 
-				{!isHidden &&
-				<Col md={3}> 
-					<Button onClick={()=> {toggleIsHidden(!isHidden)}}>
-						+
-					</Button>
-				</Col>}
+					{!isHidden &&
+					<Col xs={3}> 
+						<Button onClick={()=> {toggleIsHidden(!isHidden)}}>
+							+
+						</Button>
+					</Col>}
 
-				{isHidden &&
-				<Col md={3}>
-					<RestaurantForm 
-						addRestaurant={addRestaurant} 
-						isHidden={isHidden} 
-						toggleIsHidden={toggleIsHidden} />
-				</Col>}
-			</Row>
+					{isHidden &&
+					<Col md={3}>
+						<RestaurantForm 
+							addRestaurant={addRestaurant} 
+							isHidden={isHidden} 
+							toggleIsHidden={toggleIsHidden} />
+					</Col>}
+				</Row>
+			</div>
 		</Fragment>
 	)
 }
