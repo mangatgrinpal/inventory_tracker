@@ -70,8 +70,11 @@ const Restaurant = ({
 				</Col>
 			</Row>
 			<Row className='justify-content-center py-1'>
-				{showButton && (
+				
+
+				{showButton && currentUser && (
 					<Col xs={4}>
+
 						<Button 
 							onClick={()=> setShowForm(true)}
 						>
@@ -312,18 +315,20 @@ const Restaurant = ({
 
 						<div/>
 					}
-					<Row className='py-5'>
-						<Col xs={{span:10, offset: 1}} md={{span: 4, offset: 4}}>
-							<Button 
-								variant='danger' 
-								onClick={()=> {deleteRestaurant(id, history)}} 
-								disabled={currentUser === null}
-								block
-							>
-								Delete Restaurant
-							</Button>
-						</Col>
-					</Row>
+					{ currentUser && (
+						<Row className='py-5'>
+							<Col xs={{span:10, offset: 1}} md={{span: 4, offset: 4}}>
+								<Button 
+									variant='danger' 
+									onClick={()=> {deleteRestaurant(id, history)}} 
+									block
+								>
+									Delete Restaurant
+								</Button>
+							</Col>
+						</Row>
+					)}
+
 				</Fragment>
 				}
 

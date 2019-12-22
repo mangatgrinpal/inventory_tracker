@@ -41,16 +41,18 @@ const Item = ({
 			<Row className='border-top py-1'>
 				
 				<Col xs={12} md={3} className='clearfix'>
+					{ currentUser && (
+						<Button 
+							size='sm' 
+							className='float-right' 
+							variant='danger' 
+							onClick={()=> { deleteItem(id, restaurant)}}
+							
+						>
+							x
+						</Button>
+					)}
 					
-					<Button 
-						size='sm' 
-						className='float-right' 
-						variant='danger' 
-						onClick={()=> { deleteItem(id, restaurant)}}
-						disabled={currentUser === null}
-					>
-						x
-					</Button>
 					<h6 className='item-name'>{name} ({units})</h6>
 				</Col>
 				
@@ -58,25 +60,31 @@ const Item = ({
 					On Hand
 				</Col>
 				<Col xs={6} md={2} className='py-1'>
-
-					<Button 
-						variant='outline-primary' 
-						size='sm' 
-						onClick={()=> { updateRecord(currentWorkDay, id, 'On Hand', restaurant, 'decrement')}}
-						disabled={currentUser === null}
-					>
-						&minus;
-					</Button>
+					{ currentUser && (
+						<Button 
+							variant='outline-primary' 
+							size='sm' 
+							onClick={()=> { updateRecord(currentWorkDay, id, 'On Hand', restaurant, 'decrement')}}
+							
+						>
+							&minus;
+						</Button>
+					)}
+					
 					<Button size='sm' variant='light' className='value-display' ref={onHandValue}>
 						{onHand.length > 0 ? onHand[0].quantity : yesterdaysOnHand.length > 0 ? yesterdaysOnHand[0].quantity : 0}
 					</Button>
-					<Button 
-						size='sm' 
-						onClick={()=> { updateRecord(currentWorkDay, id, 'On Hand', restaurant, 'increment', onHandValue.current.innerText)}}
-						disabled={currentUser === null}
-					>
-						+
-					</Button>
+
+					{ currentUser && (
+						<Button 
+							size='sm' 
+							onClick={()=> { updateRecord(currentWorkDay, id, 'On Hand', restaurant, 'increment', onHandValue.current.innerText)}}
+							
+						>
+							+
+						</Button>	
+					)}
+					
 					
 				</Col>
 
@@ -85,25 +93,30 @@ const Item = ({
 				</Col>
 				<Col xs={6} md={2} className='py-1'>
 
-					<Button 
-						variant='outline-primary' 
-						size='sm' 
-						onClick={()=> { updateRecord(currentWorkDay, id, 'Needs', restaurant, 'decrement')}}
-						disabled={currentUser === null}
-					>
-						&minus;
-					</Button>
+					{ currentUser && (
+						<Button 
+							variant='outline-primary' 
+							size='sm' 
+							onClick={()=> { updateRecord(currentWorkDay, id, 'Needs', restaurant, 'decrement')}}
+							
+						>
+							&minus;
+						</Button>
+					)}
+					
 					<Button size='sm' variant='light' className='value-display'>
 						{needs.length > 0 ? needs[0].quantity : 0}
 					</Button>
-					<Button 
-						size='sm' 
-						onClick={()=> { updateRecord(currentWorkDay, id, 'Needs', restaurant, 'increment')}}
-						disabled={currentUser === null}
-					>
-						+
-					</Button>
 
+					{ currentUser && (
+						<Button 
+							size='sm' 
+							onClick={()=> { updateRecord(currentWorkDay, id, 'Needs', restaurant, 'increment')}}
+							
+						>
+							+
+						</Button>
+					)}
 					
 				</Col>
 				<Col xs={6} className='d-md-none text-right py-1'>
@@ -121,25 +134,30 @@ const Item = ({
 					Cases
 				</Col>
 				<Col xs={6} md={2} className='py-1'>
-
-					<Button 
-						variant='outline-primary' 
-						size='sm' 
-						onClick={()=> { updateRecord(currentWorkDay, id, 'Cases', restaurant, 'decrement')}}
-						disabled={currentUser === null}
-					>
-						&minus;
-					</Button>
+					{ currentUser &&
+						<Button 
+							variant='outline-primary' 
+							size='sm' 
+							onClick={()=> { updateRecord(currentWorkDay, id, 'Cases', restaurant, 'decrement')}}
+							
+						>
+							&minus;
+						</Button>
+					}
+					
 					<Button size='sm' variant='light' className='value-display' ref={caseValue}>
 						{cases.length > 0 ? cases[0].quantity : yesterdaysCases.length > 0 ? yesterdaysCases[0].quantity : 0}
 					</Button>
-					<Button 
-						size='sm' 
-						onClick={()=> { updateRecord(currentWorkDay, id, 'Cases',restaurant, 'increment', caseValue.current.innerText) }} 
-						disabled={currentUser === null}
-					>
-						+
-					</Button>
+					{ currentUser &&
+						<Button 
+							size='sm' 
+							onClick={()=> { updateRecord(currentWorkDay, id, 'Cases',restaurant, 'increment', caseValue.current.innerText) }} 
+							
+						>
+							+
+						</Button>
+					}
+					
 				</Col>
 			</Row>
 		</Fragment>

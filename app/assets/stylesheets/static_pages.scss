@@ -23,6 +23,10 @@
 
 button.value-display {
 	width: 3rem;
+
+	&:hover {
+		cursor: default;
+	}
 }
 
 .item-name {

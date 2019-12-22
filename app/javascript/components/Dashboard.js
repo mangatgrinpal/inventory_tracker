@@ -73,9 +73,6 @@ const Dashboard = ({
 
 						<br/>
 						<Switch>
-							<Route exact path={path}>
-
-							</Route>
 							<Route path={`${path}/:id`}>
 								<Restaurant 
 									hideLinks={hideLinks}
