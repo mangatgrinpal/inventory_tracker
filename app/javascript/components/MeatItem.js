@@ -39,7 +39,7 @@ const MeatItem = ({
 		<Fragment>
 			<Row className='border-top py-1'>
 
-				<Col xs={12} md={3} className='clearfix'>
+				<Col xs={12} md={3} className='clearfix py-1'>
 					{ currentUser && (
 						<Button 
 							size='sm' 
@@ -58,7 +58,7 @@ const MeatItem = ({
 					Marinated cases
 				</Col>
 
-				<Col xs={6} md={3} className='py-1'>
+				<Col xs={6} md={3} className='pb-1'>
 					{ currentUser && (
 						<Button 
 							size='sm' 
@@ -87,7 +87,7 @@ const MeatItem = ({
 				<Col xs={6} className='d-md-none text-right py-1'>
 					Separated pans
 				</Col>
-				<Col xs={6} md={3} className='py-1'>
+				<Col xs={6} md={3} className='pb-1'>
 					{ currentUser && (
 						<Button 
 							size='sm' 
@@ -113,7 +113,7 @@ const MeatItem = ({
 				<Col xs={6} className='d-md-none text-right py-1'>
 					Non-marinated cases
 				</Col>
-				<Col xs={6} md={3} className='py-1'>
+				<Col xs={6} md={3} className='pb-1'>
 					{ currentUser && (
 						<Button 
 							size='sm' 

@@ -53,12 +53,12 @@ const RestaurantLinks = ({
 				<Row>			
 					{listOfRestaurantLinks}
 
-					{!isHidden &&
+					{!isHidden && currentUser && (
 					<Col xs={3}> 
 						<Button onClick={()=> {toggleIsHidden(!isHidden)}}>
 							+
 						</Button>
-					</Col>}
+					</Col>)}
 
 					{isHidden &&
 					<Col md={3}>

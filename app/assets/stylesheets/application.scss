@@ -38,36 +38,42 @@ body {
 
 .slide-enter {
 	transform: translateY(-100%) scaleY(0);
-	opacity: 0;
+	// opacity: 0;
+	max-height: 0;
 	overflow: hidden;
 }
 
 .slide-enter-active {
 	transform: none;
-	opacity: 1;
+	// opacity: 1;
+	max-height: 90vh;
 	transition: all 500ms ease-in;
 }
 
 .slide-enter-done {
 	transform: none;
-	opacity: 1;
+	max-height: 90vh;
+	// opacity: 1;
 }
 
 /* slide exit */
 .slide-exit {
 	transform: none;
-	opacity: 1;
+	max-height: 90vh;
+	// opacity: 1;
 }
 .slide-exit-active {
 	transform: translateY(-100%) scaleY(0);
-	opacity: 0;
+	// opacity: 0;
 	overflow: hidden;
+	max-height: 0;
 	transition: all 500ms ease-out;
 }
 .slide-exit-done {
 	transform: translateY(-100%) scaleY(0);
 	overflow: hidden;
-	opacity: 0;
+	max-height: 0;
+	// opacity: 0;
 }
 
 

@@ -59,7 +59,6 @@ const Restaurant = ({
 	let sauceAddOnItems = itemList.filter(item => item.category == 'Sauces/Add-ons')
 
 
-
 	return (
 		<Fragment>
 			<Row>
