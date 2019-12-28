@@ -314,22 +314,24 @@ const Restaurant = ({
 
 						<div/>
 					}
-					{ currentUser && (
-						<Row className='py-5'>
-							<Col xs={{span:10, offset: 1}} md={{span: 4, offset: 4}}>
-								<Button 
-									variant='danger' 
-									onClick={()=> {deleteRestaurant(id, history)}} 
-									block
-								>
-									Delete Restaurant
-								</Button>
-							</Col>
-						</Row>
-					)}
+					
 
 				</Fragment>
 				}
+
+				{ currentUser && (
+					<Row className='py-5'>
+						<Col xs={{span:10, offset: 1}} md={{span: 4, offset: 4}}>
+							<Button 
+								variant='danger' 
+								onClick={()=> {deleteRestaurant(id, history)}} 
+								block
+							>
+								Delete Restaurant
+							</Button>
+						</Col>
+					</Row>
+				)}
 
 		</Fragment>
 			

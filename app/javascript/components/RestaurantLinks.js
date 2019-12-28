@@ -26,7 +26,7 @@ const RestaurantLinks = ({
 
 		return (
 			<Fragment key={id}>
-				<Col xs={6} md={3}>
+				<Col xs={5} md={3}>
 					<Card className='py-1'>
 						<Link to={`${url}/${id}`} onClick={()=>{toggleHideLinks(false)}}>
 							<Card.Body>
@@ -43,14 +43,14 @@ const RestaurantLinks = ({
 
 	return (
 		<Fragment>
-			<div className='restaurant-links-section'>
+			<Container className='restaurant-links-section'>
 				<Row>
-					<Col xs={{span:10, offset: 1}} className='pt-2 pb-5 text-center'>
-						<h3>Choose a restaurant to get started</h3>
+					<Col xs={{span:10, offset: 1}} className='py-5'>
+						<h4>Your restaurants</h4>
 					</Col>
 				</Row>
 
-				<Row>			
+				<Row className='flex-nowrap'>
 					{listOfRestaurantLinks}
 
 					{!isHidden && currentUser && (
@@ -69,7 +69,7 @@ const RestaurantLinks = ({
 							currentUser={currentUser} />
 					</Col>}
 				</Row>
-			</div>
+			</Container>
 		</Fragment>
 	)
 }

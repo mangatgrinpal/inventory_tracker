@@ -1,4 +1,6 @@
 class ItemsController < ApplicationController
+	before_action :authenticate_user!, only: [:create, :destroy]
+
 	def index
 		
 		render json: serialized_items

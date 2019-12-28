@@ -1,4 +1,6 @@
 class RestaurantsController < ApplicationController
+  before_action :authenticate_user!, only: [:create, :destroy]
+
   def index
 
     render json: serialized_restaurants
