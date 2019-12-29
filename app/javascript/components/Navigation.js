@@ -24,41 +24,44 @@ const Navigation = ({
 
 
 	return (
-		<Navbar className='navigation'>
-			<Nav className='ml-auto'>
-				<Nav.Item>
-					<LinkContainer to='/'>
-						<Nav.Link>Home</Nav.Link>
-					</LinkContainer>
-					
-				</Nav.Item>
-				
- 
-
-				<Nav.Item>
-					<LinkContainer to='/dashboard'>
-						<Nav.Link>Dashboard</Nav.Link>
-					</LinkContainer>
-				</Nav.Item>
-
-				
-				{ !currentUser &&
+		<Navbar collapseOnSelect className='navigation' expand='md' variant='dark'>
+			<Navbar.Toggle aria-controls='responsive-navbar-nav' />
+  		<Navbar.Collapse id='responsive-navbar-nav'>
+				<Nav className='ml-auto'>
 					<Nav.Item>
-						<LinkContainer to='/sign-in'>
-							<Nav.Link>Sign In</Nav.Link>
+						<LinkContainer to='/'>
+							<Nav.Link>Home</Nav.Link>
 						</LinkContainer>
 						
 					</Nav.Item>
-				}
-				
-				
-				{ currentUser && 
+					
+	 
 
-				<Nav.Item>
-					<Nav.Link onClick={(e)=>{handleClick(e, currentUser.email, history)}}>Sign Out</Nav.Link>
-				</Nav.Item>}
-				
-			</Nav>
+					<Nav.Item>
+						<LinkContainer to='/dashboard'>
+							<Nav.Link>Dashboard</Nav.Link>
+						</LinkContainer>
+					</Nav.Item>
+
+					
+					{ !currentUser &&
+						<Nav.Item>
+							<LinkContainer to='/sign-in'>
+								<Nav.Link>Sign In</Nav.Link>
+							</LinkContainer>
+							
+						</Nav.Item>
+					}
+					
+					
+					{ currentUser && 
+
+					<Nav.Item>
+						<Nav.Link onClick={(e)=>{handleClick(e, currentUser.email, history)}}>Sign Out</Nav.Link>
+					</Nav.Item>}
+					
+				</Nav>
+			</Navbar.Collapse>
 		</Navbar>
 
 		
