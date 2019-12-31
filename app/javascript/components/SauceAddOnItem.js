@@ -2,6 +2,8 @@ import React, { Fragment, useEffect } from 'react';
 
 import Record from './Record'; 
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
@@ -43,7 +45,7 @@ const SauceAddOnItem = ({
 							variant='danger' 
 							onClick={()=> { deleteItem(id, restaurant)}}	
 						>
-							x
+							<FontAwesomeIcon icon='minus' />
 						</Button>
 					)}
 					
@@ -60,7 +62,7 @@ const SauceAddOnItem = ({
 							variant='outline-primary' 
 							onClick={()=> { updateRecord(currentWorkDay, id, 'On Hand', restaurant, 'decrement')}}
 						>
-							&minus;
+							<FontAwesomeIcon icon='minus' />
 						</Button>
 					)}
 					
@@ -73,7 +75,7 @@ const SauceAddOnItem = ({
 							size='sm' 
 							onClick={()=> { updateRecord(currentWorkDay, id, 'On Hand', restaurant, 'increment', onHandValue.current.innerText)}}	
 						>
-							+
+							<FontAwesomeIcon icon='plus' />
 						</Button>
 					)}
 					

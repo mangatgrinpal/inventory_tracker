@@ -1,6 +1,10 @@
 import React, { Fragment, useEffect } from 'react';
 
-import Record from './Record'; 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+
+import Record from './Record';
+
+
 
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
@@ -47,7 +51,7 @@ const MeatItem = ({
 							variant='danger' 
 							onClick={()=> { deleteItem(id, restaurant)}}
 						>
-							x
+							<FontAwesomeIcon icon='minus' />
 						</Button>
 					)}
 					
@@ -65,7 +69,7 @@ const MeatItem = ({
 							variant='outline-primary' 
 							onClick={()=> { updateRecord(currentWorkDay, id, 'Marinated cases', restaurant, 'decrement')}}
 						>
-							&minus;
+							<FontAwesomeIcon icon='minus' />
 						</Button>
 					)}
 					
@@ -77,7 +81,7 @@ const MeatItem = ({
 							size='sm' 
 							onClick={()=> { updateRecord(currentWorkDay, id, 'Marinated cases', restaurant, 'increment', marinatedCaseValue.current.innerText)}}	
 						>
-							+
+							<FontAwesomeIcon icon='plus' />
 						</Button>
 					)}
 					
@@ -94,7 +98,7 @@ const MeatItem = ({
 							variant='outline-primary' 
 							onClick={()=> { updateRecord(currentWorkDay, id, 'Separated pans', restaurant, 'decrement')}}
 						>
-							&minus;
+							<FontAwesomeIcon icon='minus' />
 						</Button>
 					)}
 					
@@ -106,7 +110,7 @@ const MeatItem = ({
 							size='sm' 
 							onClick={()=> { updateRecord(currentWorkDay, id, 'Separated pans', restaurant, 'increment', separatedPansValue.current.innerText)}}
 						>
-							+
+							<FontAwesomeIcon icon='plus' />
 						</Button>
 					)}
 				</Col>
@@ -120,7 +124,7 @@ const MeatItem = ({
 							variant='outline-primary' 
 							onClick={()=> { updateRecord(currentWorkDay, id, 'Non-marinated cases', restaurant, 'decrement')}}		
 						>
-							&minus;
+							<FontAwesomeIcon icon='minus' />
 						</Button>
 					)}
 					
@@ -132,7 +136,7 @@ const MeatItem = ({
 							size='sm' 
 							onClick={()=> { updateRecord(currentWorkDay, id, 'Non-marinated cases',restaurant, 'increment', nonMarinatedCaseValue.current.innerText) }} 	
 						>
-							+
+							<FontAwesomeIcon icon='plus' />
 						</Button>
 					)}
 					

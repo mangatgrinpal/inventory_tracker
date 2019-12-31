@@ -8,6 +8,8 @@ import Button from 'react-bootstrap/Button';
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import ListGroup from 'react-bootstrap/ListGroup';
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+
 
 const Item = ({ 
 	item, 
@@ -49,7 +51,7 @@ const Item = ({
 							onClick={()=> { deleteItem(id, restaurant)}}
 							
 						>
-							x
+							<FontAwesomeIcon icon='minus' />
 						</Button>
 					)}
 					
@@ -67,7 +69,7 @@ const Item = ({
 							onClick={()=> { updateRecord(currentWorkDay, id, 'On Hand', restaurant, 'decrement')}}
 							
 						>
-							&minus;
+							<FontAwesomeIcon icon='minus'/>
 						</Button>
 					)}
 					
@@ -81,7 +83,7 @@ const Item = ({
 							onClick={()=> { updateRecord(currentWorkDay, id, 'On Hand', restaurant, 'increment', onHandValue.current.innerText)}}
 							
 						>
-							+
+							<FontAwesomeIcon icon='plus'/>
 						</Button>	
 					)}
 					
@@ -100,7 +102,7 @@ const Item = ({
 							onClick={()=> { updateRecord(currentWorkDay, id, 'Needs', restaurant, 'decrement')}}
 							
 						>
-							&minus;
+							<FontAwesomeIcon icon='minus'/>
 						</Button>
 					)}
 					
@@ -114,7 +116,7 @@ const Item = ({
 							onClick={()=> { updateRecord(currentWorkDay, id, 'Needs', restaurant, 'increment')}}
 							
 						>
-							+
+							<FontAwesomeIcon icon='plus'/>
 						</Button>
 					)}
 					
@@ -141,7 +143,7 @@ const Item = ({
 							onClick={()=> { updateRecord(currentWorkDay, id, 'Cases', restaurant, 'decrement')}}
 							
 						>
-							&minus;
+							<FontAwesomeIcon icon='minus'/>
 						</Button>
 					}
 					
@@ -154,7 +156,7 @@ const Item = ({
 							onClick={()=> { updateRecord(currentWorkDay, id, 'Cases',restaurant, 'increment', caseValue.current.innerText) }} 
 							
 						>
-							+
+							<FontAwesomeIcon icon='plus'/>
 						</Button>
 					}
 					

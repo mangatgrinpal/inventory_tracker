@@ -5,6 +5,12 @@ import { PersistGate } from 'redux-persist/integration/react';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { fas } from '@fortawesome/free-solid-svg-icons'
+
+
+library.add(fas)
+
 import Navigation from './Navigation';
 import Home from './Home';
 import Loading from './Loading';
