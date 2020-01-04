@@ -122,7 +122,7 @@ const Restaurant = ({
 					<Fragment>
 						<Row className='pt-5'>
 							<Col>
-								<h5 className='text-center section-name'>Line</h5>
+								<h5 className='text-center section-name py-4'>Line</h5>
 							</Col>
 						</Row>
 						<Col className='d-none d-md-block'>
@@ -137,7 +137,7 @@ const Restaurant = ({
 									Needs
 								</Col>
 								<Col md={2}>
-									To Be Prepped
+									To be Prepped
 								</Col>
 								<Col md={2}>
 									Cases
@@ -174,7 +174,7 @@ const Restaurant = ({
 						<Fragment>
 							<Row className='pt-5'>
 								<Col>
-									<h5 className='text-center section-name'>Misc</h5>
+									<h5 className='text-center section-name py-4'>Misc</h5>
 								</Col>
 							</Row>
 							<Col className='d-none d-md-block'>
@@ -189,7 +189,7 @@ const Restaurant = ({
 										Needs
 									</Col>
 									<Col md={2}>
-										To Be Prepped
+										To be Prepped
 									</Col>
 									<Col md={2}>
 										Cases
@@ -224,7 +224,7 @@ const Restaurant = ({
 							<Fragment>
 								<Row className='justify-content-center pt-5'>
 									<Col>
-										<h5 className='text-center section-name'>Sauces/Add-ons</h5>
+										<h5 className='text-center section-name py-4'>Sauces/Add-ons</h5>
 									</Col>
 								</Row>
 								<Col className='d-none d-md-block'>
@@ -233,7 +233,7 @@ const Restaurant = ({
 											Name (units)
 										</Col>
 										
-										<Col md={{span: 3, offset: 3}}>
+										<Col md={{span: 3, offset: 1}}>
 											On Hand
 										</Col>
 									</Row>
@@ -268,7 +268,7 @@ const Restaurant = ({
 							<Fragment>
 								<Row className='justify-content-center pt-5'>
 									<Col>
-										<h5 className='text-center section-name'>Meat</h5>
+										<h5 className='text-center section-name py-4'>Meat</h5>
 									</Col>
 								</Row>
 								<Col className='d-none d-md-block'>
@@ -284,7 +284,7 @@ const Restaurant = ({
 											Separated pans
 										</Col>
 										<Col md={3}>
-											Non-marinated Cases
+											Non-marinated cases
 										</Col>
 									</Row>
 								</Col>

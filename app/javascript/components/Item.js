@@ -55,7 +55,7 @@ const Item = ({
 						</Button>
 					)}
 					
-					<h6 className='item-name'>{name} ({units})</h6>
+					<h6 className='py-4 py-md-0 item-name'>{name} ({units})</h6>
 				</Col>
 				
 				<Col xs={6} className='d-md-none text-right py-1'>

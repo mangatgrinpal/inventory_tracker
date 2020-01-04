@@ -49,13 +49,13 @@ const SauceAddOnItem = ({
 						</Button>
 					)}
 					
-					<h6 className='item-name'>{name} ({units})</h6>
+					<h6 className='py-4 py-md-0 item-name'>{name} ({units})</h6>
 				</Col>
 				
 				<Col xs={6} className='d-md-none text-right py-1'>
 					On hand
 				</Col>
-				<Col xs={6} md={{span: 3, offset: 3}} className='pb-1'>
+				<Col xs={6} md={{span: 3, offset: 1}} className='pb-1'>
 					{ currentUser && (
 						<Button 
 							size='sm' 

@@ -30,6 +30,6 @@ class RestaurantsController < ApplicationController
 
   def serialized_restaurants
     @restaurants = Restaurant.all
-    ActiveModel::Serializer::CollectionSerializer.new(@restaurants, each_serializer: RestaurantSerializer)
+    ActiveModel::Serializer::CollectionSerializer.new(@restaurants.with_attached_image, each_serializer: RestaurantSerializer)
   end
 end
