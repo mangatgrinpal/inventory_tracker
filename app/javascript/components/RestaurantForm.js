@@ -12,7 +12,8 @@ const RestaurantForm = ({
 	currentUser 
 }) => {
 
-	const [ formData, setFormData ] = useState("")	
+	const [ formData, setFormData ] = useState('')
+	const [ fileData, setFileData ] = useState('')
 
 	// change this set timeout function later
 	const handleClick = () => {
@@ -35,9 +36,19 @@ const RestaurantForm = ({
 				<Form.Row>
 					<Col>
 						<Form.Control 
-							type="text"
+							type='text'
 							value={formData}
 							onChange={(e)=> setFormData(e.target.value)}
+							/>
+					</Col>
+				</Form.Row>
+				<Form.Row>
+					<Col>
+						<Form.Control 
+							type='file'
+							accept='image/png, image/jpeg'
+							value={fileData}
+							onChange={(e)=> setFileData(e.target.value)}
 							/>
 					</Col>
 				</Form.Row>
@@ -46,7 +57,7 @@ const RestaurantForm = ({
 						<Button onClick={handleClick} disabled={currentUser === null}>
 							Add
 						</Button>
-						<Button variant="danger" onClick={()=> {toggleIsHidden(!isHidden)}}>
+						<Button variant='danger' onClick={()=> {toggleIsHidden(!isHidden)}}>
 							Cancel
 						</Button>
 					</Col>

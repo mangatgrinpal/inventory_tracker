@@ -7,6 +7,7 @@ class RestaurantsController < ApplicationController
   end  
 
   def create
+    byebug
   	@restaurant = Restaurant.new(restaurant_params)
   	if @restaurant.save
   		render json: serialized_restaurants
@@ -23,7 +24,7 @@ class RestaurantsController < ApplicationController
   private
 
   def restaurant_params
-    params.require(:restaurant).permit(:name)
+    params.require(:restaurant).permit(:name, :image)
   end
 
 

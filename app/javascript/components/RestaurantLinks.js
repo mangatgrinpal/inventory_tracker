@@ -27,13 +27,14 @@ const RestaurantLinks = ({
 		return (
 			<Fragment key={id}>
 				<Col xs={5} md={3}>
-					<Card className='py-1'>
+					<Card>
+						<Card.Img src='https://ginnysbucket.s3-us-west-1.amazonaws.com/dev-images/vietnoms_badge_darkgray_edited_mini.png'/>
 						<Link to={`${url}/${id}`} onClick={()=>{toggleHideLinks(false)}}>
-							<Card.Body>
-								<Card.Title>
+							<Card.ImgOverlay>
+								<Card.Text className='pt-5 text-white'>
 									{name}
-								</Card.Title>
-							</Card.Body>
+								</Card.Text>
+							</Card.ImgOverlay>
 						</Link>
 					</Card>
 				</Col>

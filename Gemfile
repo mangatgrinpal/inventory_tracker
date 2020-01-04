@@ -24,6 +24,8 @@ gem 'jbuilder', '~> 2.7'
 gem 'react-rails'
 gem 'haml'
 gem 'devise'
+gem 'figaro'
+gem 'aws-sdk-s3', require: false
 
 gem 'active_model_serializers', '~> 0.10.0'
 # Use Active Storage variant
