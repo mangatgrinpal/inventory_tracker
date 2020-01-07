@@ -107,9 +107,7 @@ const Restaurant = ({
 						{currentWorkDay}
 					</h3>
 				</Col>
-				
 			</Row>
-			<br/>
 
 			{ isFetching ? 
 				<Loading/> : 
@@ -120,7 +118,7 @@ const Restaurant = ({
 				<Fragment>
 				{lineItems.length > 0 ? 
 					<Fragment>
-						<Row className='pt-5'>
+						<Row className='pt-1'>
 							<Col>
 								<h5 className='text-center section-name py-4'>Line</h5>
 							</Col>

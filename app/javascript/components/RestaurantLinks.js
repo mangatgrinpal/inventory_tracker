@@ -22,13 +22,13 @@ const RestaurantLinks = ({
 
 	const listOfRestaurantLinks = restaurantList.map( restaurant => {
 
-		let { id, name } = restaurant;
+		let { id, name, image } = restaurant;
 
 		return (
 			<Fragment key={id}>
 				<Col xs={5} md={3}>
 					<Card>
-						<Card.Img src='https://ginnysbucket.s3-us-west-1.amazonaws.com/dev-images/vietnoms_badge_darkgray_edited_mini.png'/>
+						<Card.Img src={ image ? image : 'https://ginnysbucket.s3-us-west-1.amazonaws.com/dev-images/vietnoms_badge_darkgray_edited_mini.png' }/>
 						<Link to={`${url}/${id}`} onClick={()=>{toggleHideLinks(false)}}>
 							<Card.ImgOverlay>
 								<Card.Text className='pt-5 text-white'>

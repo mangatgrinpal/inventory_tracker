@@ -1,8 +1,10 @@
-import React, { useState } from 'react'
+import React, { useState } from 'react';
 
-import Form from 'react-bootstrap/Form'
-import Col from 'react-bootstrap/Col'
-import Button from 'react-bootstrap/Button'
+import ImageUploader from './ImageUploader';
+
+import Form from 'react-bootstrap/Form';
+import Col from 'react-bootstrap/Col';
+import Button from 'react-bootstrap/Button';
 
 
 const RestaurantForm = ({ 
@@ -13,11 +15,12 @@ const RestaurantForm = ({
 }) => {
 
 	const [ formData, setFormData ] = useState('')
-	const [ fileData, setFileData ] = useState('')
+	const [ imageData, setImageData ] = useState('')
+
 
 	// change this set timeout function later
 	const handleClick = () => {
-		addRestaurant(formData, isHidden, toggleIsHidden)
+		addRestaurant(formData, imageData, isHidden, toggleIsHidden)
 		
 	}
 
@@ -44,12 +47,8 @@ const RestaurantForm = ({
 				</Form.Row>
 				<Form.Row>
 					<Col>
-						<Form.Control 
-							type='file'
-							accept='image/png, image/jpeg'
-							value={fileData}
-							onChange={(e)=> setFileData(e.target.value)}
-							/>
+						<ImageUploader imageData={imageData} setImageData={setImageData} />
+						
 					</Col>
 				</Form.Row>
 				<Form.Row>
