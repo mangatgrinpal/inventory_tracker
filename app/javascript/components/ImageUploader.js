@@ -1,35 +1,45 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useCallback } from 'react';
+import { DirectUpload } from '@rails/activestorage';
 
-import DropzoneComponent from 'react-dropzone-component';
+import Dropzone from 'react-dropzone';
 
-const csrfToken = document.getElementsByName('csrf-token')[0].content
-
-const componentConfig = {
-	iconFiletypes: ['.jpg', '.png', '.gif'],
-	showFiletypeIcon: true,
-	maxFiles: 1,
-	postUrl: 'no-url'
-}
-
-const djsConfig = {
-	acceptedFiles: 'image/jpeg, image/png, image/gif',
-	autoProcessQueue: false,
-	uploadMultiple: false,
-	headers: { 'X-CSRF-Token': csrfToken }
-}
 
 const ImageUploader = ({imageData, setImageData}) => {
 
-	const eventHandlers = {
-		addedfile: image => setImageData(image)
+	const uploadFile = file => {
+
+		const url = 'rails/active_storage/direct_uploads'
+		const upload = new DirectUpload(file, url)
+
+
+
+		upload.create((error, blob) => {
+			if (error) {
+				console.log(error)
+				// handle the error
+			} else {
+
+
+				const hiddenField = document.createElement('input')
+				hiddenField.setAttribute('type', 'hidden');
+				hiddenField.setAttribute('value', blob.signed_in);
+				hiddenField.name = input.name
+				document.querySelector('form').appendChild(hiddenField)
+			}
+		})
 	}
 
 	return (
-		<DropzoneComponent 
-			config={componentConfig} 
-			djsConfig={djsConfig} 
-			eventHandlers={eventHandlers} />
-
+		<Dropzone
+			onDrop={acceptedFiles => uploadFile(acceptedFiles)}
+			multiple={false}>
+			{({getRootProps, getInputProps}) => (
+				<div {...getRootProps()}>
+					<input {...getInputProps()} />
+					<p>Drag 'n' drop some files here, or click to select files</p>
+				</div>
+			)}
+		</Dropzone>
 	)
 }
 

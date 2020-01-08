@@ -35,13 +35,13 @@ export const fetchRestaurants = restaurant => async dispatch => {
 
 export const addRestaurant = (restaurant, image, isHidden, toggleIsHidden) => async dispatch => {
 
-	const { dataURL, name, size } = image;
+
 
 	try {
-
+		
 		const res = await fetch('/restaurants', {
 			method: 'POST',
-			body: JSON.stringify({restaurant: {name: restaurant}, image: {url: dataURL, name: name, byte_size: size}}),
+			body: JSON.stringify({restaurant: {name: restaurant}, image: image }),
 			headers: headers
 		})
 

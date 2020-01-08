@@ -18,7 +18,6 @@ const RestaurantForm = ({
 	const [ imageData, setImageData ] = useState('')
 
 
-	// change this set timeout function later
 	const handleClick = () => {
 		addRestaurant(formData, imageData, isHidden, toggleIsHidden)
 		
@@ -47,13 +46,13 @@ const RestaurantForm = ({
 				</Form.Row>
 				<Form.Row>
 					<Col>
-						<ImageUploader imageData={imageData} setImageData={setImageData} />
-						
+
+						<ImageUploader imageData={imageData} setImageData={setImageData}/>
 					</Col>
 				</Form.Row>
 				<Form.Row>
 					<Col>
-						<Button onClick={handleClick} disabled={currentUser === null}>
+						<Button onClick={handleClick}>
 							Add
 						</Button>
 						<Button variant='danger' onClick={()=> {toggleIsHidden(!isHidden)}}>
