@@ -33,7 +33,7 @@ export const fetchRestaurants = restaurant => async dispatch => {
 }
 
 
-export const addRestaurant = (restaurant, image, isHidden, toggleIsHidden) => async dispatch => {
+export const addRestaurant = (restaurant, isHidden, toggleIsHidden) => async dispatch => {
 
 
 
@@ -41,8 +41,9 @@ export const addRestaurant = (restaurant, image, isHidden, toggleIsHidden) => as
 		
 		const res = await fetch('/restaurants', {
 			method: 'POST',
-			body: JSON.stringify({restaurant: {name: restaurant}, image: image }),
-			headers: headers
+			body: restaurant,
+			//removed headers to get active storage attachments to work
+			headers: { 'X-CSRF-Token': csrfToken }
 		})
 
 		const json = await res.json()

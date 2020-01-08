@@ -7,6 +7,7 @@ class RestaurantSerializer < ActiveModel::Serializer
 
   def image
   	return unless object.image.attached?
+
   	object.image.blob.attributes
   				.slice('filename', 'byte_size')
   				.merge(url: image_url)

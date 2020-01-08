@@ -15,11 +15,14 @@ const RestaurantForm = ({
 }) => {
 
 	const [ formData, setFormData ] = useState('')
-	const [ imageData, setImageData ] = useState('')
+	const [ imageData, setImageData ] = useState(null)
 
 
 	const handleClick = () => {
-		addRestaurant(formData, imageData, isHidden, toggleIsHidden)
+		const restaurant = new FormData();
+		restaurant.append('[restaurant]name', formData)
+		restaurant.append('[restaurant]image', imageData[0])
+		addRestaurant(restaurant, isHidden, toggleIsHidden)
 		
 	}
 
