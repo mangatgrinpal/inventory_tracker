@@ -17,5 +17,7 @@ Rails.application.routes.draw do
   # IMPORTANT #
   # This `match` must be the *last* route in routes.rb
 
-  match '*path', to: 'static_pages#home', via: :all, constraints: lambda { |req| req.path.exclude? 'rails/active_storage' }
+  match '*path', to: 'static_pages#home', via: :all, constraints: lambda { 
+    |req| req.path.exclude? 'rails/active_storage' 
+  }
 end
