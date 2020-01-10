@@ -3,7 +3,9 @@ import {
 	FETCH_RESTAURANTS_ERROR,
 	ADD_RESTAURANT,
 	DELETE_RESTAURANT,
-	TOGGLE_RESTAURANT_FORM
+	SET_RESTAURANT_LINKS_VISIBILITY,
+	SET_RESTAURANT_FORM_VISIBILITY
+	
 } from './types'
 
 
@@ -34,14 +36,14 @@ export const fetchRestaurants = restaurant => async dispatch => {
 }
 
 
-export const addRestaurant = (restaurant, isHidden, toggleIsHidden) => async dispatch => {
+export const addRestaurant = restaurant => async dispatch => {
 
 	try {
 		
 		const res = await fetch('/restaurants', {
 			method: 'POST',
 			body: restaurant,
-			//removed headers to get active storage attachments to work
+			//removed content-type headers to get active storage attachments to work
 			headers: { 'X-CSRF-Token': csrfToken }
 		})
 
@@ -52,8 +54,6 @@ export const addRestaurant = (restaurant, isHidden, toggleIsHidden) => async dis
 			type: ADD_RESTAURANT,
 			payload: json
 		})
-
-		toggleIsHidden(!isHidden)
 
 	} catch (error) {
 
@@ -81,13 +81,22 @@ export const deleteRestaurant = (restaurant, history) => async dispatch => {
 
 	} catch (error) {
 
-		console.log(error);
+		console.log(error)
 	}
 
 }
 
-export const toggleRestaurantForm = () => dispatch => {
+export const setRestaurantLinksVisibility = visibility => dispatch => {
 	dispatch({
-		type: TOGGLE_RESTAURANT_FORM
+		type: SET_RESTAURANT_LINKS_VISIBILITY,
+		payload: visibility
 	})
 }
+
+export const setRestaurantFormVisibility = visibility => dispatch => {
+	dispatch({
+		type: SET_RESTAURANT_FORM_VISIBILITY,
+		payload: visibility
+	})
+}
+

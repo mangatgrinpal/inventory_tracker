@@ -3,14 +3,16 @@ import {
 	FETCH_RESTAURANTS_ERROR,
 	ADD_RESTAURANT,
 	DELETE_RESTAURANT,
-	TOGGLE_RESTAURANT_FORM
+	SET_RESTAURANT_LINKS_VISIBILITY,
+	SET_RESTAURANT_FORM_VISIBILITY
 } from '../actions/types';
 
 
 const initialState = {
 	restaurantList: [],
 	isFetching: true,
-	restaurantFormVisible: true
+	restaurantFormVisible: false,
+	restaurantLinksVisible: true
 };
 
 export default function(state = initialState, action) {
@@ -38,10 +40,15 @@ export default function(state = initialState, action) {
 				...state,
 				restaurantList: payload
 			};
-		case TOGGLE_RESTAURANT_FORM:
+		case SET_RESTAURANT_LINKS_VISIBILITY:
 			return {
 				...state,
-				restaurantFormVisible: !state.restaurantFormVisible
+				restaurantLinksVisible: payload
+			}
+		case SET_RESTAURANT_FORM_VISIBILITY:
+			return {
+				...state,
+				restaurantFormVisible: payload
 			};
 		default:
 			return state

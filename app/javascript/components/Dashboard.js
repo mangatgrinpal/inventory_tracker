@@ -15,7 +15,12 @@ import { CSSTransition } from 'react-transition-group';
 
 import { connect } from 'react-redux';
 
-import { fetchRestaurants, addRestaurant, toggleRestaurantForm } from '../actions/restaurants';
+import { 
+	fetchRestaurants, 
+	addRestaurant, 
+	setRestaurantFormVisibility,
+	setRestaurantLinksVisibility
+} from '../actions/restaurants';
 import { setCurrentWorkDay, setPreviousWorkDay } from '../actions/weeks';
 
 import Container from 'react-bootstrap/Container';
@@ -26,12 +31,18 @@ import Col from 'react-bootstrap/Col';
 const Dashboard = ({
 	fetchRestaurants, 
 	addRestaurant,
-	toggleRestaurantForm,
+	setRestaurantFormVisibility,
+	setRestaurantLinksVisibility,
 	setCurrentWorkDay,
 	setPreviousWorkDay,
 	currentDay,
 	yesterday,
-	restaurants: { isFetching, restaurantList, restaurantFormVisible },
+	restaurants: { 
+		isFetching, 
+		restaurantList, 
+		restaurantFormVisible, 
+		restaurantLinksVisible 
+	},
 	users: { currentUser }
 }) => {
 
@@ -59,19 +70,16 @@ const Dashboard = ({
 					<Loading/> : 
 					<Fragment>
 						<CSSTransition
-							in={hideLinks}
+							in={restaurantLinksVisible}
 							timeout={500}
 							classNames='slide'
 						>
 							<RestaurantLinks
 								restaurantList={restaurantList}
-								isHidden={isHidden}
-								toggleIsHidden={toggleIsHidden}
 								addRestaurant={addRestaurant}
-								hideLinks={hideLinks}
-								toggleRestaurantForm={toggleRestaurantForm}
+								setRestaurantLinksVisibility={setRestaurantLinksVisibility}
+								setRestaurantFormVisibility={setRestaurantFormVisibility}
 								restaurantFormVisible={restaurantFormVisible}
-								toggleHideLinks={toggleHideLinks}
 								currentUser={currentUser}
 							/>
 						</CSSTransition>
@@ -80,15 +88,15 @@ const Dashboard = ({
 						<Switch>
 							<Route path={`${path}/:id`}>
 								<Restaurant 
-									hideLinks={hideLinks}
-									toggleHideLinks={toggleHideLinks}
+									restaurantLinksVisible={restaurantLinksVisible}
+									setRestaurantLinksVisibility={setRestaurantLinksVisibility}
 								/>
 							</Route>
 						</Switch>
 						{restaurantFormVisible &&
 
-						<Col xs={12} md={{span: 8, offset: 4}} className='form-panel-container fixed-top'>
-							<a onClick={()=>{toggleRestaurantForm()}}>
+						<Col xs={12} md={{span: 6, offset: 6}} className='form-panel-container fixed-top'>
+							<a onClick={()=>{setRestaurantFormVisibility(false)}}>
 							close
 							</a>
 							<RestaurantForm 
@@ -113,5 +121,12 @@ const mapStateToProps = state =>
 
 export default connect (
 	mapStateToProps,
-	{ fetchRestaurants, addRestaurant, setCurrentWorkDay, setPreviousWorkDay, toggleRestaurantForm }
+	{ 
+		fetchRestaurants, 
+		addRestaurant, 
+		setCurrentWorkDay, 
+		setPreviousWorkDay, 
+		setRestaurantFormVisibility,
+		setRestaurantLinksVisibility
+	}
 )(Dashboard)

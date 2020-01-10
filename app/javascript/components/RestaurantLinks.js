@@ -10,13 +10,10 @@ import Button from 'react-bootstrap/Button';
 
 const RestaurantLinks = ({
 	restaurantList,
-	toggleRestaurantForm,
+	setRestaurantFormVisibility,
+	setRestaurantLinksVisibility,
 	restaurantFormVisible,
-	isHidden,
-	toggleIsHidden,
 	addRestaurant,
-	hideLinks,
-	toggleHideLinks,
 	currentUser
 }) => {
 
@@ -37,7 +34,7 @@ const RestaurantLinks = ({
 								'https://upload.wikimedia.org/wikipedia/commons/thumb/9/93/No-logo.svg/1024px-No-logo.svg.png' 
 							}/>
 
-						<Link to={`${url}/${id}`} onClick={()=>{toggleHideLinks(false)}}>
+						<Link to={`${url}/${id}`} onClick={()=>{setRestaurantLinksVisibility(false)}}>
 							<Card.ImgOverlay>
 								<Card.Text className='pt-5 text-white'>
 									{name}
@@ -59,7 +56,7 @@ const RestaurantLinks = ({
 					</Col>
 					{currentUser && (
 					<Col xs={4}> 
-						<a onClick={()=> {toggleRestaurantForm()}}>
+						<a onClick={()=> {setRestaurantFormVisibility(true)}}>
 							Add a restaurant
 						</a>
 					</Col>)}

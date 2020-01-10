@@ -34,8 +34,8 @@ const Restaurant = ({
 	deleteItem,
 	clearFetchedItems,
 	updateRecord,
-	hideLinks,
-	toggleHideLinks,
+	restaurantLinksVisible,
+	setRestaurantLinksVisibility,
 	items: { itemList, isFetching },
 	weeks: { currentWorkDay, previousWorkDay },
 	records: { recordList },
@@ -61,11 +61,17 @@ const Restaurant = ({
 
 	return (
 		<Fragment>
-			<Row>
+		<Row>
 				<Col className='clearfix'>
-					<Button size='sm' className='float-left' onClick={()=>{toggleHideLinks(true)}}>
-						Go Back
+			{restaurantLinksVisible ? 
+					<Button size='sm' className='float-left' onClick={()=>{setRestaurantLinksVisibility(false)}}>
+						Hide restaurants
 					</Button>
+				:
+					<Button size='sm' className='float-left' onClick={()=>{setRestaurantLinksVisibility(true)}}>
+						Go back
+					</Button>
+				}
 				</Col>
 			</Row>
 			<Row className='justify-content-center py-1'>
