@@ -10,6 +10,8 @@ import Button from 'react-bootstrap/Button';
 
 const RestaurantLinks = ({
 	restaurantList,
+	toggleRestaurantForm,
+	restaurantFormVisible,
 	isHidden,
 	toggleIsHidden,
 	addRestaurant,
@@ -28,7 +30,13 @@ const RestaurantLinks = ({
 			<Fragment key={id}>
 				<Col xs={5} md={3}>
 					<Card>
-						<Card.Img src={ image ? image.url : 'https://ginnysbucket.s3-us-west-1.amazonaws.com/dev-images/vietnoms_badge_darkgray_edited_mini.png' }/>
+						<Card.Img 
+							src={ 
+								image ? 
+								image.url : 
+								'https://upload.wikimedia.org/wikipedia/commons/thumb/9/93/No-logo.svg/1024px-No-logo.svg.png' 
+							}/>
+
 						<Link to={`${url}/${id}`} onClick={()=>{toggleHideLinks(false)}}>
 							<Card.ImgOverlay>
 								<Card.Text className='pt-5 text-white'>
@@ -45,32 +53,23 @@ const RestaurantLinks = ({
 	return (
 		<Fragment>
 			<Container className='restaurant-links-section'>
-				<Row>
-					<Col xs={{span:10, offset: 1}} className='py-5'>
-						<h4>Your restaurants</h4>
+				<Row className='py-4 py-md-5'>
+					<Col xs={8}>
+						<h5>Your restaurants</h5>
 					</Col>
+					{currentUser && (
+					<Col xs={4}> 
+						<a onClick={()=> {toggleRestaurantForm()}}>
+							Add a restaurant
+						</a>
+					</Col>)}
 				</Row>
 
 				<Row className='flex-nowrap'>
 					{listOfRestaurantLinks}
-
-					{!isHidden && currentUser && (
-					<Col xs={3}> 
-						<Button onClick={()=> {toggleIsHidden(!isHidden)}}>
-							+
-						</Button>
-					</Col>)}
-
-					{isHidden &&
-					<Col md={3}>
-						<RestaurantForm 
-							addRestaurant={addRestaurant} 
-							isHidden={isHidden} 
-							toggleIsHidden={toggleIsHidden}
-							currentUser={currentUser} />
-					</Col>}
 				</Row>
 			</Container>
+			
 		</Fragment>
 	)
 }

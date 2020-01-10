@@ -6,14 +6,14 @@ import thunk from 'redux-thunk';
 
 import { composeWithDevTools } from 'redux-devtools-extension';
 
-import rootReducer from "./reducers";
-
+import rootReducer from './reducers';
 
 
 const initialState = {};
 
 const persistConfig = {
 	key: 'root',
+	whitelist: ['users'],
 	storage
 }
 

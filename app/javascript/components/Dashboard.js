@@ -15,20 +15,23 @@ import { CSSTransition } from 'react-transition-group';
 
 import { connect } from 'react-redux';
 
-import { fetchRestaurants, addRestaurant } from '../actions/restaurants';
+import { fetchRestaurants, addRestaurant, toggleRestaurantForm } from '../actions/restaurants';
 import { setCurrentWorkDay, setPreviousWorkDay } from '../actions/weeks';
 
 import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
 
 
 const Dashboard = ({
 	fetchRestaurants, 
 	addRestaurant,
+	toggleRestaurantForm,
 	setCurrentWorkDay,
 	setPreviousWorkDay,
 	currentDay,
 	yesterday,
-	restaurants: { isFetching, restaurantList },
+	restaurants: { isFetching, restaurantList, restaurantFormVisible },
 	users: { currentUser }
 }) => {
 
@@ -66,6 +69,8 @@ const Dashboard = ({
 								toggleIsHidden={toggleIsHidden}
 								addRestaurant={addRestaurant}
 								hideLinks={hideLinks}
+								toggleRestaurantForm={toggleRestaurantForm}
+								restaurantFormVisible={restaurantFormVisible}
 								toggleHideLinks={toggleHideLinks}
 								currentUser={currentUser}
 							/>
@@ -80,6 +85,18 @@ const Dashboard = ({
 								/>
 							</Route>
 						</Switch>
+						{restaurantFormVisible &&
+
+						<Col xs={12} md={{span: 8, offset: 4}} className='form-panel-container fixed-top'>
+							<a onClick={()=>{toggleRestaurantForm()}}>
+							close
+							</a>
+							<RestaurantForm 
+								addRestaurant={addRestaurant} 
+								isHidden={isHidden} 
+								toggleIsHidden={toggleIsHidden}
+								currentUser={currentUser} />
+						</Col>}
 					</Fragment>
 				}					
 			</Container>
@@ -96,5 +113,5 @@ const mapStateToProps = state =>
 
 export default connect (
 	mapStateToProps,
-	{ fetchRestaurants, addRestaurant, setCurrentWorkDay, setPreviousWorkDay }
+	{ fetchRestaurants, addRestaurant, setCurrentWorkDay, setPreviousWorkDay, toggleRestaurantForm }
 )(Dashboard)

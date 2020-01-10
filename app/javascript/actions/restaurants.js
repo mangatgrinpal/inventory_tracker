@@ -2,7 +2,8 @@ import {
 	FETCH_RESTAURANTS_SUCCESS,
 	FETCH_RESTAURANTS_ERROR,
 	ADD_RESTAURANT,
-	DELETE_RESTAURANT
+	DELETE_RESTAURANT,
+	TOGGLE_RESTAURANT_FORM
 } from './types'
 
 
@@ -34,8 +35,6 @@ export const fetchRestaurants = restaurant => async dispatch => {
 
 
 export const addRestaurant = (restaurant, isHidden, toggleIsHidden) => async dispatch => {
-
-
 
 	try {
 		
@@ -85,4 +84,10 @@ export const deleteRestaurant = (restaurant, history) => async dispatch => {
 		console.log(error);
 	}
 
+}
+
+export const toggleRestaurantForm = () => dispatch => {
+	dispatch({
+		type: TOGGLE_RESTAURANT_FORM
+	})
 }
