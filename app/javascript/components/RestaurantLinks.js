@@ -55,10 +55,12 @@ const RestaurantLinks = ({
 						<h5>Your restaurants</h5>
 					</Col>
 					{currentUser && (
-					<Col xs={4}> 
+					<Col xs={4} className='text-md-right pl-0'>
+						<small> 
 						<a onClick={()=> {setRestaurantFormVisibility(true)}}>
 							Add a restaurant
 						</a>
+						</small>
 					</Col>)}
 				</Row>
 

@@ -101,8 +101,8 @@ const Dashboard = ({
 							</a>
 							<RestaurantForm 
 								addRestaurant={addRestaurant} 
-								isHidden={isHidden} 
-								toggleIsHidden={toggleIsHidden}
+								restaurantFormVisible={restaurantFormVisible}
+								setRestaurantFormVisibility={setRestaurantFormVisibility}
 								currentUser={currentUser} />
 						</Col>}
 					</Fragment>

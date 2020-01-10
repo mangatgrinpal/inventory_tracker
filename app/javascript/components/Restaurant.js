@@ -21,10 +21,11 @@ import { fetchRecords } from '../actions/records';
 
 import { useHistory, useParams } from 'react-router-dom';
 
+import Container from 'react-bootstrap/Container';
 import Button from 'react-bootstrap/Button';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import ListGroup from 'react-bootstrap/ListGroup';
+
 
 const Restaurant = ({ 
 	deleteRestaurant, 
@@ -60,7 +61,7 @@ const Restaurant = ({
 
 
 	return (
-		<Fragment>
+		<Container>
 		<Row>
 				<Col className='clearfix'>
 			{restaurantLinksVisible ? 
@@ -337,7 +338,7 @@ const Restaurant = ({
 					</Row>
 				)}
 
-		</Fragment>
+		</Container>
 			
 	)
 }

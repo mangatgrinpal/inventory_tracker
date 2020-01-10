@@ -9,8 +9,8 @@ import Button from 'react-bootstrap/Button';
 
 const RestaurantForm = ({ 
 	addRestaurant, 
-	isHidden, 
-	toggleIsHidden,
+	restaurantFormVisible,
+	setRestaurantFormVisibility,
 	currentUser 
 }) => {
 
@@ -23,7 +23,7 @@ const RestaurantForm = ({
 		const restaurant = new FormData();
 		restaurant.append('[restaurant]name', formData)
 		restaurant.append('[restaurant]image', imageData[0])
-		addRestaurant(restaurant, isHidden, toggleIsHidden)
+		addRestaurant(restaurant)
 		
 	}
 
@@ -59,7 +59,7 @@ const RestaurantForm = ({
 						<Button onClick={handleClick}>
 							Add
 						</Button>
-						<Button variant='danger' onClick={()=> {toggleIsHidden(!isHidden)}}>
+						<Button variant='danger' onClick={()=> {setRestaurantFormVisibility(false)}}>
 							Cancel
 						</Button>
 					</Col>

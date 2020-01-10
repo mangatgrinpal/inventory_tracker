@@ -52,7 +52,12 @@ export const addRestaurant = restaurant => async dispatch => {
 
 		dispatch({
 			type: ADD_RESTAURANT,
-			payload: json
+			payload: json,
+		})
+
+		dispatch({
+			type: SET_RESTAURANT_FORM_VISIBILITY,
+			payload: false
 		})
 
 	} catch (error) {
@@ -75,6 +80,11 @@ export const deleteRestaurant = (restaurant, history) => async dispatch => {
 		dispatch({
 			type: DELETE_RESTAURANT,
 			payload: json
+		})
+
+		dispatch({
+			type: SET_RESTAURANT_LINKS_VISIBILITY,
+			payload: true
 		})
 		
 		history.push('/dashboard')
