@@ -93,7 +93,13 @@ const Dashboard = ({
 								/>
 							</Route>
 						</Switch>
-						{restaurantFormVisible &&
+						<CSSTransition
+							in={restaurantFormVisible}
+							timeout={500}
+							unmountOnExit
+							classNames='slide-out'
+						>
+						
 
 						<Col xs={12} md={{span: 6, offset: 6}} className='form-panel-container fixed-top'>
 							<a onClick={()=>{setRestaurantFormVisibility(false)}}>
@@ -104,7 +110,8 @@ const Dashboard = ({
 								restaurantFormVisible={restaurantFormVisible}
 								setRestaurantFormVisibility={setRestaurantFormVisibility}
 								currentUser={currentUser} />
-						</Col>}
+						</Col>
+						</CSSTransition>
 					</Fragment>
 				}					
 			</Container>

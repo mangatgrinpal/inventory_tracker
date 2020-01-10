@@ -34,7 +34,7 @@ body {
 
 /* Transitions for animations will be placed here */
 
-/* slide enter */
+/* slide */
 
 .slide-enter {
 	transform: translateY(-100%) scaleY(0);
@@ -56,7 +56,6 @@ body {
 	// opacity: 1;
 }
 
-/* slide exit */
 .slide-exit {
 	transform: none;
 	max-height: 90vh;
@@ -78,9 +77,33 @@ body {
 
 
 
+/* slide-out */
 
+.slide-out-enter {
+	transform: translateX(+100%);
+}
 
+.slide-out-enter-active {
+	transform: translateX(0);
+	transition: transform 500ms ease-in;
+}
 
+.slide-out-enter-done {
+	transform: none;
+}
+
+.slide-out-exit {
+	transform: none;
+}
+
+.slide-out-exit-active {
+	transform: translateX(+100%);
+	transition: transform 500ms ease-out;
+}
+
+.slide-out-exit-done {
+	transform: translateX(+100%);
+}
 
 
 
