@@ -14,6 +14,7 @@ import {
 	fetchItems,
 	addItem,
 	deleteItem,
+	setItemFormVisibility,
 	clearFetchedItems,
 	updateRecord
 } from '../actions/items';
@@ -35,9 +36,10 @@ const Restaurant = ({
 	deleteItem,
 	clearFetchedItems,
 	updateRecord,
+	setItemFormVisibility,
 	restaurantLinksVisible,
 	setRestaurantLinksVisibility,
-	items: { itemList, isFetching },
+	items: { itemList, isFetching, itemFormVisible },
 	weeks: { currentWorkDay, previousWorkDay },
 	records: { recordList },
 	users: { currentUser }
@@ -59,8 +61,8 @@ const Restaurant = ({
 	let meatItems = itemList.filter(item => item.category == 'Meat')
 	let sauceAddOnItems = itemList.filter(item => item.category == 'Sauces/Add-ons')
 
-
 	return (
+		<Fragment>
 		<Container>
 		<Row>
 				<Col className='clearfix'>
@@ -78,35 +80,19 @@ const Restaurant = ({
 			<Row className='justify-content-center py-1'>
 				
 
-				{showButton && currentUser && (
+				{currentUser && (
 					<Col xs={4}>
 
 						<Button 
-							onClick={()=> setShowForm(true)}
+							onClick={()=> {setItemFormVisibility(true)}}
 						>
 							Add New Item
 						</Button>
 					</Col>
 				)}
 				
-				<Col md={10}>
-					<CSSTransition
-						in={showForm}
-						timeout={500}
-						classNames='slide'
-						unmountOnExit
-						onEnter={()=> setShowButton(false)}
-						onExited={()=> setShowButton(true)}
-					>
-						<ItemForm 
-							restaurant={id} 
-							addItem={addItem}
-							setShowForm={setShowForm}
-							currentUser={currentUser} 
-						/>
-					</CSSTransition>
+
 					
-				</Col>
 			</Row>
 			<Row className='justify-content-center pt-5'>
 				<Col xs={9} md={3}>
@@ -339,6 +325,25 @@ const Restaurant = ({
 				)}
 
 		</Container>
+			<CSSTransition
+					in={itemFormVisible}
+					timeout={500}
+					unmountOnExit
+					classNames='slide-out'
+				>
+				<Col xs={12} md={{span: 6, offset: 6}} className='form-panel-container fixed-top'>
+					<a onClick={()=>{setItemFormVisibility(false)}}>
+						close
+					</a>
+					<ItemForm 
+						restaurant={id} 
+						addItem={addItem}
+						setItemFormVisibility={setItemFormVisibility}
+						currentUser={currentUser} 
+					/>
+				</Col>
+			</CSSTransition>
+		</Fragment>
 			
 	)
 }
@@ -358,7 +363,8 @@ export default connect(
 		deleteRestaurant, 
 		fetchItems, 
 		addItem, 
-		deleteItem, 
+		deleteItem,
+		setItemFormVisibility, 
 		fetchRecords, 
 		clearFetchedItems,
 		updateRecord

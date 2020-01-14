@@ -8,7 +8,7 @@ import Button from 'react-bootstrap/Button'
 const ItemForm = ({ 
 	addItem, 
 	restaurant, 
-	setShowForm,
+	setItemFormVisibility,
 	currentUser 
 }) => {
 
@@ -33,7 +33,7 @@ const ItemForm = ({
 	return (
 			<Form onKeyPress={submitFormOnEnter}>
 				<Form.Row>
-					<Col xs={12} md={3}>
+					<Col xs={12}>
 						<Form.Label>
 							Item name
 						</Form.Label>
@@ -44,7 +44,9 @@ const ItemForm = ({
 							onChange={(e)=> setNameData(e.target.value)}
 							/>
 					</Col>
-					<Col xs={12} md={2}>
+				</Form.Row>
+				<Form.Row>
+					<Col xs={12}>
 						<Form.Label>
 							Size per unit
 						</Form.Label>
@@ -55,7 +57,9 @@ const ItemForm = ({
 							onChange={(e)=> setUnitsData(e.target.value)}
 							/>
 					</Col>
-					<Col xs={12} md={3}>
+				</Form.Row>
+				<Form.Row>
+					<Col xs={12}>
 						<Form.Label>
 							Prep category
 						</Form.Label>
@@ -67,17 +71,16 @@ const ItemForm = ({
 						</Form.Control>
 
 					</Col>
-					<Col xs={12} md={2}>
-						<Button variant='danger pt-4' onClick={()=> {setShowForm(false)}}>
+				</Form.Row>
+				<Form.Row>
+					<Col xs={12}>
+						<Button variant='danger pt-4' onClick={()=> {setItemFormVisibility(false)}}>
 							Cancel
 						</Button>
-					</Col>
-					<Col xs={12} md={2}>
 
 						<Button 
 							className='pt-4' 
 							onClick={(e)=> {handleClick(e)}} 
-							disabled={currentUser === null}
 						>
 							Add New Item
 						</Button>

@@ -5,6 +5,7 @@ import {
 	CLEAR_FETCHED_ITEMS,
 	ADD_ITEM,
 	DELETE_ITEM,
+	SET_ITEM_FORM_VISIBILITY,
 	FETCH_RECORDS_SUCCESS,
 	UPDATE_RECORD
 } from './types'
@@ -90,9 +91,17 @@ export const deleteItem = (item, restaurant) => async dispatch => {
 }
 
 export const clearFetchedItems = () => {
-	return {
+	dispatch({
 		type: CLEAR_FETCHED_ITEMS
-	}
+	})
+}
+
+export const setItemFormVisibility = visibility => dispatch => {
+	dispatch({
+		type: SET_ITEM_FORM_VISIBILITY,
+		payload: visibility
+	})
+		
 }
 
 

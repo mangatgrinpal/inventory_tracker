@@ -5,13 +5,16 @@ import {
 	CLEAR_FETCHED_ITEMS,
 	ADD_ITEM,
 	DELETE_ITEM,
+	SET_ITEM_FORM_VISIBILITY,
 	FETCH_RECORDS_SUCCESS,
 	UPDATE_RECORD
 } from '../actions/types'
 
 const initialState = {
 	itemList: [],
-	isFetching: true
+	isFetching: true,
+	itemFormVisible: false
+
 }
 
 export default function(state = initialState, action) {
@@ -21,7 +24,7 @@ export default function(state = initialState, action) {
 			return {
 				...state,
 				isFetching: true
-			}
+			};
 		case FETCH_ITEMS_SUCCESS:
 			return {
 				...state,
@@ -33,7 +36,7 @@ export default function(state = initialState, action) {
 				...state,
 				itemList: payload,
 				isFetching: false
-			}
+			};
 		case ADD_ITEM:
 			return {
 				...state,
@@ -44,16 +47,21 @@ export default function(state = initialState, action) {
 				...state,
 				itemList: payload
 			};
+		case SET_ITEM_FORM_VISIBILITY:
+			return {
+				...state,
+				itemFormVisible: payload
+			};
 		case CLEAR_FETCHED_ITEMS:
 			return {
 				...state,
 				itemList: []
-			}
+			};
 		case UPDATE_RECORD:
 			return {
 				...state,
 				itemList: payload
-			}
+			};
 		default:
 			return state
 	}

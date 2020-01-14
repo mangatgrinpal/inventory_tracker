@@ -112,6 +112,7 @@ const Dashboard = ({
 								currentUser={currentUser} />
 						</Col>
 						</CSSTransition>
+						
 					</Fragment>
 				}					
 			</Container>
