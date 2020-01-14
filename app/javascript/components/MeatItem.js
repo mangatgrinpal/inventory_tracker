@@ -42,19 +42,15 @@ const MeatItem = ({
 	return (
 		<Fragment>
 			<Row className='border-top py-1'>
-
 				<Col xs={12} md={3} className='clearfix py-1'>
 					{ currentUser && (
-						<Button 
-							size='sm' 
-							className='float-right' 
-							variant='danger' 
-							onClick={()=> { deleteItem(id, restaurant)}}
-						>
-							<FontAwesomeIcon icon='minus' />
-						</Button>
+						<div className='float-right'>
+							<FontAwesomeIcon 
+								icon='times'
+								className='clickable-icon delete-icon'
+								onClick={()=> { deleteItem(id, restaurant)}} />
+						</div>
 					)}
-					
 					<h6 className='py-4 py-md-0 item-name'>{name} ({units})</h6>
 				</Col>
 				
@@ -62,7 +58,7 @@ const MeatItem = ({
 					Marinated cases
 				</Col>
 
-				<Col xs={6} md={3} className='pb-1'>
+				<Col xs={5} md={3} className='pb-1'>
 					{ currentUser && (
 						<Button 
 							size='sm' 
@@ -91,7 +87,7 @@ const MeatItem = ({
 				<Col xs={6} className='d-md-none text-right py-1'>
 					Separated pans
 				</Col>
-				<Col xs={6} md={3} className='pb-1'>
+				<Col xs={5} md={3} className='pb-1'>
 					{ currentUser && (
 						<Button 
 							size='sm' 
@@ -117,7 +113,7 @@ const MeatItem = ({
 				<Col xs={6} className='d-md-none text-right py-1'>
 					Non-marinated cases
 				</Col>
-				<Col xs={6} md={3} className='pb-1'>
+				<Col xs={5} md={3} className='pb-1'>
 					{ currentUser && (
 						<Button 
 							size='sm' 

@@ -5,6 +5,7 @@ import MeatItem from './MeatItem';
 import SauceAddOnItem from './SauceAddOnItem';
 import ItemForm from './ItemForm';
 import RecordForm from './RecordForm';
+import AddItemButton from './AddItemButton';
 import { connect } from 'react-redux';
 
 import { CSSTransition } from 'react-transition-group';
@@ -51,6 +52,7 @@ const Restaurant = ({
 	const history = useHistory();
 
 	useEffect(() => {
+
 		fetchItems(id)
 
 	},[ id ])
@@ -66,29 +68,24 @@ const Restaurant = ({
 			<Container>
 				<Row>
 					<Col className='clearfix'>
-				{restaurantLinksVisible ? 
-					<FontAwesomeIcon icon='arrow-circle-up' size='2x' onClick={()=>{setRestaurantLinksVisibility(false)}}/>
-					:
-					<FontAwesomeIcon icon='arrow-circle-left' size='2x' onClick={()=>{setRestaurantLinksVisibility(true)}}/>	
-					}
+					{restaurantLinksVisible ? 
+						<FontAwesomeIcon 
+							className='clickable-icon' 
+							title='Hide restaurants'
+							alt='Hide restaurants'
+							icon={['far','arrow-alt-circle-up']} 
+							size='2x' 
+							onClick={()=>{setRestaurantLinksVisibility(false)}}/>
+						:
+						<FontAwesomeIcon 
+							className='clickable-icon' 
+							title='Go back'
+							alt='Go back'
+							icon={['far','arrow-alt-circle-left']} 
+							size='2x' 
+							onClick={()=>{setRestaurantLinksVisibility(true)}}/>	
+						}
 					</Col>
-				</Row>
-				<Row className='text-center py-1'>
-					
-
-					{currentUser && (
-						<Col xs={12}>
-
-							<Button 
-								onClick={()=> {setItemFormVisibility(true)}}
-							>
-								Add New Item
-							</Button>
-						</Col>
-					)}
-					
-
-						
 				</Row>
 				<Row className='justify-content-center pt-5'>
 					<Col xs={9} md={3}>
@@ -153,7 +150,8 @@ const Restaurant = ({
 									})}
 								</Col>
 							</Row>
-							</Fragment>
+							<AddItemButton setItemFormVisibility={ setItemFormVisibility } />
+						</Fragment>
 							:
 						<div/>}
 						
@@ -204,6 +202,7 @@ const Restaurant = ({
 										})}
 									</Col>
 								</Row>
+								<AddItemButton setItemFormVisibility={setItemFormVisibility}/>
 							</Fragment> :
 
 							<div/>}
@@ -247,6 +246,7 @@ const Restaurant = ({
 											})}
 										</Col>
 									</Row>
+									<AddItemButton setItemFormVisibility={setItemFormVisibility}/>
 								</Fragment> :
 
 							<div/>}
@@ -297,6 +297,7 @@ const Restaurant = ({
 											})}
 										</Col>
 									</Row>
+									<AddItemButton setItemFormVisibility={setItemFormVisibility}/>
 								</Fragment> :
 
 							<div/>
@@ -329,7 +330,14 @@ const Restaurant = ({
 				>
 				<Col xs={12} md={{span: 6, offset: 6}} className='form-panel-container fixed-top pt-2'>
 
-					<FontAwesomeIcon size='2x' icon='times' onClick={()=>{setItemFormVisibility(false)}}/>
+					<FontAwesomeIcon 
+						className='clickable-icon' 
+						size='2x'
+						title='Close'
+						alt='Close'
+						icon={['far', 'times-circle']} 
+						onClick={()=>{setItemFormVisibility(false)}}
+					/>
 
 					<ItemForm 
 						restaurant={id} 

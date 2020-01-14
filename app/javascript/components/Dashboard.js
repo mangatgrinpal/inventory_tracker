@@ -106,7 +106,13 @@ const Dashboard = ({
 
 						<Col xs={12} md={{span: 6, offset: 6}} className='form-panel-container fixed-top pt-2'>
 
-								<FontAwesomeIcon onClick={()=>{setRestaurantFormVisibility(false)}} icon='times' size='2x' />
+							<FontAwesomeIcon 
+								className='clickable-icon' 
+								title='Close'
+								alt='Close'
+								onClick={()=>{setRestaurantFormVisibility(false)}} 
+								icon={['far', 'times-circle']} 
+								size='2x' />
 
 							<RestaurantForm 
 								addRestaurant={addRestaurant} 

@@ -29,6 +29,18 @@ button.value-display {
 	}
 }
 
+.clickable-icon:hover {
+	cursor: pointer;
+}
+
+.add-icon {
+	color: lawngreen;
+}
+
+.delete-icon {
+	color: red;
+}
+
 .item-name {
 	color: rgba(248,228,53,.97);
 	font-weight: 300;

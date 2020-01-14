@@ -44,15 +44,12 @@ const Item = ({
 				
 				<Col xs={12} md={3} className='clearfix py-1'>
 					{ currentUser && (
-						<Button 
-							size='sm' 
-							className='float-right' 
-							variant='danger' 
-							onClick={()=> { deleteItem(id, restaurant)}}
-							
-						>
-							<FontAwesomeIcon icon='minus' />
-						</Button>
+						<div className='float-right'>
+							<FontAwesomeIcon 
+								icon='times'
+								className='clickable-icon delete-icon'
+								onClick={()=> { deleteItem(id, restaurant)}} />
+						</div>
 					)}
 					
 					<h6 className='py-4 py-md-0 item-name'>{name} ({units})</h6>
@@ -61,7 +58,7 @@ const Item = ({
 				<Col xs={6} className='d-md-none text-right py-1'>
 					On Hand
 				</Col>
-				<Col xs={6} md={2} className='pb-1'>
+				<Col xs={5} md={2} className='pb-1'>
 					{ currentUser && (
 						<Button 
 							variant='outline-primary' 
@@ -93,7 +90,7 @@ const Item = ({
 				<Col xs={6} className='d-md-none text-right py-1'>
 					Needs
 				</Col>
-				<Col xs={6} md={2} className='pb-1'>
+				<Col xs={5} md={2} className='pb-1'>
 
 					{ currentUser && (
 						<Button 
@@ -124,7 +121,7 @@ const Item = ({
 				<Col xs={6} className='d-md-none text-right py-1'>
 					To be prepped
 				</Col>
-				<Col xs={6} md={2} className='pb-1'>
+				<Col xs={5} md={2} className='pb-1'>
 					<Button size='sm' variant='light' className='value-display'>
 						{needs.length > 0 && onHand.length > 0 && (needs[0].quantity - onHand[0].quantity) > 0 ? 
 							(needs[0].quantity - onHand[0].quantity) : 
@@ -135,7 +132,7 @@ const Item = ({
 				<Col xs={6} className='d-md-none text-right py-1'>
 					Cases
 				</Col>
-				<Col xs={6} md={2} className='pb-1'>
+				<Col xs={5} md={2} className='pb-1'>
 					{ currentUser &&
 						<Button 
 							variant='outline-primary' 
