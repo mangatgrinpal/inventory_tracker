@@ -27,6 +27,8 @@ import Button from 'react-bootstrap/Button';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+
 
 const Restaurant = ({ 
 	deleteRestaurant, 
@@ -48,9 +50,6 @@ const Restaurant = ({
 	const { id } = useParams();
 	const history = useHistory();
 
-	const [showForm, setShowForm] = useState(false);
-	const [showButton, setShowButton] = useState(true);
-
 	useEffect(() => {
 		fetchItems(id)
 
@@ -61,111 +60,56 @@ const Restaurant = ({
 	let meatItems = itemList.filter(item => item.category == 'Meat')
 	let sauceAddOnItems = itemList.filter(item => item.category == 'Sauces/Add-ons')
 
+
 	return (
 		<Fragment>
-		<Container>
-		<Row>
-				<Col className='clearfix'>
-			{restaurantLinksVisible ? 
-					<Button size='sm' className='float-left' onClick={()=>{setRestaurantLinksVisibility(false)}}>
-						Hide restaurants
-					</Button>
-				:
-					<Button size='sm' className='float-left' onClick={()=>{setRestaurantLinksVisibility(true)}}>
-						Go back
-					</Button>
-				}
-				</Col>
-			</Row>
-			<Row className='justify-content-center py-1'>
-				
-
-				{currentUser && (
-					<Col xs={4}>
-
-						<Button 
-							onClick={()=> {setItemFormVisibility(true)}}
-						>
-							Add New Item
-						</Button>
+			<Container>
+				<Row>
+					<Col className='clearfix'>
+				{restaurantLinksVisible ? 
+					<FontAwesomeIcon icon='arrow-circle-up' size='2x' onClick={()=>{setRestaurantLinksVisibility(false)}}/>
+					:
+					<FontAwesomeIcon icon='arrow-circle-left' size='2x' onClick={()=>{setRestaurantLinksVisibility(true)}}/>	
+					}
 					</Col>
-				)}
-				
-
+				</Row>
+				<Row className='text-center py-1'>
 					
-			</Row>
-			<Row className='justify-content-center pt-5'>
-				<Col xs={9} md={3}>
-					<h3 className='text-center border-bottom'>
-						{currentWorkDay}
-					</h3>
-				</Col>
-			</Row>
 
-			{ isFetching ? 
-				<Loading/> : 
-				itemList.length === 0 ?
-				<Fragment>
-					<h6>No items in this inventory. Add some above.</h6>
-				</Fragment> :
-				<Fragment>
-				{lineItems.length > 0 ? 
-					<Fragment>
-						<Row className='pt-1'>
-							<Col>
-								<h5 className='text-center section-name py-4'>Line</h5>
-							</Col>
-						</Row>
-						<Col className='d-none d-md-block'>
-							<Row className='text-center'>
-								<Col md={3}>
-									Name (units)
-								</Col>
-								<Col md={2}>
-									On Hand
-								</Col>
-								<Col md={2}>
-									Needs
-								</Col>
-								<Col md={2}>
-									To be Prepped
-								</Col>
-								<Col md={2}>
-									Cases
-								</Col>
-							</Row>
+					{currentUser && (
+						<Col xs={12}>
+
+							<Button 
+								onClick={()=> {setItemFormVisibility(true)}}
+							>
+								Add New Item
+							</Button>
 						</Col>
-
-						<Row className='no-gutters'>
-							<Col className='text-center'>
-
-								{lineItems.map( item => {
-
-									return(
-										<Item 
-											key={item.id}
-											restaurant={id}
-											item={item}
-											fetchRecords={fetchRecords}
-											recordList={recordList}
-											deleteItem={deleteItem}
-											currentWorkDay={currentWorkDay}
-											previousWorkDay={previousWorkDay}
-											updateRecord={updateRecord}
-											currentUser={currentUser} />
-									)
-								})}
-							</Col>
-						</Row>
-						</Fragment>
-						:
-					<div/>}
+					)}
 					
-					{miscItems.length > 0 ?
+
+						
+				</Row>
+				<Row className='justify-content-center pt-5'>
+					<Col xs={9} md={3}>
+						<h3 className='text-center border-bottom'>
+							{currentWorkDay}
+						</h3>
+					</Col>
+				</Row>
+
+				{ isFetching ? 
+					<Loading/> : 
+					itemList.length === 0 ?
+					<Fragment>
+						<h6>No items in this inventory. Add some above.</h6>
+					</Fragment> :
+					<Fragment>
+					{lineItems.length > 0 ? 
 						<Fragment>
-							<Row className='pt-5'>
+							<Row className='pt-1'>
 								<Col>
-									<h5 className='text-center section-name py-4'>Misc</h5>
+									<h5 className='text-center section-name py-4'>Line</h5>
 								</Col>
 							</Row>
 							<Col className='d-none d-md-block'>
@@ -187,10 +131,11 @@ const Restaurant = ({
 									</Col>
 								</Row>
 							</Col>
+
 							<Row className='no-gutters'>
 								<Col className='text-center'>
 
-									{miscItems.map( item => {
+									{lineItems.map( item => {
 
 										return(
 											<Item 
@@ -208,14 +153,15 @@ const Restaurant = ({
 									})}
 								</Col>
 							</Row>
-						</Fragment> :
-
+							</Fragment>
+							:
 						<div/>}
-						{sauceAddOnItems.length > 0 ?
+						
+						{miscItems.length > 0 ?
 							<Fragment>
-								<Row className='justify-content-center pt-5'>
+								<Row className='pt-5'>
 									<Col>
-										<h5 className='text-center section-name py-4'>Sauces/Add-ons</h5>
+										<h5 className='text-center section-name py-4'>Misc</h5>
 									</Col>
 								</Row>
 								<Col className='d-none d-md-block'>
@@ -223,20 +169,27 @@ const Restaurant = ({
 										<Col md={3}>
 											Name (units)
 										</Col>
-										
-										<Col md={{span: 3, offset: 1}}>
+										<Col md={2}>
 											On Hand
 										</Col>
+										<Col md={2}>
+											Needs
+										</Col>
+										<Col md={2}>
+											To be Prepped
+										</Col>
+										<Col md={2}>
+											Cases
+										</Col>
 									</Row>
 								</Col>
-								
 								<Row className='no-gutters'>
 									<Col className='text-center'>
 
-										{sauceAddOnItems.map( item => {
+										{miscItems.map( item => {
 
 											return(
-												<SauceAddOnItem 
+												<Item 
 													key={item.id}
 													restaurant={id}
 													item={item}
@@ -253,88 +206,131 @@ const Restaurant = ({
 								</Row>
 							</Fragment> :
 
-						<div/>}
-
-						{meatItems.length > 0 ?
-							<Fragment>
-								<Row className='justify-content-center pt-5'>
-									<Col>
-										<h5 className='text-center section-name py-4'>Meat</h5>
-									</Col>
-								</Row>
-								<Col className='d-none d-md-block'>
-									<Row className='text-center'>
-										<Col md={3}>
-											Name (units)
-										</Col>
-										
-										<Col md={3}>
-											Marinated cases
-										</Col>
-										<Col md={3}>
-											Separated pans
-										</Col>
-										<Col md={3}>
-											Non-marinated cases
+							<div/>}
+							{sauceAddOnItems.length > 0 ?
+								<Fragment>
+									<Row className='justify-content-center pt-5'>
+										<Col>
+											<h5 className='text-center section-name py-4'>Sauces/Add-ons</h5>
 										</Col>
 									</Row>
-								</Col>
-								
-								<Row className='no-gutters'>
-									<Col className='text-center'>
-
-										{meatItems.map( item => {
-
-											return(
-												<MeatItem 
-													key={item.id}
-													restaurant={id}
-													item={item}
-													fetchRecords={fetchRecords}
-													recordList={recordList}
-													deleteItem={deleteItem}
-													currentWorkDay={currentWorkDay}
-													previousWorkDay={previousWorkDay}
-													updateRecord={updateRecord}
-													currentUser={currentUser} />
-											)
-										})}
+									<Col className='d-none d-md-block'>
+										<Row className='text-center'>
+											<Col md={3}>
+												Name (units)
+											</Col>
+											
+											<Col md={{span: 3, offset: 1}}>
+												On Hand
+											</Col>
+										</Row>
 									</Col>
-								</Row>
-							</Fragment> :
+									
+									<Row className='no-gutters'>
+										<Col className='text-center'>
 
-						<div/>
+											{sauceAddOnItems.map( item => {
+
+												return(
+													<SauceAddOnItem 
+														key={item.id}
+														restaurant={id}
+														item={item}
+														fetchRecords={fetchRecords}
+														recordList={recordList}
+														deleteItem={deleteItem}
+														currentWorkDay={currentWorkDay}
+														previousWorkDay={previousWorkDay}
+														updateRecord={updateRecord}
+														currentUser={currentUser} />
+												)
+											})}
+										</Col>
+									</Row>
+								</Fragment> :
+
+							<div/>}
+
+							{meatItems.length > 0 ?
+								<Fragment>
+									<Row className='justify-content-center pt-5'>
+										<Col>
+											<h5 className='text-center section-name py-4'>Meat</h5>
+										</Col>
+									</Row>
+									<Col className='d-none d-md-block'>
+										<Row className='text-center'>
+											<Col md={3}>
+												Name (units)
+											</Col>
+											
+											<Col md={3}>
+												Marinated cases
+											</Col>
+											<Col md={3}>
+												Separated pans
+											</Col>
+											<Col md={3}>
+												Non-marinated cases
+											</Col>
+										</Row>
+									</Col>
+									
+									<Row className='no-gutters'>
+										<Col className='text-center'>
+
+											{meatItems.map( item => {
+
+												return(
+													<MeatItem 
+														key={item.id}
+														restaurant={id}
+														item={item}
+														fetchRecords={fetchRecords}
+														recordList={recordList}
+														deleteItem={deleteItem}
+														currentWorkDay={currentWorkDay}
+														previousWorkDay={previousWorkDay}
+														updateRecord={updateRecord}
+														currentUser={currentUser} />
+												)
+											})}
+										</Col>
+									</Row>
+								</Fragment> :
+
+							<div/>
+						}
+						
+
+					</Fragment>
 					}
-					
 
-				</Fragment>
-				}
+					{ currentUser && (
+						<Row className='py-5'>
+							<Col xs={{span:10, offset: 1}} md={{span: 4, offset: 4}}>
+								<Button 
+									variant='danger' 
+									onClick={()=> {deleteRestaurant(id, history)}} 
+									block
+								>
+									Delete Restaurant
+								</Button>
+							</Col>
+						</Row>
+					)}
 
-				{ currentUser && (
-					<Row className='py-5'>
-						<Col xs={{span:10, offset: 1}} md={{span: 4, offset: 4}}>
-							<Button 
-								variant='danger' 
-								onClick={()=> {deleteRestaurant(id, history)}} 
-								block
-							>
-								Delete Restaurant
-							</Button>
-						</Col>
-					</Row>
-				)}
-
-		</Container>
+			</Container>
 			<CSSTransition
 					in={itemFormVisible}
-					timeout={500}
+					timeout={600}
 					unmountOnExit
 					classNames='slide-out'
 				>
-				<Col xs={12} md={{span: 6, offset: 6}} className='form-panel-container fixed-top'>
-					<a onClick={()=>{setItemFormVisibility(false)}}>
-						close
-					</a>
+				<Col xs={12} md={{span: 6, offset: 6}} className='form-panel-container fixed-top pt-2'>
+
+					<FontAwesomeIcon size='2x' icon='times' onClick={()=>{setItemFormVisibility(false)}}/>
+
 					<ItemForm 
 						restaurant={id} 
 						addItem={addItem}

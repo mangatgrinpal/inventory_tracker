@@ -27,6 +27,8 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+
 
 const Dashboard = ({
 	fetchRestaurants, 
@@ -71,7 +73,8 @@ const Dashboard = ({
 					<Fragment>
 						<CSSTransition
 							in={restaurantLinksVisible}
-							timeout={500}
+							timeout={600}
+							unmountOnExit
 							classNames='slide'
 						>
 							<RestaurantLinks
@@ -95,16 +98,16 @@ const Dashboard = ({
 						</Switch>
 						<CSSTransition
 							in={restaurantFormVisible}
-							timeout={500}
+							timeout={600}
 							unmountOnExit
 							classNames='slide-out'
 						>
 						
 
-						<Col xs={12} md={{span: 6, offset: 6}} className='form-panel-container fixed-top'>
-							<a onClick={()=>{setRestaurantFormVisibility(false)}}>
-							close
-							</a>
+						<Col xs={12} md={{span: 6, offset: 6}} className='form-panel-container fixed-top pt-2'>
+
+								<FontAwesomeIcon onClick={()=>{setRestaurantFormVisibility(false)}} icon='times' size='2x' />
+
 							<RestaurantForm 
 								addRestaurant={addRestaurant} 
 								restaurantFormVisible={restaurantFormVisible}

@@ -64,6 +64,11 @@ export const addItem = (name, units, category, restaurant) => async dispatch => 
 			payload: json
 		})
 
+		dispatch({
+			type: SET_ITEM_FORM_VISIBILITY,
+			payload: false
+		})
+
 	} catch(error) {
 		console.log(error)
 	}

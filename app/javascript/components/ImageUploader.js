@@ -5,6 +5,7 @@ import Dropzone from 'react-dropzone';
 
 const ImageUploader = ({imageData, setImageData}) => {
 
+
 	return (
 		<Dropzone
 			accept='image/png, image/gif, image/jpeg'
@@ -14,7 +15,7 @@ const ImageUploader = ({imageData, setImageData}) => {
 					<input {...getInputProps()} />
 					{imageData === null ? 
 						<p>Drag 'n' drop some files here, or click to select files</p> :
-						<p>Image added</p>}
+						<p>{imageData[0].name} selected</p>}
 					
 				</div>
 			)}

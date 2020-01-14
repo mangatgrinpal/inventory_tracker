@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { Fragment, useState } from 'react';
 
 import ImageUploader from './ImageUploader';
 
+import Container from 'react-bootstrap/Container';
 import Form from 'react-bootstrap/Form';
 import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
@@ -38,33 +39,42 @@ const RestaurantForm = ({
 	}
 
 	return (
-			<Form onKeyPress={submitFormOnEnter}>
-				<Form.Row>
-					<Col>
-						<Form.Control 
-							type='text'
-							value={formData}
-							onChange={(e)=> setFormData(e.target.value)}
-							/>
-					</Col>
-				</Form.Row>
-				<Form.Row>
-					<Col>
-
-						<ImageUploader imageData={imageData} setImageData={setImageData}/>
-					</Col>
-				</Form.Row>
-				<Form.Row>
-					<Col>
-						<Button onClick={handleClick}>
-							Add
-						</Button>
-						<Button variant='danger' onClick={()=> {setRestaurantFormVisibility(false)}}>
-							Cancel
-						</Button>
-					</Col>
-				</Form.Row>
-			</Form>
+			<Container className='p-4'>
+				<h6 className='section-name'>Add new restaurant</h6>
+				<Form onKeyPress={submitFormOnEnter} className='pt-5'>
+					<Form.Row>
+						<Col>
+							<Form.Label>
+								Restaurant name
+							</Form.Label>
+							<Form.Control 
+								type='text'
+								placeholder='What is your restaurant called?'
+								value={formData}
+								onChange={(e)=> setFormData(e.target.value)}
+								/>
+						</Col>
+					</Form.Row>
+					<Form.Row>
+						<Col>
+							<Form.Label>
+								Choose image
+							</Form.Label>
+							<ImageUploader imageData={imageData} setImageData={setImageData}/>
+						</Col>
+					</Form.Row>
+					<Form.Row>
+						<Col>
+							<Button onClick={handleClick}>
+								Add
+							</Button>
+							<Button variant='danger' onClick={()=> {setRestaurantFormVisibility(false)}}>
+								Cancel
+							</Button>
+						</Col>
+					</Form.Row>
+				</Form>
+			</Container>
 		)
 }
 

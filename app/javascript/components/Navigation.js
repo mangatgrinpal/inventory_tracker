@@ -4,6 +4,7 @@ import { NavLink, useHistory } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import { userSignOut } from '../actions/users';
+import { setRestaurantLinksVisibility } from '../actions/restaurants';
 
 import { LinkContainer } from 'react-router-bootstrap';
 
@@ -12,6 +13,7 @@ import Nav from 'react-bootstrap/Nav';
 
 const Navigation = ({ 
 	userSignOut,
+	setRestaurantLinksVisibility,
 	users: { currentUser }
 }) => {
 
@@ -38,7 +40,7 @@ const Navigation = ({
 	 
 
 					<Nav.Item>
-						<LinkContainer to='/dashboard'>
+						<LinkContainer to='/dashboard' onClick={()=>{setRestaurantLinksVisibility(true)}}>
 							<Nav.Link>Dashboard</Nav.Link>
 						</LinkContainer>
 					</Nav.Item>
@@ -70,10 +72,11 @@ const Navigation = ({
 
 const mapStateToProps = state => 
 ({
-	users: state.users
+	users: state.users,
+	restaurants: state.restaurants
 })
 
 export default connect (
 	mapStateToProps,
-	{ userSignOut }
+	{ userSignOut, setRestaurantLinksVisibility }
 )(Navigation)
