@@ -25,7 +25,7 @@ export const fetchItems = restaurant => async dispatch => {
 			type: FETCH_ITEMS_REQUEST
 		})
 
-		const res = await fetch('/items?restaurant=' + restaurant)
+		const res = await fetch(`/items?restaurant=${restaurant}`)
 		const json = await res.json();
 
 

@@ -16,7 +16,7 @@ const RestaurantForm = ({
 }) => {
 
 	const [ formData, setFormData ] = useState('')
-	const [ imageData, setImageData ] = useState(null)
+	const [ imageData, setImageData ] = useState([])
 
 
 	const handleClick = () => {
@@ -56,7 +56,7 @@ const RestaurantForm = ({
 						</Col>
 					</Form.Row>
 					<Form.Row>
-						<Col>
+						<Col className='pt-2'>
 							<Form.Label>
 								Choose image
 							</Form.Label>
