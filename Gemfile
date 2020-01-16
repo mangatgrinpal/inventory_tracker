@@ -23,7 +23,7 @@ gem 'jbuilder', '~> 2.7'
 # gem 'bcrypt', '~> 3.1.7'
 gem 'react-rails'
 gem 'haml'
-
+gem 'devise_token_auth'
 gem 'figaro'
 gem 'aws-sdk-s3', require: false
 
