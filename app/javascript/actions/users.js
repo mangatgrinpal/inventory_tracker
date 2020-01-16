@@ -69,6 +69,8 @@ export const userSignIn = (email, password, history) => async dispatch => {
 			payload: json
 		})
 
+
+
 		history.push('/dashboard')
 
 	} catch(error) {
