@@ -19,11 +19,11 @@ export const userSignUp = (email, password, passwordConfirmation, history) => as
 		const res = await fetch('/users', {
 			method: 'POST',
 			body: JSON.stringify({
-				user: {
+
 					email: email,
 					password: password,
 					password_confirmation: passwordConfirmation
-				}
+
 			}),
 			headers: headers
 		})
@@ -35,7 +35,7 @@ export const userSignUp = (email, password, passwordConfirmation, history) => as
 			payload: json
 		})
 
-		history.push('/dashboard')
+		// history.push('/dashboard')
 
 
 		
@@ -52,10 +52,10 @@ export const userSignIn = (email, password, history) => async dispatch => {
 		const res = await fetch('/users/sign_in', {
 			method: 'POST',
 			body: JSON.stringify({
-				user: {
+
 					email: email,
 					password: password
-				}
+
 			}),
 			headers: headers
 		})

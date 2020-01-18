@@ -1,4 +1,5 @@
 import { combineReducers } from 'redux';
+import { reduxTokenAuthReducer } from 'redux-token-auth';
 import restaurants from './restaurants';
 import items from './items';
 import weeks from './weeks';
@@ -11,5 +12,6 @@ export default combineReducers({
 	restaurants,
 	items,
 	records,
+	reduxTokenAuth: reduxTokenAuthReducer,
 	users
 });

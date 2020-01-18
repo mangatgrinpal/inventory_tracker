@@ -9,7 +9,6 @@ import { library } from '@fortawesome/fontawesome-svg-core';
 import { fas } from '@fortawesome/free-solid-svg-icons';
 import { far } from '@fortawesome/free-regular-svg-icons';
 
-
 library.add(fas, far)
 
 import Navigation from './Navigation';
@@ -21,6 +20,8 @@ import UserSignIn from './UserSignIn';
 
 import { store, persistor } from '../store';
 
+import { verifyCredentials } from '../actions/redux-token-auth-config';
+
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom'
 
 
@@ -29,7 +30,7 @@ const App = ({ currentDay, yesterday }) => {
 	return (
 		
 		<Provider store={store}>
-			<PersistGate loading={<Loading/>} persistor={persistor}>
+
 				<Router>
 					<Navigation />
 
@@ -42,17 +43,17 @@ const App = ({ currentDay, yesterday }) => {
 								yesterday={yesterday}
 								currentDay={currentDay} />
 						</Route>
-					{/*
+
 						<Route path='/sign-up'>
 							<UserSignUp />
 						</Route>
-					*/}
+
 						<Route path='/sign-in'>
 							<UserSignIn />
 						</Route>
 					</Switch>
 				</Router>
-			</PersistGate>
+
 		</Provider>
 	)
 

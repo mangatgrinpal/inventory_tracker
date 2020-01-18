@@ -9,7 +9,14 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 import rootReducer from './reducers';
 
 
-const initialState = {};
+const initialState = {
+	reduxTokenAuth: {
+		currentUser: {
+			isLoading: false,
+			isSignedIn: false
+		}
+	}
+};
 
 const persistConfig = {
 	key: 'root',
@@ -22,7 +29,7 @@ const persistedReducer = persistReducer(persistConfig, rootReducer)
 
 
 const store = createStore(
-	persistedReducer,
+	rootReducer,
 	initialState,
 	composeWithDevTools(
 		applyMiddleware(thunk)
