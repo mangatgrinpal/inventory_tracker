@@ -20,9 +20,8 @@ import UserSignIn from './UserSignIn';
 
 import { store, persistor } from '../store';
 
-import { verifyCredentials } from '../actions/redux-token-auth-config';
 
-import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom'
+import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 
 
 const App = ({ currentDay, yesterday }) => {

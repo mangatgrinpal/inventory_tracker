@@ -6,7 +6,8 @@ import {
 
 const initialState = {
 	currentUser: null,
-	loading: false
+	loading: false,
+	isLoggedIn: false
 }
 
 export default function(state=initialState, action) {

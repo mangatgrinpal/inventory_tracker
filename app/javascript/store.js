@@ -10,12 +10,6 @@ import rootReducer from './reducers';
 
 
 const initialState = {
-	reduxTokenAuth: {
-		currentUser: {
-			isLoading: false,
-			isSignedIn: false
-		}
-	}
 };
 
 const persistConfig = {
