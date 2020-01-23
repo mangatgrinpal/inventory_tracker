@@ -10,6 +10,13 @@ import {
 	USER_SIGN_OUT_FAILURE
 } from '../actions/types';
 
+import { 
+	setAuthHeaders, 
+	persistAuthHeadersInDeviceStorage 
+} from '../utils/auth';
+
+import axios from 'axios';
+
 //consolidate these csrftokens into a single file later
 
 const csrfToken = document.getElementsByName('csrf-token')[0].content
@@ -32,11 +39,13 @@ export const userSignUp = (email, password, passwordConfirmation, history) => as
 	})
 
 	try {
-		const res = await fetch('/users', {
-			method: 'POST',
-			body: body,
-			headers: headers
+		const res = await axios.post({
+			url: 'users',
+			data: body
 		})
+
+		setAuthHeaders(res.headers)
+		persistAuthHeadersInDeviceStorage(response.headers)
 
 
 		const json = await res.json();
