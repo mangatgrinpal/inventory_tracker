@@ -10,21 +10,14 @@ import {
 	USER_SIGN_OUT_FAILURE
 } from '../actions/types';
 
+import axios from 'axios';
+
 import { 
 	setAuthHeaders, 
 	persistAuthHeadersInDeviceStorage 
 } from '../utils/auth';
 
-import axios from 'axios';
 
-//consolidate these csrftokens into a single file later
-
-const csrfToken = document.getElementsByName('csrf-token')[0].content
-
-const headers = {
-	'X-CSRF-Token': csrfToken,
-	'Content-Type': 'application/json'
-}
 
 export const userSignUp = (email, password, passwordConfirmation, history) => async dispatch => {
 	
@@ -32,48 +25,38 @@ export const userSignUp = (email, password, passwordConfirmation, history) => as
 		type: USER_SIGN_UP_REQUEST
 	})
 
-	let body = JSON.stringify({
-		email: email,
-		password: password,
-		password_confirmation: passwordConfirmation
-	})
-
 	try {
-		const res = await axios.post({
-			url: 'users',
-			data: body
+
+		const res = await axios.post('/users', {
+			email: email,
+			password: password,
+			password_confirmation: passwordConfirmation
 		})
 
 		setAuthHeaders(res.headers)
-		persistAuthHeadersInDeviceStorage(response.headers)
+		persistAuthHeadersInDeviceStorage(res.headers)
+
+		const { data } = res.data;
 
 
-		const json = await res.json();
+		debugger
 
-		const { status, data, errors } = json;
+		dispatch({
+			type: USER_SIGN_UP_SUCCESS,
+			payload: data
+		})
 
 
-		if (status === 'error') {
-
-			dispatch({
-				type: USER_SIGN_UP_FAILURE,
-				payload: errors.full_messages
-			})
-
-		} else {
-
-			dispatch({
-				type: USER_SIGN_UP_SUCCESS,
-				payload: data
-			})
-
-		}
 
 		// history.push('/dashboard')
 
-	} catch(error) {
+	} catch (err) {
+		console.error(err)
+		debugger
+		dispatch({
+			type: USER_SIGN_UP_FAILURE
+		})
 
-		console.log(error)
 
 	}
 }

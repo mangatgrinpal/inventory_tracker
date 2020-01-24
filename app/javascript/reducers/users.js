@@ -36,8 +36,7 @@ export default function(state=initialState, action) {
 			return {
 				...state,
 				currentUser: null,
-				loading: false,
-				errorMessages: payload
+				loading: false
 			};
 		case USER_SIGN_IN_SUCCESS:
 			return {

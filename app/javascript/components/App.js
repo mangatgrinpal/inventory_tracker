@@ -1,5 +1,7 @@
 import React, { Fragment, useState, useEffect } from 'react';
 
+import axios from 'axios';
+
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
 

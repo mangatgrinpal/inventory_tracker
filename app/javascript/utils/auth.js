@@ -1,6 +1,5 @@
-
-
 import axios from 'axios';
+
 
 const authHeaderKeys = [
 	'access-token',
@@ -10,13 +9,14 @@ const authHeaderKeys = [
 	'uid'
 ]
 
-export const setAuthHeaders = () => {
+
+export const setAuthHeaders = headers => {
 	authHeaderKeys.forEach(key=> {
 		axios.defaults.headers.common[key] = headers[key]
 	})
 }
 
-export const persistAuthHeadersInDeviceStorage = () => {
+export const persistAuthHeadersInDeviceStorage = (headers) => {
 	authHeaderKeys.forEach(key=> {
 		localStorage.setItem(key, headers[key])
 	})
@@ -28,8 +28,8 @@ export const deleteAuthHeaders = () => {
 	})
 }
 
-export const deleteAuthHeadersFromDeviceStorage = async => {
+export const deleteAuthHeadersFromDeviceStorage = async (storage) => {
 	authHeaderKeys.forEach(key=> {
-		localStorage.removeItem(key)
+		storage.removeItem(key)
 	})
 }
