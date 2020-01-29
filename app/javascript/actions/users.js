@@ -104,9 +104,11 @@ export const userSignOut = (email, history) => async dispatch => {
 
 	try {
 
-		const res = await axios.delete('/users/sign_out',{
+		const res = await axios.delete('/users/sign_out', {
 			email: email
 		})
+
+
 
 		deleteAuthHeaders()
 		deleteAuthHeadersFromDeviceStorage()
@@ -118,11 +120,7 @@ export const userSignOut = (email, history) => async dispatch => {
 		history.push('/')
 
 	} catch(error) {
-
-		dispatch({
-
-		})
-
+		console.log(error)
 	}
 }
 

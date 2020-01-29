@@ -19,6 +19,7 @@ import Loading from './Loading';
 import Dashboard from './Dashboard';
 import UserSignUp from './UserSignUp';
 import UserSignIn from './UserSignIn';
+import PrivateRouteWrapper from './PrivateRouteWrapper';
 
 import { store, persistor } from '../store';
 
@@ -38,11 +39,11 @@ const App = ({ currentDay, yesterday }) => {
 						<Route exact path='/'>
 							<Home />
 						</Route>
-						<Route path='/dashboard'>
+						<PrivateRouteWrapper path='/dashboard'>
 							<Dashboard
 								yesterday={yesterday}
 								currentDay={currentDay} />
-						</Route>
+						</PrivateRouteWrapper>
 
 						<Route path='/sign-up'>
 							<UserSignUp />

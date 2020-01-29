@@ -1,7 +1,7 @@
 import React, { Fragment, useState } from 'react';
 import Loading from './Loading';
 
-import { Link, useHistory } from 'react-router-dom';
+import { Link, useHistory, useLocation } from 'react-router-dom';
 
 import { connect } from 'react-redux';
 
@@ -19,6 +19,9 @@ const UserSignIn = ({
 }) => {
 
 	const history = useHistory();
+	const location = useLocation();
+
+	let { from } = location.state || { from: { pathname: '/' } };
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
 

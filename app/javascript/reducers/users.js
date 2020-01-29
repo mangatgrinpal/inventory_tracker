@@ -13,7 +13,8 @@ import {
 const initialState = {
 	currentUser: null,
 	loading: false,
-	errorMessages: []
+	errorMessages: [],
+	isAuthenticated: false
 
 }
 
@@ -22,6 +23,7 @@ export default function(state=initialState, action) {
 	switch(type) {
 		case USER_SIGN_UP_REQUEST:
 		case USER_SIGN_IN_REQUEST:
+		case USER_SIGN_OUT_REQUEST:
 			return {
 				...state,
 				loading: true
@@ -33,6 +35,7 @@ export default function(state=initialState, action) {
 				loading: false
 			};
 		case USER_SIGN_UP_FAILURE:
+		case USER_SIGN_IN_FAILURE:
 			return {
 				...state,
 				currentUser: null,
@@ -44,26 +47,15 @@ export default function(state=initialState, action) {
 				...state,
 				currentUser: payload,
 				loading: false,
-				errorMessages: []
-			};
-		case USER_SIGN_IN_FAILURE:
-			return {
-				...state,
-				currentUser: null,
-				loading: false,
-				errorMessages: [payload]
-			}
-		case USER_SIGN_OUT_REQUEST:
-			return {
-				...state,
-				currentUser: payload,
-				loading: false
+				errorMessages: [],
+				isAuthenticated: true
 			};
 		case USER_SIGN_OUT_SUCCESS:
 			return {
 				...state,
 				currentUser: null,
-				loading: false
+				loading: false,
+				isAuthenticated: false
 			};
 		case USER_SIGN_OUT_FAILURE:
 			return {
