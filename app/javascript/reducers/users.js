@@ -36,7 +36,8 @@ export default function(state=initialState, action) {
 			return {
 				...state,
 				currentUser: null,
-				loading: false
+				loading: false,
+				errorMessages: [payload]
 			};
 		case USER_SIGN_IN_SUCCESS:
 			return {
@@ -50,7 +51,7 @@ export default function(state=initialState, action) {
 				...state,
 				currentUser: null,
 				loading: false,
-				errorMessages: payload
+				errorMessages: [payload]
 			}
 		case USER_SIGN_OUT_REQUEST:
 			return {

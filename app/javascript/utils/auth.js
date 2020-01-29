@@ -28,8 +28,8 @@ export const deleteAuthHeaders = () => {
 	})
 }
 
-export const deleteAuthHeadersFromDeviceStorage = async (storage) => {
+export const deleteAuthHeadersFromDeviceStorage = async () => {
 	authHeaderKeys.forEach(key=> {
-		storage.removeItem(key)
+		localStorage.removeItem(key)
 	})
 }

@@ -22,7 +22,6 @@ import UserSignIn from './UserSignIn';
 
 import { store, persistor } from '../store';
 
-
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 
 
@@ -31,7 +30,7 @@ const App = ({ currentDay, yesterday }) => {
 	return (
 		
 		<Provider store={store}>
-
+			<PersistGate loading={<Loading/>} persistor={persistor}>
 				<Router>
 					<Navigation />
 
@@ -54,7 +53,7 @@ const App = ({ currentDay, yesterday }) => {
 						</Route>
 					</Switch>
 				</Router>
-
+			</PersistGate>
 		</Provider>
 	)
 

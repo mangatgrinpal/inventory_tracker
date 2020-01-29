@@ -14,9 +14,10 @@ import axios from 'axios';
 
 import { 
 	setAuthHeaders, 
-	persistAuthHeadersInDeviceStorage 
+	persistAuthHeadersInDeviceStorage,
+	deleteAuthHeaders,
+	deleteAuthHeadersFromDeviceStorage 
 } from '../utils/auth';
-
 
 
 export const userSignUp = (email, password, passwordConfirmation, history) => async dispatch => {
@@ -39,8 +40,6 @@ export const userSignUp = (email, password, passwordConfirmation, history) => as
 		const { data } = res.data;
 
 
-		debugger
-
 		dispatch({
 			type: USER_SIGN_UP_SUCCESS,
 			payload: data
@@ -50,11 +49,11 @@ export const userSignUp = (email, password, passwordConfirmation, history) => as
 
 		// history.push('/dashboard')
 
-	} catch (err) {
-		console.error(err)
-		debugger
+	} catch(error) {
+
 		dispatch({
-			type: USER_SIGN_UP_FAILURE
+			type: USER_SIGN_UP_FAILURE,
+			payload: error.message
 		})
 
 
@@ -67,44 +66,33 @@ export const userSignIn = (email, password, history) => async dispatch => {
 		type: USER_SIGN_IN_REQUEST
 	})
 
-	let body = JSON.stringify({
-		email: email,
-		password: password
-	})
 
 	try {
 
-		const res = await fetch('/users/sign_in', {
-			method: 'POST',
-			body: body,
-			headers: headers
+		const res = await axios.post('/users/sign_in', {
+			email: email,
+			password: password
 		})
 
-		const json = await res.json()
-		const { success, data, errors } = json;
+		setAuthHeaders(res.headers)
+		persistAuthHeadersInDeviceStorage(res.headers)
+
+		const { data } = res.data;
+		
+		dispatch({
+			type: USER_SIGN_IN_SUCCESS,
+			payload: data
+		})
 
 
-		if (data) {
-
-			dispatch({
-				type: USER_SIGN_IN_SUCCESS,
-				payload: data
-			})
-
-		} else {
-
-			dispatch({
-				type: USER_SIGN_IN_FAILURE,
-				payload: errors
-			})
-
-		}
-
-
-		//history.push('/dashboard')
+		history.push('/dashboard')
 
 	} catch(error) {
-		console.log(error)
+
+		dispatch({
+			type: USER_SIGN_IN_FAILURE,
+			payload: error.message
+		})
 	}
 }
 
@@ -116,29 +104,25 @@ export const userSignOut = (email, history) => async dispatch => {
 
 	try {
 
-		const res = await fetch('/users/sign_out',{
-			method: 'DELETE',
-			body: JSON.stringify({
-				email: email
-			}),
-			headers: headers
+		const res = await axios.delete('/users/sign_out',{
+			email: email
 		})
 
-		const json = await res.json()
-
-
-
+		deleteAuthHeaders()
+		deleteAuthHeadersFromDeviceStorage()
 
 		dispatch({
-			type: USER_SIGN_OUT_SUCCESS,
-			payload: json
+			type: USER_SIGN_OUT_SUCCESS
 		})
 
-		//history.push('/')
-
+		history.push('/')
 
 	} catch(error) {
-		console.log(error)
+
+		dispatch({
+
+		})
+
 	}
 }
 
