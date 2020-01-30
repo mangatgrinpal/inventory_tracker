@@ -19,9 +19,9 @@ const Navigation = ({
 
 	const history = useHistory();
 
-	const handleClick = (e, email, history) => {
+	const handleClick = (e, history) => {
 		e.preventDefault()
-		userSignOut(email, history)
+		userSignOut(history)
 	}
 
 
@@ -40,7 +40,7 @@ const Navigation = ({
 								</LinkContainer>
 							</Nav.Item>
 							<Nav.Item>
-								<LinkContainer to='/sign-out' onClick={(e)=>{handleClick(e, currentUser.email, history)}}>
+								<LinkContainer to='/sign-out' onClick={(e)=>{handleClick(e, history)}}>
 									<Nav.Link >Sign Out</Nav.Link>
 								</LinkContainer>
 							</Nav.Item>

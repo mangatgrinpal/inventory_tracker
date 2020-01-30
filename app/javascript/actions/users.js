@@ -96,8 +96,14 @@ export const userSignIn = (email, password, history) => async dispatch => {
 	}
 }
 
-export const userSignOut = (email, history) => async dispatch => {
+export const userSignOut = history => async dispatch => {
 	
+	const userSignOutCredentials = {
+		'access-token': await localStorage.getItem('access-token'),
+		'client': await localStorage.getItem('client'),
+		'uid': await localStorage.getItem('uid')
+	}
+
 	dispatch({
 		type: USER_SIGN_OUT_REQUEST
 	})
@@ -105,7 +111,7 @@ export const userSignOut = (email, history) => async dispatch => {
 	try {
 
 		const res = await axios.delete('/users/sign_out', {
-			email: email
+			data: userSignOutCredentials
 		})
 
 
