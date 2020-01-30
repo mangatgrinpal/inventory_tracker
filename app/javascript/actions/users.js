@@ -60,6 +60,21 @@ export const userSignUp = (email, password, passwordConfirmation, history) => as
 	}
 }
 
+export const verifyToken = verificationParams => async dispatch => {
+	debugger
+	try {
+		const res = await axios.get('/users/validate_token',{
+			params: verificationParams
+		})
+
+		setAuthHeaders(res.headers)
+		persistAuthHeadersInDeviceStorage(res.headers)
+
+	} catch (error) {
+		console.log(error)
+	}
+}
+
 export const userSignIn = (email, password, history) => async dispatch => {
 
 	dispatch({
@@ -114,8 +129,6 @@ export const userSignOut = history => async dispatch => {
 			data: userSignOutCredentials
 		})
 
-
-
 		deleteAuthHeaders()
 		deleteAuthHeadersFromDeviceStorage()
 
@@ -128,6 +141,25 @@ export const userSignOut = history => async dispatch => {
 	} catch(error) {
 		console.log(error)
 	}
+}
+
+export const verifyCredentials = () => async dispatch => {
+
+
+	if (await localStorage.getItem('access-token')) {
+		const verificationParams = {
+			'access-token': await localStorage.getItem('access-token'),
+			'client': await localStorage.getItem('client'),
+			'uid': await localStorage.getItem('uid')
+		}
+		debugger
+		verifyToken(verificationParams)
+	} else {
+		// do something
+	}
+
+
+
 }
 
 

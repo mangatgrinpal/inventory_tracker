@@ -49,8 +49,6 @@ const Dashboard = ({
 }) => {
 
 	const { path, url } = useRouteMatch();
-	const [isHidden, toggleIsHidden] = useState(false);
-	const [hideLinks, toggleHideLinks] = useState(true);
 
 	useEffect(()=> {
 

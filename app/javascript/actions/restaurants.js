@@ -1,4 +1,5 @@
 import {
+	FETCH_RESTAURANTS_REQUEST,
 	FETCH_RESTAURANTS_SUCCESS,
 	FETCH_RESTAURANTS_ERROR,
 	ADD_RESTAURANT,
@@ -6,31 +7,45 @@ import {
 	SET_RESTAURANT_LINKS_VISIBILITY,
 	SET_RESTAURANT_FORM_VISIBILITY
 	
-} from './types'
+} from './types';
+
+import axios from 'axios';
 
 
-const csrfToken = document.getElementsByName('csrf-token')[0].content
-
-const headers = {
-	'X-CSRF-Token': csrfToken,
-	'Content-Type': 'application/json'
-}
 
 export const fetchRestaurants = restaurant => async dispatch => {
 
+	dispatch({
+		type: FETCH_RESTAURANTS_REQUEST
+	})
+
+	const userSignOutCredentials = {
+		'access-token': await localStorage.getItem('access-token'),
+		'client': await localStorage.getItem('client'),
+		'uid': await localStorage.getItem('uid')
+	}
+
+	
 	try {
 
-		const res = await fetch('/restaurants');
-		const json = await res.json();
+		const res = await axios.get('/restaurants', { headers: 
+			userSignOutCredentials
+		});
+
+
+		const { data } = res;
 
 		dispatch({
 			type: FETCH_RESTAURANTS_SUCCESS,
-			payload: json
+			payload: data
 		})
 		
 	} catch (error) {
 
 		console.log(error);
+		dispatch({
+			type: FETCH_RESTAURANTS_ERROR
+		})
 	}
 
 }

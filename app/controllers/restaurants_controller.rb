@@ -1,8 +1,7 @@
 class RestaurantsController < ApplicationController
-  before_action :authenticate_user!, only: [:create, :destroy]
+  before_action :authenticate_user!, only: [:index, :create, :destroy]
 
   def index
-
     render json: serialized_restaurants
   end  
 
@@ -29,7 +28,7 @@ class RestaurantsController < ApplicationController
 
 
   def serialized_restaurants
-    @restaurants = Restaurant.all
+    @restaurants = Restaurant.where(user_id: current_user.id)
     ActiveModel::Serializer::CollectionSerializer.new(@restaurants.with_attached_image, each_serializer: RestaurantSerializer)
   end
 end

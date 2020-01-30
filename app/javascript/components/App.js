@@ -1,7 +1,5 @@
 import React, { Fragment, useState, useEffect } from 'react';
 
-
-
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
 
@@ -20,6 +18,8 @@ import Dashboard from './Dashboard';
 import UserSignUp from './UserSignUp';
 import UserSignIn from './UserSignIn';
 import PrivateRouteWrapper from './PrivateRouteWrapper';
+
+import { verifyCredentials } from '../actions/users';
 
 import { store, persistor } from '../store';
 
