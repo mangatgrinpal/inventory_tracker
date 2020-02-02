@@ -23,10 +23,9 @@ const RestaurantForm = ({
 		// must use FormData prototype in order to send it to active storage
 		e.preventDefault();
 		const restaurant = new FormData();
-		restaurant.set('name', formData)
-		restaurant.append('image', imageData[0])
+		restaurant.append('[restaurant]name', formData)
+		restaurant.append('[restaurant]image', imageData[0])
 
-		debugger
 		addRestaurant(restaurant)
 		
 	}

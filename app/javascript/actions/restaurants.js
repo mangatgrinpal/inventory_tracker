@@ -59,7 +59,6 @@ export const fetchRestaurants = restaurant => async dispatch => {
 
 export const addRestaurant = restaurant => async dispatch => {
 
-	debugger
 
 	const currentUserCredentials = {
 		'Content-Type': 'multipart/form-data',
@@ -74,19 +73,17 @@ export const addRestaurant = restaurant => async dispatch => {
 
 
 		
-		const res = await axios.post('/restaurants', {
-			restaurant: restaurant
-			
-		}, {headers: currentUserCredentials} )
+		const res = await axios.post('/restaurants', 
+			restaurant
+		// , {headers: currentUserCredentials} 
+		)
 
-
-
-		const json = await res.json()
+		const { data } = res;
 
 
 		dispatch({
 			type: ADD_RESTAURANT,
-			payload: json,
+			payload: data,
 		})
 
 		dispatch({
@@ -104,16 +101,13 @@ export const deleteRestaurant = (restaurant, history) => async dispatch => {
 
 	try {
 
-		const res = await fetch('/restaurants/' + restaurant, {
-			method: 'DELETE',
-			headers: headers
-		})
+		const res = await axios.delete('/restaurants/' + restaurant)
 
-		const json = await res.json()
+		const { data } = res;
 
 		dispatch({
 			type: DELETE_RESTAURANT,
-			payload: json
+			payload: data
 		})
 
 		dispatch({

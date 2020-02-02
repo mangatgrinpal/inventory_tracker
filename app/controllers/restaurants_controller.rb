@@ -6,8 +6,8 @@ class RestaurantsController < ApplicationController
   end  
 
   def create
-    byebug
-  	@restaurant = Restaurant.new(restaurant_params)
+
+  	@restaurant = current_user.restaurants.build(restaurant_params)
 
 
   	if @restaurant.save
