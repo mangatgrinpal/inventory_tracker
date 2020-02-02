@@ -19,11 +19,14 @@ const RestaurantForm = ({
 	const [ imageData, setImageData ] = useState([])
 
 
-	const handleClick = () => {
+	const handleClick = e => {
 		// must use FormData prototype in order to send it to active storage
+		e.preventDefault();
 		const restaurant = new FormData();
-		restaurant.append('[restaurant]name', formData)
-		restaurant.append('[restaurant]image', imageData[0])
+		restaurant.set('name', formData)
+		restaurant.append('image', imageData[0])
+
+		debugger
 		addRestaurant(restaurant)
 		
 	}

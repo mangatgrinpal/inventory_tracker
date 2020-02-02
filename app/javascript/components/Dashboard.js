@@ -102,7 +102,10 @@ const Dashboard = ({
 						>
 						
 
-						<Col xs={12} md={{span: 6, offset: 6}} className='form-panel-container fixed-top pt-2'>
+						<Col 
+							xs={12} 
+							md={{span: 6, offset: 6}} 
+							className='form-panel-container fixed-top pt-2'>
 
 							<FontAwesomeIcon 
 								className='clickable-icon' 
@@ -118,6 +121,16 @@ const Dashboard = ({
 								setRestaurantFormVisibility={setRestaurantFormVisibility}
 								currentUser={currentUser} />
 						</Col>
+						</CSSTransition>
+
+
+						<CSSTransition
+							in={restaurantFormVisible}
+							timeout={600}
+							unmountOnExit
+							classNames='fade'
+						>
+							<Col xs={12} className='dashboard-overlay'/>
 						</CSSTransition>
 						
 					</Fragment>

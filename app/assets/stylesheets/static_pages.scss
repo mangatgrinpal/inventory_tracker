@@ -85,6 +85,17 @@ button.btn {
 	height: 100vh;
 }
 
+.dashboard-overlay {
+	top: 0;
+	right: 0;
+	left: 0;
+	z-index: 51;
+	height: 100vh;
+	position: fixed!important;
+	background-color: black;
+	opacity: 0.8;
+}
+
 .thumbs-container {
 	display: flex;
 	flex-direction: row;

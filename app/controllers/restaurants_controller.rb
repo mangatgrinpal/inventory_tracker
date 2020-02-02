@@ -6,8 +6,10 @@ class RestaurantsController < ApplicationController
   end  
 
   def create
-
+    byebug
   	@restaurant = Restaurant.new(restaurant_params)
+
+
   	if @restaurant.save
   		render json: serialized_restaurants
   	end

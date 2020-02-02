@@ -6,10 +6,14 @@ import {
 	DELETE_RESTAURANT,
 	SET_RESTAURANT_LINKS_VISIBILITY,
 	SET_RESTAURANT_FORM_VISIBILITY
-	
 } from './types';
 
 import axios from 'axios';
+
+import {
+	setAuthHeaders,
+	persistAuthHeadersInDeviceStorage
+} from '../utils/auth';
 
 
 
@@ -19,7 +23,7 @@ export const fetchRestaurants = restaurant => async dispatch => {
 		type: FETCH_RESTAURANTS_REQUEST
 	})
 
-	const userSignOutCredentials = {
+	const currentUserCredentials = {
 		'access-token': await localStorage.getItem('access-token'),
 		'client': await localStorage.getItem('client'),
 		'uid': await localStorage.getItem('uid')
@@ -29,9 +33,11 @@ export const fetchRestaurants = restaurant => async dispatch => {
 	try {
 
 		const res = await axios.get('/restaurants', { headers: 
-			userSignOutCredentials
+			currentUserCredentials
 		});
 
+		setAuthHeaders(res.headers)
+		persistAuthHeadersInDeviceStorage(res.headers)
 
 		const { data } = res;
 
@@ -53,14 +59,27 @@ export const fetchRestaurants = restaurant => async dispatch => {
 
 export const addRestaurant = restaurant => async dispatch => {
 
+	debugger
+
+	const currentUserCredentials = {
+		'Content-Type': 'multipart/form-data',
+		'access-token': await localStorage.getItem('access-token'),
+		// 'token-type': 'Bearer',
+		'client': await localStorage.getItem('client'),
+		// 'expiry': await localStorage.getItem('expiry'),
+		'uid': await localStorage.getItem('uid')
+	}
+
 	try {
+
+
 		
-		const res = await fetch('/restaurants', {
-			method: 'POST',
-			body: restaurant,
-			//removed content-type headers to get active storage attachments to work
-			headers: { 'X-CSRF-Token': csrfToken }
-		})
+		const res = await axios.post('/restaurants', {
+			restaurant: restaurant
+			
+		}, {headers: currentUserCredentials} )
+
+
 
 		const json = await res.json()
 
