@@ -27,7 +27,7 @@ const UserSignUp = ({
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
-		userSignUp(email, password, passwordConfirmation)
+		userSignUp(email, password, passwordConfirmation, history)
 	}
 
 

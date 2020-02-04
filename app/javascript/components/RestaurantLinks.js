@@ -66,7 +66,12 @@ const RestaurantLinks = ({
 				</Row>
 
 				<Row className='flex-nowrap'>
-					{listOfRestaurantLinks}
+					{restaurantList.length > 0 ? 
+						listOfRestaurantLinks :
+						<Col xs={5} md={3}>
+							Sorry, add a restaurant to start tracking inventories.
+						</Col>
+					}
 				</Row>
 			</Container>
 			

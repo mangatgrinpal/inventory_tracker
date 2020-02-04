@@ -47,7 +47,7 @@ export const userSignUp = (email, password, passwordConfirmation, history) => as
 
 
 
-		// history.push('/dashboard')
+		history.push('/dashboard')
 
 	} catch(error) {
 
@@ -136,7 +136,11 @@ export const userSignOut = history => async dispatch => {
 			type: USER_SIGN_OUT_SUCCESS
 		})
 
+
+
 		history.push('/')
+
+		localStorage.removeItem('persist:root')
 
 	} catch(error) {
 		console.log(error)

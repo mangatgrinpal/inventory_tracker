@@ -32,7 +32,8 @@ export default function(state=initialState, action) {
 			return {
 				...state,
 				currentUser: payload,
-				loading: false
+				loading: false,
+				isAuthenticated: true
 			};
 		case USER_SIGN_UP_FAILURE:
 		case USER_SIGN_IN_FAILURE:
