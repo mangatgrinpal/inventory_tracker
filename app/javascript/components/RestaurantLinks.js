@@ -30,17 +30,21 @@ const RestaurantLinks = ({
 						<div className='embed-responsive embed-responsive-1by1'>
 							<Card.Img
 								className='embed-responsive-item' 
-								src={ 
+								src={
 									image ? 
 									image.url : 
 									'https://upload.wikimedia.org/wikipedia/commons/thumb/9/93/No-logo.svg/1024px-No-logo.svg.png' 
-								}/>
+								}
+							/>
 
-							<Link to={`${url}/${id}`} onClick={()=>{setRestaurantLinksVisibility(false)}}>
-								<Card.ImgOverlay>
-									<Card.Text className='pt-5 text-white'>
+							<Link 
+								to={`${url}/${id}`} 
+								onClick={()=>{setRestaurantLinksVisibility(false)}}
+							>
+								<Card.ImgOverlay className='d-flex justify-content-center'>
+									<Card.Title className='mt-auto text-white'>
 										{name}
-									</Card.Text>
+									</Card.Title>
 								</Card.ImgOverlay>
 							</Link>
 						</div>
