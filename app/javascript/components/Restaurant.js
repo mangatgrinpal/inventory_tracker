@@ -31,7 +31,8 @@ import Col from 'react-bootstrap/Col';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 
-const Restaurant = ({ 
+const Restaurant = ({
+	restaurantList, 
 	deleteRestaurant, 
 	fetchItems,
 	fetchRecords,
@@ -56,6 +57,10 @@ const Restaurant = ({
 		fetchItems(id)
 
 	},[ id ])
+	console.log(restaurantList)
+
+	let currentRestaurant = restaurantList.filter(restaurant => restaurant.id == id)
+	let currentRestaurantName = currentRestaurant[0].name
 
 	let lineItems = itemList.filter(item => item.category == 'Line')
 	let miscItems = itemList.filter(item => item.category == 'Misc')
@@ -85,6 +90,11 @@ const Restaurant = ({
 							size='2x' 
 							onClick={()=>{setRestaurantLinksVisibility(true)}}/>	
 						}
+					</Col>
+					<Col xs={9} md={8}>
+						<h2 className='text-right section-name'>
+							{currentRestaurantName}
+						</h2>
 					</Col>
 				</Row>
 				<Row className='justify-content-center pt-2'>
@@ -219,7 +229,7 @@ const Restaurant = ({
 												Name (units)
 											</Col>
 											
-											<Col md={{span: 3, offset: 1}}>
+											<Col md={{span: 2, offset: 2}}>
 												On Hand
 											</Col>
 										</Row>

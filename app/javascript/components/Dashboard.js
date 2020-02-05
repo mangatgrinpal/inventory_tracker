@@ -89,6 +89,7 @@ const Dashboard = ({
 						<Switch>
 							<Route path={`${path}/:id`}>
 								<Restaurant 
+									restaurantList={restaurantList}
 									restaurantLinksVisible={restaurantLinksVisible}
 									setRestaurantLinksVisibility={setRestaurantLinksVisibility}
 								/>

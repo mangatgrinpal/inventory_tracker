@@ -60,22 +60,12 @@ export const fetchRestaurants = restaurant => async dispatch => {
 export const addRestaurant = restaurant => async dispatch => {
 
 
-	const currentUserCredentials = {
-		'Content-Type': 'multipart/form-data',
-		'access-token': await localStorage.getItem('access-token'),
-		// 'token-type': 'Bearer',
-		'client': await localStorage.getItem('client'),
-		// 'expiry': await localStorage.getItem('expiry'),
-		'uid': await localStorage.getItem('uid')
-	}
+	
 
 	try {
-
-
 		
 		const res = await axios.post('/restaurants', 
 			restaurant
-		// , {headers: currentUserCredentials} 
 		)
 
 		const { data } = res;

@@ -53,7 +53,7 @@ const SauceAddOnItem = ({
 				<Col xs={6} className='d-md-none text-right py-1'>
 					On hand
 				</Col>
-				<Col xs={5} md={{span: 3, offset: 1}} className='pb-1'>
+				<Col xs={5} md={{span: 2, offset: 2}} className='pb-1'>
 					{ currentUser && (
 						<Button 
 							size='sm' 
