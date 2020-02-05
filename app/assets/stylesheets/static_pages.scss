@@ -58,6 +58,10 @@ button.value-display {
 	font-size: 1.75rem;
 }
 
+.card-img {
+	object-fit: cover;
+}
+
 .card-img-overlay {
 	background-image: linear-gradient(rgba(15, 20, 31, 0) 0px, rgba(15, 20, 31, 0.1) 25%, rgba(15, 20, 31, 0.8) 100%);
 }

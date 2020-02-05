@@ -87,7 +87,7 @@ const Restaurant = ({
 						}
 					</Col>
 				</Row>
-				<Row className='justify-content-center pt-5'>
+				<Row className='justify-content-center pt-2'>
 					<Col xs={9} md={3}>
 						<h3 className='text-center border-bottom'>
 							{currentWorkDay}
@@ -99,7 +99,7 @@ const Restaurant = ({
 					<Loading/> : 
 					itemList.length === 0 ?
 					<Fragment>
-						<h6>No items in this inventory. Add some above.</h6>
+						<h6 className='text-center'>No items in this inventory. Add some above.</h6>
 					</Fragment> :
 					<Fragment>
 					{lineItems.length > 0 ? 

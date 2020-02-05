@@ -27,20 +27,23 @@ const RestaurantLinks = ({
 			<Fragment key={id}>
 				<Col xs={5} md={3}>
 					<Card>
-						<Card.Img 
-							src={ 
-								image ? 
-								image.url : 
-								'https://upload.wikimedia.org/wikipedia/commons/thumb/9/93/No-logo.svg/1024px-No-logo.svg.png' 
-							}/>
+						<div className='embed-responsive embed-responsive-1by1'>
+							<Card.Img
+								className='embed-responsive-item' 
+								src={ 
+									image ? 
+									image.url : 
+									'https://upload.wikimedia.org/wikipedia/commons/thumb/9/93/No-logo.svg/1024px-No-logo.svg.png' 
+								}/>
 
-						<Link to={`${url}/${id}`} onClick={()=>{setRestaurantLinksVisibility(false)}}>
-							<Card.ImgOverlay>
-								<Card.Text className='pt-5 text-white'>
-									{name}
-								</Card.Text>
-							</Card.ImgOverlay>
-						</Link>
+							<Link to={`${url}/${id}`} onClick={()=>{setRestaurantLinksVisibility(false)}}>
+								<Card.ImgOverlay>
+									<Card.Text className='pt-5 text-white'>
+										{name}
+									</Card.Text>
+								</Card.ImgOverlay>
+							</Link>
+						</div>
 					</Card>
 				</Col>
 			</Fragment>
@@ -68,8 +71,9 @@ const RestaurantLinks = ({
 				<Row className='flex-nowrap'>
 					{restaurantList.length > 0 ? 
 						listOfRestaurantLinks :
-						<Col xs={5} md={3}>
-							Sorry, add a restaurant to start tracking inventories.
+						<Col xs={12}>
+							Whoops! Looks like you have yet to add a restaurant. 
+							<a onClick={()=> {setRestaurantFormVisibility(true)}}> Add one now</a>.
 						</Col>
 					}
 				</Row>
