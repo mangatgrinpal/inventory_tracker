@@ -57,7 +57,6 @@ const Restaurant = ({
 		fetchItems(id)
 
 	},[ id ])
-	console.log(restaurantList)
 
 	let currentRestaurant = restaurantList.filter(restaurant => restaurant.id == id)
 	let currentRestaurantName = currentRestaurant[0].name
@@ -109,7 +108,10 @@ const Restaurant = ({
 					<Loading/> : 
 					itemList.length === 0 ?
 					<Fragment>
-						<h6 className='text-center'>No items in this inventory. Add some above.</h6>
+						
+						<a onClick={()=>{setItemFormVisibility(true)}}>
+							<h6 className='pt-3 text-center'>No items in this inventory. Click here to get started.</h6>
+						</a>
 					</Fragment> :
 					<Fragment>
 					{lineItems.length > 0 ? 

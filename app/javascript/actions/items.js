@@ -10,28 +10,41 @@ import {
 	UPDATE_RECORD
 } from './types'
 
+import {
+	setAuthHeaders,
+	persistAuthHeadersInDeviceStorage
+} from '../utils/auth';
 
-const csrfToken = document.getElementsByName('csrf-token')[0].content
+import axios from 'axios';
 
-const headers = {
-	'X-CSRF-Token': csrfToken,
-	'Content-Type': 'application/json'
-}
 
 export const fetchItems = restaurant => async dispatch => {
+	
+	const currentUserCredentials = {
+		'access-token': await localStorage.getItem('access-token'),
+		'client': await localStorage.getItem('client'),
+		'uid': await localStorage.getItem('uid')
+	}
+
 	try {
 
 		dispatch({
 			type: FETCH_ITEMS_REQUEST
 		})
 
-		const res = await fetch(`/items?restaurant=${restaurant}`)
-		const json = await res.json();
+		const res = await axios.get(`/items?restaurant=${restaurant}`, { headers: 
+			currentUserCredentials
+		});
+
+		setAuthHeaders(res.headers)
+		persistAuthHeadersInDeviceStorage(res.headers)
+
+		const { data } = res;
 
 
 		dispatch({
 			type: FETCH_ITEMS_SUCCESS,
-			payload: json
+			payload: data
 		})
 
 
@@ -43,25 +56,24 @@ export const fetchItems = restaurant => async dispatch => {
 export const addItem = (name, units, category, restaurant) => async dispatch => {
 	
 	try {
-		const res = await fetch('/items', {
-			method: 'POST',
-			body: JSON.stringify({
+
+		const res = await axios.post('/items', {
+			
 				item: {
 					name: name, 
 					units: units, 
 					restaurant_id: restaurant, 
 					category: category
-				},
+				}, 
 				restaurant: restaurant
-			}),
-			headers: headers
 		})
 
-		const json = await res.json();
+
+		const { data } = res;
 
 		dispatch({
 			type: ADD_ITEM,
-			payload: json
+			payload: data
 		})
 
 		dispatch({
@@ -77,17 +89,18 @@ export const addItem = (name, units, category, restaurant) => async dispatch => 
 export const deleteItem = (item, restaurant) => async dispatch => {
 
 	try {
-		const res = await fetch('/items/' + item, {
-			method: 'DELETE',
-			body: JSON.stringify({restaurant: restaurant}),
-			headers: headers
+		const res = await axios.delete('/items/' + item, {
+			
+			data: { 
+				restaurant: restaurant
+			}
 		})
 
-		const json = await res.json();
+		const { data } = res;
 
 		dispatch({
 			type: DELETE_ITEM,
-			payload: json
+			payload: data
 		})
 
 	} catch(error) {
@@ -114,27 +127,24 @@ export const updateRecord = (date, item, recordType, restaurant, updateType, qua
 
 
 	try {
-		const res = await fetch('/records', {
-			method: 'POST',
-			body: JSON.stringify({
-				record: {
-					item_id: item, 
-					record_type: recordType, 
-					date: date,
-					quantity: quantity
-				}, 
-				restaurant: restaurant, 
-				update_type: updateType
-			}),
-			headers: headers
+		const res = await axios.post('/records', {
+			
+			record: {
+				item_id: item, 
+				record_type: recordType, 
+				date: date,
+				quantity: quantity
+			}, 
+			restaurant: restaurant, 
+			update_type: updateType,
 		})
 
-		const json = await res.json();
+		const { data } = res;
 
 
 		dispatch({
 			type: UPDATE_RECORD,
-			payload: json
+			payload: data
 		})
 		
 	} catch(error) {
