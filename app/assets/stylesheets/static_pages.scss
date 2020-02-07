@@ -12,6 +12,13 @@
 	right: 50%;
 }
 
+#scroll-up-button {
+	position: fixed;
+	bottom: 0;
+	padding-bottom: 1rem;
+	color: #ff4747;
+}
+
 .home-background-image {
 	background-image: url(https://ginnysbucket.s3-us-west-1.amazonaws.com/dev-images/vietnoms_badge_darkgray_edited.png);
 	height: 50rem;
@@ -32,6 +39,10 @@ button.value-display {
 .clickable-icon:hover {
 	cursor: pointer;
 }
+
+// .clickable-icon:active {
+// 	filter: drop-shadow(2px 2px 2px #c1c1c1);
+// }
 
 .add-icon {
 	color: lawngreen;

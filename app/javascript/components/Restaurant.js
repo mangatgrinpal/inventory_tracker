@@ -6,6 +6,7 @@ import SauceAddOnItem from './SauceAddOnItem';
 import ItemForm from './ItemForm';
 import RecordForm from './RecordForm';
 import AddItemButton from './AddItemButton';
+import ScrollUpButton from './ScrollUpButton';
 import { connect } from 'react-redux';
 
 import { CSSTransition } from 'react-transition-group';
@@ -51,15 +52,29 @@ const Restaurant = ({
 
 	const { id } = useParams();
 	const history = useHistory();
+	const [scrollButton, showScrollButton ] = useState(false)
+
+	const positionCheck = () => {
+		if (window.pageYOffset > 300) {
+			showScrollButton(true)
+		} else {
+			showScrollButton(false)
+		}
+	}
 
 	useEffect(() => {
 
 		fetchItems(id)
 
+		window.addEventListener('scroll', positionCheck);
+
+		return () => { window.removeEventListener('scroll', positionCheck)}
+
 	},[ id ])
 
+	
+
 	let currentRestaurant = restaurantList.filter(restaurant => restaurant.id == id)
-	let currentRestaurantName = currentRestaurant[0].name
 
 	let lineItems = itemList.filter(item => item.category == 'Line')
 	let miscItems = itemList.filter(item => item.category == 'Misc')
@@ -69,7 +84,7 @@ const Restaurant = ({
 
 	return (
 		<Fragment>
-			<Container>
+			<Container id='restaurant-container'>
 				<Row>
 					<Col className='clearfix'>
 					{restaurantLinksVisible ? 
@@ -92,7 +107,7 @@ const Restaurant = ({
 					</Col>
 					<Col xs={9} md={8}>
 						<h2 className='text-right section-name'>
-							{currentRestaurantName}
+							{currentRestaurant.length > 0 ? currentRestaurant[0].name : <div/>}
 						</h2>
 					</Col>
 				</Row>
@@ -321,7 +336,7 @@ const Restaurant = ({
 
 					{ currentUser && (
 						<Row className='py-5'>
-							<Col xs={{span:10, offset: 1}} md={{span: 4, offset: 4}}>
+							<Col xs={{span:8, offset: 2}} md={{span: 4, offset: 4}}>
 								<Button 
 									variant='danger' 
 									onClick={()=> {deleteRestaurant(id, history)}} 
@@ -333,6 +348,20 @@ const Restaurant = ({
 						</Row>
 					)}
 
+
+				<CSSTransition
+					in={scrollButton}
+					timeout={600}
+					unmountOnExit
+					classNames='fade-completely'
+				>
+				
+					<ScrollUpButton />
+				</CSSTransition>
+						
+	
+					
+				
 			</Container>
 			<CSSTransition
 					in={itemFormVisible}
