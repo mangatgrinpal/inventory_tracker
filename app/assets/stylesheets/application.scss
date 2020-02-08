@@ -112,16 +112,16 @@ body {
 }
 
 .fade-enter-active {
-	opacity: 1;
+	opacity: 0.8;
 	transition: opacity 600ms cubic-bezier(0.39, 0.575, 0.565, 1);
 }
 
 .fade-enter-done {
-	opacity: 1;
+	opacity: 0.8;
 }
 
 .fade-exit {
-	opacity: 1;
+	opacity: 0.8;
 }
 
 .fade-exit-active {
@@ -136,29 +136,29 @@ body {
 
 /*fade for object entering/leaving completely*/
 
-.fade-completely-enter {
+.complete-fade-enter {
 	opacity: 0;
 }
 
-.fade-completely-enter-active {
+.complete-fade-enter-active {
 	opacity: 1;
 	transition: opacity 600ms cubic-bezier(0.39, 0.575, 0.565, 1);
 }
 
-.fade-completely-enter-done {
+.complete-fade-enter-done {
 	opacity: 1;
 }
 
-.fade-completely-exit {
+.complete-fade-exit {
 	opacity: 1;
 }
 
-.fade-completely-exit-active {
+.complete-fade-exit-active {
 	opacity: 0;
 	transition: opacity 600ms cubic-bezier(0.39, 0.575, 0.565, 1);
 }
 
-.fade-completely-exit-done {
+.complete-fade-exit-done {
 	opacity: 0;
 }
 

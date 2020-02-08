@@ -42,8 +42,8 @@ const RestaurantForm = ({
 
 	return (
 			<Container className='p-4'>
-				<h6 className='section-name'>Add new restaurant</h6>
-				<Form onKeyPress={submitFormOnEnter} className='pt-5'>
+				<h6 className='section-name pt-4 pt-md-0'>Add new restaurant</h6>
+				<Form onKeyPress={submitFormOnEnter} className='pt-5 pt-md-3'>
 					<Form.Row>
 						<Col>
 							<Form.Label>
@@ -65,14 +65,15 @@ const RestaurantForm = ({
 							<ImageUploader imageData={imageData} setImageData={setImageData}/>
 						</Col>
 					</Form.Row>
-					<Form.Row>
-						<Col>
-							<Button onClick={handleClick}>
-								Add
+					<Form.Row className='pt-2'>
+						<Col className='clearfix'>
+							<Button className='float-right' onClick={handleClick}>
+								Create restaurant
 							</Button>
-							<Button variant='danger' onClick={()=> {setRestaurantFormVisibility(false)}}>
+							<Button className='float-right' variant='danger' onClick={()=> {setRestaurantFormVisibility(false)}}>
 								Cancel
 							</Button>
+							
 						</Col>
 					</Form.Row>
 				</Form>

@@ -353,7 +353,7 @@ const Restaurant = ({
 					in={scrollButton}
 					timeout={600}
 					unmountOnExit
-					classNames='fade-completely'
+					classNames='complete-fade'
 				>
 				
 					<ScrollUpButton />

@@ -2,6 +2,9 @@ import React, { Fragment, useEffect } from 'react';
 
 import { useDropzone } from 'react-dropzone';
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import Button from 'react-bootstrap/Button';
+
 
 const ImageUploader = ({imageData, setImageData}) => {
 
@@ -16,10 +19,17 @@ const ImageUploader = ({imageData, setImageData}) => {
 
 	const thumbs = imageData.map(file=> (
 		<div className='thumb' key={file.name}>
-			<div className='thumb-inner'>
+			<div className='thumb-inner embed-responsive justify-content-end'>
+				<FontAwesomeIcon
+					className='position-fixed'
+					icon='times-circle'
+					size='2x'
+					onClick={()=>{setImageData([])}}>
+					click me
+				</FontAwesomeIcon>
 				<img 
 					src={file.preview}
-					className='img'
+					className='thumb-img embed-responsive-item'
 				/>
 			</div>
 		</div>
@@ -32,13 +42,19 @@ const ImageUploader = ({imageData, setImageData}) => {
 
 	return (
 		<Fragment>
-			<div {...getRootProps({className: 'dropzone'})}>
-				<input {...getInputProps()} />
-				<p>Drag 'n' drop some files here, or click to select</p>
-			</div>
-			<aside className='thumbs-container'>
-				{thumbs}
-			</aside>
+			{imageData.length === 0 ? 
+				<div {...getRootProps({className: 'dropzone'})}>
+					<input {...getInputProps()} />
+					<p className='text-center'>Drag 'n' drop some files here, or click to select</p>
+				</div>	:
+
+				<aside className='thumbs-container justify-content-center'>
+					{thumbs}
+				</aside>	
+
+			}
+			
+			
 		</Fragment>
 	)
 }
