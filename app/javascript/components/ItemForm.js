@@ -33,8 +33,8 @@ const ItemForm = ({
 
 	return (
 			<Container className='p-4'>
-				<h6 className='section-name'>Add new item</h6>
-				<Form onKeyPress={submitFormOnEnter} className='pt-5'>
+				<h6 className='section-name pt-4 pt-md-0'>Add new item</h6>
+				<Form onKeyPress={submitFormOnEnter} className='pt-5 pt-md-3'>
 					<Form.Row>
 						<Col xs={12}>
 							<Form.Label>
@@ -75,17 +75,15 @@ const ItemForm = ({
 
 						</Col>
 					</Form.Row>
-					<Form.Row>
-						<Col xs={12}>
-							<Button variant='danger pt-4' onClick={()=> {setItemFormVisibility(false)}}>
-								Cancel
-							</Button>
+					<Form.Row className='pt-2'>
+						<Col className='clearfix'>
+							
 
-							<Button 
-								className='pt-4' 
-								onClick={(e)=> {handleClick(e)}} 
-							>
-								Add New Item
+							<Button className='float-right' onClick={(e)=> {handleClick(e)}} >
+								Add new item
+							</Button>
+							<Button className='float-right' variant='danger' onClick={()=> {setItemFormVisibility(false)}}>
+								Cancel
 							</Button>
 						</Col>
 					</Form.Row>

@@ -369,7 +369,7 @@ const Restaurant = ({
 					unmountOnExit
 					classNames='slide-out'
 				>
-				<Col xs={12} md={{span: 6, offset: 6}} className='form-panel-container fixed-top pt-2'>
+				<Col xs={12} md={{span: 6, offset: 6}} className='form-panel-container fixed-top pt-3'>
 
 					<FontAwesomeIcon 
 						className='clickable-icon' 
@@ -387,6 +387,16 @@ const Restaurant = ({
 						currentUser={currentUser} 
 					/>
 				</Col>
+			</CSSTransition>
+
+
+			<CSSTransition
+				in={itemFormVisible}
+				timeout={600}
+				unmountOnExit
+				classNames='fade'
+			>
+				<Col xs={12} className='dashboard-overlay'/>
 			</CSSTransition>
 		</Fragment>
 			

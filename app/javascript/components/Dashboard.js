@@ -106,7 +106,7 @@ const Dashboard = ({
 						<Col 
 							xs={12} 
 							md={{span: 6, offset: 6}} 
-							className='form-panel-container fixed-top pt-2'>
+							className='form-panel-container fixed-top pt-3'>
 
 							<FontAwesomeIcon 
 								className='clickable-icon' 

@@ -3,7 +3,6 @@ import React, { Fragment, useEffect } from 'react';
 import { useDropzone } from 'react-dropzone';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import Button from 'react-bootstrap/Button';
 
 
 const ImageUploader = ({imageData, setImageData}) => {
@@ -43,9 +42,9 @@ const ImageUploader = ({imageData, setImageData}) => {
 	return (
 		<Fragment>
 			{imageData.length === 0 ? 
-				<div {...getRootProps({className: 'dropzone'})}>
+				<div {...getRootProps({className: 'dropzone text-center'})}>
 					<input {...getInputProps()} />
-					<p className='text-center'>Drag 'n' drop some files here, or click to select</p>
+					<FontAwesomeIcon icon='camera' size='2x' />
 				</div>	:
 
 				<aside className='thumbs-container justify-content-center'>
