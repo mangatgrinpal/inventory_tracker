@@ -7,7 +7,20 @@ class ItemsController < ApplicationController
 	end
 
 	def create
-		@item = Item.new(item_params)
+
+		ActiveRecord::Base.transaction do
+			@item = Item.create!(item_params)
+
+			@category = Category.where(title: params['category']['title']).first
+			if !@category
+				@category = Category.create!(category_params)	
+			end
+			
+			@item.save
+			ItemCategory.create!(item: @item, category: @category)
+		end
+
+		
 
 		if @item.save
 			render json: serialized_items
@@ -24,7 +37,11 @@ class ItemsController < ApplicationController
 	private
 
 		def item_params
-			params.require(:item).permit(:name, :units, :restaurant_id, :category)
+			params.require(:item).permit(:name, :units, :restaurant_id)
+		end
+
+		def category_params
+			params.require(:category).permit(:title)
 		end
 
 		def serialized_items

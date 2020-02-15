@@ -76,10 +76,10 @@ const Restaurant = ({
 
 	let currentRestaurant = restaurantList.filter(restaurant => restaurant.id == id)
 
-	let lineItems = itemList.filter(item => item.category == 'Line')
-	let miscItems = itemList.filter(item => item.category == 'Misc')
-	let meatItems = itemList.filter(item => item.category == 'Meat')
-	let sauceAddOnItems = itemList.filter(item => item.category == 'Sauces/Add-ons')
+	let lineItems = itemList.filter(item => item.category.title == 'Line')
+	let miscItems = itemList.filter(item => item.category.title == 'Misc')
+	let meatItems = itemList.filter(item => item.category.title == 'Meat')
+	let sauceAddOnItems = itemList.filter(item => item.category.title == 'Sauces/Add-ons')
 
 
 	return (

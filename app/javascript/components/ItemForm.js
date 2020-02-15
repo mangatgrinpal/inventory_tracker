@@ -66,12 +66,13 @@ const ItemForm = ({
 							<Form.Label>
 								Prep category
 							</Form.Label>
-							<Form.Control as='select' onChange={(e)=> setCategoryData(e.target.value)}>
+							<Form.Control type='text' list='categories' onChange={(e)=> setCategoryData(e.target.value)}/>
+							<datalist id='categories'>
 								<option>Line</option>
 								<option>Meat</option>
 								<option>Sauces/Add-ons</option>
 								<option>Misc</option>
-							</Form.Control>
+							</datalist>
 
 						</Col>
 					</Form.Row>

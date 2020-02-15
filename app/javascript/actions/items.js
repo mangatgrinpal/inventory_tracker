@@ -62,9 +62,9 @@ export const addItem = (name, units, category, restaurant) => async dispatch => 
 				item: {
 					name: name, 
 					units: units, 
-					restaurant_id: restaurant, 
-					category: category
-				}, 
+					restaurant_id: restaurant
+				},
+				category: { title: category },
 				restaurant: restaurant
 		})
 
