@@ -5,6 +5,7 @@ import items from './items';
 import weeks from './weeks';
 import records from './records';
 import users from './users';
+import categories from './categories';
 
 
 export default combineReducers({
@@ -12,5 +13,6 @@ export default combineReducers({
 	restaurants,
 	items,
 	records,
-	users
+	users,
+	categories
 });

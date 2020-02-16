@@ -22,6 +22,7 @@ import {
 	setRestaurantLinksVisibility
 } from '../actions/restaurants';
 import { setCurrentWorkDay, setPreviousWorkDay } from '../actions/weeks';
+import { fetchCategories } from '../actions/categories';
 
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
@@ -31,7 +32,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 
 const Dashboard = ({
-	fetchRestaurants, 
+	fetchRestaurants,
+	fetchCategories, 
 	addRestaurant,
 	setRestaurantFormVisibility,
 	setRestaurantLinksVisibility,
@@ -55,6 +57,8 @@ const Dashboard = ({
 		setPreviousWorkDay(yesterday)
 		setCurrentWorkDay(currentDay)
 		fetchRestaurants();
+		fetchCategories(currentUser.id);
+
 
 
 	},[ fetchRestaurants, currentDay ])
@@ -156,6 +160,7 @@ export default connect (
 		setCurrentWorkDay, 
 		setPreviousWorkDay, 
 		setRestaurantFormVisibility,
-		setRestaurantLinksVisibility
+		setRestaurantLinksVisibility,
+		fetchCategories
 	}
 )(Dashboard)

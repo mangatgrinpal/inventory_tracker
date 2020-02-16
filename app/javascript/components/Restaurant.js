@@ -47,7 +47,8 @@ const Restaurant = ({
 	items: { itemList, isFetching, itemFormVisible },
 	weeks: { currentWorkDay, previousWorkDay },
 	records: { recordList },
-	users: { currentUser }
+	users: { currentUser },
+	categories: { categoryList }
 }) => {	
 
 	const { id } = useParams();
@@ -408,7 +409,8 @@ const mapStateToProps = state =>
 	items: state.items,
 	weeks: state.weeks,
 	records: state.records,
-	users: state.users
+	users: state.users,
+	categories: state.categories
 });
 
 

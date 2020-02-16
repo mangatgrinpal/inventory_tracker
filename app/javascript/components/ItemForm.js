@@ -15,7 +15,8 @@ const ItemForm = ({
 
 	const [ nameData, setNameData ] = useState('')
 	const [ unitsData, setUnitsData ] = useState('')
-	const [ categoryData, setCategoryData ] = useState('Line')
+	const [ categoryData, setCategoryData ] = useState('')
+	const [ attributesData, setAttributesData ] = useState('')
 
 	const submitFormOnEnter = e => {
 		if (e.key === 'Enter') {
@@ -28,7 +29,7 @@ const ItemForm = ({
 		addItem(nameData, unitsData, categoryData, restaurant)
 		setNameData('')
 		setUnitsData('')
-		setCategoryData('Line')
+		setCategoryData('')
 	}
 
 	return (
@@ -75,6 +76,15 @@ const ItemForm = ({
 							</datalist>
 
 						</Col>
+					</Form.Row>
+					<Form.Row>
+						<Col xs={12}>
+
+							<Form.Label>
+								Which quantities will this category keep track of? (Up to 4)
+							</Form.Label>
+						</Col>
+
 					</Form.Row>
 					<Form.Row className='pt-2'>
 						<Col className='clearfix'>
