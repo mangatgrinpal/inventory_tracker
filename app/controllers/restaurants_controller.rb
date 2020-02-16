@@ -2,13 +2,13 @@ class RestaurantsController < ApplicationController
   before_action :authenticate_user!
 
   def index
+
     render json: serialized_restaurants
   end  
 
   def create
 
   	@restaurant = current_user.restaurants.build(restaurant_params)
-
 
   	if @restaurant.save
   		render json: serialized_restaurants

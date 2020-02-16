@@ -57,7 +57,7 @@ const Dashboard = ({
 		setPreviousWorkDay(yesterday)
 		setCurrentWorkDay(currentDay)
 		fetchRestaurants();
-		fetchCategories(currentUser.id);
+		fetchCategories();
 
 
 

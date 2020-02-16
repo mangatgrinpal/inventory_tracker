@@ -13,7 +13,11 @@ import axios from 'axios';
 
 export const fetchCategories = user => async dispatch => {
 
-
+	const currentUserCredentials = {
+		'access-token': await localStorage.getItem('access-token'),
+		'client': await localStorage.getItem('client'),
+		'uid': await localStorage.getItem('uid')
+	}
 
 
 	try {
@@ -21,7 +25,9 @@ export const fetchCategories = user => async dispatch => {
 			type: FETCH_CATEGORIES_REQUEST
 		})
 
-		const res = await axios.get('/categories?user_id=' + user)
+		const res = await axios.get('/categories', { headers:
+			currentUserCredentials
+		});
 
 		setAuthHeaders(res.headers)
 		persistAuthHeadersInDeviceStorage(res.headers)

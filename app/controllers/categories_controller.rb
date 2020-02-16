@@ -1,8 +1,9 @@
 class CategoriesController < ApplicationController
+	before_action :authenticate_user! 
 
 	def index
-		byebug
-		@categories = Category.where(user_id: params[:user_id])
+
+		@categories = Category.where(user_id: current_user.id)
 		render json: @categories
 	end
 end

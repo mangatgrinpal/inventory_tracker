@@ -1,5 +1,6 @@
 import React, { Fragment, useState, useEffect } from 'react';
 import Loading from './Loading';
+import CategoryContainer from './CategoryContainer';
 import Item from './Item';
 import MeatItem from './MeatItem';
 import SauceAddOnItem from './SauceAddOnItem';
@@ -53,7 +54,7 @@ const Restaurant = ({
 
 	const { id } = useParams();
 	const history = useHistory();
-	const [scrollButton, showScrollButton ] = useState(false)
+	const [ scrollButton, showScrollButton ] = useState(false)
 
 	const positionCheck = () => {
 		if (window.pageYOffset > 300) {
@@ -73,14 +74,9 @@ const Restaurant = ({
 
 	},[ id ])
 
-	
+
 
 	let currentRestaurant = restaurantList.filter(restaurant => restaurant.id == id)
-
-	let lineItems = itemList.filter(item => item.category.title == 'Line')
-	let miscItems = itemList.filter(item => item.category.title == 'Misc')
-	let meatItems = itemList.filter(item => item.category.title == 'Meat')
-	let sauceAddOnItems = itemList.filter(item => item.category.title == 'Sauces/Add-ons')
 
 
 	return (
@@ -130,7 +126,20 @@ const Restaurant = ({
 						</a>
 					</Fragment> :
 					<Fragment>
-					{lineItems.length > 0 ? 
+					{categoryList.map( category => {
+						return (
+							category.items.length > 0 ?
+							<Fragment key={category.id}>
+								<CategoryContainer
+									restaurant={id}
+									category={category} />
+								<AddItemButton setItemFormVisibility={ setItemFormVisibility } />
+							</Fragment>
+							:
+							<div/>
+						)
+					})}
+					{/*lineItems.length > 0 ? 
 						<Fragment>
 							<Row className='pt-1'>
 								<Col>
@@ -329,7 +338,7 @@ const Restaurant = ({
 								</Fragment> :
 
 							<div/>
-						}
+						*/}
 						
 
 					</Fragment>
