@@ -11,9 +11,9 @@ class ItemsController < ApplicationController
 		ActiveRecord::Base.transaction do
 			@item = Item.create!(item_params)
 
-			@category = Category.where(title: params['category']['title']).first
+			@category = current_user.categories.where(title: params['category']['title']).first
 			if !@category
-				@category = Category.create!(category_params)	
+				@category = current_user.categories.create!(category_params)	
 			end
 			
 			@item.save

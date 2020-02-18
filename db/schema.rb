@@ -41,7 +41,6 @@ ActiveRecord::Schema.define(version: 2020_02_15_220755) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "user_id"
-    t.string "trackable_attributes", default: [], array: true
   end
 
   create_table "item_categories", force: :cascade do |t|

@@ -28,9 +28,7 @@ const CategoryContainer = ({
 	users: { currentUser }
 }) => {
 
-	const categoryItems = itemList.filter(item => item.category.title === category.title )
-
-	console.log(categoryItems)
+	const categoryItems = itemList.filter(item => item.category.title === category.title)
 
 
 	return (
