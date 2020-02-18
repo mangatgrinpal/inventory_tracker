@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_02_15_220755) do
+ActiveRecord::Schema.define(version: 2020_02_18_085746) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -50,6 +50,15 @@ ActiveRecord::Schema.define(version: 2020_02_15_220755) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "item_records", force: :cascade do |t|
+    t.integer "item_id"
+    t.integer "record_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["item_id"], name: "index_item_records_on_item_id"
+    t.index ["record_id"], name: "index_item_records_on_record_id"
+  end
+
   create_table "items", force: :cascade do |t|
     t.string "name"
     t.string "units"
@@ -58,14 +67,19 @@ ActiveRecord::Schema.define(version: 2020_02_15_220755) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "records", force: :cascade do |t|
-    t.float "quantity", default: 0.0
-    t.integer "item_id"
+  create_table "record_trackable_attributes", force: :cascade do |t|
+    t.integer "record_id"
+    t.integer "trackable_attribute_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.string "date"
-    t.string "record_type"
-    t.index ["item_id"], name: "index_records_on_item_id"
+    t.index ["record_id"], name: "index_record_trackable_attributes_on_record_id"
+    t.index ["trackable_attribute_id"], name: "index_record_trackable_attributes_on_trackable_attribute_id"
+  end
+
+  create_table "records", force: :cascade do |t|
+    t.float "quantity", default: 0.0
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "restaurants", force: :cascade do |t|
@@ -74,6 +88,15 @@ ActiveRecord::Schema.define(version: 2020_02_15_220755) do
     t.datetime "updated_at", precision: 6, null: false
     t.integer "user_id"
     t.index ["user_id"], name: "index_restaurants_on_user_id"
+  end
+
+  create_table "trackable_attributes", force: :cascade do |t|
+    t.string "name"
+    t.integer "category_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["category_id"], name: "index_trackable_attributes_on_category_id"
+    t.index ["name"], name: "index_trackable_attributes_on_name"
   end
 
   create_table "users", force: :cascade do |t|
