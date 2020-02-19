@@ -31,6 +31,8 @@ const CategoryContainer = ({
 	const categoryItems = itemList.filter(item => item.category.title === category.title)
 
 
+	const columnWidth = category.trackable_attributes.length > 0 ? (8/category.trackable_attributes.length) : 8
+
 	return (
 
 			<Fragment>
@@ -41,21 +43,23 @@ const CategoryContainer = ({
 				</Row>
 				<Col className='d-none d-md-block'>
 					<Row className='text-center'>
-						<Col md={3}>
+						<Col md={4}>
 							Name (units)
 						</Col>
-						<Col md={2}>
-							On Hand
-						</Col>
-						<Col md={2}>
-							Needs
-						</Col>
-						<Col md={2}>
-							To be Prepped
-						</Col>
-						<Col md={2}>
-							Cases
-						</Col>
+						{category.trackable_attributes.length === 0 ?  
+
+							<Col md={columnWidth}>
+								Whoops! This category doesn't have any attributes to track.
+							</Col>
+
+							:
+							category.trackable_attributes.map( trackableAttribute => {
+							return (
+								<Col md={columnWidth} key={trackableAttribute.id}>
+									{trackableAttribute.name}
+								</Col>
+							)
+						})}
 					</Row>
 				</Col>
 

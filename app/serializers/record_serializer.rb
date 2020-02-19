@@ -1,5 +1,6 @@
 class RecordSerializer < ActiveModel::Serializer
-  attributes :id, :quantity, :record_type, :date
+  attributes :id, :quantity
 
-  belongs_to :item
+  has_one :item, through: :item_record
+  has_one :trackable_attribute, through: :record_trackable_attribute
 end

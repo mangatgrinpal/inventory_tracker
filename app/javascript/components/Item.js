@@ -24,13 +24,9 @@ const Item = ({
 }) => {
 
 
-	const { id, name, units, records } = item;
-	
-	let yesterdaysCases = records.filter(record => record.record_type == 'Cases' && record.date == previousWorkDay)
-	let cases = records.filter(record => record.record_type == 'Cases' && record.date == currentWorkDay)
-	let yesterdaysOnHand = records.filter(record => record.record_type == 'On Hand' && record.date == previousWorkDay)
-	let onHand = records.filter(record => record.record_type == 'On Hand' && record.date == currentWorkDay)
-	let needs = records.filter(record => record.record_type == 'Needs' && record.date == currentWorkDay)
+	const { id, name, units, trackable_attributes, records } = item;
+
+	const columnWidth = trackable_attributes.length > 0 ? (8/trackable_attributes.length) : 8	
 
 	let caseValue = React.createRef()
 	let onHandValue = React.createRef()
@@ -41,123 +37,56 @@ const Item = ({
 	return (
 		<Fragment>
 			<Row className='border-top py-1'>
-				
-				<Col xs={12} md={3} className='clearfix py-1'>
-					{ currentUser && (
+				<Col xs={12} md={4} className='clearfix py-1'>
+
 						<div className='float-right'>
 							<FontAwesomeIcon 
 								icon='times'
 								className='clickable-icon delete-icon'
 								onClick={()=> { deleteItem(id, restaurant)}} />
 						</div>
-					)}
+
 					
 					<h6 className='py-4 py-md-0 item-name'>{name} ({units})</h6>
 				</Col>
-				
-				<Col xs={6} className='d-md-none text-right py-1'>
-					On Hand
-				</Col>
-				<Col xs={5} md={2} className='pb-1'>
-					{ currentUser && (
-						<Button 
-							variant='outline-primary' 
-							size='sm' 
-							onClick={()=> { updateRecord(currentWorkDay, id, 'On Hand', restaurant, 'decrement')}}
-							
-						>
-							<FontAwesomeIcon icon='minus'/>
-						</Button>
-					)}
-					
-					<Button size='sm' variant='light' className='value-display' ref={onHandValue}>
-						{onHand.length > 0 ? onHand[0].quantity : yesterdaysOnHand.length > 0 ? yesterdaysOnHand[0].quantity : 0}
-					</Button>
+				{trackable_attributes.map( trackableAttribute => {
 
-					{ currentUser && (
-						<Button 
-							size='sm' 
-							onClick={()=> { updateRecord(currentWorkDay, id, 'On Hand', restaurant, 'increment', onHandValue.current.innerText)}}
-							
-						>
-							<FontAwesomeIcon icon='plus'/>
-						</Button>	
-					)}
-					
-					
-				</Col>
+					return (
+						<Fragment key={trackableAttribute.id}>
+							<Col xs={6} className='d-md-none text-right py-1'>
+								{trackableAttribute.name}
+							</Col>
+							<Col xs={5} md={2} className='pb-1'>
 
-				<Col xs={6} className='d-md-none text-right py-1'>
-					Needs
-				</Col>
-				<Col xs={5} md={2} className='pb-1'>
+									<Button 
+										variant='outline-primary' 
+										size='sm' 
+										onClick={()=> { updateRecord(currentWorkDay, id, 'On Hand', restaurant, 'decrement')}}
+										
+									>
+										<FontAwesomeIcon icon='minus'/>
+									</Button>
 
-					{ currentUser && (
-						<Button 
-							variant='outline-primary' 
-							size='sm' 
-							onClick={()=> { updateRecord(currentWorkDay, id, 'Needs', restaurant, 'decrement')}}
-							
-						>
-							<FontAwesomeIcon icon='minus'/>
-						</Button>
-					)}
-					
-					<Button size='sm' variant='light' className='value-display'>
-						{needs.length > 0 ? needs[0].quantity : 0}
-					</Button>
+								
+								<Button size='sm' variant='light' className='value-display' ref={onHandValue}>
+									on hand value
+								</Button>
 
-					{ currentUser && (
-						<Button 
-							size='sm' 
-							onClick={()=> { updateRecord(currentWorkDay, id, 'Needs', restaurant, 'increment')}}
-							
-						>
-							<FontAwesomeIcon icon='plus'/>
-						</Button>
-					)}
-					
-				</Col>
-				<Col xs={6} className='d-md-none text-right py-1'>
-					To be prepped
-				</Col>
-				<Col xs={5} md={2} className='pb-1'>
-					<Button size='sm' variant='light' className='value-display'>
-						{needs.length > 0 && onHand.length > 0 && (needs[0].quantity - onHand[0].quantity) > 0 ? 
-							(needs[0].quantity - onHand[0].quantity) : 
-							needs.length > 0 && onHand.length == 0 ?
-							needs[0].quantity : 0}
-					</Button>
-				</Col>
-				<Col xs={6} className='d-md-none text-right py-1'>
-					Cases
-				</Col>
-				<Col xs={5} md={2} className='pb-1'>
-					{ currentUser &&
-						<Button 
-							variant='outline-primary' 
-							size='sm' 
-							onClick={()=> { updateRecord(currentWorkDay, id, 'Cases', restaurant, 'decrement')}}
-							
-						>
-							<FontAwesomeIcon icon='minus'/>
-						</Button>
-					}
-					
-					<Button size='sm' variant='light' className='value-display' ref={caseValue}>
-						{cases.length > 0 ? cases[0].quantity : yesterdaysCases.length > 0 ? yesterdaysCases[0].quantity : 0}
-					</Button>
-					{ currentUser &&
-						<Button 
-							size='sm' 
-							onClick={()=> { updateRecord(currentWorkDay, id, 'Cases',restaurant, 'increment', caseValue.current.innerText) }} 
-							
-						>
-							<FontAwesomeIcon icon='plus'/>
-						</Button>
-					}
-					
-				</Col>
+
+									<Button 
+										size='sm' 
+										onClick={()=> { updateRecord(currentWorkDay, id, 'On Hand', restaurant, 'increment', onHandValue.current.innerText)}}
+										
+									>
+										<FontAwesomeIcon icon='plus'/>
+									</Button>	
+
+								
+								
+							</Col>
+						</Fragment>
+					)
+				})}
 			</Row>
 		</Fragment>
 	)

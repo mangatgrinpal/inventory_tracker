@@ -28,6 +28,7 @@ export const fetchCategories = user => async dispatch => {
 		const res = await axios.get('/categories', { headers:
 			currentUserCredentials
 		});
+		
 
 		setAuthHeaders(res.headers)
 		persistAuthHeadersInDeviceStorage(res.headers)
