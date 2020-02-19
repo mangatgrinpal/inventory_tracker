@@ -192,6 +192,7 @@ const Restaurant = ({
 					<ItemForm 
 						restaurant={id} 
 						addItem={addItem}
+						categoryList={categoryList}
 						setItemFormVisibility={setItemFormVisibility}
 						currentUser={currentUser} 
 					/>

@@ -61,7 +61,7 @@ const RestaurantLinks = ({
 					<Col xs={8}>
 						<h5>Your restaurants</h5>
 					</Col>
-					{currentUser && (
+
 					<Col xs={4} className='text-md-right pl-0'>
 						<small> 
 						<a className='clickable-icon' onClick={()=> {setRestaurantFormVisibility(true)}}>
@@ -69,7 +69,7 @@ const RestaurantLinks = ({
 						</a>
 						</small>
 					</Col>
-					)}
+
 				</Row>
 
 				<Row className='flex-nowrap'>

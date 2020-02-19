@@ -14,7 +14,7 @@ const initialState = {
 
 const persistConfig = {
 	key: 'root',
-	whitelist: ['users','restaurants'],
+	whitelist: ['users'],
 	storage
 }
 

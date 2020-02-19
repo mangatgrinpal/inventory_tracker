@@ -10,6 +10,7 @@ const ItemForm = ({
 	addItem, 
 	restaurant, 
 	setItemFormVisibility,
+	categoryList,
 	currentUser 
 }) => {
 
@@ -23,6 +24,8 @@ const ItemForm = ({
 			addItem(nameData, unitsData, categoryData, restaurant)
 		}
 	}
+
+
 
 	const handleClick = e => {
 		e.preventDefault()
@@ -69,23 +72,26 @@ const ItemForm = ({
 							</Form.Label>
 							<Form.Control type='text' list='categories' onChange={(e)=> setCategoryData(e.target.value)}/>
 							<datalist id='categories'>
-								<option>Line</option>
-								<option>Meat</option>
-								<option>Sauces/Add-ons</option>
-								<option>Misc</option>
+								{categoryList.map(category => {
+									return (
+										<option key={category.id}>
+											{category.title}
+										</option>
+									)
+								})}
 							</datalist>
 
 						</Col>
 					</Form.Row>
+
 					<Form.Row>
 						<Col xs={12}>
-
 							<Form.Label>
 								Which quantities will this category keep track of? (Up to 4)
 							</Form.Label>
 						</Col>
-
 					</Form.Row>
+
 					<Form.Row className='pt-2'>
 						<Col className='clearfix'>
 							

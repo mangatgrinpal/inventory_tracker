@@ -62,8 +62,6 @@ const Dashboard = ({
 
 
 	},[ fetchRestaurants, currentDay ])
-
-
 	
 
 	return (
@@ -71,7 +69,11 @@ const Dashboard = ({
 		<Fragment>
 			<Container>
 				{isFetching ? 
-					<Loading/> : 
+					<Loading/> 
+					: 
+					restaurantList.length === 0 ?
+					<DashHome setRestaurantFormVisibility={setRestaurantFormVisibility}/> 
+					:
 					<Fragment>
 						<CSSTransition
 							in={restaurantLinksVisible}
@@ -99,47 +101,48 @@ const Dashboard = ({
 								/>
 							</Route>
 						</Switch>
-						<CSSTransition
-							in={restaurantFormVisible}
-							timeout={600}
-							unmountOnExit
-							classNames='slide-out'
-						>
 						
-
-						<Col 
-							xs={12} 
-							md={{span: 6, offset: 6}} 
-							className='form-panel-container fixed-top pt-3'>
-
-							<FontAwesomeIcon 
-								className='clickable-icon' 
-								title='Close'
-								alt='Close'
-								onClick={()=>{setRestaurantFormVisibility(false)}} 
-								icon={['far', 'times-circle']} 
-								size='2x' />
-
-							<RestaurantForm 
-								addRestaurant={addRestaurant} 
-								restaurantFormVisible={restaurantFormVisible}
-								setRestaurantFormVisibility={setRestaurantFormVisibility}
-								currentUser={currentUser} />
-						</Col>
-						</CSSTransition>
-
-
-						<CSSTransition
-							in={restaurantFormVisible}
-							timeout={600}
-							unmountOnExit
-							classNames='fade'
-						>
-							<Col xs={12} className='dashboard-overlay'/>
-						</CSSTransition>
 						
 					</Fragment>
-				}					
+				}
+				<CSSTransition
+					in={restaurantFormVisible}
+					timeout={600}
+					unmountOnExit
+					classNames='slide-out'
+				>
+				
+
+				<Col 
+					xs={12} 
+					md={{span: 6, offset: 6}} 
+					className='form-panel-container fixed-top pt-3'>
+
+					<FontAwesomeIcon 
+						className='clickable-icon' 
+						title='Close'
+						alt='Close'
+						onClick={()=>{setRestaurantFormVisibility(false)}} 
+						icon={['far', 'times-circle']} 
+						size='2x' />
+
+					<RestaurantForm 
+						addRestaurant={addRestaurant} 
+						restaurantFormVisible={restaurantFormVisible}
+						setRestaurantFormVisibility={setRestaurantFormVisibility}
+						currentUser={currentUser} />
+				</Col>
+				</CSSTransition>
+
+
+				<CSSTransition
+					in={restaurantFormVisible}
+					timeout={600}
+					unmountOnExit
+					classNames='fade'
+				>
+					<Col xs={12} className='dashboard-overlay'/>
+				</CSSTransition>
 			</Container>
 		</Fragment>
 	)
