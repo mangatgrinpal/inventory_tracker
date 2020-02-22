@@ -26,6 +26,8 @@ const Item = ({
 
 	const { id, name, units, trackable_attributes, records } = item;
 
+	console.log(trackable_attributes)
+
 	const columnWidth = trackable_attributes.length > 0 ? (8/trackable_attributes.length) : 8	
 
 	let caseValue = React.createRef()
@@ -49,6 +51,7 @@ const Item = ({
 					
 					<h6 className='py-4 py-md-0 item-name'>{name} ({units})</h6>
 				</Col>
+
 				{trackable_attributes.map( trackableAttribute => {
 
 					return (
@@ -56,7 +59,7 @@ const Item = ({
 							<Col xs={6} className='d-md-none text-right py-1'>
 								{trackableAttribute.name}
 							</Col>
-							<Col xs={5} md={2} className='pb-1'>
+							<Col xs={5} md={columnWidth} className='pb-1'>
 
 									<Button 
 										variant='outline-primary' 
