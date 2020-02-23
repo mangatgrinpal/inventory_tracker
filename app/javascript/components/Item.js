@@ -26,9 +26,7 @@ const Item = ({
 
 	const { id, name, units, trackable_attributes, records } = item;
 
-	console.log(trackable_attributes)
-
-	const columnWidth = trackable_attributes.length > 0 ? (8/trackable_attributes.length) : 8	
+	const columnWidth = trackable_attributes.length > 0 ? Math.floor(8/trackable_attributes.length) : 8	
 
 	let caseValue = React.createRef()
 	let onHandValue = React.createRef()

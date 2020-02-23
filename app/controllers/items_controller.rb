@@ -7,7 +7,7 @@ class ItemsController < ApplicationController
 	end
 
 	def create
-
+		byebug
 		ActiveRecord::Base.transaction do
 			@item = Item.create!(item_params)
 

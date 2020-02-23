@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { Fragment, useState, useEffect } from 'react';
 
 import axios from 'axios';
 
@@ -7,6 +7,8 @@ import Form from 'react-bootstrap/Form';
 import InputGroup from 'react-bootstrap/InputGroup';
 import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
+
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 
 const ItemForm = ({ 
@@ -22,8 +24,8 @@ const ItemForm = ({
 	const [ categoryData, setCategoryData ] = useState('')
 	const [ attributesData, setAttributesData ] = useState([])
 	const [ newCategory, setNewCategory ] = useState(false)
+	const [ newAttribute, setNewAttribute ] = useState('')
 	const [ possibleAttributes, setPossibleAttributes ] = useState([])
-
 	const [ selectedCategory, setSelectedCategory ] = useState({})
 
 	const submitFormOnEnter = e => {
@@ -75,11 +77,19 @@ const ItemForm = ({
 
 		newCategoryChecker(e)
 
+	}
+
+
+	const handleAddAttribute = e => {
+		e.preventDefault()
+		setAttributesData([...attributesData, newAttribute])
+		setNewAttribute('')
 
 	}
 
-	const handleAttributeUpdate = e => {
+	const handleRemoveAttribute = e => {
 
+		setAttributesData(attributesData.filter(attribute => attribute != e.currentTarget.id))
 	}
 
 	const handleClick = e => {
@@ -90,7 +100,6 @@ const ItemForm = ({
 		setCategoryData('')
 	}
 
-	console.log(selectedCategory)
 
 	return (
 			<Container className='p-4'>
@@ -127,7 +136,7 @@ const ItemForm = ({
 							<Form.Label>
 								Prep category
 							</Form.Label>
-							<Form.Control type='text' list='categories' onChange={handleCategoryChange}/>
+							<Form.Control type='text' list='categories' value={categoryData} onChange={handleCategoryChange} onBlur={newCategoryChecker} />
 							<datalist id='categories'>
 								{categoryList.map(category => {
 									return (
@@ -145,7 +154,7 @@ const ItemForm = ({
 						<Form.Row>
 							<Col xs={12}>
 								<Form.Label>
-									Here are the trackable attributes for this category.
+									These are the attributes that this category will allow you to track.
 								</Form.Label>
 								<ul>
 									{selectedCategory[0].trackable_attributes.map( attribute => {
@@ -160,15 +169,16 @@ const ItemForm = ({
 					}
 
 					{newCategory &&
+						<Fragment>
 						<Form.Row>
 							<Col xs={12}>
 								<Form.Label>
 									Which quantities will this category keep track of? (Up to 4)
 								</Form.Label>
 								<InputGroup>
-									<Form.Control type='text' list='trackable-attributes' onChange={handleAttributeUpdate} />
+									<Form.Control type='text' list='trackable-attributes' value={newAttribute} onChange={e=>{setNewAttribute(e.target.value)}} />
 									<InputGroup.Append>
-										<Button>
+										<Button onClick={e=>{handleAddAttribute(e)}}>
 											Add attribute
 										</Button>
 									</InputGroup.Append>
@@ -183,6 +193,32 @@ const ItemForm = ({
 								</datalist>
 							</Col>
 						</Form.Row>
+						{ attributesData.length > 0 &&
+						<Form.Row>
+							<Col xs={12}>
+								<Form.Label>
+									Selected attributes
+								</Form.Label>
+								<ul>
+								
+									{attributesData.map((attribute,index)=> {
+										return (
+											<li key={index}>
+												{attribute}
+												<FontAwesomeIcon
+													id={attribute} 
+													icon='times'
+													className='clickable-icon delete-icon'
+													onClick={e=>{handleRemoveAttribute(e)}} />
+											</li>
+										)
+									})}
+								
+								</ul>
+							</Col>
+						</Form.Row>
+						}
+						</Fragment>
 					}
 
 					

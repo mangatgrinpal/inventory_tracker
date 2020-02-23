@@ -31,7 +31,7 @@ const CategoryContainer = ({
 	const categoryItems = itemList.filter(item => item.category.title === category.title)
 
 
-	const columnWidth = category.trackable_attributes.length > 0 ? (8/category.trackable_attributes.length) : 8
+	const columnWidth = category.trackable_attributes.length > 0 ? Math.floor(8/category.trackable_attributes.length) : 8
 
 	return (
 
