@@ -5,4 +5,10 @@ class CategoriesController < ApplicationController
 		@categories = Category.where(user_id: current_user.id)
 		render json: @categories
 	end
+
+
+	private
+		def category_params
+			params.require(:category).permit(:title)
+		end
 end

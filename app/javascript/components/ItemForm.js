@@ -1,4 +1,5 @@
 import React, { Fragment, useState, useEffect } from 'react';
+import CategoryForm from './CategoryForm';
 
 import axios from 'axios';
 
@@ -82,14 +83,20 @@ const ItemForm = ({
 
 	const handleAddAttribute = e => {
 		e.preventDefault()
-		setAttributesData([...attributesData, newAttribute])
+		let selectedAttribute = possibleAttributes.filter(attribute => attribute.name.toLowerCase() == newAttribute.toLowerCase())
+		if (selectedAttribute.length > 0) {
+			setAttributesData([...attributesData, selectedAttribute[0]])
+		} else {
+			setAttributesData([...attributesData, Object.assign({}, {name: newAttribute})])
+		}
+		
 		setNewAttribute('')
 
 	}
 
 	const handleRemoveAttribute = e => {
 
-		setAttributesData(attributesData.filter(attribute => attribute != e.currentTarget.id))
+		setAttributesData(attributesData.filter(attribute => attribute.name != e.currentTarget.id))
 	}
 
 	const handleClick = e => {
@@ -149,7 +156,7 @@ const ItemForm = ({
 
 						</Col>
 					</Form.Row>
-					{selectedCategory.length > 0 && 
+					{selectedCategory.length > 0 ? 
 
 						<Form.Row>
 							<Col xs={12}>
@@ -166,61 +173,15 @@ const ItemForm = ({
 								
 							</Col>
 						</Form.Row>
+						:
+						<CategoryForm
+							attributesData={attributesData}
+							handleAddAttribute={handleAddAttribute}
+							newAttribute={newAttribute}
+							setNewAttribute={setNewAttribute}
+							possibleAttributes={possibleAttributes}
+							handleRemoveAttribute={handleRemoveAttribute} />
 					}
-
-					{newCategory &&
-						<Fragment>
-						<Form.Row>
-							<Col xs={12}>
-								<Form.Label>
-									Which quantities will this category keep track of? (Up to 4)
-								</Form.Label>
-								<InputGroup>
-									<Form.Control type='text' list='trackable-attributes' value={newAttribute} onChange={e=>{setNewAttribute(e.target.value)}} />
-									<InputGroup.Append>
-										<Button onClick={e=>{handleAddAttribute(e)}}>
-											Add attribute
-										</Button>
-									</InputGroup.Append>
-								</InputGroup>
-								
-								<datalist id='trackable-attributes'>
-									{possibleAttributes.length > 0 && possibleAttributes.map( attribute => {
-										return (
-											<option key={attribute.id}>{attribute.name}</option>
-										)
-									})}
-								</datalist>
-							</Col>
-						</Form.Row>
-						{ attributesData.length > 0 &&
-						<Form.Row>
-							<Col xs={12}>
-								<Form.Label>
-									Selected attributes
-								</Form.Label>
-								<ul>
-								
-									{attributesData.map((attribute,index)=> {
-										return (
-											<li key={index}>
-												{attribute}
-												<FontAwesomeIcon
-													id={attribute} 
-													icon='times'
-													className='clickable-icon delete-icon'
-													onClick={e=>{handleRemoveAttribute(e)}} />
-											</li>
-										)
-									})}
-								
-								</ul>
-							</Col>
-						</Form.Row>
-						}
-						</Fragment>
-					}
-
 					
 
 					<Form.Row className='pt-2'>
