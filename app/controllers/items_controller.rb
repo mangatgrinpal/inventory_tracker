@@ -12,15 +12,16 @@ class ItemsController < ApplicationController
 			@item = Item.create!(item_params)
 
 			@category = current_user.categories.where(title: params['category']['title']).first
+			@trackable_attributes = params['trackable_attributes']
+
 			if !@category
-				@category = current_user.categories.create!(category_params)	
+				@category = current_user.categories.create!(category_params)
+				CategoryCreator.call(@category, )
+			else
+
 			end
-			
-			@item.save
 			ItemCategory.create!(item: @item, category: @category)
 		end
-
-		
 
 		if @item.save
 			render json: serialized_items

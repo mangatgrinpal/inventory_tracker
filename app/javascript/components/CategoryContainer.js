@@ -23,6 +23,7 @@ import Col from 'react-bootstrap/Col';
 const CategoryContainer = ({ 
 	category,
 	restaurant,
+	deleteItem,
 	items: { itemList },
 	weeks: { currentWorkDay, previousWorkDay },
 	users: { currentUser }
@@ -98,6 +99,12 @@ const mapStateToProps = state => ({
 export default connect(
 	mapStateToProps,
 	{
-		fetchRecords
+		fetchRecords,
+		fetchItems,
+		addItem,
+		deleteItem,
+		setItemFormVisibility,
+		clearFetchedItems,
+		updateRecord
 	}
 )(CategoryContainer)

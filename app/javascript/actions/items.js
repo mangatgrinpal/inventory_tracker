@@ -53,7 +53,7 @@ export const fetchItems = restaurant => async dispatch => {
 	}
 }
 
-export const addItem = (name, units, category, restaurant) => async dispatch => {
+export const addItem = (name, units, category, restaurant, attributes) => async dispatch => {
 	
 	try {
 

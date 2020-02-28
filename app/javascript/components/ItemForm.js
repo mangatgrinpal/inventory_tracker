@@ -99,6 +99,10 @@ const ItemForm = ({
 		setAttributesData(attributesData.filter(attribute => attribute.name != e.currentTarget.id))
 	}
 
+	const validate = () => {
+		// we'll define a function to validate the form
+	}
+
 	const handleClick = e => {
 		e.preventDefault()
 		addItem(nameData, unitsData, categoryData, restaurant)
@@ -143,7 +147,12 @@ const ItemForm = ({
 							<Form.Label>
 								Prep category
 							</Form.Label>
-							<Form.Control type='text' list='categories' value={categoryData} onChange={handleCategoryChange} onBlur={newCategoryChecker} />
+							<Form.Control 
+								type='text' 
+								list='categories' 
+								value={categoryData} 
+								onChange={handleCategoryChange} 
+								onBlur={newCategoryChecker} />
 							<datalist id='categories'>
 								{categoryList.map(category => {
 									return (

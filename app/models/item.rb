@@ -1,6 +1,6 @@
 class Item < ApplicationRecord
 	belongs_to :restaurant
-	has_one :item_category
+	has_one :item_category, dependent: :destroy
 	has_one :category, through: :item_category
 	has_many :trackable_attributes, through: :category
 	has_many :item_records

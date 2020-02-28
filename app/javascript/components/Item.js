@@ -70,7 +70,7 @@ const Item = ({
 
 								
 								<Button size='sm' variant='light' className='value-display' ref={onHandValue}>
-									on hand value
+									{trackableAttribute.name} value
 								</Button>
 
 
