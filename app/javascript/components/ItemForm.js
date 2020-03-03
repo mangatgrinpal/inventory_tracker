@@ -105,10 +105,10 @@ const ItemForm = ({
 
 	const handleClick = e => {
 		e.preventDefault()
-		addItem(nameData, unitsData, categoryData, restaurant)
-		setNameData('')
-		setUnitsData('')
-		setCategoryData('')
+		addItem(nameData, unitsData, categoryData, restaurant, attributesData)
+		// setNameData('')
+		// setUnitsData('')
+		// setCategoryData('')
 	}
 
 

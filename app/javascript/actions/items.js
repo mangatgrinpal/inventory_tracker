@@ -53,7 +53,7 @@ export const fetchItems = restaurant => async dispatch => {
 	}
 }
 
-export const addItem = (name, units, category, restaurant, attributes) => async dispatch => {
+export const addItem = (name, units, category, restaurant, trackable_attributes) => async dispatch => {
 	
 	try {
 
@@ -65,7 +65,8 @@ export const addItem = (name, units, category, restaurant, attributes) => async 
 					restaurant_id: restaurant
 				},
 				category: { title: category },
-				restaurant: restaurant
+				restaurant: restaurant,
+				trackable_attributes
 		})
 
 

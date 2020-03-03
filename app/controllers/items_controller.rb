@@ -8,20 +8,26 @@ class ItemsController < ApplicationController
 
 	def create
 
-		ActiveRecord::Base.transaction do
-			@item = Item.create!(item_params)
+		@item = Item.create(item_params)
 
-			@category = current_user.categories.where(title: params['category']['title']).first
+		@category = current_user.categories.where(title: params['category']['title']).first
+		
+		
+		if !@category
+			@category = current_user.categories.create(category_params)
 			@trackable_attributes = params['trackable_attributes']
+			@trackable_attributes.each do |attribute|
+				byebug
+				if attribute['id'] == nil
+					@trackable_attribute = TrackableAttribute.create(trackable_attribute_params)
+				else
 
-			if !@category
-				@category = current_user.categories.create!(category_params)
-				CategoryCreator.call(@category, )
-			else
-
+				end
 			end
-			ItemCategory.create!(item: @item, category: @category)
+		else
+
 		end
+		ItemCategory.create!(item: @item, category: @category)
 
 		if @item.save
 			render json: serialized_items
@@ -43,6 +49,10 @@ class ItemsController < ApplicationController
 
 		def category_params
 			params.require(:category).permit(:title)
+		end
+
+		def trackable_attribute_params
+			params.permit(:name)
 		end
 
 		def serialized_items

@@ -53,6 +53,7 @@ const CategoryForm = ({
 						<ul>
 						
 							{attributesData.map( (attribute,index) => {
+								
 								return (
 									<li key={index}>
 										{attribute.name}&nbsp;
