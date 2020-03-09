@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_03_03_075824) do
+ActiveRecord::Schema.define(version: 2020_03_04_025147) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -41,6 +41,15 @@ ActiveRecord::Schema.define(version: 2020_03_03_075824) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "user_id"
+  end
+
+  create_table "category_attributes", force: :cascade do |t|
+    t.integer "category_id"
+    t.integer "trackable_attribute_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["category_id"], name: "index_category_attributes_on_category_id"
+    t.index ["trackable_attribute_id"], name: "index_category_attributes_on_trackable_attribute_id"
   end
 
   create_table "item_categories", force: :cascade do |t|

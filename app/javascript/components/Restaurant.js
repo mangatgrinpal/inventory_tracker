@@ -75,7 +75,6 @@ const Restaurant = ({
 
 	let currentRestaurant = restaurantList.filter(restaurant => restaurant.id == id)
 
-
 	return (
 		<Fragment>
 			<Container id='restaurant-container'>
