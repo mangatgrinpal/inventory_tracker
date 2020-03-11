@@ -10,36 +10,17 @@ class ItemsController < ApplicationController
 
 		Item.transaction do
 			@item = Item.create(item_params)
+			@category = current_user.categories.find_or_create_by(title: params[:category][:title])
 
-			@category = current_user.categories.where(title: params['category']['title']).first
-			
-			#check if the category exists in the db
-			if !@category
-				#if it does not we will create the category
-				# and assign the trackable attributes to this category
-				@category = current_user.categories.create!(category_params)
-				@trackable_attributes = TrackableAttribute.create!(trackable_attribute_params)
-
-				# @trackable_attributes.each do |trackable_attribute|
-
-
-				# 	if trackable_attribute['id'] == nil
-				# 		byebug
-				# 		@trackable_attribute = TrackableAttribute.create!(trackable_attribute)
-				# 	else
-				# 		@trackable_attribute = TrackableAttribute.where(id: trackable_attribute.id).first
-
-				# 	end
-				# 	@category_attribute = CategoryAttribute.create!(category: @category, trackable_attribute: @trackable_attribute)
-				# end
-
+			params[:trackable_attributes].try(:each) do |trackable_attribute|
+				@category.trackable_attributes.find_or_create_by(name: trackable_attribute[:name])
 			end
 
 			@item_category = ItemCategory.create!(item: @item, category: @category)
 		end
 
 		if @item.save
-			render json: serialized_items
+			render json: {items: serialized_items, categories: current_user_categories, trackable_attributes: TrackableAttribute.all}
 		end
 	end
 
@@ -61,7 +42,11 @@ class ItemsController < ApplicationController
 		end
 
 		def trackable_attribute_params
-			params.require(:trackable_attributes).permit([:name])
+			params.require(:trackable_attribute).permit(:name)
+		end
+
+		def current_user_categories
+			@categories = Category.where(user_id: current_user.id)
 		end
 
 		def serialized_items

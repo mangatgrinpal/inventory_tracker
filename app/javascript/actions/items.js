@@ -7,7 +7,8 @@ import {
 	DELETE_ITEM,
 	SET_ITEM_FORM_VISIBILITY,
 	FETCH_RECORDS_SUCCESS,
-	UPDATE_RECORD
+	UPDATE_RECORD,
+	FETCH_CATEGORIES_SUCCESS
 } from './types'
 
 import {
@@ -70,11 +71,18 @@ export const addItem = (name, units, category, restaurant, trackable_attributes)
 		})
 
 
-		const { data } = res;
+		const { data: { items, categories, trackable_attributes} } = res;
+
+		debugger
 
 		dispatch({
 			type: ADD_ITEM,
-			payload: data
+			payload: items
+		})
+
+		dispatch({
+			type: FETCH_CATEGORIES_SUCCESS,
+			payload: categories
 		})
 
 		dispatch({
