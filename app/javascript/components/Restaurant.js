@@ -3,7 +3,6 @@ import Loading from './Loading';
 import CategoryContainer from './CategoryContainer';
 import Item from './Item';
 import ItemForm from './ItemForm';
-import AddItemButton from './AddItemButton';
 import ScrollUpButton from './ScrollUpButton';
 import { connect } from 'react-redux';
 
@@ -72,7 +71,6 @@ const Restaurant = ({
 	},[ id ])
 
 
-
 	let currentRestaurant = restaurantList.filter(restaurant => restaurant.id == id)
 
 	return (
@@ -123,17 +121,12 @@ const Restaurant = ({
 					</Fragment> :
 					<Fragment>
 						{categoryList.map( category => {
-
 							return (
-								category.items.length > 0 ?
-									<Fragment key={category.id}>
-										<CategoryContainer
-											restaurant={id}
-											category={category} />
-										<AddItemButton setItemFormVisibility={ setItemFormVisibility } />
-									</Fragment>
-								:
-								<div key={category.id}/>
+								<CategoryContainer
+									key={category.id}
+									restaurant={id}
+									setItemFormVisibility={setItemFormVisibility}
+									category={category} />
 							)
 						})}
 					</Fragment>

@@ -12,7 +12,9 @@ class ItemsController < ApplicationController
 			@item = Item.create(item_params)
 			@category = current_user.categories.find_or_create_by(title: params[:category][:title])
 
+			byebug
 			params[:trackable_attributes].try(:each) do |trackable_attribute|
+
 				@category.trackable_attributes.find_or_create_by(name: trackable_attribute[:name])
 			end
 
@@ -20,7 +22,7 @@ class ItemsController < ApplicationController
 		end
 
 		if @item.save
-			render json: {items: serialized_items, categories: current_user_categories, trackable_attributes: TrackableAttribute.all}
+			render json: {items: serialized_items, categories: serialized_categories, trackable_attributes: TrackableAttribute.all}
 		end
 	end
 
@@ -45,8 +47,9 @@ class ItemsController < ApplicationController
 			params.require(:trackable_attribute).permit(:name)
 		end
 
-		def current_user_categories
+		def serialized_categories
 			@categories = Category.where(user_id: current_user.id)
+			ActiveModel::Serializer::CollectionSerializer.new(@categories, each_serializer: CategorySerializer)
 		end
 
 		def serialized_items
