@@ -60,7 +60,9 @@ export default function(state = initialState, action) {
 		case UPDATE_RECORD:
 			return {
 				...state,
-				itemList: payload
+				itemList: state.itemList.map(item =>
+						item.id === payload.id ? { ...item, records: payload.records } : item
+					)
 			};
 		default:
 			return state

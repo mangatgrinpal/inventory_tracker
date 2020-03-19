@@ -36,13 +36,11 @@ const CategoryContainer = ({
 
 	const columnWidth = category.trackable_attributes.length > 0 ? Math.floor(8/category.trackable_attributes.length) : 8
 
-
+	console.log(categoryItems)
 
 	return (
 
 			categoryItems.length > 0 ?
-
-
 
 				<Fragment>
 					<Row className='pt-1'>
