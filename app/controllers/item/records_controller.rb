@@ -1,4 +1,4 @@
-class RecordsController < ApplicationController
+class Item::RecordsController < ApplicationController
 	
 	def index
 
@@ -7,7 +7,7 @@ class RecordsController < ApplicationController
 
 	def create
 		#first locate the record to see if it exists
-
+		byebug
 		@record = Record.find_by(item_id: params[:record][:item_id], date: params[:record][:date], record_type: params[:record][:record_type])
 
 		#if it exists and it is an increment 

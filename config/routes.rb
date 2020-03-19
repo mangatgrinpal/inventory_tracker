@@ -1,7 +1,11 @@
 Rails.application.routes.draw do
   mount_devise_token_auth_for 'User', at: 'users'
   
-  resources :restaurants, :items, :records, :categories, :trackable_attributes
+  resources :restaurants, :categories, :trackable_attributes
+
+  resources :items do
+  	resources :records, controller: 'item/records'
+  end
   
   root 'static_pages#home'
 

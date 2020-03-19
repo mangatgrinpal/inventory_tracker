@@ -31,7 +31,11 @@ const Item = ({
 	let caseValue = React.createRef()
 	let onHandValue = React.createRef()
 
-
+	const handleClick = e => {
+		e.preventDefault()
+		console.log('clicked!!')
+		updateRecord(currentWorkDay, id, 'On Hand', restaurant, 'decrement')
+	}
 
 
 	return (
@@ -59,7 +63,7 @@ const Item = ({
 									<Button 
 										variant='outline-primary' 
 										size='sm' 
-										onClick={()=> { updateRecord(currentWorkDay, id, 'On Hand', restaurant, 'decrement')}}
+										onClick={(e)=> { handleClick(e) }}
 										
 									>
 										<FontAwesomeIcon icon='minus'/>

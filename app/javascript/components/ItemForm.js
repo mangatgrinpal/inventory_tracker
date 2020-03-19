@@ -62,7 +62,9 @@ const ItemForm = ({
 
 	const handleAddAttribute = e => {
 		e.preventDefault()
-		let selectedAttribute = trackableAttributeList.filter(attribute => attribute.name.toLowerCase() == newAttribute.toLowerCase())
+		let selectedAttribute = trackableAttributeList.filter(
+			attribute => attribute.name.toLowerCase() == newAttribute.toLowerCase()
+		)
 		if (selectedAttribute.length > 0) {
 			setAttributesData([...attributesData, selectedAttribute[0]])
 		} else {

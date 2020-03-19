@@ -139,9 +139,9 @@ export const setItemFormVisibility = visibility => dispatch => {
 
 export const updateRecord = (date, item, recordType, restaurant, updateType, quantity) => async dispatch => {
 
-
+	// debugger
 	try {
-		const res = await axios.post('/records', {
+		const res = await axios.post(`/items/${item}/records`, {
 			
 			record: {
 				item_id: item, 

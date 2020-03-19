@@ -7,7 +7,9 @@ import {
 	DELETE_ITEM,
 	SET_ITEM_FORM_VISIBILITY,
 	FETCH_RECORDS_SUCCESS,
-	UPDATE_RECORD
+	UPDATE_RECORD,
+	INCREMENT_RECORD,
+	DECREMENT_RECORD
 } from '../actions/types'
 
 const initialState = {
@@ -64,6 +66,13 @@ export default function(state = initialState, action) {
 						item.id === payload.id ? { ...item, records: payload.records } : item
 					)
 			};
+		case INCREMENT_RECORD:
+			return {
+				...state,
+				itemList: state.itemList.map(item =>
+					item.id === payload.id ? { ...item, records: payload.records } : item
+				)
+			}
 		default:
 			return state
 	}
