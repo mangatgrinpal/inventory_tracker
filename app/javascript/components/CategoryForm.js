@@ -14,7 +14,7 @@ const CategoryForm = ({
 	handleAddAttribute,
 	newAttribute,
 	setNewAttribute,
-	possibleAttributes,
+	trackableAttributeList,
 	handleRemoveAttribute
 }) => {
 
@@ -36,7 +36,7 @@ const CategoryForm = ({
 						}
 					</InputGroup>
 					<datalist id='trackable-attributes'>
-						{possibleAttributes && possibleAttributes.length > 0 && possibleAttributes.map( attribute => {
+						{trackableAttributeList && trackableAttributeList.length > 0 && trackableAttributeList.map( attribute => {
 							return (
 								<option key={attribute.id}>{attribute.name}</option>
 							)

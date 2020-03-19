@@ -17,6 +17,8 @@ const ItemForm = ({
 	restaurant, 
 	setItemFormVisibility,
 	categoryList,
+	fetchTrackableAttributes,
+	trackableAttributeList,
 	currentUser 
 }) => {
 
@@ -26,7 +28,6 @@ const ItemForm = ({
 	const [ attributesData, setAttributesData ] = useState([])
 	const [ newCategory, setNewCategory ] = useState(false)
 	const [ newAttribute, setNewAttribute ] = useState('')
-	const [ possibleAttributes, setPossibleAttributes ] = useState([])
 	const [ selectedCategory, setSelectedCategory ] = useState({})
 
 	const submitFormOnEnter = e => {
@@ -34,28 +35,6 @@ const ItemForm = ({
 			addItem(nameData, unitsData, categoryData, restaurant)
 		}
 	}
-
-	useEffect(()=> {
-		async function fetchAttributes() {
-			try {
-				const res = await axios.get('/trackable_attributes')
-
-				const { data } = res;
-
-				setPossibleAttributes(data)
-			} catch(error) {
-				console.log(error)
-			}	
-		}
-
-		fetchAttributes();
-		
-		
-	},[])
-
-
-
-	
 
 	const newCategoryChecker = e => {
 
@@ -83,7 +62,7 @@ const ItemForm = ({
 
 	const handleAddAttribute = e => {
 		e.preventDefault()
-		let selectedAttribute = possibleAttributes.filter(attribute => attribute.name.toLowerCase() == newAttribute.toLowerCase())
+		let selectedAttribute = trackableAttributeList.filter(attribute => attribute.name.toLowerCase() == newAttribute.toLowerCase())
 		if (selectedAttribute.length > 0) {
 			setAttributesData([...attributesData, selectedAttribute[0]])
 		} else {
@@ -187,7 +166,7 @@ const ItemForm = ({
 							handleAddAttribute={handleAddAttribute}
 							newAttribute={newAttribute}
 							setNewAttribute={setNewAttribute}
-							possibleAttributes={possibleAttributes}
+							trackableAttributeList={trackableAttributeList}
 							handleRemoveAttribute={handleRemoveAttribute} />
 					}
 					

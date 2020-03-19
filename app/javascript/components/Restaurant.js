@@ -45,7 +45,7 @@ const Restaurant = ({
 	weeks: { currentWorkDay, previousWorkDay },
 	records: { recordList },
 	users: { currentUser },
-	categories: { categoryList }
+	categories: { categoryList, trackableAttributeList }
 }) => {	
 
 	const { id } = useParams();
@@ -182,6 +182,7 @@ const Restaurant = ({
 						restaurant={id} 
 						addItem={addItem}
 						categoryList={categoryList}
+						trackableAttributeList={trackableAttributeList}
 						setItemFormVisibility={setItemFormVisibility}
 						currentUser={currentUser} 
 					/>
@@ -195,7 +196,10 @@ const Restaurant = ({
 				unmountOnExit
 				classNames='fade'
 			>
-				<Col xs={12} className='dashboard-overlay'/>
+				<Col 
+					onClick={()=>{setItemFormVisibility(false)}} 
+					xs={12} 
+					className='dashboard-overlay'/>
 			</CSSTransition>
 		</Fragment>
 			
@@ -220,7 +224,7 @@ export default connect(
 		addItem, 
 		deleteItem,
 		setItemFormVisibility, 
-		fetchRecords, 
+		fetchRecords,
 		clearFetchedItems,
 		updateRecord
 	}

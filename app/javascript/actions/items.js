@@ -8,7 +8,8 @@ import {
 	SET_ITEM_FORM_VISIBILITY,
 	FETCH_RECORDS_SUCCESS,
 	UPDATE_RECORD,
-	FETCH_CATEGORIES_SUCCESS
+	FETCH_CATEGORIES_SUCCESS,
+	FETCH_TRACKABLE_ATTRIBUTES_SUCCESS
 } from './types'
 
 import {
@@ -82,6 +83,11 @@ export const addItem = (name, units, category, restaurant, trackableAttributes) 
 		dispatch({
 			type: FETCH_CATEGORIES_SUCCESS,
 			payload: categories
+		})
+
+		dispatch({
+			type: FETCH_TRACKABLE_ATTRIBUTES_SUCCESS,
+			payload: trackable_attributes
 		})
 
 		dispatch({

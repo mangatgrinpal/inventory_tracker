@@ -22,7 +22,7 @@ import {
 	setRestaurantLinksVisibility
 } from '../actions/restaurants';
 import { setCurrentWorkDay, setPreviousWorkDay } from '../actions/weeks';
-import { fetchCategories } from '../actions/categories';
+import { fetchCategories, fetchTrackableAttributes } from '../actions/categories';
 
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
@@ -33,7 +33,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const Dashboard = ({
 	fetchRestaurants,
-	fetchCategories, 
+	fetchCategories,
+	fetchTrackableAttributes, 
 	addRestaurant,
 	setRestaurantFormVisibility,
 	setRestaurantLinksVisibility,
@@ -58,7 +59,7 @@ const Dashboard = ({
 		setCurrentWorkDay(currentDay)
 		fetchRestaurants();
 		fetchCategories();
-
+		fetchTrackableAttributes();
 
 
 	},[ fetchRestaurants, currentDay ])
@@ -141,7 +142,10 @@ const Dashboard = ({
 					unmountOnExit
 					classNames='fade'
 				>
-					<Col xs={12} className='dashboard-overlay'/>
+					<Col 
+						xs={12} 
+						className='dashboard-overlay'
+						onClick={()=>{setRestaurantFormVisibility(false)}}/>
 				</CSSTransition>
 			</Container>
 		</Fragment>
@@ -158,12 +162,13 @@ const mapStateToProps = state =>
 export default connect (
 	mapStateToProps,
 	{ 
-		fetchRestaurants, 
-		addRestaurant, 
+		fetchRestaurants,
+		fetchCategories,
+		fetchTrackableAttributes,
+		addRestaurant,
 		setCurrentWorkDay, 
 		setPreviousWorkDay, 
 		setRestaurantFormVisibility,
-		setRestaurantLinksVisibility,
-		fetchCategories
+		setRestaurantLinksVisibility
 	}
 )(Dashboard)
