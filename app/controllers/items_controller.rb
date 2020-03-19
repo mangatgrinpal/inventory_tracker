@@ -12,10 +12,17 @@ class ItemsController < ApplicationController
 			@item = Item.create(item_params)
 			@category = current_user.categories.find_or_create_by(title: params[:category][:title])
 
-			byebug
-			params[:trackable_attributes].try(:each) do |trackable_attribute|
 
-				@category.trackable_attributes.find_or_create_by(name: trackable_attribute[:name])
+			params[:trackableAttributes].try(:each) do |trackable_attribute|
+
+
+				@trackable_attribute = TrackableAttribute.where(name: trackable_attribute[:name]).first
+				if @trackable_attribute
+					CategoryAttribute.create(category: @category, trackable_attribute: @trackable_attribute)
+				else
+					@category.trackable_attributes.create(name: trackable_attribute[:name])
+				end
+
 			end
 
 			@item_category = ItemCategory.create!(item: @item, category: @category)

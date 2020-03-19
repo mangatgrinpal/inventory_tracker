@@ -54,8 +54,8 @@ export const fetchItems = restaurant => async dispatch => {
 	}
 }
 
-export const addItem = (name, units, category, restaurant, trackable_attributes) => async dispatch => {
-	
+export const addItem = (name, units, category, restaurant, trackableAttributes) => async dispatch => {
+
 	try {
 
 		const res = await axios.post('/items', {
@@ -67,13 +67,12 @@ export const addItem = (name, units, category, restaurant, trackable_attributes)
 				},
 				category: { title: category },
 				restaurant: restaurant,
-				trackable_attributes
+				trackableAttributes
 		})
 
 
 		const { data: { items, categories, trackable_attributes} } = res;
 
-		debugger
 
 		dispatch({
 			type: ADD_ITEM,
