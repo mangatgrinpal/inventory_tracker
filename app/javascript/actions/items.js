@@ -137,20 +137,16 @@ export const setItemFormVisibility = visibility => dispatch => {
 }
 
 
-export const updateRecord = (date, item, recordType, restaurant, updateType, quantity) => async dispatch => {
+export const updateRecord = (item, quantity, trackableAttribute) => async dispatch => {
+	//rename this function to createRecord later
 
-	// debugger
 	try {
 		const res = await axios.post(`/items/${item}/records`, {
 			
 			record: {
-				item_id: item, 
-				record_type: recordType, 
-				date: date,
 				quantity: quantity
-			}, 
-			restaurant: restaurant, 
-			update_type: updateType,
+			},
+			trackable_attribute: trackableAttribute
 		})
 
 		const { data } = res;
@@ -163,5 +159,32 @@ export const updateRecord = (date, item, recordType, restaurant, updateType, qua
 		
 	} catch(error) {
 		console.log(error)
+	}
+}
+
+export const incrementRecord = (item, record) => async dispatch => {
+
+	try {
+		const res = await axios.post(`/items/${item}/records`, {
+
+
+
+		})
+	} catch (error) {
+		
+	}
+}
+
+
+export const decrementRecord = (item, record) => async dispatch => {
+
+	try {
+		const res = await axios.post(`/items/${item}/records`, {
+
+
+			
+		})
+	} catch (error) {
+		
 	}
 }

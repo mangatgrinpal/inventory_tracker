@@ -1,12 +1,15 @@
-import React, { Fragment, useEffect } from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 
-import Record from './Record'; 
+import Record from './Record';
+import RecordForm from './RecordForm';
 
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import ListGroup from 'react-bootstrap/ListGroup';
+import Form from 'react-bootstrap/Form';
+import InputGroup from 'react-bootstrap/InputGroup';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
@@ -20,11 +23,16 @@ const Item = ({
 	currentWorkDay,
 	previousWorkDay,
 	updateRecord,
+	incrementRecord,
+	decrementRecord,
 	currentUser
 }) => {
 
 
 	const { id, name, units, trackable_attributes, records } = item;
+
+	const [quantityData, setQuantityData] = useState({})
+
 
 	const columnWidth = trackable_attributes.length > 0 ? Math.floor(8/trackable_attributes.length) : 8	
 
@@ -34,7 +42,7 @@ const Item = ({
 	const handleClick = e => {
 		e.preventDefault()
 		console.log('clicked!!')
-		updateRecord(currentWorkDay, id, 'On Hand', restaurant, 'decrement')
+		updateRecord(id, quantity, attribute)
 	}
 
 
@@ -59,32 +67,32 @@ const Item = ({
 								{trackableAttribute.name}
 							</Col>
 							<Col xs={5} md={columnWidth} className='pb-1'>
+								<InputGroup className='mx-auto px-md-3'>
+									<InputGroup.Prepend>
+										<Button 
+											variant='outline-primary' 
+											size='sm' 
+											onClick={(e)=> { handleClick(e) }}
+											
+										>
+											<FontAwesomeIcon icon='minus'/>
+										</Button>
+									</InputGroup.Prepend>
+									<RecordForm
+										item={id} 
+										attributeId={trackableAttribute.id}
+										updateRecord={updateRecord} />
 
-									<Button 
-										variant='outline-primary' 
-										size='sm' 
-										onClick={(e)=> { handleClick(e) }}
-										
-									>
-										<FontAwesomeIcon icon='minus'/>
-									</Button>
-
-								
-								<Button size='sm' variant='light' className='value-display' ref={onHandValue}>
-									{trackableAttribute.name} value
-								</Button>
-
-
-									<Button 
-										size='sm' 
-										onClick={()=> { updateRecord(currentWorkDay, id, 'On Hand', restaurant, 'increment', onHandValue.current.innerText)}}
-										
-									>
-										<FontAwesomeIcon icon='plus'/>
-									</Button>	
-
-								
-								
+									<InputGroup.Append>
+										<Button 
+											size='sm' 
+											onClick={()=> { incrementRecord }}
+											
+										>
+											<FontAwesomeIcon icon='plus'/>
+										</Button>	
+									</InputGroup.Append>
+								</InputGroup>
 							</Col>
 						</Fragment>
 					)

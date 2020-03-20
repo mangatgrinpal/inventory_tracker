@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useState } from 'react';
 
 
 import Form from 'react-bootstrap/Form';
@@ -6,20 +6,28 @@ import InputGroup from 'react-bootstrap/InputGroup';
 import Button from 'react-bootstrap/Button';
 
 
-const RecordForm = () => {
+const RecordForm = ({ 
+	attributeId,
+	item,
+	updateRecord
+}) => {
+
+	const [ quantityData, setQuantityData ] = useState('')
+
+	const handleBlur = e => {
+		e.preventDefault()
+		updateRecord(item, quantityData, attributeId)
+	}
+
 	return (
-		<Form>
-			<InputGroup>
-				<Form.Control type='text' placeholder='0'/>
-				<InputGroup.Append>
-					<Button>
-						Add
-					</Button>
-				</InputGroup.Append>
-
-			</InputGroup>
-
-		</Form>
+		
+		<Form.Control 
+			type='number'
+			className='text-center'
+			onBlur={(e)=> { handleBlur(e) }}
+			value={quantityData}
+			onChange={e => setQuantityData(e.target.value)}/>
+				
 	)
 }
 

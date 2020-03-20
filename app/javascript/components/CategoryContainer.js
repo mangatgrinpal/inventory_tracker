@@ -13,7 +13,9 @@ import {
 	deleteItem,
 	setItemFormVisibility,
 	clearFetchedItems,
-	updateRecord
+	updateRecord,
+	incrementRecord,
+	decrementRecord
 } from '../actions/items';
 
 import Container from 'react-bootstrap/Container';
@@ -86,6 +88,8 @@ const CategoryContainer = ({
 										currentWorkDay={currentWorkDay}
 										previousWorkDay={previousWorkDay}
 										updateRecord={updateRecord}
+										incrementRecord={incrementRecord}
+										decrementRecord={decrementRecord}
 										currentUser={currentUser} />
 								)
 							})}
@@ -113,6 +117,8 @@ export default connect(
 		deleteItem,
 		setItemFormVisibility,
 		clearFetchedItems,
-		updateRecord
+		updateRecord,
+		incrementRecord,
+		decrementRecord
 	}
 )(CategoryContainer)
