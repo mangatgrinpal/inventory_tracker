@@ -6,11 +6,33 @@ class Item::RecordsController < ApplicationController
 	end
 
 	def create
-		#first locate the record to see if it exists
+		#first locate the record to see if a record exists from TODAY
 		byebug
-		@record = Record.find_by(item_id: params[:record][:item_id], date: params[:record][:date], record_type: params[:record][:record_type])
+		@record = Item.find_by(id: params[:item_id]).records.where(created_at: today).first
 
-		#if it exists and it is an increment 
+		#if it does then update it with the new value -- front end validations check to see if 
+		#if has changed since the input last lost focus
+		if @record 
+			@record.update(quantity: params[:record][:quantity])
+
+			
+		else
+			ActiveRecord::Base.transaction do
+				@record = Record.create!(quantity: params[:record][:quantity])
+				byebug
+				@record_attribute = RecordTrackableAttribute.create!(record: @record, trackable_attribute_id: params[:trackable_attribute])
+				@item_record = ItemRecord.create!(record_id: @record, item_id: params[:item_id])
+			end
+
+		end
+	end
+
+	def update
+
+		@record = Item.find_by(id: params[:item_id]).records.where(created_at: today)
+
+		#if it does then update it with the new value -- front end validations check to see if 
+		#if has changed since the input last lost focus
 		if @record && params[:update_type] == 'increment' #is increment
 			@record.increment!(:quantity, 0.5)
 			render json: serialized_items, status: 200
@@ -29,17 +51,7 @@ class Item::RecordsController < ApplicationController
 			end
 			
 		else
-
-			@record = Record.new(record_params)
-			if @record.save && params[:update_type] == 'increment'
-				@record.increment!(:quantity, 0.5)
-				render json: serialized_items, status: 200
-			else
-				render json: serialized_items, status: 400
-			end
-
 		end
-
 
 	end
 
@@ -52,8 +64,12 @@ class Item::RecordsController < ApplicationController
 
 	private
 
+		def today
+			Time.zone.now.beginning_of_day..Time.zone.now.end_of_day	
+		end
+
 		def record_params
-			params.require(:record).permit(:item_id, :quantity, :record_type, :date)
+			params.require(:record).permit(:quantity)
 		end 
 
 		def serialized_records
