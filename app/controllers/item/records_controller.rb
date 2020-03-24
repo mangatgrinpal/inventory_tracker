@@ -7,22 +7,22 @@ class Item::RecordsController < ApplicationController
 
 	def create
 		#first locate the record to see if a record exists from TODAY
-		byebug
-		@record = Item.find_by(id: params[:item_id]).records.where(created_at: today).first
+		@item = Item.find_by(id: params[:item_id])
+		@trackable_attribute = TrackableAttribute.find_by(id: params[:trackable_attribute])
+		@record = @item.records.where(created_at: today).select { |record| record.trackable_attribute == @trackable_attribute }.first
 
 		#if it does then update it with the new value -- front end validations check to see if 
 		#if has changed since the input last lost focus
-		if @record 
+		if @record
 			@record.update(quantity: params[:record][:quantity])
 
 			
 		else
-			ActiveRecord::Base.transaction do
-				@record = Record.create!(quantity: params[:record][:quantity])
-				byebug
-				@record_attribute = RecordTrackableAttribute.create!(record: @record, trackable_attribute_id: params[:trackable_attribute])
-				@item_record = ItemRecord.create!(record_id: @record, item_id: params[:item_id])
-			end
+			@record = @item.records.create!(quantity: params[:record][:quantity])
+
+			@record_attribute = RecordTrackableAttribute.create!(record: @record, trackable_attribute: @trackable_attribute)
+			@item_record = ItemRecord.create!(item: @item, record: @record)
+
 
 		end
 	end
