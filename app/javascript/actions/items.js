@@ -142,8 +142,7 @@ export const updateRecord = (item, quantity, trackableAttribute) => async dispat
 
 	try {
 		const res = await axios.post(`/items/${item}/records`, {
-			
-			record: {
+			record: { 
 				quantity: quantity
 			},
 			trackable_attribute: trackableAttribute
@@ -154,7 +153,7 @@ export const updateRecord = (item, quantity, trackableAttribute) => async dispat
 
 		dispatch({
 			type: UPDATE_RECORD,
-			payload: data
+			payload: {id:item ,records: data}
 		})
 		
 	} catch(error) {

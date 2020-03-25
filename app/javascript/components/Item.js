@@ -30,6 +30,8 @@ const Item = ({
 
 
 	const { id, name, units, trackable_attributes, records } = item;
+	
+	
 
 	const [quantityData, setQuantityData] = useState({})
 
@@ -60,7 +62,7 @@ const Item = ({
 				</Col>
 
 				{trackable_attributes.map( trackableAttribute => {
-
+					const record = records.filter(record=> record.trackable_attribute.id == trackableAttribute.id)
 					return (
 						<Fragment key={trackableAttribute.id}>
 							<Col xs={6} className='d-md-none text-right py-1'>
@@ -79,7 +81,8 @@ const Item = ({
 										</Button>
 									</InputGroup.Prepend>
 									<RecordForm
-										item={id} 
+										item={id}
+										record={record} 
 										attributeId={trackableAttribute.id}
 										updateRecord={updateRecord} />
 

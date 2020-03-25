@@ -9,14 +9,22 @@ import Button from 'react-bootstrap/Button';
 const RecordForm = ({ 
 	attributeId,
 	item,
-	updateRecord
+	updateRecord,
+	record
 }) => {
 
-	const [ quantityData, setQuantityData ] = useState('')
+	const baseState = record.length === 1 ? record[0].quantity : 0
+	const [ quantityData, setQuantityData ] = useState(baseState)
+
 
 	const handleBlur = e => {
 		e.preventDefault()
 		updateRecord(item, quantityData, attributeId)
+	}
+
+	const handleChange = e => {
+		e.preventDefault()
+		setQuantityData(e.target.value)
 	}
 
 	return (
@@ -26,7 +34,7 @@ const RecordForm = ({
 			className='text-center'
 			onBlur={(e)=> { handleBlur(e) }}
 			value={quantityData}
-			onChange={e => setQuantityData(e.target.value)}/>
+			onChange={e => {handleChange(e)}} />
 				
 	)
 }
