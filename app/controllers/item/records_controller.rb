@@ -1,8 +1,8 @@
 class Item::RecordsController < ApplicationController
 	
 	def index
-
-		render json: serialized_records
+		@item = Item.find_by(id: params[:item_id])
+		render json: @item.records.where(created_at: today), status: 200
 	end
 
 	def create

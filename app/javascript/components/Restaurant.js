@@ -17,7 +17,7 @@ import {
 	clearFetchedItems,
 	updateRecord
 } from '../actions/items';
-import { fetchRecords } from '../actions/records';
+
 
 import { useHistory, useParams } from 'react-router-dom';
 
@@ -33,7 +33,6 @@ const Restaurant = ({
 	restaurantList, 
 	deleteRestaurant, 
 	fetchItems,
-	fetchRecords,
 	addItem,
 	deleteItem,
 	clearFetchedItems,
@@ -223,8 +222,7 @@ export default connect(
 		fetchItems, 
 		addItem, 
 		deleteItem,
-		setItemFormVisibility, 
-		fetchRecords,
+		setItemFormVisibility,
 		clearFetchedItems,
 		updateRecord
 	}

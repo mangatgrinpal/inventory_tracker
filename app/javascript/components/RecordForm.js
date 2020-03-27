@@ -16,6 +16,8 @@ const RecordForm = ({
 	const baseState = record.length === 1 ? record[0].quantity : 0
 	const [ quantityData, setQuantityData ] = useState(baseState)
 
+	console.log(baseState)
+
 
 	const handleBlur = e => {
 		e.preventDefault()

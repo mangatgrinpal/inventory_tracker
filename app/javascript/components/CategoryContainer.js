@@ -4,9 +4,6 @@ import AddItemButton from './AddItemButton';
 
 import { connect } from 'react-redux';
 
-
-import { fetchRecords } from '../actions/records';
-
 import { 
 	fetchItems,
 	addItem,
@@ -15,7 +12,8 @@ import {
 	clearFetchedItems,
 	updateRecord,
 	incrementRecord,
-	decrementRecord
+	decrementRecord,
+	fetchRecords
 } from '../actions/items';
 
 import Container from 'react-bootstrap/Container';
@@ -29,6 +27,7 @@ const CategoryContainer = ({
 	deleteItem,
 	setItemFormVisibility,
 	updateRecord,
+	fetchRecords,
 	items: { itemList },
 	weeks: { currentWorkDay, previousWorkDay },
 	users: { currentUser }
@@ -111,13 +110,13 @@ const mapStateToProps = state => ({
 export default connect(
 	mapStateToProps,
 	{
-		fetchRecords,
 		fetchItems,
 		addItem,
 		deleteItem,
 		setItemFormVisibility,
 		clearFetchedItems,
 		updateRecord,
+		fetchRecords,
 		incrementRecord,
 		decrementRecord
 	}

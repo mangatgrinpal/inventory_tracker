@@ -60,6 +60,7 @@ export default function(state = initialState, action) {
 				itemList: []
 			};
 		case UPDATE_RECORD:
+		case FETCH_RECORDS_SUCCESS:
 			return {
 				...state,
 				itemList: state.itemList.map(item =>

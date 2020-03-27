@@ -161,6 +161,29 @@ export const updateRecord = (item, quantity, trackableAttribute) => async dispat
 	}
 }
 
+
+
+export const fetchRecords = item => async dispatch => {
+
+	try {
+
+		const res = await axios.get(`/items/${item}/records`)
+
+		const { data } = res;
+
+		dispatch({
+			type: FETCH_RECORDS_SUCCESS,
+			payload: {id: item, records: data}
+		})
+
+	} catch(error) {
+		console.log(error)
+	}
+}
+
+
+
+
 export const incrementRecord = (item, record) => async dispatch => {
 
 	try {
