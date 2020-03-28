@@ -30,13 +30,13 @@ const Item = ({
 
 
 	const { id, name, units, trackable_attributes, records } = item;
-	
+
+	console.log(item)
+
 	useEffect(()=>{
-
+		
 		fetchRecords(id)
-
-	},[ id ])
-	
+	},[id])
 
 	const [quantityData, setQuantityData] = useState({})
 
@@ -49,6 +49,8 @@ const Item = ({
 		console.log('clicked!!')
 		updateRecord(id, quantity, attribute)
 	}
+
+
 
 
 	return (
@@ -65,6 +67,7 @@ const Item = ({
 				</Col>
 
 				{trackable_attributes.map( trackableAttribute => {
+
 					const record = records.filter(record=> record.trackable_attribute.id == trackableAttribute.id)
 					return (
 						<Fragment key={trackableAttribute.id}>

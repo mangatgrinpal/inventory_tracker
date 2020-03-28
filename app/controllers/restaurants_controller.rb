@@ -30,7 +30,7 @@ class RestaurantsController < ApplicationController
 
 
   def serialized_restaurants
-    @restaurants = Restaurant.where(user_id: current_user.id)
+    @restaurants = Restaurant.where(user_id: current_user.id).includes(:items)
     ActiveModel::Serializer::CollectionSerializer.new(@restaurants.with_attached_image, each_serializer: RestaurantSerializer)
   end
 end

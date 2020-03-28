@@ -2,6 +2,15 @@ class Item::RecordsController < ApplicationController
 	
 	def index
 		@item = Item.find_by(id: params[:item_id])
+
+		if @item.records.where(created_at: today).length == 0
+			@item.trackable_attributes.each do |trackable_attribute|
+				@item.records
+				byebug
+			end
+			
+		end
+		
 		render json: @item.records.where(created_at: today), status: 200
 	end
 
@@ -19,12 +28,9 @@ class Item::RecordsController < ApplicationController
 			@record.update(quantity: params[:record][:quantity])	
 		else
 
+			@record = @item.records.create!(quantity: params[:record][:quantity])
 
-				@record = @item.records.create!(quantity: params[:record][:quantity])
-
-				@record_attribute = RecordTrackableAttribute.create!(record: @record, trackable_attribute: @trackable_attribute)
-				
-
+			@record_attribute = RecordTrackableAttribute.create!(record: @record, trackable_attribute: @trackable_attribute)
 
 		end
 		
@@ -76,6 +82,10 @@ class Item::RecordsController < ApplicationController
 
 		def today
 			Time.zone.now.beginning_of_day..Time.zone.now.end_of_day	
+		end
+
+		def yesterday
+			(Time.zone.now.beginning_of_day-1.day)..(Time.zone.now.end_of_day-1.day)
 		end
 
 		def record_params

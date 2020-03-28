@@ -170,7 +170,7 @@ export const fetchRecords = item => async dispatch => {
 		const res = await axios.get(`/items/${item}/records`)
 
 		const { data } = res;
-
+		debugger
 		dispatch({
 			type: FETCH_RECORDS_SUCCESS,
 			payload: {id: item, records: data}
