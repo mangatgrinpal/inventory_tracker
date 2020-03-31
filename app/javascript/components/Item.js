@@ -40,9 +40,6 @@ const Item = ({
 	const [quantityData, setQuantityData] = useState({})
 
 
-	const columnWidth = trackable_attributes.length > 0 ? Math.floor(8/trackable_attributes.length) : 8	
-
-
 	const handleClick = e => {
 		e.preventDefault()
 		console.log('clicked!!')
@@ -73,7 +70,7 @@ const Item = ({
 							<Col xs={6} className='d-md-none text-right py-1'>
 								{trackableAttribute.name}
 							</Col>
-							<Col xs={5} md={columnWidth} className='pb-1'>
+							<Col xs={5} md={2} className='pb-1 col-centered'>
 								<InputGroup className='mx-auto px-md-3'>
 									<InputGroup.Prepend>
 										<Button 

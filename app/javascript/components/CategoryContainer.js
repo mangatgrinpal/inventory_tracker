@@ -36,9 +36,6 @@ const CategoryContainer = ({
 
 	const categoryItems = itemList.filter(item => item.category.title === category.title)
 
-	const columnWidth = category.trackable_attributes.length > 0 ? Math.floor(8/category.trackable_attributes.length) : 8
-
-
 
 	return (
 
@@ -64,7 +61,7 @@ const CategoryContainer = ({
 								:
 								category.trackable_attributes.map( trackableAttribute => {
 								return (
-									<Col md={columnWidth} key={trackableAttribute.id}>
+									<Col md={2} className='col-centered' key={trackableAttribute.id}>
 										{trackableAttribute.name}
 									</Col>
 								)
