@@ -86,6 +86,7 @@ const ItemForm = ({
 
 	const handleClick = e => {
 		e.preventDefault()
+
 		addItem(nameData, unitsData, categoryData, restaurant, attributesData)
 		// setNameData('')
 		// setUnitsData('')

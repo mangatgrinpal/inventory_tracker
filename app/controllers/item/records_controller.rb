@@ -2,11 +2,15 @@ class Item::RecordsController < ApplicationController
 	
 	def index
 		@item = Item.find_by(id: params[:item_id])
-
-		if @item.records.where(created_at: today).length == 0
-			@item.trackable_attributes.each do |trackable_attribute|
-				@item.records
-				byebug
+		@item_attributes  = @item.trackable_attributes
+		if @item.records.where(created_at: today).length != @item_attributes.length
+			@item_attributes.each do |trackable_attribute|
+				@records = @item.records.joins(:trackable_attribute).where('record_trackable_attributes.trackable_attribute_id = ?', trackable_attribute.id)
+				if @records.where(created_at: today).length == 0
+					quantity = @records.last.try(:quantity)
+					@record = @item.records.create!(quantity: quantity)
+					@record_attribute = RecordTrackableAttribute.create!(record: @record, trackable_attribute: trackable_attribute)
+				end
 			end
 			
 		end

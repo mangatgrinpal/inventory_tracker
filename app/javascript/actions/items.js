@@ -163,14 +163,16 @@ export const updateRecord = (item, quantity, trackableAttribute) => async dispat
 
 
 
-export const fetchRecords = item => async dispatch => {
+export const fetchRecords = (item) => async dispatch => {
 
 	try {
 
-		const res = await axios.get(`/items/${item}/records`)
+		const res = await axios.get(`/items/${item}/records`
+
+		)
 
 		const { data } = res;
-		debugger
+		
 		dispatch({
 			type: FETCH_RECORDS_SUCCESS,
 			payload: {id: item, records: data}

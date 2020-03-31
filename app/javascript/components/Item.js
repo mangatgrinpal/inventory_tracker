@@ -29,9 +29,8 @@ const Item = ({
 }) => {
 
 
-	const { id, name, units, trackable_attributes, records } = item;
 
-	console.log(item)
+	const { id, name, units, trackable_attributes, records } = item;
 
 	useEffect(()=>{
 		

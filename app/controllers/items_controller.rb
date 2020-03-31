@@ -11,6 +11,10 @@ class ItemsController < ApplicationController
 		Item.transaction do
 			@item = Item.create!(item_params)
 			@category = current_user.categories.find_or_create_by!(title: params[:category][:title])
+			@category.trackable_attributes.each do |trackable_attribute|
+				@initial_record = @item.records.create!
+				@record_attribute = RecordTrackableAttribute.create!(record: @initial_record, trackable_attribute: trackable_attribute)
+			end
 
 			params[:trackableAttributes].try(:each) do |trackable_attribute|
 
