@@ -14,8 +14,7 @@ import {
 	addItem,
 	deleteItem,
 	setItemFormVisibility,
-	clearFetchedItems,
-	updateRecord
+	clearFetchedItems
 } from '../actions/items';
 
 import { deleteCategory } from '../actions/categories';
@@ -39,7 +38,6 @@ const Restaurant = ({
 	deleteItem,
 	deleteCategory,
 	clearFetchedItems,
-	updateRecord,
 	setItemFormVisibility,
 	restaurantLinksVisible,
 	setRestaurantLinksVisibility,
@@ -228,7 +226,6 @@ export default connect(
 		deleteItem,
 		deleteCategory,
 		setItemFormVisibility,
-		clearFetchedItems,
-		updateRecord
+		clearFetchedItems
 	}
 )(Restaurant)

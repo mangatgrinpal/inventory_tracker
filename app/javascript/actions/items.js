@@ -8,6 +8,8 @@ import {
 	SET_ITEM_FORM_VISIBILITY,
 	FETCH_RECORDS_SUCCESS,
 	UPDATE_RECORD,
+	INCREMENT_RECORD,
+	DECREMENT_RECORD,
 	FETCH_CATEGORIES_SUCCESS,
 	FETCH_TRACKABLE_ATTRIBUTES_SUCCESS
 } from './types'
@@ -137,8 +139,30 @@ export const setItemFormVisibility = visibility => dispatch => {
 }
 
 
+
+
+
+
+export const fetchRecords = (item) => async dispatch => {
+
+	try {
+
+		const res = await axios.get(`/items/${item}/records`)
+
+		const { data } = res;
+
+		dispatch({
+			type: FETCH_RECORDS_SUCCESS,
+			payload: {id: item, records: data}
+		})
+
+	} catch(error) {
+		console.log(error)
+	}
+}
+
+
 export const updateRecord = (item, quantity, trackableAttribute) => async dispatch => {
-	//rename this function to createRecord later
 
 	try {
 		const res = await axios.post(`/items/${item}/records`, {
@@ -162,40 +186,22 @@ export const updateRecord = (item, quantity, trackableAttribute) => async dispat
 }
 
 
-
-export const fetchRecords = (item) => async dispatch => {
-
-	try {
-
-		const res = await axios.get(`/items/${item}/records`
-
-		)
-
-		const { data } = res;
-		
-		dispatch({
-			type: FETCH_RECORDS_SUCCESS,
-			payload: {id: item, records: data}
-		})
-
-	} catch(error) {
-		console.log(error)
-	}
-}
-
-
-
-
 export const incrementRecord = (item, record) => async dispatch => {
 
 	try {
-		const res = await axios.post(`/items/${item}/records`, {
-
-
-
+		const res = await axios.patch(`/items/${item}/records/${record}`,{
+			update_type: 'increment'
 		})
+
+		const { data } = res;
+
+		dispatch({
+			type: INCREMENT_RECORD,
+			payload: {id: item, records: data}
+		})
+
 	} catch (error) {
-		
+		console.log(error)
 	}
 }
 
@@ -203,12 +209,20 @@ export const incrementRecord = (item, record) => async dispatch => {
 export const decrementRecord = (item, record) => async dispatch => {
 
 	try {
-		const res = await axios.post(`/items/${item}/records`, {
+		const res = await axios.patch(`/items/${item}/records`, {
+			update_type: 'decrement'
 
-
-			
 		})
-	} catch (error) {
+
+		const { data } = res;
+		debugger
 		
+		dispatch({
+			type: DECREMENT_RECORD,
+			payload: {id: item, records: data}
+		})
+
+	} catch (error) {
+		console.log(error)
 	}
 }

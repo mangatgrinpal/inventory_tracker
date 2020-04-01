@@ -40,10 +40,6 @@ export default function(state = initialState, action) {
 				isFetching: false
 			};
 		case ADD_ITEM:
-			return {
-				...state,
-				itemList: payload
-			};
 		case DELETE_ITEM:
 			return {
 				...state,
@@ -61,19 +57,14 @@ export default function(state = initialState, action) {
 			};
 		case UPDATE_RECORD:
 		case FETCH_RECORDS_SUCCESS:
+		case INCREMENT_RECORD:
+		case DECREMENT_RECORD:
 			return {
 				...state,
 				itemList: state.itemList.map(item =>
 						item.id === payload.id ? { ...item, records: payload.records } : item
 					)
 			};
-		case INCREMENT_RECORD:
-			return {
-				...state,
-				itemList: state.itemList.map(item =>
-					item.id === payload.id ? { ...item, records: payload.records } : item
-				)
-			}
 		default:
 			return state
 	}

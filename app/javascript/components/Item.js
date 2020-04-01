@@ -29,7 +29,6 @@ const Item = ({
 }) => {
 
 
-
 	const { id, name, units, trackable_attributes, records } = item;
 
 	useEffect(()=>{
@@ -38,15 +37,6 @@ const Item = ({
 	},[id])
 
 	const [quantityData, setQuantityData] = useState({})
-
-
-	const handleClick = e => {
-		e.preventDefault()
-		console.log('clicked!!')
-		updateRecord(id, quantity, attribute)
-	}
-
-
 
 
 	return (
@@ -64,40 +54,22 @@ const Item = ({
 
 				{trackable_attributes.map( trackableAttribute => {
 
-					const record = records.filter(record=> record.trackable_attribute.id == trackableAttribute.id)
+					let record = records.filter(record=> record.trackable_attribute.id == trackableAttribute.id)[0]
+
 					return (
 						<Fragment key={trackableAttribute.id}>
 							<Col xs={5} className='d-md-none text-right py-1'>
 								{trackableAttribute.name}
 							</Col>
-							<Col xs={5} md={2} className='pb-1 col-centered'>
-								<InputGroup className='mx-auto px-md-3'>
-									<InputGroup.Prepend>
-										<Button 
-											variant='outline-primary' 
-											size='sm' 
-											onClick={(e)=> { handleClick(e) }}
-											
-										>
-											<FontAwesomeIcon icon='minus'/>
-										</Button>
-									</InputGroup.Prepend>
-									<RecordForm
-										item={id}
-										record={record} 
-										attributeId={trackableAttribute.id}
-										updateRecord={updateRecord} />
+							<Col xs={5} md={2} className='pb-1 col-centered'>									
+								<RecordForm
+									item={id}
+									record={record} 
+									attributeId={trackableAttribute.id}
+									updateRecord={updateRecord}
+									incrementRecord={incrementRecord}
+									decrementRecord={decrementRecord} />
 
-									<InputGroup.Append>
-										<Button 
-											size='sm' 
-											onClick={()=> { incrementRecord }}
-											
-										>
-											<FontAwesomeIcon icon='plus'/>
-										</Button>	
-									</InputGroup.Append>
-								</InputGroup>
 							</Col>
 						</Fragment>
 					)

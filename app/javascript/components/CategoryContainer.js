@@ -26,6 +26,8 @@ const CategoryContainer = ({
 	restaurant,
 	deleteItem,
 	setItemFormVisibility,
+	incrementRecord,
+	decrementRecord,
 	updateRecord,
 	fetchRecords,
 	items: { itemList },

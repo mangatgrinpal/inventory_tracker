@@ -18,6 +18,7 @@ class Item::RecordsController < ApplicationController
 		render json: @item.records.where(created_at: today), status: 200
 	end
 
+
 	def create
 		#first locate the record to see if a record exists from TODAY
 		
@@ -47,33 +48,38 @@ class Item::RecordsController < ApplicationController
 
 	end
 
-	# def update
+	def update
 
-	# 	@record = Item.find_by(id: params[:item_id]).records.where(created_at: today)
+		@item = Item.find_by(id: params[:item_id])
+		@record = Record.find_by(id: params[:id])
 
-	# 	#if it does then update it with the new value -- front end validations check to see if 
-	# 	#if has changed since the input last lost focus
-	# 	if @record && params[:update_type] == 'increment' #is increment
-	# 		@record.increment!(:quantity, 0.5)
-	# 		render json: serialized_items, status: 200
-	# 	#if it exists and we are sending an decrement
-	# 	elsif @record && params[:update_type] == 'decrement'
+		#if it does then update it with the new value -- front end validations check to see if 
+		#if has changed since the input last lost focus
+		if params[:update_type] == 'increment' #is increment
+			@record.increment!(:quantity, 0.5)
 
-	# 		#perform a check to see if the current quantity is greater than 0. it will not decrement if the value is 0
-	# 		if @record.quantity > 0
-	# 			@record.decrement!(:quantity, 0.5)
-	# 			render json: serialized_items, status: 200
+		#if it exists and we are sending an decrement
+		else 
+			#perform a check to see if the current quantity is greater than 0. it will not decrement if the value is 0
+			if @record.quantity > 0.5
+				@record.decrement!(:quantity, 0.5)
+				
 
-	# 		else
+			else
 
-	# 			#do this when it fails.. think of something
+				# think of an error message to send when this tries to decrement below 0
+				# render json: @record, status: 400
 
-	# 		end
+			end
 			
-	# 	else
-	# 	end
 
-	# end
+		end
+
+		if @record
+			render json: @item.records.where(created_at: today), status: 200
+		end
+
+	end
 
 	def destroy
 		@record = Record.find(params[:id])
