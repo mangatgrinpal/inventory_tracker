@@ -4,7 +4,8 @@ import {
 	FETCH_CATEGORIES_FAILURE,
 	FETCH_TRACKABLE_ATTRIBUTES_REQUEST,
 	FETCH_TRACKABLE_ATTRIBUTES_SUCCESS,
-	FETCH_TRACKABLE_ATTRIBUTES_FAILURE
+	FETCH_TRACKABLE_ATTRIBUTES_FAILURE,
+	DELETE_CATEGORY_SUCCESS
 } from './types';
 
 import {
@@ -43,6 +44,22 @@ export const fetchCategories = user => async dispatch => {
 			payload: data
 		})
 
+	} catch(error) {
+		console.log(error)
+	}
+}
+
+export const deleteCategory = category => async dispatch => {
+
+	try {
+		const res = await axios.delete(`/categories/#${category}`)
+
+		const { data } = res;
+
+		dispatch({
+			type: DELETE_CATEGORY_SUCCESS,
+			payload: data
+		})
 	} catch(error) {
 		console.log(error)
 	}

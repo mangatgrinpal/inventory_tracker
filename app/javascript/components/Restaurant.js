@@ -18,6 +18,8 @@ import {
 	updateRecord
 } from '../actions/items';
 
+import { deleteCategory } from '../actions/categories';
+
 
 import { useHistory, useParams } from 'react-router-dom';
 
@@ -35,6 +37,7 @@ const Restaurant = ({
 	fetchItems,
 	addItem,
 	deleteItem,
+	deleteCategory,
 	clearFetchedItems,
 	updateRecord,
 	setItemFormVisibility,
@@ -181,6 +184,7 @@ const Restaurant = ({
 						restaurant={id} 
 						addItem={addItem}
 						categoryList={categoryList}
+						deleteCategory={deleteCategory}
 						trackableAttributeList={trackableAttributeList}
 						setItemFormVisibility={setItemFormVisibility}
 						currentUser={currentUser} 
@@ -222,6 +226,7 @@ export default connect(
 		fetchItems, 
 		addItem, 
 		deleteItem,
+		deleteCategory,
 		setItemFormVisibility,
 		clearFetchedItems,
 		updateRecord

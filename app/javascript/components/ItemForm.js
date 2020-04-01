@@ -16,6 +16,7 @@ const ItemForm = ({
 	addItem, 
 	restaurant, 
 	setItemFormVisibility,
+	deleteCategory,
 	categoryList,
 	fetchTrackableAttributes,
 	trackableAttributeList,

@@ -67,7 +67,7 @@ const Item = ({
 					const record = records.filter(record=> record.trackable_attribute.id == trackableAttribute.id)
 					return (
 						<Fragment key={trackableAttribute.id}>
-							<Col xs={6} className='d-md-none text-right py-1'>
+							<Col xs={5} className='d-md-none text-right py-1'>
 								{trackableAttribute.name}
 							</Col>
 							<Col xs={5} md={2} className='pb-1 col-centered'>

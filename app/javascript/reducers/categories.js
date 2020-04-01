@@ -4,7 +4,8 @@ import {
 	FETCH_CATEGORIES_FAILURE,
 	FETCH_TRACKABLE_ATTRIBUTES_REQUEST,
 	FETCH_TRACKABLE_ATTRIBUTES_SUCCESS,
-	FETCH_TRACKABLE_ATTRIBUTES_FAILURE
+	FETCH_TRACKABLE_ATTRIBUTES_FAILURE,
+	DELETE_CATEGORY_SUCCESS
 } from '../actions/types';
 
 const initialState = {
@@ -16,6 +17,7 @@ export default function(state = initialState, action) {
 	const { type, payload } = action;
 	switch (type) {
 		case FETCH_CATEGORIES_SUCCESS:
+		case DELETE_CATEGORY_SUCCESS:
 			return {
 				...state,
 				categoryList: payload
@@ -24,7 +26,7 @@ export default function(state = initialState, action) {
 			return {
 				...state,
 				trackableAttributeList: payload
-			}
+			}	
 		default:
 			return state
 	}
