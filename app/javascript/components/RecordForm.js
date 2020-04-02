@@ -19,9 +19,11 @@ const RecordForm = ({
 
 
 
-	let [ quantityData, setQuantityData ] = useState(record.quantity)
+	
 
 	const { id, quantity } = record;
+
+	let [ quantityData, setQuantityData ] = useState(quantity)
 
 
 	const handleBlur = e => {
@@ -48,7 +50,7 @@ const RecordForm = ({
 
 	return (
 		<InputGroup className='mx-auto px-md-3'>
-			<InputGroup.Prepend>
+			{/*<InputGroup.Prepend>
 				<Button 
 					variant='outline-primary' 
 					size='sm' 
@@ -57,14 +59,14 @@ const RecordForm = ({
 				>
 					<FontAwesomeIcon icon='minus'/>
 				</Button>
-			</InputGroup.Prepend>
+			</InputGroup.Prepend>*/}
 			<Form.Control 
 				type='number'
 				className='text-center'
 				onBlur={(e)=> { handleBlur(e) }}
-				value={quantity}
+				value={quantityData}
 				onChange={e => {handleChange(e)}} />
-				<InputGroup.Append>
+				{/*<InputGroup.Append>
 					<Button 
 						size='sm' 
 						onClick={e => { handleIncrement(e) }}
@@ -72,7 +74,7 @@ const RecordForm = ({
 					>
 						<FontAwesomeIcon icon='plus'/>
 					</Button>	
-				</InputGroup.Append>
+				</InputGroup.Append>*/}
 			</InputGroup>
 				
 	)

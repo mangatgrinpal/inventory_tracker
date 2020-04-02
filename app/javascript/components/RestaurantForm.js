@@ -12,14 +12,17 @@ const RestaurantForm = ({
 	addRestaurant, 
 	restaurantFormVisible,
 	setRestaurantFormVisibility,
+	isCreating,
 	currentUser 
 }) => {
 
 	const [ formData, setFormData ] = useState('')
 	const [ imageData, setImageData ] = useState([])
+	
 
 
 	const handleClick = e => {
+
 		// must use FormData prototype in order to send it to active storage
 		e.preventDefault();
 		const restaurant = new FormData();
@@ -33,10 +36,11 @@ const RestaurantForm = ({
 	const submitFormOnEnter = e => {
 
 		if (e.key === 'Enter') {
+			setCreating(true)
 			e.preventDefault()
-			if (currentUser != null) {
-				addRestaurant(formData)	
-			}	
+			
+			addRestaurant(formData)	
+				
 		}
 	}
 
@@ -67,8 +71,11 @@ const RestaurantForm = ({
 					</Form.Row>
 					<Form.Row className='pt-2'>
 						<Col className='clearfix'>
-							<Button className='float-right' onClick={handleClick}>
-								Create restaurant
+							<Button 
+								className='float-right'
+								disabled={isCreating} 
+								onClick={handleClick}>
+								{isCreating ? 'Creating...':'Create restaurant'}
 							</Button>
 							<Button className='float-right' variant='danger' onClick={()=> {setRestaurantFormVisibility(false)}}>
 								Cancel

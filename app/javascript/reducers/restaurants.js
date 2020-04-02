@@ -2,7 +2,8 @@ import {
 	FETCH_RESTAURANTS_REQUEST,
 	FETCH_RESTAURANTS_SUCCESS, 
 	FETCH_RESTAURANTS_ERROR,
-	ADD_RESTAURANT,
+	ADD_RESTAURANT_REQUEST,
+	ADD_RESTAURANT_SUCCESS,
 	DELETE_RESTAURANT,
 	SET_RESTAURANT_LINKS_VISIBILITY,
 	SET_RESTAURANT_FORM_VISIBILITY
@@ -13,7 +14,9 @@ const initialState = {
 	restaurantList: [],
 	isFetching: true,
 	restaurantFormVisible: false,
-	restaurantLinksVisible: true
+	restaurantLinksVisible: true,
+	isCreating: false,
+	isDeleting: false
 };
 
 export default function(state = initialState, action) {
@@ -37,9 +40,15 @@ export default function(state = initialState, action) {
 				restaurantList: payload,
 				isFetching: false
 			}
-		case ADD_RESTAURANT:
+		case ADD_RESTAURANT_REQUEST:
 			return {
 				...state,
+				isCreating: true
+			}
+		case ADD_RESTAURANT_SUCCESS:
+			return {
+				...state,
+				isCreating: false,
 				restaurantList: payload
 			};
 		case DELETE_RESTAURANT:

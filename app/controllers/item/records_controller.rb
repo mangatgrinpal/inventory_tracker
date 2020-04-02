@@ -57,13 +57,14 @@ class Item::RecordsController < ApplicationController
 		#if has changed since the input last lost focus
 		if params[:update_type] == 'increment' #is increment
 			@record.increment!(:quantity, 0.5)
+			render json: @item.records.where(created_at: today), status: 200
 
 		#if it exists and we are sending an decrement
 		else 
 			#perform a check to see if the current quantity is greater than 0. it will not decrement if the value is 0
 			if @record.quantity > 0.5
 				@record.decrement!(:quantity, 0.5)
-				
+				render json: @item.records.where(created_at: today), status: 200
 
 			else
 
@@ -75,9 +76,6 @@ class Item::RecordsController < ApplicationController
 
 		end
 
-		if @record
-			render json: @item.records.where(created_at: today), status: 200
-		end
 
 	end
 

@@ -209,13 +209,12 @@ export const incrementRecord = (item, record) => async dispatch => {
 export const decrementRecord = (item, record) => async dispatch => {
 
 	try {
-		const res = await axios.patch(`/items/${item}/records`, {
+		
+		const res = await axios.patch(`/items/${item}/records/${record}`, {
 			update_type: 'decrement'
-
 		})
 
 		const { data } = res;
-		debugger
 		
 		dispatch({
 			type: DECREMENT_RECORD,
