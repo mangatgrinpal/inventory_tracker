@@ -1,5 +1,7 @@
 import React, { Fragment, useState } from 'react';
 
+import { throttle } from 'lodash';
+
 import ImageUploader from './ImageUploader';
 
 import Container from 'react-bootstrap/Container';
@@ -13,18 +15,26 @@ const RestaurantForm = ({
 	restaurantFormVisible,
 	setRestaurantFormVisibility,
 	isCreating,
-	currentUser 
+	currentUser,
+	errors 
 }) => {
 
 	const [ formData, setFormData ] = useState('')
 	const [ imageData, setImageData ] = useState([])
+	const [ validated, setValidated ] = useState(false);
+
+
 	
 
 
-	const handleClick = e => {
-
-		// must use FormData prototype in order to send it to active storage
+	const handleSubmit = e => {
+		const form = e.currentTarget
 		e.preventDefault();
+		if (form.checkValidity() === false) {
+			e.stopPropagation();
+		}
+		// must use FormData prototype in order to send it to active storage
+		setValidated(true);
 		const restaurant = new FormData();
 		restaurant.append('[restaurant]name', formData)
 		restaurant.append('[restaurant]image', imageData[0])
@@ -32,6 +42,8 @@ const RestaurantForm = ({
 		addRestaurant(restaurant)
 		
 	}
+
+	const handleSubmitThrottled = throttle(handleSubmit,500)
 
 	const submitFormOnEnter = e => {
 
@@ -47,7 +59,12 @@ const RestaurantForm = ({
 	return (
 			<Container className='p-4'>
 				<h6 className='section-name pt-4 pt-md-0'>Add new restaurant</h6>
-				<Form onKeyPress={submitFormOnEnter} className='pt-5 pt-md-3'>
+				<Form 
+					noValidate
+					validated={validated}
+					onKeyPress={submitFormOnEnter} 
+					onSubmit={handleSubmitThrottled} 
+					className='pt-5 pt-md-3'>
 					<Form.Row>
 						<Col>
 							<Form.Label>
@@ -72,9 +89,9 @@ const RestaurantForm = ({
 					<Form.Row className='pt-2'>
 						<Col className='clearfix'>
 							<Button 
+								type='submit'
 								className='float-right'
-								disabled={isCreating} 
-								onClick={handleClick}>
+								disabled={isCreating} >
 								{isCreating ? 'Creating...':'Create restaurant'}
 							</Button>
 							<Button className='float-right' variant='danger' onClick={()=> {setRestaurantFormVisibility(false)}}>

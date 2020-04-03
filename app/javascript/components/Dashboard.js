@@ -48,7 +48,8 @@ const Dashboard = ({
 		restaurantFormVisible, 
 		restaurantLinksVisible,
 		isCreating,
-		isDeleting 
+		isDeleting,
+		errors 
 	},
 	users: { currentUser }
 }) => {
@@ -134,6 +135,7 @@ const Dashboard = ({
 						restaurantFormVisible={restaurantFormVisible}
 						setRestaurantFormVisibility={setRestaurantFormVisibility}
 						isCreating={isCreating}
+						errors={errors}
 						currentUser={currentUser} />
 				</Col>
 				</CSSTransition>

@@ -11,7 +11,10 @@ class RestaurantsController < ApplicationController
   	@restaurant = current_user.restaurants.build(restaurant_params)
 
   	if @restaurant.save
-  		render json: serialized_restaurants
+  		render json: serialized_restaurants, status: 200
+    else
+      byebug
+      render json: @restaurant.errors.messages, status: 400
   	end
   end
 

@@ -4,6 +4,7 @@ import {
 	FETCH_RESTAURANTS_ERROR,
 	ADD_RESTAURANT_REQUEST,
 	ADD_RESTAURANT_SUCCESS,
+	ADD_RESTAURANT_FAILURE,
 	DELETE_RESTAURANT,
 	SET_RESTAURANT_LINKS_VISIBILITY,
 	SET_RESTAURANT_FORM_VISIBILITY
@@ -16,7 +17,11 @@ const initialState = {
 	restaurantFormVisible: false,
 	restaurantLinksVisible: true,
 	isCreating: false,
-	isDeleting: false
+	isDeleting: false,
+	errors: {
+		name: '',
+		image: ''
+	}
 };
 
 export default function(state = initialState, action) {
