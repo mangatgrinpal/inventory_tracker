@@ -46,6 +46,13 @@ input.value-display {
 	cursor: pointer;
 }
 
+.invalid-error-frame {
+	border-color: #dc3545!important;
+	&:focus {
+		box-shadow: 0 0 0 0.2rem rgba(220,53,69,.25)!important;
+	}
+}
+
 // .clickable-icon:active {
 // 	filter: drop-shadow(2px 2px 2px #c1c1c1);
 // }

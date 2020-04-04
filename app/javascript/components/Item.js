@@ -54,7 +54,7 @@ const Item = ({
 
 				{trackable_attributes.map( trackableAttribute => {
 
-					let record = records.filter(record=> record.trackable_attribute.id == trackableAttribute.id)[0]
+					let record = records.filter(record=> record.trackable_attribute.id == trackableAttribute.id)
 
 					return (
 						<Fragment key={trackableAttribute.id}>

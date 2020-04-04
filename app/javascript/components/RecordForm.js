@@ -18,10 +18,9 @@ const RecordForm = ({
 }) => {
 
 
+	const quantity = record.length == 0 ? 0 : record[0].quantity
 
-	
 
-	const { id, quantity } = record;
 
 	let [ quantityData, setQuantityData ] = useState(quantity)
 
@@ -38,13 +37,13 @@ const RecordForm = ({
 
 	const handleIncrement = e => {
 		e.preventDefault()
-		incrementRecord(item, id)
+		incrementRecord(item, record[0].id)
 
 	}
 
 	const handleDecrement = e => {
 		e.preventDefault()
-		decrementRecord(item, id)
+		decrementRecord(item, record[0].id)
 
 	}
 

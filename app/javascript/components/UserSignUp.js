@@ -24,10 +24,66 @@ const UserSignUp = ({
 	const [email, setEmail ] = useState('');
 	const [password, setPassword] = useState('');
 	const [passwordConfirmation, setPasswordConfirmation] = useState('');
+	const [emailError, setEmailError] = useState('');
+	const [passwordError, setPasswordError] = useState('');
+	const [passwordConfirmationError, setPasswordConfirmationError] = useState('');
+
+
+
+	const validate = () => {
+	
+		const emailRegex = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+		const emailValid = emailRegex.test(email)
+
+		const passwordValid = password.length > 5 && password.length < 128
+
+		const passwordConfirmationValid = (password === passwordConfirmation &&  passwordConfirmation !=  '')
+
+
+		if (!emailValid && !passwordValid) {
+			setEmailError('Invalid email, please enter a valid email.')
+			setPasswordError('Invalid password length, password must be at least 6 characters.')
+
+			document.getElementById('emailField').classList.add('invalid-error-frame')
+			document.getElementById('passwordField').classList.add('invalid-error-frame')
+			return false
+		}
+		if (!emailValid) {
+			setEmailError('Invalid email, please enter a valid email.')
+			document.getElementById('emailField').classList.add('invalid-error-frame')
+			return false
+		}
+
+		if (!passwordValid) {
+			setPasswordError('Invalid password length, password must be at least 6 characters.')
+			document.getElementById('passwordField').classList.add('invalid-error-frame')
+			return false
+		}
+
+		if (!passwordConfirmationValid) {
+			setPasswordConfirmationError('Passwords must match.')
+			document.getElementById('passwordConfirmationField').classList.add('invalid-error-frame')
+			return false
+		}
+
+		return true;
+	}
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
-		userSignUp(email, password, passwordConfirmation, history)
+		setEmailError('')
+		setPasswordError('')
+		setPasswordConfirmationError('')
+		document.getElementById('emailField').classList.remove('invalid-error-frame')
+		document.getElementById('passwordField').classList.remove('invalid-error-frame')
+		document.getElementById('passwordConfirmationField').classList.remove('invalid-error-frame')
+
+		const isValid = validate();
+
+		if (isValid) {
+			userSignUp(email, password, passwordConfirmation, history)
+		}
+		
 	}
 
 
@@ -42,36 +98,54 @@ const UserSignUp = ({
 							<h6 className='section-name'>Sign Up</h6>
 						</Col>
 					</Row>
-					{ errorMessages.length > 0 ? 
-					<Row>
-						<Col xs={{span: 10, offset: 1}} md={{span: 6, offset: 3}}>
-							{errorMessages.map((error, index) => {
-								return(
-									<p key={index} className='text-danger'>{error}</p>
-								)
-							})}
-						</Col>
-					</Row> :
-					<div/>
-					}
 					<Row>
 						<Col xs={{span: 10, offset: 1}} md={{span: 6, offset: 3}}>
 
 							<Form onSubmit={handleSubmit}>
 								<Form.Group>
 									<Form.Label>Email address</Form.Label>
-									<Form.Control type="email" placeholder="Enter email" onChange={(e)=>{setEmail(e.target.value)}}/>
+									<Form.Control
+										id='emailField'
+										name='email' 
+										type='email'
+										placeholder='Email' 
+										onChange={(e)=>{setEmail(e.target.value)}}/>
+									<Row>
+										<Col style={{'color':'red'}}>
+											{emailError}
+										</Col>
+									</Row>
 								</Form.Group>
 
 								<Form.Group>
 									<Form.Label>Password</Form.Label>
-									<Form.Control type="password" placeholder="Password" onChange={(e)=>{setPassword(e.target.value)}}/>
+									<Form.Control
+										id='passwordField'
+										name='password' 
+										type='password'
+										placeholder='Password'
+										onChange={(e)=>{setPassword(e.target.value)}}/>
+									<Row>
+										<Col style={{'color':'red'}}>
+											{passwordError}
+										</Col>
+									</Row>
 								</Form.Group>
 								<Form.Group>
 									<Form.Label>Confirm Password</Form.Label>
-									<Form.Control type="password" placeholder="Password Confirmation" onChange={(e)=>{setPasswordConfirmation(e.target.value)}} />
+									<Form.Control 
+										id='passwordConfirmationField'
+										name='passwordConfirmation'
+										type='password' 
+										placeholder='Password confirmation'
+										onChange={(e)=>{setPasswordConfirmation(e.target.value)}} />
+									<Row>
+										<Col style={{'color':'red'}}>
+											{passwordConfirmationError}
+										</Col>
+									</Row>
 								</Form.Group>
-								<Button type='submit' className='float-right' variant="primary">
+								<Button type='submit' className='float-right' variant='primary'>
 									Submit
 								</Button>
 							</Form>

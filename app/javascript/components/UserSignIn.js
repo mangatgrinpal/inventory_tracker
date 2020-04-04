@@ -28,6 +28,7 @@ const UserSignIn = ({
 	const [emailError, setEmailError] = useState('');
 	const [passwordError, setPasswordError] = useState('');
 
+
 	const submitFormOnEnter = e => {
 		if (e.key === 'Enter') {
 			userSignIn(email, password, history)
@@ -38,6 +39,8 @@ const UserSignIn = ({
 		e.preventDefault();
 		setEmailError('')
 		setPasswordError('')
+		document.getElementById('emailField').classList.remove('invalid-error-frame')
+		document.getElementById('passwordField').classList.remove('invalid-error-frame')
 		const isValid = validate();
 
 		if (isValid) {
@@ -55,17 +58,22 @@ const UserSignIn = ({
 
 
 		if (!emailValid && !passwordValid) {
-			setEmailError('invalid email')
-			setPasswordError('invalid password')
+			setEmailError('Invalid email, please enter a valid email.')
+			setPasswordError('Invalid password length, password must be at least 6 characters.')
+
+			document.getElementById('emailField').classList.add('invalid-error-frame')
+			document.getElementById('passwordField').classList.add('invalid-error-frame')
 			return false
 		}
 		if (!emailValid) {
-			setEmailError('invalid email')
+			setEmailError('Invalid email, please enter a valid email.')
+			document.getElementById('emailField').classList.add('invalid-error-frame')
 			return false
 		}
 
 		if (!passwordValid) {
-			setPasswordError('invalid password')
+			setPasswordError('Invalid password length, password must be at least 6 characters.')
+			document.getElementById('passwordField').classList.add('invalid-error-frame')
 			return false
 		}
 
@@ -86,16 +94,8 @@ const UserSignIn = ({
 							<h6 className='section-name'>Sign In</h6>
 						</Col>
 					</Row>
-					<Row>
-						<Col style={{'color':'red'}} xs={{span: 10, offset: 1}} md={{span: 6, offset: 3}}>
-							{emailError}
-						</Col>
-					</Row>
-					<Row>
-						<Col style={{'color':'red'}} xs={{span: 10, offset: 1}} md={{span: 6, offset: 3}}>
-							{passwordError}
-						</Col>
-					</Row>
+					
+					
 					<Row>
 						<Col xs={{span: 10, offset: 1}} md={{span: 6, offset: 3}}>
 							<Form 
@@ -105,27 +105,33 @@ const UserSignIn = ({
 								<Form.Group>
 									<Form.Label className='form-label'>Email address</Form.Label>
 									<Form.Control 
+										id='emailField'
 										name='email'
 										type='email' 
 										placeholder='Email' 
 										onChange={(e)=>{setEmail(e.target.value)}}/>
+									<Row>
+										<Col style={{'color':'red'}}>
+											{emailError}
+										</Col>
+									</Row>
 								</Form.Group>
-								<Form.Control.Feedback type="invalid">
-			            {emailError}
-			          </Form.Control.Feedback>
-
+								
 								<Form.Group>
 									<Form.Label className='form-label'>Password</Form.Label>
 									<Form.Control 
+										id='passwordField'
 										name='password'
 										type='password'
 										placeholder='Password' 
 										onChange={(e)=>{setPassword(e.target.value)}}/>
+									<Row>
+										<Col style={{'color':'red'}}>
+											{passwordError}
+										</Col>
+									</Row>
 								</Form.Group>
-								<Form.Control.Feedback type="invalid">
-			            {passwordError}
-			          </Form.Control.Feedback>
-
+								
 								<Button type='submit' className='float-right' variant='primary'>
 									Submit
 								</Button>
