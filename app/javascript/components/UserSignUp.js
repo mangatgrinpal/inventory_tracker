@@ -29,6 +29,20 @@ const UserSignUp = ({
 	const [passwordConfirmationError, setPasswordConfirmationError] = useState('');
 
 
+	const emailErrorHandler = () => {
+		setEmailError('Invalid email, please enter a valid email.')
+		document.getElementById('emailField').classList.add('invalid-error-frame')
+	}
+
+	const passwordErrorHandler = () => {
+		setPasswordError('Invalid password length, password must be at least 6 characters.')
+		document.getElementById('passwordField').classList.add('invalid-error-frame')
+	}
+
+	const passwordConfirmationErrorHandler = () => {
+		setPasswordConfirmationError('Passwords must match.')
+		document.getElementById('passwordConfirmationField').classList.add('invalid-error-frame')
+	}
 
 	const validate = () => {
 	
@@ -39,30 +53,37 @@ const UserSignUp = ({
 
 		const passwordConfirmationValid = (password === passwordConfirmation &&  passwordConfirmation !=  '')
 
-
-		if (!emailValid && !passwordValid) {
-			setEmailError('Invalid email, please enter a valid email.')
-			setPasswordError('Invalid password length, password must be at least 6 characters.')
-
-			document.getElementById('emailField').classList.add('invalid-error-frame')
-			document.getElementById('passwordField').classList.add('invalid-error-frame')
+		if (!emailValid && !passwordValid && !passwordConfirmationValid) {
+			emailErrorHandler()
+			passwordErrorHandler()
+			passwordConfirmationErrorHandler()
 			return false
 		}
+
+		if (!passwordValid && !passwordConfirmation) {
+			passwordErrorHandler()
+			passwordConfirmationErrorHandler()
+			return false
+		}
+
+		if (!emailValid && !passwordValid) {
+			emailErrorHandler()
+			passwordErrorHandler()
+			return false
+		}
+		
 		if (!emailValid) {
-			setEmailError('Invalid email, please enter a valid email.')
-			document.getElementById('emailField').classList.add('invalid-error-frame')
+			emailErrorHandler()
 			return false
 		}
 
 		if (!passwordValid) {
-			setPasswordError('Invalid password length, password must be at least 6 characters.')
-			document.getElementById('passwordField').classList.add('invalid-error-frame')
+			passwordErrorHandler()
 			return false
 		}
 
 		if (!passwordConfirmationValid) {
-			setPasswordConfirmationError('Passwords must match.')
-			document.getElementById('passwordConfirmationField').classList.add('invalid-error-frame')
+			passwordConfirmationErrorHandler()
 			return false
 		}
 

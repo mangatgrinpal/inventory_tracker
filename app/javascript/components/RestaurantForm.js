@@ -19,27 +19,70 @@ const RestaurantForm = ({
 	errors 
 }) => {
 
-	const [ formData, setFormData ] = useState('')
+	const [ name, setName ] = useState('')
 	const [ imageData, setImageData ] = useState([])
-	const [ validated, setValidated ] = useState(false);
+	const [ nameError, setNameError ] = useState('')
+	const [ imageError, setImageError ] = useState('')
+
+	const nameErrorHandler = () => {
+		setNameError('Invalid restaurant name, please enter a valid name up to 64 characters.')
+		document.getElementById('nameField').classList.add('invalid-error-frame')
+	}
+
+	const imageErrorHandler = () => {
+		setImageError('Please select an image to use for your restaurant.')
+		document.getElementById('imageField').classList.add('invalid-error-frame')
+
+	}
+
+	const validate = () => {
+
+		const nameValid = name.length > 1 && name.length < 64
+		const imageAttached = imageData.length === 1 
 
 
+		if (!nameValid && !imageAttached) {
+			nameErrorHandler()
+			imageErrorHandler()
+			return false
+		}
+
+		if (!nameValid) {
+
+			nameErrorHandler()
+			return false
+		}
+
+		if (!imageAttached) {
+
+			imageErrorHandler()
+			return false
+		}
+		return true
+	}
 	
 
-
 	const handleSubmit = e => {
-		const form = e.currentTarget
 		e.preventDefault();
-		if (form.checkValidity() === false) {
-			e.stopPropagation();
-		}
-		// must use FormData prototype in order to send it to active storage
-		setValidated(true);
-		const restaurant = new FormData();
-		restaurant.append('[restaurant]name', formData)
-		restaurant.append('[restaurant]image', imageData[0])
+		setNameError('')
+		setImageError('')
 
-		addRestaurant(restaurant)
+		document.getElementById('nameField').classList.remove('invalid-error-frame')
+		
+		
+
+		const isValid = validate()
+
+		if (isValid) {
+			// must use FormData prototype in order to send it to active storage
+			const restaurant = new FormData();
+			restaurant.append('[restaurant]name', name)
+			restaurant.append('[restaurant]image', imageData[0])
+
+			addRestaurant(restaurant)
+		}
+	
+		
 		
 	}
 
@@ -48,10 +91,14 @@ const RestaurantForm = ({
 	const submitFormOnEnter = e => {
 
 		if (e.key === 'Enter') {
-			setCreating(true)
-			e.preventDefault()
+			const isValid = valiate()
+			if (isValid) {
+				setCreating(true)
+				e.preventDefault()
+				
+				addRestaurant(name)		
+			}
 			
-			addRestaurant(formData)	
 				
 		}
 	}
@@ -60,8 +107,6 @@ const RestaurantForm = ({
 			<Container className='p-4'>
 				<h6 className='section-name pt-4 pt-md-0'>Add new restaurant</h6>
 				<Form 
-					noValidate
-					validated={validated}
 					onKeyPress={submitFormOnEnter} 
 					onSubmit={handleSubmitThrottled} 
 					className='pt-5 pt-md-3'>
@@ -70,12 +115,15 @@ const RestaurantForm = ({
 							<Form.Label>
 								Restaurant name
 							</Form.Label>
-							<Form.Control 
+							<Form.Control
+								id='nameField'
+								name='name' 
 								type='text'
 								placeholder='What is your restaurant called?'
-								value={formData}
-								onChange={(e)=> setFormData(e.target.value)}
+								value={name}
+								onChange={(e)=> setName(e.target.value)}
 								/>
+								<span style={{'color':'red'}}>{nameError}</span>
 						</Col>
 					</Form.Row>
 					<Form.Row>
@@ -83,7 +131,13 @@ const RestaurantForm = ({
 							<Form.Label>
 								Choose image
 							</Form.Label>
-							<ImageUploader imageData={imageData} setImageData={setImageData}/>
+
+							<ImageUploader 
+								imageData={imageData} 
+								setImageData={setImageData}
+								setImageError={setImageError} />
+							<span style={{'color':'red'}}>{imageError}</span>
+
 						</Col>
 					</Form.Row>
 					<Form.Row className='pt-2'>

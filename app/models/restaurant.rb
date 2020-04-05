@@ -3,9 +3,9 @@ class Restaurant < ApplicationRecord
 	has_many :items
 	
 
-	validates :name, presence: true, length: { maximum: 64 }
-
+	validates :name, presence: true, length: { in: 1..64 }
 
 
 	default_scope { order(created_at: :asc)}
+	
 end

@@ -5,7 +5,10 @@ import { useDropzone } from 'react-dropzone';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 
-const ImageUploader = ({imageData, setImageData}) => {
+const ImageUploader = ({
+	imageData, 
+	setImageData
+}) => {
 
 	const { getRootProps, getInputProps } = useDropzone({
 		accept: 'image/*',
@@ -34,6 +37,10 @@ const ImageUploader = ({imageData, setImageData}) => {
 		</div>
 	));
 
+	const clearImageError = () => {
+		document.getElementById('imageField').classList.remove('invalid-error-frame')
+	}
+
 	useEffect(()=> ()=> {
 		// make sure to revoke the data uris to avoid memory leaks
 		imageData.forEach(file => URL.revokeObjectURL(file.preview))
@@ -42,9 +49,13 @@ const ImageUploader = ({imageData, setImageData}) => {
 	return (
 		<Fragment>
 			{imageData.length === 0 ? 
-				<div {...getRootProps({className: 'dropzone text-center'})}>
-					<input {...getInputProps()} />
-					<FontAwesomeIcon icon='camera' size='2x' />
+				<div 
+					onClick={clearImageError}
+					id='imageField' 
+					{...getRootProps({className: 'dropzone text-center'})}>
+
+					<input {...getInputProps()} onBlur={clearImageError}/>
+					<FontAwesomeIcon id='cameraIcon' icon='camera' size='2x' />
 				</div>	:
 
 				<aside className='thumbs-container justify-content-center'>
