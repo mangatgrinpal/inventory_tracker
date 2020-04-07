@@ -50,7 +50,7 @@ const ImageUploader = ({
 		<Fragment>
 			{imageData.length === 0 ? 
 				<div 
-					onClick={clearImageError}
+					onClick={()=>{clearImageError}}
 					id='imageField' 
 					{...getRootProps({className: 'dropzone text-center'})}>
 

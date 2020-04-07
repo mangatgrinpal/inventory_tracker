@@ -7,4 +7,6 @@ class TrackableAttribute < ApplicationRecord
 	has_many :category_attributes
 	has_many :categories, through: :category_attributes
 
+	validates :name, presence: true, length: { in: 1..64 }
+
 end

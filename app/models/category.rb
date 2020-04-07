@@ -5,6 +5,6 @@ class Category < ApplicationRecord
 	has_many :category_attributes, dependent: :destroy
 	has_many :trackable_attributes, through: :category_attributes
 
-	validates :title, presence: true
+	validates :title, presence: true, length: { in: 1..64 }
 
 end

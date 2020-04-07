@@ -132,19 +132,19 @@ const Restaurant = ({
 					</Fragment>
 					}
 
-					{ currentUser && (
-						<Row className='py-5'>
-							<Col xs={{span:8, offset: 2}} md={{span: 4, offset: 4}}>
-								<Button 
-									variant='danger' 
-									onClick={()=> {deleteRestaurant(id, history)}} 
-									block
-								>
-									Delete Restaurant
-								</Button>
-							</Col>
-						</Row>
-					)}
+
+					<Row className='py-5'>
+						<Col xs={{span:8, offset: 2}} md={{span: 4, offset: 4}}>
+							<Button 
+								variant='danger' 
+								onClick={()=> {deleteRestaurant(id, history)}} 
+								block
+							>
+								Delete Restaurant
+							</Button>
+						</Col>
+					</Row>
+
 
 
 				<CSSTransition

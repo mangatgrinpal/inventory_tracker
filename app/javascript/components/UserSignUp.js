@@ -53,37 +53,20 @@ const UserSignUp = ({
 
 		const passwordConfirmationValid = (password === passwordConfirmation &&  passwordConfirmation !=  '')
 
-		if (!emailValid && !passwordValid && !passwordConfirmationValid) {
-			emailErrorHandler()
-			passwordErrorHandler()
-			passwordConfirmationErrorHandler()
-			return false
-		}
-
-		if (!passwordValid && !passwordConfirmation) {
-			passwordErrorHandler()
-			passwordConfirmationErrorHandler()
-			return false
-		}
-
-		if (!emailValid && !passwordValid) {
-			emailErrorHandler()
-			passwordErrorHandler()
-			return false
-		}
 		
 		if (!emailValid) {
 			emailErrorHandler()
-			return false
 		}
 
 		if (!passwordValid) {
 			passwordErrorHandler()
-			return false
 		}
 
 		if (!passwordConfirmationValid) {
 			passwordConfirmationErrorHandler()
+		}
+
+		if (!emailValid || !passwordValid || !passwordConfirmationValid) {
 			return false
 		}
 

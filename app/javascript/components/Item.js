@@ -17,6 +17,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 const Item = ({ 
 	item, 
 	deleteItem,
+	editingItem,
 	fetchRecords, 
 	restaurant,
 	recordList,
@@ -31,12 +32,21 @@ const Item = ({
 
 	const { id, name, units, trackable_attributes, records } = item;
 
+	const [editing, setEditing ] = useState(false)
+	const [quantityData, setQuantityData] = useState({})
+
 	useEffect(()=>{
 		
 		fetchRecords(id)
 	},[id])
 
-	const [quantityData, setQuantityData] = useState({})
+	const handleDelete = e => {
+		e.preventDefault()
+		deleteItem(id, restaurant)
+		setEditing(false)
+	}
+
+
 
 
 	return (
@@ -44,10 +54,19 @@ const Item = ({
 			<Row className='border-top py-1'>
 				<Col xs={12} md={4} className='clearfix py-1'>
 					<div className='float-right'>
-						<FontAwesomeIcon 
-							icon='times'
-							className='clickable-icon delete-icon'
-							onClick={()=> { deleteItem(id, restaurant)}} />
+						{ editing ? 
+							<FontAwesomeIcon
+								title='Delete item' 
+								icon='times'
+								className='clickable-icon delete-icon'
+								onClick={e => { handleDelete(e)}} />
+							: 
+							<FontAwesomeIcon
+								title='Edit item' 
+								icon='edit'
+								className='clickable-icon'
+								onClick={()=>{setEditing(true)}} />
+						}
 					</div>
 					<h6 className='py-4 py-md-0 item-name'>{name} ({units})</h6>
 				</Col>

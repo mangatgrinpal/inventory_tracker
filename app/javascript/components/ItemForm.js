@@ -24,8 +24,11 @@ const ItemForm = ({
 }) => {
 
 	const [ nameData, setNameData ] = useState('')
+	const [ itemNameError, setItemNameError ] = useState('')
 	const [ unitsData, setUnitsData ] = useState('')
+	const [ unitsError, setUnitsError ] = useState('')
 	const [ categoryData, setCategoryData ] = useState('')
+	const [ categoryError, setCategoryError ] = useState('')
 	const [ attributesData, setAttributesData ] = useState([])
 	const [ newCategory, setNewCategory ] = useState(false)
 	const [ newAttribute, setNewAttribute ] = useState('')
@@ -38,7 +41,7 @@ const ItemForm = ({
 	}
 
 	const newCategoryChecker = e => {
-
+		console.log('hi')
 		let result = categoryList.filter(category => 
 			category.title.toLowerCase() == e.target.value.toLowerCase()
 			)
@@ -81,34 +84,85 @@ const ItemForm = ({
 		setAttributesData(attributesData.filter(attribute => attribute.name != e.currentTarget.id))
 	}
 
-	const validate = () => {
-		// we'll define a function to validate the form
+	const itemNameErrorHandler = () => {
+		setItemNameError('Invalid item name length, name can be up to 64 characters.')
+		document.getElementById('itemNameField').classList.add('invalid-error-frame')
 	}
 
-	const handleClick = e => {
-		e.preventDefault()
+	const unitErrorHandler = () => {
+		setUnitsError('Invalid units name length, units can be up to 32 characters.')
+		document.getElementById('unitField').classList.add('invalid-error-frame')
+	}
 
-		addItem(nameData, unitsData, categoryData, restaurant, attributesData)
-		// setNameData('')
-		// setUnitsData('')
-		// setCategoryData('')
+	const categoryErrorHandler = () => {
+		setCategoryError('Please select a category above or create a new one.')
+		document.getElementById('categoryField').classList.add('invalid-error-frame')
+	}
+
+	const validate = () => {
+		// we'll define a function to validate the form
+		const nameValid = nameData.length > 1 && nameData.length < 64
+		const unitsValid = unitsData.length > 1 && unitsData.length < 64
+		const categoryValid = selectedCategory.length === 1
+
+		if (!nameValid) {
+			itemNameErrorHandler()
+		}
+
+		if (!unitsValid) {
+			unitErrorHandler()
+		}
+
+		if (!categoryValid) {
+			categoryErrorHandler()
+		}
+
+		if (!unitsValid || !nameValid || !categoryValid) {
+			return false
+		}
+
+		return true
+
+	}
+
+	const handleSubmit = e => {
+		e.preventDefault()
+		setItemNameError('')
+		setUnitsError('')
+		setCategoryError('')
+		document.getElementById('itemNameField').classList.remove('invalid-error-frame')
+		document.getElementById('unitField').classList.remove('invalid-error-frame')
+		document.getElementById('categoryField').classList.remove('invalid-error-frame')
+
+		const isValid = validate()
+
+		if (isValid) {
+			addItem(nameData, unitsData, categoryData, restaurant, attributesData)	
+		}
+		
+		
 	}
 
 	return (
 			<Container className='p-4'>
 				<h6 className='section-name pt-4 pt-md-0'>Add new item</h6>
-				<Form onKeyPress={submitFormOnEnter} className='pt-5 pt-md-3'>
+				<Form 
+					onKeyPress={submitFormOnEnter} 
+					onSubmit={e=> {handleSubmit(e)}}
+					className='pt-5 pt-md-3'>
 					<Form.Row>
 						<Col xs={12}>
 							<Form.Label>
 								Item name
 							</Form.Label>
 							<Form.Control 
+								id='itemNameField'
 								type='text'
 								placeholder='name'
 								value={nameData}
 								onChange={(e)=> setNameData(e.target.value)}
 								/>
+							<span style={{'color':'red'}}>{itemNameError}</span>
 						</Col>
 					</Form.Row>
 					<Form.Row>
@@ -116,12 +170,14 @@ const ItemForm = ({
 							<Form.Label>
 								Size per unit
 							</Form.Label>
-							<Form.Control 
+							<Form.Control
+								id='unitField' 
 								type='text'
 								placeholder='units'
 								value={unitsData}
 								onChange={(e)=> setUnitsData(e.target.value)}
 								/>
+							<span style={{'color':'red'}}>{unitsError}</span>
 						</Col>
 					</Form.Row>
 					<Form.Row>
@@ -129,7 +185,8 @@ const ItemForm = ({
 							<Form.Label>
 								Prep category
 							</Form.Label>
-							<Form.Control 
+							<Form.Control
+								id='categoryField' 
 								type='text' 
 								list='categories' 
 								value={categoryData} 
@@ -144,7 +201,7 @@ const ItemForm = ({
 									)
 								})}
 							</datalist>
-
+							<span style={{'color':'red'}}>{categoryError}</span>
 						</Col>
 					</Form.Row>
 					{selectedCategory.length > 0 ? 
@@ -179,10 +236,14 @@ const ItemForm = ({
 						<Col className='clearfix'>
 							
 
-							<Button className='float-right' onClick={(e)=> {handleClick(e)}} >
+							<Button type='submit' className='float-right'>
 								Add new item
 							</Button>
-							<Button className='float-right' variant='danger' onClick={()=> {setItemFormVisibility(false)}}>
+							<Button 
+								className='float-right' 
+								variant='danger' 
+								onClick={()=> {setItemFormVisibility(false)}}
+							>
 								Cancel
 							</Button>
 						</Col>

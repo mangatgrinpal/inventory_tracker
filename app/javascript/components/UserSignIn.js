@@ -48,6 +48,16 @@ const UserSignIn = ({
 		}
 	}
 
+		const emailErrorHandler = () => {
+			setEmailError('Invalid email, please enter a valid email.')
+			document.getElementById('emailField').classList.add('invalid-error-frame')
+		}
+
+		const passwordErrorHandler = () => {
+			setPasswordError('Invalid password length, password must be at least 6 characters.')
+			document.getElementById('passwordField').classList.add('invalid-error-frame')
+		}
+
 	const validate = () => {
 		
 
@@ -57,23 +67,17 @@ const UserSignIn = ({
 		const passwordValid = password.length > 5 && password.length < 128
 
 
-		if (!emailValid && !passwordValid) {
-			setEmailError('Invalid email, please enter a valid email.')
-			setPasswordError('Invalid password length, password must be at least 6 characters.')
-
-			document.getElementById('emailField').classList.add('invalid-error-frame')
-			document.getElementById('passwordField').classList.add('invalid-error-frame')
-			return false
-		}
+		
 		if (!emailValid) {
-			setEmailError('Invalid email, please enter a valid email.')
-			document.getElementById('emailField').classList.add('invalid-error-frame')
-			return false
+			emailErrorHandler()
+
 		}
 
 		if (!passwordValid) {
-			setPasswordError('Invalid password length, password must be at least 6 characters.')
-			document.getElementById('passwordField').classList.add('invalid-error-frame')
+			passwordErrorHandler()
+		}
+
+		if (!emailValid || !passwordValid) {
 			return false
 		}
 

@@ -41,23 +41,18 @@ const RestaurantForm = ({
 		const imageAttached = imageData.length === 1 
 
 
-		if (!nameValid && !imageAttached) {
-			nameErrorHandler()
-			imageErrorHandler()
-			return false
-		}
-
 		if (!nameValid) {
-
 			nameErrorHandler()
-			return false
 		}
 
 		if (!imageAttached) {
-
 			imageErrorHandler()
+		}
+
+		if (!nameValid || !imageAttached) {
 			return false
 		}
+		
 		return true
 	}
 	

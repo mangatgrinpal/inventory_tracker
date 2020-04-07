@@ -17,7 +17,11 @@ class ItemsController < ApplicationController
 
 				@trackable_attribute = TrackableAttribute.where(name: trackable_attribute[:name]).first
 				if @trackable_attribute
-					CategoryAttribute.create!(category: @category, trackable_attribute: @trackable_attribute)
+					CategoryAttribute.create!(
+						category: @category, 
+						trackable_attribute: @trackable_attribute, 
+						user_id: current_user.id
+					)
 				else
 					@category.trackable_attributes.create!(name: trackable_attribute[:name])
 				end
@@ -26,14 +30,21 @@ class ItemsController < ApplicationController
 
 			@category.trackable_attributes.each do |trackable_attribute|
 				@initial_record = @item.records.create!
-				@record_attribute = RecordTrackableAttribute.create!(record: @initial_record, trackable_attribute: trackable_attribute)
+				@record_attribute = RecordTrackableAttribute.create!(
+					record: @initial_record, 
+					trackable_attribute: trackable_attribute
+				)
 			end
 
 			@item_category = ItemCategory.create!(item: @item, category: @category)
 		end
 
 		if @item.save
-			render json: {items: serialized_items, categories: serialized_categories, trackable_attributes: TrackableAttribute.all}
+			render json: {
+				items: serialized_items, 
+				categories: serialized_categories, 
+				trackable_attributes: TrackableAttribute.all
+			}
 		end
 	end
 
