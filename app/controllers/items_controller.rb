@@ -11,6 +11,7 @@ class ItemsController < ApplicationController
 		Item.transaction do
 			@item = Item.create!(item_params)
 			@category = current_user.categories.find_or_create_by!(title: params[:category][:title])
+			byebug
 
 
 			params[:trackableAttributes].try(:each) do |trackable_attribute|
@@ -19,8 +20,7 @@ class ItemsController < ApplicationController
 				if @trackable_attribute
 					CategoryAttribute.create!(
 						category: @category, 
-						trackable_attribute: @trackable_attribute, 
-						user_id: current_user.id
+						trackable_attribute: @trackable_attribute
 					)
 				else
 					@category.trackable_attributes.create!(name: trackable_attribute[:name])

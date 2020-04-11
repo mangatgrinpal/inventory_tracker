@@ -11,12 +11,20 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const CategoryForm = ({
 	attributesData,
+	attributesError,
+	setAttributesError,
 	handleAddAttribute,
 	newAttribute,
 	setNewAttribute,
 	trackableAttributeList,
 	handleRemoveAttribute
 }) => {
+
+	const handleAddAttributeWrapper = e => {
+		setAttributesError('')
+		document.getElementById('attributeField').classList.remove('invalid-error-frame')
+		handleAddAttribute(e)
+	}
 
 	return (
 		<Fragment>
@@ -26,10 +34,15 @@ const CategoryForm = ({
 						Which quantities will this category keep track of? (Up to 4)
 					</Form.Label>
 					<InputGroup>
-						<Form.Control type='text' list='trackable-attributes' value={newAttribute} onChange={e=>{setNewAttribute(e.target.value)}} />
+						<Form.Control
+							id='attributeField'
+							type='text' 
+							list='trackable-attributes' 
+							value={newAttribute} 
+							onChange={e=>{setNewAttribute(e.target.value)}} />
 						{	attributesData && attributesData.length < 4 && 
 							<InputGroup.Append>
-								<Button onClick={e=>{handleAddAttribute(e)}}>
+								<Button onClick={e=>{handleAddAttributeWrapper(e)}}>
 									Add attribute
 								</Button>
 							</InputGroup.Append>									
@@ -42,6 +55,7 @@ const CategoryForm = ({
 							)
 						})}
 					</datalist>
+					<span style={{'color':'red'}}>{attributesError}</span>
 				</Col>
 			</Form.Row>
 			{ attributesData && attributesData.length > 0 &&

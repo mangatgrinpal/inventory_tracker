@@ -7,14 +7,22 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const ImageUploader = ({
 	imageData, 
-	setImageData
+	setImageData,
+	setImageError
 }) => {
 
-	const { getRootProps, getInputProps } = useDropzone({
+	const { 
+		getRootProps, 
+		getInputProps,
+		rootRef,
+		inputRef 
+	} = useDropzone({
 		accept: 'image/*',
 		onDrop: acceptedFiles => {
+			clearImageError()
 			setImageData(acceptedFiles.map(file=> Object.assign(file, {
 				preview: URL.createObjectURL(file)
+
 			})));
 		}
 	})
@@ -38,6 +46,7 @@ const ImageUploader = ({
 	));
 
 	const clearImageError = () => {
+		setImageError('')
 		document.getElementById('imageField').classList.remove('invalid-error-frame')
 	}
 
@@ -50,11 +59,10 @@ const ImageUploader = ({
 		<Fragment>
 			{imageData.length === 0 ? 
 				<div 
-					onClick={()=>{clearImageError}}
-					id='imageField' 
+					id='imageField'
 					{...getRootProps({className: 'dropzone text-center'})}>
 
-					<input {...getInputProps()} onBlur={clearImageError}/>
+					<input {...getInputProps()} />
 					<FontAwesomeIcon id='cameraIcon' icon='camera' size='2x' />
 				</div>	:
 

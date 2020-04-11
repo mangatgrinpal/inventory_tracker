@@ -56,7 +56,7 @@ const CategoryContainer = ({
 							</Col>
 							{category.trackable_attributes.length === 0 ?  
 
-								<Col md={columnWidth}>
+								<Col md={4}>
 									Whoops! This category doesn't have any attributes to track.
 								</Col>
 

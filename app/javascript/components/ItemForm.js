@@ -30,6 +30,7 @@ const ItemForm = ({
 	const [ categoryData, setCategoryData ] = useState('')
 	const [ categoryError, setCategoryError ] = useState('')
 	const [ attributesData, setAttributesData ] = useState([])
+	const [ attributesError, setAttributesError ] = useState('')
 	const [ newCategory, setNewCategory ] = useState(false)
 	const [ newAttribute, setNewAttribute ] = useState('')
 	const [ selectedCategory, setSelectedCategory ] = useState({})
@@ -41,14 +42,14 @@ const ItemForm = ({
 	}
 
 	const newCategoryChecker = e => {
-		console.log('hi')
+
 		let result = categoryList.filter(category => 
 			category.title.toLowerCase() == e.target.value.toLowerCase()
 			)
 
 		setSelectedCategory(result)
 
-		if (result.length > 0) {
+		if (result.length > 0 || e.target.value == '') {
 			setNewCategory(false)
 
 		} else {
@@ -99,11 +100,17 @@ const ItemForm = ({
 		document.getElementById('categoryField').classList.add('invalid-error-frame')
 	}
 
+	const attributeErrorHandler = () => {
+		setAttributesError('You need to choose at least one attribute to track for this new category.')
+		document.getElementById('attributeField').classList.add('invalid-error-frame')
+	}
+
 	const validate = () => {
 		// we'll define a function to validate the form
 		const nameValid = nameData.length > 1 && nameData.length < 64
 		const unitsValid = unitsData.length > 1 && unitsData.length < 64
-		const categoryValid = selectedCategory.length === 1
+		const categoryValid = selectedCategory.length === 1 || categoryData != ''
+
 
 		if (!nameValid) {
 			itemNameErrorHandler()
@@ -111,6 +118,10 @@ const ItemForm = ({
 
 		if (!unitsValid) {
 			unitErrorHandler()
+		}
+
+		if (newCategory && attributesData.length === 0) {
+			attributeErrorHandler()
 		}
 
 		if (!categoryValid) {
@@ -125,11 +136,17 @@ const ItemForm = ({
 
 	}
 
+	const handleSelect = e => {
+		setCategoryError('')
+		document.getElementById('categoryField').classList.remove('invalid-error-frame')
+	}
+
 	const handleSubmit = e => {
 		e.preventDefault()
 		setItemNameError('')
 		setUnitsError('')
 		setCategoryError('')
+		setAttributesError('')
 		document.getElementById('itemNameField').classList.remove('invalid-error-frame')
 		document.getElementById('unitField').classList.remove('invalid-error-frame')
 		document.getElementById('categoryField').classList.remove('invalid-error-frame')
@@ -190,7 +207,8 @@ const ItemForm = ({
 								type='text' 
 								list='categories' 
 								value={categoryData} 
-								onChange={handleCategoryChange} 
+								onChange={handleCategoryChange}
+								onSelect={e=>{handleSelect(e)}} 
 								onBlur={newCategoryChecker} />
 							<datalist id='categories'>
 								{categoryList.map(category => {
@@ -204,7 +222,7 @@ const ItemForm = ({
 							<span style={{'color':'red'}}>{categoryError}</span>
 						</Col>
 					</Form.Row>
-					{selectedCategory.length > 0 ? 
+					{selectedCategory.length > 0 && 
 
 						<Form.Row>
 							<Col xs={12}>
@@ -221,17 +239,18 @@ const ItemForm = ({
 								
 							</Col>
 						</Form.Row>
-						:
+						}
+						{newCategory &&
 						<CategoryForm
 							attributesData={attributesData}
+							attributesError={attributesError}
+							setAttributesError={setAttributesError}
 							handleAddAttribute={handleAddAttribute}
 							newAttribute={newAttribute}
 							setNewAttribute={setNewAttribute}
 							trackableAttributeList={trackableAttributeList}
-							handleRemoveAttribute={handleRemoveAttribute} />
-					}
-					
-
+							handleRemoveAttribute={handleRemoveAttribute} />					
+						}
 					<Form.Row className='pt-2'>
 						<Col className='clearfix'>
 							

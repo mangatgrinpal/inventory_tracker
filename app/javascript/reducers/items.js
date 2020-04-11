@@ -15,7 +15,7 @@ import {
 const initialState = {
 	itemList: [],
 	isFetching: true,
-	itemFormVisible: true
+	itemFormVisible: false
 
 }
 

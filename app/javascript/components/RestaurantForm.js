@@ -14,15 +14,14 @@ const RestaurantForm = ({
 	addRestaurant, 
 	restaurantFormVisible,
 	setRestaurantFormVisibility,
-	isCreating,
-	currentUser,
-	errors 
+	currentUser
 }) => {
 
 	const [ name, setName ] = useState('')
 	const [ imageData, setImageData ] = useState([])
 	const [ nameError, setNameError ] = useState('')
 	const [ imageError, setImageError ] = useState('')
+	const [ isCreating, setCreating ] = useState(false)
 
 	const nameErrorHandler = () => {
 		setNameError('Invalid restaurant name, please enter a valid name up to 64 characters.')
@@ -73,7 +72,7 @@ const RestaurantForm = ({
 			const restaurant = new FormData();
 			restaurant.append('[restaurant]name', name)
 			restaurant.append('[restaurant]image', imageData[0])
-
+			setCreating(true)
 			addRestaurant(restaurant)
 		}
 	
@@ -86,7 +85,7 @@ const RestaurantForm = ({
 	const submitFormOnEnter = e => {
 
 		if (e.key === 'Enter') {
-			const isValid = valiate()
+			const isValid = validate()
 			if (isValid) {
 				setCreating(true)
 				e.preventDefault()

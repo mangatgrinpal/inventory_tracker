@@ -15,13 +15,7 @@ const initialState = {
 	restaurantList: [],
 	isFetching: true,
 	restaurantFormVisible: false,
-	restaurantLinksVisible: true,
-	isCreating: false,
-	isDeleting: false,
-	errors: {
-		name: '',
-		image: ''
-	}
+	restaurantLinksVisible: true
 };
 
 export default function(state = initialState, action) {
