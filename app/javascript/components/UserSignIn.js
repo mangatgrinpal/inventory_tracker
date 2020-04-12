@@ -30,8 +30,13 @@ const UserSignIn = ({
 
 
 	const submitFormOnEnter = e => {
+
 		if (e.key === 'Enter') {
-			userSignIn(email, password, history)
+			const isValid = validate()
+			if (isValid) {
+				e.preventDefault()
+				userSignIn(email, password, history)	
+			}
 		}
 	}
 
@@ -96,12 +101,12 @@ const UserSignIn = ({
 							md={{span: 4, offset: 4}} 
 							className='py-5'>
 							<h6 className='section-name'>Sign In</h6>
+							
 						</Col>
 					</Row>
-					
-					
 					<Row>
 						<Col xs={{span: 10, offset: 1}} md={{span: 6, offset: 3}}>
+							<span style={{'color':'red'}}>{errorMessages}</span>
 							<Form 
 								onKeyPress={submitFormOnEnter} 
 								onSubmit={(e)=>{handleSubmit(e, email, password, history)}}

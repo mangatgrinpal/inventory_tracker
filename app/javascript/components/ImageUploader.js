@@ -22,7 +22,6 @@ const ImageUploader = ({
 			clearImageError()
 			setImageData(acceptedFiles.map(file=> Object.assign(file, {
 				preview: URL.createObjectURL(file)
-
 			})));
 		}
 	})

@@ -53,7 +53,7 @@ export const userSignUp = (email, password, passwordConfirmation, history) => as
 
 		dispatch({
 			type: USER_SIGN_UP_FAILURE,
-			payload: error.message
+			payload: error.response
 		})
 
 
@@ -61,7 +61,7 @@ export const userSignUp = (email, password, passwordConfirmation, history) => as
 }
 
 export const verifyToken = verificationParams => async dispatch => {
-	debugger
+
 	try {
 		const res = await axios.get('/users/validate_token',{
 			params: verificationParams
@@ -103,10 +103,20 @@ export const userSignIn = (email, password, history) => async dispatch => {
 		history.push('/dashboard')
 
 	} catch(error) {
+		
+		let message;
+		
+		if (error.response.status === 401) {
+			message = 'Invalid credentials, please try again.'
+		}
+
+		if (error.response.status === 500) {
+			message = 'Uh oh, something went wrong. Please try again.'
+		}
 
 		dispatch({
 			type: USER_SIGN_IN_FAILURE,
-			payload: error.message
+			payload: message
 		})
 	}
 }
@@ -165,15 +175,5 @@ export const verifyCredentials = () => async dispatch => {
 
 
 }
-
-
-
-
-
-
-
-
-
-
 
 
