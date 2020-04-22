@@ -55,16 +55,26 @@ const Item = ({
 				<Col xs={12} md={4} className='clearfix py-1'>
 					<div className='float-right'>
 						{ editing ? 
-							<FontAwesomeIcon
-								title='Delete item' 
-								icon='times'
-								className='clickable-icon delete-icon'
-								onClick={e => { handleDelete(e)}} />
+							<Fragment>
+								<FontAwesomeIcon
+									title='Save' 
+									icon='check'
+									className='clickable-icon add-icon'
+									onClick={e => { setEditing(false)}} />
+									&nbsp;&nbsp;
+
+								<FontAwesomeIcon
+									title='Delete item' 
+									icon='times'
+									className='clickable-icon delete-icon'
+									onClick={e => { handleDelete(e)}} />
+								
+							</Fragment>
 							: 
 							<FontAwesomeIcon
 								title='Edit item' 
-								icon='edit'
-								className='clickable-icon'
+								icon='pen'
+								className='clickable-icon mx-2'
 								onClick={()=>{setEditing(true)}} />
 						}
 					</div>

@@ -90,6 +90,17 @@ const UserSignUp = ({
 		
 	}
 
+	const submitFormOnEnter = e => {
+
+		if (e.key === 'Enter') {
+			const isValid = validate()
+			if (isValid) {
+				e.preventDefault()
+				userSignUp(email, password, passwordConfirmation, history)
+			}
+		}
+	}
+
 
 
 	return (

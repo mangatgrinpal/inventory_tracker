@@ -5,16 +5,16 @@ class Item::RecordsController < ApplicationController
 		@item_attributes  = @item.trackable_attributes
 		if @item.records.where(created_at: today).length != @item_attributes.length
 			@item_attributes.each do |trackable_attribute|
-				@records = @item.records.joins(:trackable_attribute).where('record_trackable_attributes.trackable_attribute_id = ?', trackable_attribute.id)
-				if @records.where(created_at: today).length == 0
-					quantity = @records.last.try(:quantity)
+				@attribute_record = @item.records.joins(:trackable_attribute).where('record_trackable_attributes.trackable_attribute_id = ?', trackable_attribute.id)
+				if !@attribute_record.where(created_at: today).exists?
+					quantity = @attribute_record.last.try(:quantity)
 					@record = @item.records.create!(quantity: quantity)
 					@record_attribute = RecordTrackableAttribute.create!(record: @record, trackable_attribute: trackable_attribute)
 				end
 			end
 			
 		end
-		
+		@item.reload
 		render json: @item.records.where(created_at: today), status: 200
 	end
 
@@ -98,17 +98,6 @@ class Item::RecordsController < ApplicationController
 
 		def record_params
 			params.require(:record).permit(:quantity)
-		end 
-
-		def serialized_records
-			@records = Record.where(updated_at: today)
-			ActiveModel::Serializer::CollectionSerializer.new(@records, each_serializer: RecordsSerializer)
 		end
-
-		def serialized_items
-			@items = Item.where(restaurant_id: params[:restaurant])
-			ActiveModel::Serializer::CollectionSerializer.new(@items, each_serializer: ItemSerializer)
-		end
-
 		
 end

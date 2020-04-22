@@ -105,12 +105,14 @@ export const userSignIn = (email, password, history) => async dispatch => {
 	} catch(error) {
 		
 		let message;
-		
-		if (error.response.status === 401) {
+
+		const { response: { status }} = error;
+
+		if (status === 401) {
 			message = 'Invalid credentials, please try again.'
 		}
 
-		if (error.response.status === 500) {
+		if (status === 500) {
 			message = 'Uh oh, something went wrong. Please try again.'
 		}
 

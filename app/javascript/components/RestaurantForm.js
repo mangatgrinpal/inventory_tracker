@@ -63,8 +63,6 @@ const RestaurantForm = ({
 
 		document.getElementById('nameField').classList.remove('invalid-error-frame')
 		
-		
-
 		const isValid = validate()
 
 		if (isValid) {
@@ -76,8 +74,6 @@ const RestaurantForm = ({
 			addRestaurant(restaurant)
 		}
 	
-		
-		
 	}
 
 	const handleSubmitThrottled = throttle(handleSubmit,500)
