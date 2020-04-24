@@ -1,25 +1,21 @@
-import React, { Fragment, useState, useEffect } from "react"
+import React, { Fragment, useState, useEffect } from 'react'
+import HeroImage from './HeroImage';
+import HeroDescription from './HeroDescription';
 
-import Container from "react-bootstrap/Container"
-import Row from "react-bootstrap/Row"
-import Col from "react-bootstrap/Col"
-import Button from "react-bootstrap/Button"
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+import Button from 'react-bootstrap/Button';
 
 const Home = () => {
 
+
+
 	return (
 		<Fragment>
-			<Container>
-				<Row className='text-center'>
-					<Col>
-						<h1>Inventory Management System</h1>
+			<Container fluid={true}>
+				<HeroImage />
 
-					</Col>
-				</Row>
-				<Row>
-					<Col className='home-background-image'>
-					</Col>
-				</Row>
 			</Container>
 		</Fragment>
 	)

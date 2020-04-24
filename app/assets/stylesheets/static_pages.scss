@@ -29,13 +29,29 @@ input[type=number] {
 	color: #ff4747;
 }
 
-.home-background-image {
-	background-image: url(https://ginnysbucket.s3-us-west-1.amazonaws.com/dev-images/vietnoms_badge_darkgray_edited.png);
+#hero-image {
 	height: 50rem;
-	background-position: center;
+	opacity: 1;
+	transition: opacity 800ms;
+	z-index: -1;
 	background-size: cover;
 	background-repeat: no-repeat;
-	background-color: #272827;
+	height: 40rem;
+
+	.hero-overlay {
+		z-index: 1;
+		background-color: black;
+		opacity: 0.5;
+	}
+
+	.hero-text {
+		z-index: 2;
+		position: absolute;
+	}
+}
+
+#hero-image.fadeOut {
+	opacity: 0;
 }
 
 input.value-display {
