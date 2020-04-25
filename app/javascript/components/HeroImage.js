@@ -6,6 +6,8 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+
 
 const HeroImage = () => {
 
@@ -39,6 +41,15 @@ const HeroImage = () => {
 		slideShow();
 	}
 
+	const scrollToDescription = () => {
+
+		window.scrollTo({
+			top:100,
+			left:0,
+			behavior: 'smooth'
+		});
+	}
+
 	return (
 		<Fragment>
 			<Row>
@@ -46,6 +57,14 @@ const HeroImage = () => {
 					<h1>Inventory Management System</h1>
 					<p className='py-5'>Easily manage inventories on the go for your business.</p>
 					<Link className='btn btn-primary' to='/sign-up'>Get started today</Link>
+
+					<p className='pt-5 mt-5'>Learn more now</p>
+					<FontAwesomeIcon
+						id='pulse-button'
+						icon='angle-double-down'
+						className='clickable-icon mt-3 mt-md-5'
+						size='2x'
+						onClick={()=>{scrollToDescription}} />
 				</Col>
 			</Row>
 			<Row id='hero-image' className='text-center'>

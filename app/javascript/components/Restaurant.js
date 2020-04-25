@@ -116,7 +116,7 @@ const Restaurant = ({
 					<Fragment>
 						
 						<a onClick={()=>{setItemFormVisibility(true)}}>
-							<h6 className='pt-3 text-center'>No items in this inventory. Click here to get started.</h6>
+							<h6 className='pt-3 text-center'>No items in this inventory. Click <a href='javascript:void(0)'>here</a> to get started.</h6>
 						</a>
 					</Fragment> :
 					<Fragment>
