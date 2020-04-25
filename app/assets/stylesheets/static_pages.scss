@@ -43,15 +43,15 @@ input[type=number] {
 		background-color: black;
 		opacity: 0.5;
 	}
-
-	.hero-text {
-		z-index: 2;
-		position: absolute;
-	}
 }
 
 #hero-image.fadeOut {
 	opacity: 0;
+}
+
+.hero-text {
+	z-index: 2;
+	position: fixed!important;
 }
 
 input.value-display {

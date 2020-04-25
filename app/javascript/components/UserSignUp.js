@@ -2,7 +2,7 @@ import React, { Fragment, useState } from 'react';
 import Loading from './Loading';
 
 import { connect } from 'react-redux';
-import { useHistory } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 
 import { userSignUp } from '../actions/users';
 
@@ -164,6 +164,11 @@ const UserSignUp = ({
 									Submit
 								</Button>
 							</Form>
+						</Col>
+					</Row>
+					<Row className='pt-3'>
+						<Col xs={{span: 10, offset: 1}} md={{span: 6, offset: 3}}>
+							Already have an account? <Link to='/sign-in'>Sign in now</Link>
 						</Col>
 					</Row>
 				</Container>

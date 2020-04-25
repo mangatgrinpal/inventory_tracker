@@ -1,7 +1,10 @@
 import React, { Fragment, useEffect } from 'react';
 
+import { Link } from 'react-router-dom';
+
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+import Button from 'react-bootstrap/Button';
 
 
 const HeroImage = () => {
@@ -38,14 +41,16 @@ const HeroImage = () => {
 
 	return (
 		<Fragment>
-			<Row id='hero-image' className='text-center'>
-				<Col className='hero-overlay h-100'/>
-				<Col className='hero-text h-75 pt-5'>
+			<Row>
+				<Col className='hero-text text-center pt-5 mt-5'>
 					<h1>Inventory Management System</h1>
+					<p className='py-5'>Easily manage inventories on the go for your business.</p>
+					<Link className='btn btn-primary' to='/sign-up'>Get started today</Link>
 				</Col>
 			</Row>
-
-
+			<Row id='hero-image' className='text-center'>
+				<Col className='hero-overlay h-100'/>
+			</Row>
 		</Fragment>
 	)
 }
