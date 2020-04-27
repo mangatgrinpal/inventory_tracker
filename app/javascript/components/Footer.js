@@ -1,17 +1,41 @@
-import React, { Fragment } from 'react'
+import React, { Fragment } from 'react';
+
+import { Link } from 'react-router-dom';
 
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
 const Footer = () => {
 	return (
-		<Row>
-			<Col>
-				<p>
-					Track your inventories today!
-				</p>
-			</Col>
-		</Row>
+		<Fragment>
+			<Row id='footer'>
+				<Col className='text-center'>
+					<p>
+						Track your inventories today
+					</p>
+				</Col>
+				<Col>
+					<ul>
+						<li>
+							<Link to='sign-up'>
+								Sign up now
+							</Link>
+							
+						</li>
+						<li>
+							<Link to='sign-in'>
+								Sign in
+							</Link>
+						</li>
+					</ul>
+				</Col>
+			</Row>
+			<Row className='py-4 text-center'>
+				<Col>
+					&copy; {new Date().getFullYear()} Copyright: <a href='/'>Inventory Manager</a>
+				</Col>
+			</Row>
+		</Fragment>
 	)
 }
 

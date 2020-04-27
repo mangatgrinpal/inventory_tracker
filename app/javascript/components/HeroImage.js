@@ -28,7 +28,7 @@ const HeroImage = () => {
 
 		// sets hero-image to images in backgrounds array using i to access index
 		function slideShow() {
-			heroImage.className += " fadeOut";
+			heroImage.className += " fade-out";
 			setTimeout(()=> {
 				heroImage.style.backgroundImage = "url(" + baseURL + backgrounds[i] + ")";
 

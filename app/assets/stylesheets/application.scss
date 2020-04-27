@@ -166,7 +166,7 @@ body {
 
 // pulse animation for button on landing page
 
-@keyframes pulse {
+@-webkit-keyframes pulse {
   0% {
     transform: (scale(.8));
   }
@@ -183,7 +183,7 @@ body {
 }
 
 #pulse-button {
-	animation: pulse 1.5s infinite;
+	animation: pulse 2s infinite;
 	// color: #ff4747;
 	width: 2rem;
 	height: 2rem;
