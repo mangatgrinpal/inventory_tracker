@@ -7,15 +7,15 @@ import Col from 'react-bootstrap/Col';
 const HeroDescription = () => {
 
 	return (
-		<Row className='justify-content-center'>
+		<Row className='justify-content-center text-center hero-description'>
 			<Col xs={12} md={4}>
-				Hi
+				Easily add restaurants to track their inventories.
 			</Col>
 			<Col xs={12} md={4}>
-				how
+				Add items to your restaurants, organized in categories to find them quickly.
 			</Col>
 			<Col xs={12} md={4}>
-				are you
+				Keep track of the quantities you need, on your computer or on the go.
 			</Col>
 		</Row>
 	)

@@ -51,7 +51,11 @@ input[type=number] {
 
 .hero-text {
 	z-index: 2;
-	position: fixed!important;
+	position: absolute!important;
+}
+
+.hero-description {
+	height: 700px;
 }
 
 input.value-display {

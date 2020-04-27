@@ -1,6 +1,7 @@
 import React, { Fragment, useState, useEffect } from 'react'
 import HeroImage from './HeroImage';
 import HeroDescription from './HeroDescription';
+import Footer from './Footer';
 
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
@@ -15,7 +16,8 @@ const Home = () => {
 		<Fragment>
 			<Container fluid={true}>
 				<HeroImage />
-
+				<HeroDescription />
+				<Footer />
 			</Container>
 		</Fragment>
 	)

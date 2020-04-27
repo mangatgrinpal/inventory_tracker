@@ -44,7 +44,7 @@ const HeroImage = () => {
 	const scrollToDescription = () => {
 
 		window.scrollTo({
-			top:100,
+			top:1000,
 			left:0,
 			behavior: 'smooth'
 		});
@@ -64,7 +64,7 @@ const HeroImage = () => {
 						icon='angle-double-down'
 						className='clickable-icon mt-3 mt-md-5'
 						size='2x'
-						onClick={()=>{scrollToDescription}} />
+						onClick={()=>{scrollToDescription()}} />
 				</Col>
 			</Row>
 			<Row id='hero-image' className='text-center'>
