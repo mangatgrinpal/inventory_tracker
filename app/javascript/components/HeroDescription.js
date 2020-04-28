@@ -9,13 +9,13 @@ const HeroDescription = () => {
 	return (
 		<Row className='justify-content-center text-center hero-description'>
 			<Col xs={12} md={4}>
-				Easily add restaurants to track their inventories.
+				<p>Easily add restaurants to track their inventories.</p>
 			</Col>
 			<Col xs={12} md={4}>
-				Add items to your restaurants, organized in categories to find them quickly.
+				<p>Add items to your restaurants, organized in categories to find them quickly.</p>
 			</Col>
 			<Col xs={12} md={4}>
-				Keep track of the quantities you need, on your computer or on the go.
+				<p>Keep track of the quantities you need, on your computer or on the go.</p>
 			</Col>
 		</Row>
 	)
