@@ -62,12 +62,14 @@ const HeroImage = () => {
 					<Link className='btn btn-primary' to='/sign-up'>Get started today</Link>
 
 					<p className='pt-5 mt-5 mb-5 mb-md-1'>Learn more now</p>
+					<div className='p-5'>
 					<FontAwesomeIcon
 						id='pulse-button'
 						icon='angle-double-down'
 						className='clickable-icon mt-3 mt-md-5'
 						size='2x'
 						onClick={()=>{scrollToDescription()}} />
+					</div>
 				</Col>
 			</Row>
 			<Row id='hero-image' className='text-center'>
