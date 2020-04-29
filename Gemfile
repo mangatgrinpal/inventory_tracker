@@ -26,6 +26,7 @@ gem 'haml'
 gem 'devise_token_auth'
 gem 'figaro'
 gem 'aws-sdk-s3', require: false
+gem 'autoprefixer-rails'
 
 gem 'active_model_serializers', '~> 0.10.0'
 # Use Active Storage variant
