@@ -73,6 +73,11 @@ const Restaurant = ({
 
 	let currentRestaurant = restaurantList.filter(restaurant => restaurant.id == id)
 
+	const handleItemFormToggle = (e, option) => {
+		e.preventDefault()
+		setItemFormVisibility(option)
+	}
+
 	return (
 		<Fragment>
 			<Container id='restaurant-container'>
@@ -115,9 +120,9 @@ const Restaurant = ({
 					itemList.length === 0 ?
 					<Fragment>
 						
-						<a onClick={()=>{setItemFormVisibility(true)}}>
-							<h6 className='pt-3 text-center'>No items in this inventory. Click <a href='javascript:void(0)'>here</a> to get started.</h6>
-						</a>
+						<h6 className='text-center pt-3'>
+							No items in this inventory. Click <a href='#!'onClick={(e)=>{handleItemFormToggle(e, true)}}>here</a> to get started.
+						</h6>
 					</Fragment> :
 					<Fragment>
 						{categoryList.map( category => {

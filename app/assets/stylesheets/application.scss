@@ -166,23 +166,31 @@ body {
 
 // pulse animation for button on landing page
 
-@-webkit-keyframes pulse {
+@keyframes pulse {
   0% {
-    transform: (scale(.8));
+  	transform: (scale(.8));
+    -webkit-transform: (scale(.8));
+    -moz-transform: (scale(.8));
   }
   
   70% {
-    transform: (scale(1.1));
+  	transform: (scale(1.1));
+  	-moz-transform: (scale(1.1));
+    -webkit-transform: (scale(1.1));
     box-shadow: 0 0 0 50px rgba(#5a99d4, 0);
   }
   
   100% {
     transform: (scale(.9));
+    -webkit-transform: (scale(.9));
+		-moz-transform: (scale(.9));
     box-shadow: 0 0 0 0 rgba(#5a99d4, 0);
   }
 }
 
 #pulse-button {
+	-webkit-animation: pulse 2s infinite;
+	-moz-animation: pulse 2s infinite;
 	animation: pulse 2s infinite;
 	// color: #ff4747;
 	width: 2rem;

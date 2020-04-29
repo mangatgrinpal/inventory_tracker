@@ -30,13 +30,12 @@ input[type=number] {
 }
 
 #hero-image {
-	height: 50rem;
+	height: 94vh;
 	opacity: 1;
 	transition: opacity 800ms;
 	z-index: -1;
 	background-size: cover;
 	background-repeat: no-repeat;
-	height: 40rem;
 
 	.hero-overlay {
 		z-index: 1;
@@ -55,7 +54,7 @@ input[type=number] {
 }
 
 .hero-description {
-	height: 700px;
+	height: 20rem;
 	// background-color: #ff4747;
 }
 

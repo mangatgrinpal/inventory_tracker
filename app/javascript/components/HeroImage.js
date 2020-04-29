@@ -42,9 +42,12 @@ const HeroImage = () => {
 	}
 
 	const scrollToDescription = () => {
+		let scrollAmount = window.innerHeight
+
+
 
 		window.scrollTo({
-			top:1000,
+			top:scrollAmount,
 			left:0,
 			behavior: 'smooth'
 		});
@@ -58,7 +61,7 @@ const HeroImage = () => {
 					<p className='py-5'>Easily manage inventories on the go for your business.</p>
 					<Link className='btn btn-primary' to='/sign-up'>Get started today</Link>
 
-					<p className='pt-5 mt-5'>Learn more now</p>
+					<p className='pt-5 mt-5 mb-5 mb-md-1'>Learn more now</p>
 					<FontAwesomeIcon
 						id='pulse-button'
 						icon='angle-double-down'
