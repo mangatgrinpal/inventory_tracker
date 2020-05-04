@@ -24,10 +24,18 @@ const RecordForm = ({
 
 	let [ quantityData, setQuantityData ] = useState(quantity)
 
+	const validate = () => {
+		return !isNaN(quantityData) && 
+						parseInt(Number(quantityData)) == quantityData && 
+						!isNaN(parseInt(quantityData, 10));
+	}
 
 	const handleBlur = e => {
 		e.preventDefault()
-		updateRecord(item, quantityData, attributeId)
+		let isValid = validate()
+		if (isValid) {
+			updateRecord(item, quantityData, attributeId)	
+		}
 	}
 
 	const handleChange = e => {
