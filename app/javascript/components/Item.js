@@ -87,10 +87,10 @@ const Item = ({
 
 					return (
 						<Fragment key={trackableAttribute.id}>
-							<Col xs={5} className='d-md-none text-right py-1'>
+							<Col xs={6} className='d-md-none text-right py-1'>
 								{trackableAttribute.name}
 							</Col>
-							<Col xs={5} md={2} className='pb-1 col-centered'>									
+							<Col xs={3} md={2} className='pb-1 col-md-centered'>									
 								<RecordForm
 									item={id}
 									record={record} 

@@ -2,6 +2,7 @@ import React, { Fragment } from 'react';
 
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+import Image from 'react-bootstrap/Image';
 
 
 const HeroDescription = () => {
@@ -9,7 +10,7 @@ const HeroDescription = () => {
 	return (
 		<Fragment>
 			<Row className='justify-content-center text-center pt-3'>
-				<Col xs={12} className='align-self-end'>
+				<Col xs={12}>
 					<h3 className='section-name'>
 						Getting started is easy
 					</h3>
@@ -24,10 +25,10 @@ const HeroDescription = () => {
 						you can track virtually any type of inventory.
 					</p>
 				</Col>
-				<Col className='embed-responsive' xs={12} md={{span: 4, offset:3}}>
-					<img 
+				<Col xs={12} md={{span: 4, offset:2}}>
+					<Image 
 						src='https://ginnysbucket.s3-us-west-1.amazonaws.com/dev-images/add_restaurant_preview_mac.png'
-						className='embed-responsive-item' />
+						fluid />
 				</Col>
 			</Row>
 			<Row className='justify-content-start text-right hero-description'>
@@ -39,10 +40,10 @@ const HeroDescription = () => {
 						You will also specify what you plan to track with each category.
 					</p>
 				</Col>				
-				<Col className='embed-responsive' xs={12} md={{span: 4, offset:3}}>
-					<img 
-						src='https://ginnysbucket.s3-us-west-1.amazonaws.com/dev-images/add_item_view_mac.png'
-						className='embed-responsive-item' />
+				<Col xs={12} md={{span: 4, offset:2}}>
+					<Image 
+						src='https://ginnysbucket.s3-us-west-1.amazonaws.com/dev-images/add_item_view_mac_new.png'
+						fluid />
 				</Col>
 			</Row>
 			<Row className='justify-content-start text-right hero-description'>
