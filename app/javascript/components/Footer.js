@@ -8,7 +8,7 @@ import Col from 'react-bootstrap/Col';
 const Footer = () => {
 	return (
 		<Fragment>
-			<Row id='footer'>
+			<Row id='footer' className='py-5'>
 				<Col className='text-center'>
 					<p>
 						Track your inventories today
