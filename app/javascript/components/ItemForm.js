@@ -252,20 +252,21 @@ const ItemForm = ({
 							handleRemoveAttribute={handleRemoveAttribute} />					
 						}
 					<Form.Row className='pt-2'>
-						<Col className='clearfix'>
+						<div className='ml-auto'>
 							
 
-							<Button type='submit' className='float-right'>
-								Add new item
-							</Button>
+							
 							<Button 
-								className='float-right' 
+								className='mr-1' 
 								variant='danger' 
 								onClick={()=> {setItemFormVisibility(false)}}
 							>
 								Cancel
 							</Button>
-						</Col>
+							<Button type='submit'>
+								Add new item
+							</Button>
+						</div>
 					</Form.Row>
 				</Form>
 			</Container>

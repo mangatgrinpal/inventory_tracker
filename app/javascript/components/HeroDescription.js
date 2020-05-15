@@ -54,7 +54,7 @@ const HeroDescription = () => {
 					</p>
 				</Col>
 				
-				<Col xs={{span: 6, offset: 3}} md={{span: 2, offset: 1}}>
+				<Col xs={{span: 6, offset: 3}} md={{span: 2, offset: 2}}>
 					<Image 
 						src='https://ginnysbucket.s3-us-west-1.amazonaws.com/dev-images/inventory_preview_iphone.png'
 						fluid />

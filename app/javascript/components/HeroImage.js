@@ -2,6 +2,8 @@ import React, { Fragment, useEffect } from 'react';
 
 import { Link } from 'react-router-dom';
 
+import { CSSTransition } from 'react-transition-group';
+
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
@@ -28,11 +30,11 @@ const HeroImage = () => {
 
 		// sets hero-image to images in backgrounds array using i to access index
 		function slideShow() {
-			heroImage.className += " fade-out";
+
+			heroImage.className += ' fade-in';
 			setTimeout(()=> {
 				heroImage.style.backgroundImage = "url(" + baseURL + backgrounds[i] + ")";
-
-				heroImage.className = "row text-center";
+				heroImage.className = 'row text-center';
 			}, 1000)
 			i++;
 			if (i == backgrounds.length) { i = 0; }

@@ -52,33 +52,45 @@ const Item = ({
 	return (
 		<Fragment>
 			<Row className='border-top py-1'>
-				<Col xs={12} md={4} className='clearfix py-1'>
-					<div className='float-right'>
-						{ editing ? 
-							<Fragment>
-								<FontAwesomeIcon
-									title='Save' 
-									icon='check'
-									className='clickable-icon add-icon'
-									onClick={e => { setEditing(false)}} />
-									&nbsp;&nbsp;
+				<Col xs={12} md={4} className='py-1'>
+					<Row>
+						<Col xs={12} md={10} className='pb-4 py-md-0 item-name order-2 order-md-1 text-center'>
+							{name} ({units})
+						</Col>
+						<Col xs={12} md={2} className='px-2 text-right order-1 order-md-2'>
 
+							{ editing ? 
+								<Fragment>
+									<FontAwesomeIcon
+										title='Save' 
+										icon='check'
+										className='clickable-icon add-icon'
+										onClick={e => { setEditing(false)}} />
+										&nbsp;&nbsp;
+
+									<FontAwesomeIcon
+										title='Delete item' 
+										icon='times'
+										className='clickable-icon delete-icon'
+										onClick={e => { handleDelete(e)}} />
+									
+								</Fragment>
+								: 
 								<FontAwesomeIcon
-									title='Delete item' 
-									icon='times'
-									className='clickable-icon delete-icon'
-									onClick={e => { handleDelete(e)}} />
-								
-							</Fragment>
-							: 
-							<FontAwesomeIcon
-								title='Edit item' 
-								icon='pen'
-								className='clickable-icon mx-2'
-								onClick={()=>{setEditing(true)}} />
-						}
-					</div>
-					<h6 className='py-4 py-md-0 item-name'>{name} ({units})</h6>
+									title='Edit item' 
+									icon='pen'
+									className='clickable-icon'
+									onClick={()=>{setEditing(true)}} />
+							}
+
+						</Col>
+						
+					</Row>
+					<Row className='text-center'>
+					
+					</Row>
+					
+					
 				</Col>
 
 				{trackable_attributes.map( trackableAttribute => {

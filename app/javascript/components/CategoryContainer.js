@@ -52,47 +52,48 @@ const CategoryContainer = ({
 					<Col className='d-none d-md-block'>
 						<Row className='text-center'>
 							<Col md={4}>
-								Name (units)
+								<Row>
+									<Col md={10}>
+										Name (units)
+									</Col>
+								</Row>
+								
 							</Col>
 							{category.trackable_attributes.length === 0 ?  
 
-								<Col md={4}>
+								<Col md={8} className='col-md-centered'>
 									Whoops! This category doesn't have any attributes to track.
 								</Col>
 
 								:
 								category.trackable_attributes.map( trackableAttribute => {
 								return (
-									<Col md={2} className='col-centered' key={trackableAttribute.id}>
+									<Col md={2} className='col-md-centered' key={trackableAttribute.id}>
 										{trackableAttribute.name}
 									</Col>
 								)
 							})}
 						</Row>
-					</Col>
+					</Col>					
 
-					<Row className='no-gutters'>
-						<Col className='text-center'>
+					{categoryItems.map( item => {
 
-							{categoryItems.map( item => {
-
-								return(
-									<Item 
-										key={item.id}
-										restaurant={restaurant}
-										item={item}
-										fetchRecords={fetchRecords}
-										deleteItem={deleteItem}
-										currentWorkDay={currentWorkDay}
-										previousWorkDay={previousWorkDay}
-										updateRecord={updateRecord}
-										incrementRecord={incrementRecord}
-										decrementRecord={decrementRecord}
-										currentUser={currentUser} />
-								)
-							})}
-						</Col>
-					</Row>
+						return(
+							<Item 
+								key={item.id}
+								restaurant={restaurant}
+								item={item}
+								fetchRecords={fetchRecords}
+								deleteItem={deleteItem}
+								currentWorkDay={currentWorkDay}
+								previousWorkDay={previousWorkDay}
+								updateRecord={updateRecord}
+								incrementRecord={incrementRecord}
+								decrementRecord={decrementRecord}
+								currentUser={currentUser} />
+						)
+					})}
+				
 					<AddItemButton setItemFormVisibility={ setItemFormVisibility } />
 				</Fragment> :
 			<div/>

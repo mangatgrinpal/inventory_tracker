@@ -131,18 +131,18 @@ const RestaurantForm = ({
 						</Col>
 					</Form.Row>
 					<Form.Row className='pt-2'>
-						<Col className='clearfix'>
+						<div className='ml-auto'>
+							<Button className='mr-1' variant='danger' onClick={()=> {setRestaurantFormVisibility(false)}}>
+								Cancel
+							</Button>
 							<Button 
 								type='submit'
-								className='float-right'
 								disabled={isCreating} >
 								{isCreating ? 'Creating...':'Create restaurant'}
 							</Button>
-							<Button className='float-right' variant='danger' onClick={()=> {setRestaurantFormVisibility(false)}}>
-								Cancel
-							</Button>
 							
-						</Col>
+							
+						</div>
 					</Form.Row>
 				</Form>
 			</Container>
