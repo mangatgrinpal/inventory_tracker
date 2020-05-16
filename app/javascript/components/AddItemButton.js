@@ -11,7 +11,7 @@ const AddItemButton = ({ setItemFormVisibility }) => {
 
 	return (
 		<Row className='border-top py-1'>
-			<Col xs={12} md={4} className='text-center py-1'>
+			<Col className='text-center py-1'>
 				<span className='clickable-icon' onClick={()=>{setItemFormVisibility(true)}}>
 					<FontAwesomeIcon 
 						icon='plus'

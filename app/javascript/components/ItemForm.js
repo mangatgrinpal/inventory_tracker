@@ -33,6 +33,7 @@ const ItemForm = ({
 	const [ attributesError, setAttributesError ] = useState('')
 	const [ newCategory, setNewCategory ] = useState(false)
 	const [ newAttribute, setNewAttribute ] = useState('')
+	const [ newAttributeError, setNewAttributeError ] = useState('')
 	const [ selectedCategory, setSelectedCategory ] = useState({})
 
 	const submitFormOnEnter = e => {
@@ -105,6 +106,11 @@ const ItemForm = ({
 		document.getElementById('attributeField').classList.add('invalid-error-frame')
 	}
 
+	const newAttributeErrorHandler = () => {
+		setNewAttributeError('Invalid attribute name length, name can be up to 64 characters')
+		document.getElementById('attributeField').classList.add('invalid-error-frame')
+	}
+
 	const validate = () => {
 		// we'll define a function to validate the form
 		const nameValid = nameData.length > 1 && nameData.length < 64
@@ -128,7 +134,7 @@ const ItemForm = ({
 			categoryErrorHandler()
 		}
 
-		if (!unitsValid || !nameValid || !categoryValid) {
+		if (!unitsValid || !nameValid || !categoryValid || newCategory && attributesData.length === 0) {
 			return false
 		}
 
@@ -247,7 +253,10 @@ const ItemForm = ({
 							setAttributesError={setAttributesError}
 							handleAddAttribute={handleAddAttribute}
 							newAttribute={newAttribute}
+							newAttributeError={newAttributeError}
 							setNewAttribute={setNewAttribute}
+							setNewAttributeError={setNewAttributeError}
+							newAttributeErrorHandler={newAttributeErrorHandler}
 							trackableAttributeList={trackableAttributeList}
 							handleRemoveAttribute={handleRemoveAttribute} />					
 						}

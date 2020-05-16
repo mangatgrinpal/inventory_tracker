@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useState } from 'react';
 
 import Form from 'react-bootstrap/Form';
 import Col from 'react-bootstrap/Col';
@@ -16,14 +16,30 @@ const CategoryForm = ({
 	handleAddAttribute,
 	newAttribute,
 	setNewAttribute,
+	newAttributeError,
+	setNewAttributeError,
+	newAttributeErrorHandler,
 	trackableAttributeList,
 	handleRemoveAttribute
 }) => {
 
+	
+
 	const handleAddAttributeWrapper = e => {
 		setAttributesError('')
+		setNewAttributeError('')
 		document.getElementById('attributeField').classList.remove('invalid-error-frame')
-		handleAddAttribute(e)
+		const isValid = validate()
+		if (!isValid) {
+			handleAddAttribute(e)	
+		} else {
+			newAttributeErrorHandler()
+		}
+		
+	}
+
+	const validate = () => {
+		return newAttribute.length === 0 || newAttribute.length > 64
 	}
 
 	return (
@@ -55,7 +71,7 @@ const CategoryForm = ({
 							)
 						})}
 					</datalist>
-					<span style={{'color':'red'}}>{attributesError}</span>
+					<span style={{'color':'red'}}>{attributesError}{newAttributeError}</span>
 				</Col>
 			</Form.Row>
 			{ attributesData && attributesData.length > 0 &&
