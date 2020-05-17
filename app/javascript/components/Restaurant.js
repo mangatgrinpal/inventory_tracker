@@ -4,6 +4,7 @@ import CategoryContainer from './CategoryContainer';
 import Item from './Item';
 import ItemForm from './ItemForm';
 import ScrollUpButton from './ScrollUpButton';
+import ConfirmationModal from './ConfirmationModal';
 import { connect } from 'react-redux';
 
 import { CSSTransition } from 'react-transition-group';
@@ -51,6 +52,7 @@ const Restaurant = ({
 	const { id } = useParams();
 	const history = useHistory();
 	const [ scrollButton, showScrollButton ] = useState(false)
+	const [ showModal, setShowModal ] = useState(false)
 
 	const positionCheck = () => {
 		if (window.pageYOffset > 300) {
@@ -142,13 +144,21 @@ const Restaurant = ({
 						<Col xs={{span:8, offset: 2}} md={{span: 4, offset: 4}}>
 							<Button 
 								variant='danger' 
-								onClick={()=> {deleteRestaurant(id, history)}} 
+								onClick={()=>setShowModal(true)} 
 								block
 							>
 								Delete Restaurant
 							</Button>
 						</Col>
 					</Row>
+
+					<ConfirmationModal 
+						show={showModal}
+						deleteRestaurant={deleteRestaurant}
+						id={id}
+						history={history}
+						onHide={()=> setShowModal(false)}/>
+
 
 
 
